@@ -1,0 +1,7 @@
+# logs
+/stacktrace.log
+/test/reports
+/logs
+
+# temporary build files
+/target
