@@ -1,60 +1,61 @@
+<!DOCTYPE html>
 <html>
 
-<head>
-<title><g:message code='spring.security.ui.login.title'/></title>
-<meta name='layout' content='register'/>
-</head>
+    <head>
 
-<body>
+    	<meta name="layout" content="login"/>
 
-<p/>
+        <title><g:message code='spring.security.ui.login.title'/> - W-Educ</title>
 
-<div class="login s2ui_center ui-corner-all" style='text-align:center;'>
-	<div class="login-inner">
-	<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
-	<div class="sign-in">
+    </head>
 
-	<h1><g:message code='spring.security.ui.login.signin'/></h1>
+    <body>
 
-	<table>
-		<tr>
-			<td><label for="username"><g:message code='spring.security.ui.login.username'/></label></td>
-			<td><input name="j_username" id="username" size="20" /></td>
-		</tr>
-		<tr>
-			<td><label for="password"><g:message code='spring.security.ui.login.password'/></label></td>
-			<td><input type="password" name="j_password" id="password" size="20" /></td>
-		</tr>
-		<tr>
-			<td colspan='2'>
-				<input type="checkbox" class="checkbox" name="${rememberMeParameter}" id="remember_me" checked="checked" />
-				<label for='remember_me'><g:message code='spring.security.ui.login.rememberme'/></label> |
-				<span class="forgot-link">
-					<g:link controller='register' action='forgotPassword'><g:message code='spring.security.ui.login.forgotPassword'/></g:link>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td colspan='2'>
-				<s2ui:linkButton elementId='register' controller='register' messageCode='spring.security.ui.login.register'/>
-				<s2ui:submitButton elementId='loginButton' form='loginForm' messageCode='spring.security.ui.login.login'/>
-			</td>
-		</tr>
-	</table>
+	    <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Por favor, entre com seus dados</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off' role="form">
+                                <fieldset>
+                                <div class="form-group">
+                                        <g:if test="${flash.message}">
+                                        	<div class="alert alert-danger alert-dismissable">
+				                            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				                                Verifique se o usuário e a senha foram digitados corretamente.
+				                            </div>
+                                        </g:if>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Usuário" name="j_username" type="text" autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Senha" name="j_password" type="password" value="">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="${rememberMeParameter}" id="remember_me" type="checkbox" value="Lembrar-me">Lembrar-me
+                                        </label>
+                                    </div>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Login"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</div>
-	</form>
-	</div>
-</div>
+		<script>
 
-<script>
-$(document).ready(function() {
-	$('#username').focus();
-});
+		<s2ui:initCheckboxes/>
 
-<s2ui:initCheckboxes/>
+		</script>
 
-</script>
+	</body>
 
-</body>
 </html>
