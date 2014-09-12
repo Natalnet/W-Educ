@@ -118,9 +118,13 @@ log4j.main = {
 
 
 // Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.natalnet.weduc.Usuario'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.natalnet.weduc.UsuarioPrivilegio'
 grails.plugin.springsecurity.authority.className = 'org.natalnet.weduc.Privilegio'
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.securityConfigType = "Annotation"
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],

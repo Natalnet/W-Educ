@@ -1,5 +1,10 @@
 package org.natalnet.weduc
 
+import grails.plugin.springsecurity.annotation.Secured
+
 class AdminController {
-	def index = {}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def index() {}
+
 }

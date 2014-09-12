@@ -1,13 +1,15 @@
 package org.natalnet.weduc
 
 class CadastroController {
-	def index = {}
 
-	def novo = {}
+	def index() {}
 
-	def salvar = {}
+	def novo() {}
 
-	def editar = {}
+	def salvar() {}
 
-	def atualizar = {}
+	def editar() {}
+
+	def atualizar() {}
+	
 }

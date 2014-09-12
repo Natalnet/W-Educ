@@ -8,11 +8,11 @@ class BootStrap {
     	// Registra privilégios, caso não existam
     	def privilegios = ["ADMIN", "PROFESSOR", "ALUNO"]
     	privilegios.each {
-    		Privilegio.findOrSaveWhere(authority: it)
+    		Privilegio.findOrSaveWhere(authority: "ROLE_" + it)
     	}
 
     	// Registra usuário padrão
-    	def privilegio = Privilegio.findWhere(authority: "ADMIN")
+    	def privilegio = Privilegio.findWhere(authority: "ROLE_ADMIN")
     	def usuario = Usuario.findWhere(username: "admin")
     	if(!usuario) {
     		usuario = new Usuario()
