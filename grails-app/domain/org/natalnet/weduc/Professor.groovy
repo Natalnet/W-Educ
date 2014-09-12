@@ -1,5 +1,5 @@
 package org.natalnet.weduc
 
-class Aluno extends Usuario {
+class Professor extends Usuario {
 	static hasMany = [alunos: Aluno]
 }
