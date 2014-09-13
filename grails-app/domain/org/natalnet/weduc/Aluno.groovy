@@ -2,6 +2,10 @@ package org.natalnet.weduc
 
 class Aluno extends Usuario {
 
-	static belongsTo = [professor: Professor]
+	Professor professor
+
+	static constraints = {
+		professor nullable: true
+	}
 	
 }
