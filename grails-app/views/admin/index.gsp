@@ -354,39 +354,39 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                        <i class="fa fa-bell fa-fw"></i> Minhas Estatísticas
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="list-group">
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                <i class="fa fa-comment fa-fw"></i> Publicações no fórum
+                                <span class="pull-right text-muted small"><em>150</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                <i class="fa fa-twitter fa-fw"></i> Programas cadastrados
+                                <span class="pull-right text-muted small"><em>12</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                <i class="fa fa-envelope fa-fw"></i> Total de compilações
+                                <span class="pull-right text-muted small"><em>27</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-tasks fa-fw"></i> New Task
-                                <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                <i class="fa fa-tasks fa-fw"></i> Compilações bem-sucedidas
+                                <span class="pull-right text-muted small"><em>20</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                <i class="fa fa-upload fa-fw"></i> Compilações mal-sucedidas
+                                <span class="pull-right text-muted small"><em>7</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                <i class="fa fa-bolt fa-fw"></i> Linguagens utilizadas
+                                <span class="pull-right text-muted small"><em>3</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
