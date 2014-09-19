@@ -146,13 +146,52 @@
                                 <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Flot Charts</a>
+                                        <a href="flot.html">Estatísticas do sistema</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Morris.js Charts</a>
+                                        <a href="morris.html">Gerenciar professores</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Professor<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html">Estatísticas do professor</a>
+                                    </li>
+                                    <li>
+                                        <a href="flot.html">Cadastrar linguagem</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Gerenciar linguagens</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Procurar linguagens</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Gerenciar alunos</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Fórum de discussão</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Aluno<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html">Procurar professores</a>
+                                    </li>
+                                    <li>
+                                        <a href="flot.html">Procurar linguagens</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Fórum de discussão</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
