@@ -145,6 +145,7 @@
                             <li>
                                 <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -157,6 +158,8 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_PROFESSOR">
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Professor<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -181,6 +184,8 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -196,6 +201,7 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+                            </sec:ifAnyGranted>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
