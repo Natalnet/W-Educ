@@ -167,7 +167,7 @@
                                         <a href="flot.html">Estatísticas do professor</a>
                                     </li>
                                     <li>
-                                        <a href="flot.html">Cadastrar linguagem</a>
+                                        <g:link controller="linguagem" action="nova">Cadastrar linguagem</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Gerenciar linguagens</a>
