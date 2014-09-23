@@ -118,7 +118,7 @@
                     linguagem.
                 </p>
                 <p>
-                    Caso você deseje facilitar a manipulação da linguagem para os seus alunos é possível utilizar o cabeçalho para definir as funções que serão manipuladas ao serem cadastradas no item <b>funções</b>. Novas estruturas também podem ser definidas nesta seção.
+                    Caso você deseje facilitar a manipulação da linguagem para os seus alunos é possível utilizar o cabeçalho para definir as funções que serão manipuladas ao serem cadastradas no item <strong>funções</strong>. Novas estruturas também podem ser definidas nesta seção.
                 </p>
             </div>
         </div>
@@ -138,7 +138,45 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h2>Nome do Robô</h2>
+                <h2>Declaração de Funções</h2>
+                <h3>Função Principal</h3>
+                <p>
+                    Nesta seção você deve declarar a função principal do seu programa.
+                </p>
+                <p>
+                    Os exemplos abaixo mostram como é definida a função principal nas linguagens de programação R-Educ e C. Observe que a palavra reservada <strong>comandos</strong> deve ser utilizada.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Função</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    tarefa principal {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    int main() {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="well">
                     <input type="text" class="form-control" id="nome-do-robo" />
                 </div>
