@@ -226,10 +226,12 @@
         <!-- Metis Menu Plugin JavaScript -->
         <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
 
-        <!-- Morris Charts JavaScript -->
-        <asset:javascript src="js/plugins/morris/raphael.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris-data.js"/>
+        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
+            <!-- Morris Charts JavaScript -->
+            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris-data.js"/>
+        </g:if>
 
         <!-- Custom Theme JavaScript -->
         <asset:javascript src="js/sb-admin-2.js"/>

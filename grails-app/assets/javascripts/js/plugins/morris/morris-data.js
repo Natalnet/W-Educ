@@ -61,7 +61,7 @@ $(function() {
         resize: true
     });
 
-    Morris.Donut({
+    /* Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
             label: "Download Sales",
@@ -112,6 +112,6 @@ $(function() {
         labels: ['Series A', 'Series B'],
         hideHover: 'auto',
         resize: true
-    });
+    }); */
 
 });
