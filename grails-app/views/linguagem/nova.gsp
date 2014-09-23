@@ -22,8 +22,18 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <h2>Nome da Linguagem</h2>
+                <div class="well">
+                    <input type="text" class="form-control" id="nome-da-linguagem" />
+                </div>
+                <h2>Nome do Robô</h2>
+                <div class="well">
+                    <input type="text" class="form-control" id="nome-do-robo" />
+                </div>
                 <h2>Descrição da Linguagem</h2>
-                <textarea class="form-control" rows="3" id="descricao"></textarea>
+                <div class="well">
+                    <textarea class="form-control" rows="3" id="descricao"></textarea>
+                </div>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -42,19 +52,19 @@
                     Caso seja necessário descompactar os arquivos do compilador ou realizar algum tipo de instalação. Marque o item <strong>Instalação necessária</strong>.
                 </p>
                 <p>
-                    Código de compilação:
+                    <h4>Código de compilação:</h4>
                     <div class="well">
                         <input type="text" class="form-control" id="codigo-de-compilacao" />
                     </div>
                 </p>
                 <p>
-                    Extensão dos arquivos na linguaem:
+                    <h4>Extensão dos arquivos na linguaem:</h4>
                     <div class="well">
                         <input type="text" class="form-control" id="extensao-do-arquivo" />
                     </div>
                 </p>
                 <p>
-                    Upload do compilador:
+                    <h4>Upload do compilador:</h4>
                     <div class="well">
                         <button class="btn btn-default" id="fazer-upload">Faça o upload do compilador</button><br />
                         <label>
@@ -70,19 +80,19 @@
                     O código de envio deve ser inserido referenciando a localização de todos os arquivos necessários(códigos fonte e programa de envio) com a palavra chave <strong>diretorio</strong> para indicar o endereço dos arquivos. Já o nome do programa deve ser indicado com a palavra chave <strong>nomedoprograma</strong>. Por exemplo, caso o seu código de envio seja <strong>nbc -d nomedoprograma.nxc </strong> ele deverá ser escrito da seguinte forma: <strong>diretorio/nbc -d diretorio/nomedoprograma.nxc</strong>. Esse endereço de diretório será tratado e substituído pelo endereço de sua pasta local de arquivos temporários.
                 </p>
                 <p>
-                    Código de envio:
+                    <h4>Código de envio:</h4>
                     <div class="well">
                         <input type="text" class="form-control" id="codigo-de-envio" />
                     </div>
                 </p>
                 <p>
-                    Extensão do arquivo enviado:
+                    <h4>Extensão do arquivo enviado:</h4>
                     <div class="well">
                         <input type="text" class="form-control" id="extensao-do-arquivo-enviado" />
                     </div>
                 </p>
                 <p>
-                    Upload do arquivo a ser enviado ao computador local para permitir o envio:
+                    <h4>Upload do arquivo a ser enviado ao computador local para permitir o envio: </h4>
                     <div class="well">
                         <button class="btn btn-default" id="fazer-upload-envio">Faça o upload do programa de envio</button><br />
                         <label>
@@ -91,11 +101,28 @@
                     </div>
                 </p>
                 <p>
-                    Nome do arquivo:
+                    <h4>Nome do arquivo:</h4>
                     <div class="well">
                         <input type="text" class="form-control" id="nome-do-arquivo" />
                     </div>
                 </p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Cabeçalho e Rodapé</h2>
+                <div class="well">
+                    <input type="text" class="form-control" id="nome-da-linguagem" />
+                </div>
+                <h2>Nome do Robô</h2>
+                <div class="well">
+                    <input type="text" class="form-control" id="nome-do-robo" />
+                </div>
+                <h2>Descrição da Linguagem</h2>
+                <div class="well">
+                    <textarea class="form-control" rows="3" id="descricao"></textarea>
+                </div>
             </div>
             <!-- /.col-lg-12 -->
         </div>
