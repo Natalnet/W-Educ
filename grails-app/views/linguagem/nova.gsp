@@ -56,13 +56,46 @@
                 <p>
                     Upload do compilador:
                     <div class="well">
-                        <button class="btn btn-default" id="extensao-do-arquivo">Faça o upload do compilador</button><br />
+                        <button class="btn btn-default" id="fazer-upload">Faça o upload do compilador</button><br />
                         <label>
-                            <input type="checkbox" id="extensao-do-arquivo"> Requer instalação</input> 
+                            <input type="checkbox" id="requer-instalacao"> Requer instalação</input> 
                         </label>
                     </div>
                 </p>
-                <textarea class="form-control" rows="3" id="descricao"></textarea>
+                <h3>Envio</h3>
+                <p>
+                    Nesta seção você deve inserir a chamada de envio do programa em sua plataforma e a extensão do código a ser enviado ao computador local para posteriormente ser enviado ao robô através da chamada inserida.
+                </p>
+                <p>
+                    O código de envio deve ser inserido referenciando a localização de todos os arquivos necessários(códigos fonte e programa de envio) com a palavra chave <strong>diretorio</strong> para indicar o endereço dos arquivos. Já o nome do programa deve ser indicado com a palavra chave <strong>nomedoprograma</strong>. Por exemplo, caso o seu código de envio seja <strong>nbc -d nomedoprograma.nxc </strong> ele deverá ser escrito da seguinte forma: <strong>diretorio/nbc -d diretorio/nomedoprograma.nxc</strong>. Esse endereço de diretório será tratado e substituído pelo endereço de sua pasta local de arquivos temporários.
+                </p>
+                <p>
+                    Código de envio:
+                    <div class="well">
+                        <input type="text" class="form-control" id="codigo-de-envio" />
+                    </div>
+                </p>
+                <p>
+                    Extensão do arquivo enviado:
+                    <div class="well">
+                        <input type="text" class="form-control" id="extensao-do-arquivo-enviado" />
+                    </div>
+                </p>
+                <p>
+                    Upload do arquivo a ser enviado ao computador local para permitir o envio:
+                    <div class="well">
+                        <button class="btn btn-default" id="fazer-upload-envio">Faça o upload do programa de envio</button><br />
+                        <label>
+                            <input type="checkbox" id="envio-necessario"> Envio necessário</input> 
+                        </label>
+                    </div>
+                </p>
+                <p>
+                    Nome do arquivo:
+                    <div class="well">
+                        <input type="text" class="form-control" id="nome-do-arquivo" />
+                    </div>
+                </p>
             </div>
             <!-- /.col-lg-12 -->
         </div>
