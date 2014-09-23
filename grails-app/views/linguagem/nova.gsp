@@ -112,9 +112,32 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Cabeçalho e Rodapé</h2>
+                <p>
+                    Nesta seção você deve inserir o cabeçalho e rodapé necessários para gerar o seu código. Lembre-se de incluir todas as bibliotecas e fazer todas as definições necessárias para o funcionamento do seu programa. O cabeçalho e o rodapé inseridos serão 
+                    adicionados a todos os códigos gerados para esta
+                    linguagem.
+                </p>
+                <p>
+                    Caso você deseje facilitar a manipulação da linguagem para os seus alunos é possível utilizar o cabeçalho para definir as funções que serão manipuladas ao serem cadastradas no item <b>funções</b>. Novas estruturas também podem ser definidas nesta seção.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Cabeçalho</h3>
                 <div class="well">
-                    <input type="text" class="form-control" id="nome-da-linguagem" />
+                    <textarea class="form-control" rows="3" id="cabecalho"></textarea>
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Rodapé</h3>
+                <div class="well">
+                    <textarea class="form-control" rows="3" id="rodape"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <h2>Nome do Robô</h2>
                 <div class="well">
                     <input type="text" class="form-control" id="nome-do-robo" />

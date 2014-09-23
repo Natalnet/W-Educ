@@ -345,10 +345,6 @@ table.dataTable thead .sorting:after {
 }
 
 h1:not(:first-child),
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2, h3, h4, h5, h6 {
     padding-top: .75em;
 }
