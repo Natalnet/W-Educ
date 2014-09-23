@@ -143,7 +143,7 @@
                                 <!-- /input-group -->
                             <!-- </li> -->
                             <li>
-                                <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <li>
