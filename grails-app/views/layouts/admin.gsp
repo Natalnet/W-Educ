@@ -143,7 +143,7 @@
                                 <!-- /input-group -->
                             <!-- </li> -->
                             <li>
-                                <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <li>
@@ -167,7 +167,7 @@
                                         <a href="flot.html">Estatísticas do professor</a>
                                     </li>
                                     <li>
-                                        <a href="flot.html">Cadastrar linguagem</a>
+                                        <g:link controller="linguagem" action="nova">Cadastrar linguagem</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Gerenciar linguagens</a>
@@ -226,10 +226,12 @@
         <!-- Metis Menu Plugin JavaScript -->
         <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
 
-        <!-- Morris Charts JavaScript -->
-        <asset:javascript src="js/plugins/morris/raphael.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris-data.js"/>
+        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
+            <!-- Morris Charts JavaScript -->
+            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris-data.js"/>
+        </g:if>
 
         <!-- Custom Theme JavaScript -->
         <asset:javascript src="js/sb-admin-2.js"/>
