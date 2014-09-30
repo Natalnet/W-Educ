@@ -150,7 +150,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <h4>Função</h4>
+                <h4>Função Principal na Linguagem Alvo</h4>
                 <div class="well">
                     <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
                 </div>
@@ -173,6 +173,60 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <h3>Funções</h3>
+                <p>
+                    Nesta seção você deve identificar como é feita a declaração de funções sem retorno do seu programa.
+                </p>
+                <p>
+                    Os exemplos abaixo mostram como são definidas as funções sem retorno nas linguagens de programação R-Educ e C. Observe que as palavras reservadas <strong>comandos</strong> e <strong>funcao</strong> devem ser utilizadas.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Função na Linguagem Alvo</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    tarefa funcao {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    void funcao() {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    Depois que a função foi declarada, ela pode ser chamada. Os exemplos abaixo mostram como são feitas chamadas de funções nas linguagens de programação R-Educ e C. Observe que a palavra reservada <strong>funcao</strong> deve ser utilizada.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Chamada de Função na Linguagem Alvo</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    funcao
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    funcao();
+                </div>
             </div>
         </div>
         <div class="row">
