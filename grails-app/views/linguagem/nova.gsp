@@ -435,6 +435,145 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <h2>Controle de Fluxo</h2>
+                <p>
+                    Nesta sestao você deve definir as estruturas de controle de fluxo da Linguagem Alvo. A linguagem R-Educ possui as seguintes funções de controle de fluxo: <strong>se</strong>, <strong>enquanto</strong>, <strong>repita</strong>, <strong>teste</strong>, <strong>farei</strong>, <strong>para</strong> e <strong>sair</strong>.
+                </p>
+                <p>
+                    Siga os exemplos abaixo para declarar as estruturas. Observe que cada definição possui um conjunto de palavras reservadas que devem ser utilizadas em cada caso, sendo elas: <strong>condicao</strong>, <strong>comandos1</strong>, <strong>comandos2</strong>, <strong>comandos</strong>, <strong>var</strong>, <strong>variavel</strong>, <strong>//teste1</strong>, <strong>//teste2</strong>, <strong>//fim</strong>, <strong>valor1</strong> e <strong>passo</strong>.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Se</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="16" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    se (condicao) entao {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos1<br/>
+                    }<br/>
+                    senao {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos2<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    if (condicao) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos1<br/>
+                    } else {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos2<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Enquanto</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    enquanto (condicao) farei {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    while (condicao) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Repita</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    repita var vezes {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    for (int k = 0; k &lt; var; k++) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Teste</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="18" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    teste (variavel) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; se valor1: comandos1<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; senao: comandos2<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    switch (variavel) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste1<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case (valor1): comandos1<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste2<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; default: comandos2<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //fim<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Para</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="18" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    para variavel de valor1 ate valor2 passo X farei {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
+                    }
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    switch (variavel) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste1<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case (valor1): comandos1<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste2<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; default: comandos2<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //fim<br/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="well">
                     <input type="text" class="form-control" id="nome-do-robo" />
                 </div>
