@@ -3,6 +3,11 @@
     <head>
         <meta name="layout" content="admin"/>
         <title>Cadastro de Linguagem - W-Educ</title>
+        <style type="text/css">
+            .operadores > div > span {
+                width: 5em;
+            }
+        </style>
     </head>
     <body>
         <!-- /.row -->
@@ -333,6 +338,98 @@
                 <h4>Linguagem C</h4>
                 <div class="well">
                     false
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Operadores</h2>
+                <p>
+                    Nesta seção você deve definir os operadores lógicos e relacionais da Linguagem Alvo. Os exemplos abaixo mostram como são definidos estes operadores nas linguagens de programação R-Educ e C.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Operadores na Linguagem Alvo</h4>
+                <div class="well operadores">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">e</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">ou</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">!</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">=</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">!=</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&gt;</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&gt;=</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&lt;</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&lt;=</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4>Linguagem R-Educ e Linguagem C</h4>
+                <div class="well operadores">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">e</span>
+                        <input type="text" class="form-control" value="&amp;&amp;" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">ou</span>
+                        <input type="text" class="form-control" value="&#124;&#124;" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">!</span>
+                        <input type="text" class="form-control" value="!" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">=</span>
+                        <input type="text" class="form-control" value="==" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">!=</span>
+                        <input type="text" class="form-control" value="!=" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&gt;</span>
+                        <input type="text" class="form-control" value="&gt;" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&gt;=</span>
+                        <input type="text" class="form-control" value="&gt;=" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&lt;</span>
+                        <input type="text" class="form-control" value="&lt;" readonly />
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">&lt;=</span>
+                        <input type="text" class="form-control" value="&lt;=" readonly />
+                    </div>
                 </div>
             </div>
         </div>
