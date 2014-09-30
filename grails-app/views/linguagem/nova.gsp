@@ -231,6 +231,113 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <h2>Tipos de Dados</h2>
+                <p>
+                    Nesta seção você deve definir como são declaradas variáveis utilizando tipos específicos de dados na Linguagem Alvo.
+                </p>
+                <p>
+                    A linguagem R-Educ possui três tipos de dados: <strong>texto</strong>, <strong>numero</strong> e <strong>booleano</strong>. Siga os exemplos abaixo para declarar as variáveis. Observe que as palavras reservadas <strong>variavel</strong> e <strong>valor</strong> devem ser utilizadas.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Declaração do Tipo Texto</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    texto variavel = "valor"
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    String variavel = "valor";
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Declaração do Tipo Numero</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                </div>
+                <p>
+                    Variáveis do tipo <strong>numero</strong> recebem valores inteiros ou em ponto flutuante.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    numero variavel = valor
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    float variavel = valor;
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Declaração do Tipo Booleano</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                </div>
+                <p>
+                    Variáveis do tipo <strong>booleano</strong> podem receber valores do tipo verdadeiro ou falso. Especifique como esses valores são chamados na linguagem cadastrada.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    booleano variavel = valor
+                </div>
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    bool variavel = valor;
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4>Verdadeiro</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="x"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    verdadeiro
+                </div>
+
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    true
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Falso</h4>
+                <div class="well">
+                    <textarea class="form-control" rows="7" id="x"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Linguagem R-Educ</h4>
+                <div class="well">
+                    falso
+                </div>
+
+                <h4>Linguagem C</h4>
+                <div class="well">
+                    false
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="well">
                     <input type="text" class="form-control" id="nome-do-robo" />
                 </div>
