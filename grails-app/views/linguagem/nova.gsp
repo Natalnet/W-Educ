@@ -627,6 +627,23 @@
                 <p>
                     Os exemplos abaixo mostram funções nas linguagens R-Educ, NXC e Lejos que realizam a movimentação de robôs.
                 </p>
+                <h3>Nome</h3>
+                <div class="well">
+                    <input type="text" id="haha" class="form-control"/>
+                </div>
+                <h3>Tipo</h3>
+                <div class="well">
+                    <g:select name="haha" id="haha" class="form-control" from="${["Escrita", "Leitura", "Movimentação", "Outros"]}"/>
+                </div>
+                <h3>Retorno</h3>
+                <div class="well">
+                    <g:select name="haha" id="haha" class="form-control" from="${["boolean", "float", "String", "Void"]}"/>
+                </div>
+                <h3>Quantidade de parâmetros</h3>
+                <div class="well">
+                    <g:select name="haha" id="haha" class="form-control" from="${0..5}"/>
+                </div>
+                <h3>Código</h3>
                 <div class="well">
                     <textarea class="form-control" rows="3" id="descricao"></textarea>
                 </div>
