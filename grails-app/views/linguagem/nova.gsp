@@ -560,14 +560,8 @@
                 </div>
                 <h4>Linguagem C</h4>
                 <div class="well">
-                    switch (variavel) {<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste1<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case (valor1): comandos1<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //teste2<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; default: comandos2<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //fim<br/>
+                    for (int variavel = valor1; variavel &lt;= valor2; variavel+= x) {<br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; comandos<br/>
                     }
                 </div>
             </div>
