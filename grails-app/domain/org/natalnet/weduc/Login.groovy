@@ -6,8 +6,8 @@ class Login {
 	Date data
 
 	static constraints = {
-		usuario nullable: false,
-		data nullable: false,
+		usuario nullable: false
+		data nullable: false
 		primeiro nullable: true
 	}
 
