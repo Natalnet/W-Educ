@@ -9,6 +9,8 @@ class AdminController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def index() {
 
+		// Estatíscias de acesso - Início
+
 		// Mês e ano atuais
 		def data = new Date()
 		def mes = Integer.parseInt(data.format("MM"))
@@ -22,7 +24,6 @@ class AdminController {
 
 			// Define chaves primárias
 			datas.add(ano + "-" + mes)
-			println (mes == 12 ? ano + 1 : ano) + "-" + (mes == 12 ? 1 : mes + 1) + "-01"
 
 			// Define datas base
 			def dataAnterior = new Date().parse("yyyy-MM-dd", ano + "-" + mes + "-01")
@@ -46,6 +47,8 @@ class AdminController {
 			ano = mes == 1 ? ano - 1 : ano
 
 		}
+
+		// Estatísticas de acesso - Fim
 
 		[datas: datas, loginsUnicos: loginsUnicos, loginsTotais: loginsTotais]
 	}
