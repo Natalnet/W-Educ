@@ -29,6 +29,11 @@
         <!-- Custom Fonts -->
         <asset:stylesheet src="font-awesome-4.1.0/css/font-awesome.min.css"/>
 
+        <!-- Chosen jQuery Plugin -->
+        <asset:stylesheet src="css/chosen.min.css"/>
+        <asset:javascript src="js/chosen.jquery.min.js"/>
+        <asset:javascript src="js/chosen.proto.min.js"/>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
