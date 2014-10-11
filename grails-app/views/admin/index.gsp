@@ -10,17 +10,17 @@
                 Morris.Area({
                     element: 'morris-area-chart',
                     data: [
-                        <g:each in="${meses}" var="it" status="i">
+                        <g:each in="${datas}" var="it" status="i">
                         {
-                            mes: "${it}",
-                            loginUnico: ${loginsUnicos[i]},
-                            login: ${logins[i]}
-                        }<g:if test="${(meses?.size() - 1) != i}">,</g:if>
+                            month: "${it}",
+                            loginsUnicos: ${loginsUnicos[i]},
+                            loginsTotais: ${loginsTotais[i]}
+                        }<g:if test="${(datas?.size() - 1) != i}">,</g:if>
                         </g:each>
                     ],
-                    xkey: 'mes',
-                    ykeys: ['loginUnico', 'login'],
-                    labels: ['Login único', 'Login'],
+                    xkey: 'month',
+                    ykeys: ['loginsUnicos', 'loginsTotais'],
+                    labels: ['Logins únicos', 'Logins totais'],
                     pointSize: 2,
                     hideHover: 'auto',
                     resize: true
