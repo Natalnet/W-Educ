@@ -31,8 +31,6 @@
 
         <!-- Chosen jQuery Plugin -->
         <asset:stylesheet src="css/chosen.min.css"/>
-        <asset:javascript src="js/chosen.jquery.min.js"/>
-        <asset:javascript src="js/chosen.proto.min.js"/>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,6 +38,28 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <!-- jQuery Version 1.11.0 -->
+        <asset:javascript src="js/jquery-1.11.0.js"/>
+
+        <!-- Bootstrap Core JavaScript -->
+        <asset:javascript src="js/bootstrap.min.js"/>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
+
+        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
+            <!-- Morris Charts JavaScript -->
+            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris.min.js"/>
+        </g:if>
+
+        <!-- Custom Theme JavaScript -->
+        <asset:javascript src="js/sb-admin-2.js"/>
+
+        <!-- Chosen jQuery UI -->
+        <asset:javascript src="js/chosen.jquery.min.js"/>
+        <asset:javascript src="js/chosen.proto.min.js"/>
 
         <g:layoutHead/>
 
@@ -221,25 +241,6 @@
 
         </div>
         <!-- /#wrapper -->
-
-        <!-- jQuery Version 1.11.0 -->
-        <asset:javascript src="js/jquery-1.11.0.js"/>
-
-        <!-- Bootstrap Core JavaScript -->
-        <asset:javascript src="js/bootstrap.min.js"/>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
-
-        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
-            <!-- Morris Charts JavaScript -->
-            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
-            <asset:javascript src="js/plugins/morris/morris.min.js"/>
-            <asset:javascript src="js/plugins/morris/morris-data.js"/>
-        </g:if>
-
-        <!-- Custom Theme JavaScript -->
-        <asset:javascript src="js/sb-admin-2.js"/>
 
     </body>
 
