@@ -29,15 +29,15 @@
             <div class="col-lg-12">
                 <h2>Nome da Linguagem</h2>
                 <div class="well">
-                    <input type="text" class="form-control" id="nome-da-linguagem" />
+                    <input type="text" class="form-control" id="nome" required />
                 </div>
                 <h2>Nome do Robô</h2>
                 <div class="well">
-                    <input type="text" class="form-control" id="nome-do-robo" />
+                    <input type="text" class="form-control" id="robo" required />
                 </div>
                 <h2>Descrição da Linguagem</h2>
                 <div class="well">
-                    <textarea class="form-control" rows="3" id="descricao"></textarea>
+                    <textarea class="form-control" rows="3" id="descricao" required ></textarea>
                 </div>
             </div>
             <!-- /.col-lg-12 -->
@@ -59,13 +59,13 @@
                 <p>
                     <h4>Código de compilação:</h4>
                     <div class="well">
-                        <input type="text" class="form-control" id="codigo-de-compilacao" />
+                        <input type="text" class="form-control" id="codigoDeCompilacao" required />
                     </div>
                 </p>
                 <p>
                     <h4>Extensão dos arquivos na linguaem:</h4>
                     <div class="well">
-                        <input type="text" class="form-control" id="extensao-do-arquivo" />
+                        <input type="text" class="form-control" id="extensao" required />
                     </div>
                 </p>
                 <p>
@@ -87,13 +87,13 @@
                 <p>
                     <h4>Código de envio:</h4>
                     <div class="well">
-                        <input type="text" class="form-control" id="codigo-de-envio" />
+                        <input type="text" class="form-control" id="codigoDeEnvio" required />
                     </div>
                 </p>
                 <p>
                     <h4>Extensão do arquivo enviado:</h4>
                     <div class="well">
-                        <input type="text" class="form-control" id="extensao-do-arquivo-enviado" />
+                        <input type="text" class="form-control" id="extensaoDoArquivo" required />
                     </div>
                 </p>
                 <p>
@@ -108,7 +108,7 @@
                 <p>
                     <h4>Nome do arquivo:</h4>
                     <div class="well">
-                        <input type="text" class="form-control" id="nome-do-arquivo" />
+                        <input type="text" class="form-control" id="arquivo" />
                     </div>
                 </p>
             </div>
@@ -131,13 +131,13 @@
             <div class="col-lg-6">
                 <h3>Cabeçalho</h3>
                 <div class="well">
-                    <textarea class="form-control" rows="3" id="cabecalho"></textarea>
+                    <textarea class="form-control" rows="3" id="cabecalho" required></textarea>
                 </div>
             </div>
             <div class="col-lg-6">
                 <h3>Rodapé</h3>
                 <div class="well">
-                    <textarea class="form-control" rows="3" id="rodape"></textarea>
+                    <textarea class="form-control" rows="3" id="rodape" required></textarea>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
             <div class="col-lg-8">
                 <h4>Função Principal na Linguagem Alvo</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="11" id="funcaoPrincipal" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -191,7 +191,7 @@
             <div class="col-lg-8">
                 <h4>Função na Linguagem Alvo</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="11" id="funcao"></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -220,7 +220,7 @@
             <div class="col-lg-8">
                 <h4>Chamada de Função na Linguagem Alvo</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="7" id="chamadaDeFuncao" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
