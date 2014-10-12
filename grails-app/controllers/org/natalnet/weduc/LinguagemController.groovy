@@ -29,11 +29,11 @@ class LinguagemController {
         // Tipos da linguagem
         linguagem.types = new Tipos()
         linguagem.types.name = ""
-        linguagem.types.declareFalse = "false"
-        linguagem.types.declareTrue = "true"
-        linguagem.types.declareFloat = "float variavel = valor;"
-        linguagem.types.declareString = "string variavel = \"valor\";"
-        linguagem.types.declareBoolean = "bool variavel = valor;"
+        linguagem.types.declareFalse = params.falso
+        linguagem.types.declareTrue = params.verdadeiro
+        linguagem.types.declareFloat = params.numero
+        linguagem.types.declareString = params.texto
+        linguagem.types.declareBoolean = params.booleano
         linguagem.types.save(flush: true, failOnError: true)
 
         // Operadores da linguagem

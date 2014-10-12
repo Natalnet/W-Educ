@@ -249,7 +249,7 @@
             <div class="col-lg-8">
                 <h4>Declaração do Tipo Texto</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="7" id="texto" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -267,7 +267,7 @@
             <div class="col-lg-8">
                 <h4>Declaração do Tipo Numero</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="7" id="numero" required></textarea>
                 </div>
                 <p>
                     Variáveis do tipo <strong>numero</strong> recebem valores inteiros ou em ponto flutuante.
@@ -288,7 +288,7 @@
             <div class="col-lg-8">
                 <h4>Declaração do Tipo Booleano</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="7" id="booleano" required></textarea>
                 </div>
                 <p>
                     Variáveis do tipo <strong>booleano</strong> podem receber valores do tipo verdadeiro ou falso. Especifique como esses valores são chamados na linguagem cadastrada.
@@ -309,7 +309,7 @@
             <div class="col-lg-3">
                 <h4>Verdadeiro</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="x"></textarea>
+                    <textarea class="form-control" rows="7" id="verdadeiro" required></textarea>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -326,7 +326,7 @@
             <div class="col-lg-3">
                 <h4>Falso</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="x"></textarea>
+                    <textarea class="form-control" rows="7" id="falso"required></textarea>
                 </div>
             </div>
             <div class="col-lg-3">
