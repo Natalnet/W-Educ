@@ -38,15 +38,15 @@ class LinguagemController {
 
         // Operadores da linguagem
         linguagem.operators = new Operadores()
-        linguagem.operators.equalTo = "=="
-        linguagem.operators.notEqualTo = "!="
-        linguagem.operators.greaterThan = ">"
-        linguagem.operators.lessThan = "<"
-        linguagem.operators.greaterThanOrEqualTo = ">="
-        linguagem.operators.lessThanOrEqualTo = "<="
-        linguagem.operators.logicalAnd = "&&"
-        linguagem.operators.logicalOr = "||"
-        linguagem.operators.logicalNot = "!"
+        linguagem.operators.equalTo = params.igual
+        linguagem.operators.notEqualTo = params.diferente
+        linguagem.operators.greaterThan = params.maior
+        linguagem.operators.lessThan = params.menor
+        linguagem.operators.greaterThanOrEqualTo = params.maiorOuIgual
+        linguagem.operators.lessThanOrEqualTo = params.menorOuIgual
+        linguagem.operators.logicalAnd = params.e
+        linguagem.operators.logicalOr = params.ou
+        linguagem.operators.logicalNot = params.nao
         linguagem.operators.name = ""
         linguagem.operators.save(flush: true, failOnError: true)
 

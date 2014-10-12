@@ -355,39 +355,39 @@
                 <div class="well operadores">
                     <div class="form-group input-group">
                         <span class="input-group-addon">e</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="e" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">ou</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="ou" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">!</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="nao" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">=</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="igual" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">!=</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="diferente" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">&gt;</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="maior" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">&gt;=</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="maiorOuIgual" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">&lt;</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="menor" required />
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">&lt;=</span>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" id="menorOuIgual" required />
                     </div>
                 </div>
             </div>
