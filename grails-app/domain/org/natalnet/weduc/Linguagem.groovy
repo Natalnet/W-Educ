@@ -22,6 +22,8 @@ class Linguagem {
     
     static hasMany = [functions: Funcao, defines: Definicao]
 
+    static belongsTo = [autor: Professor]
+
     static constraints = {
     }
     
