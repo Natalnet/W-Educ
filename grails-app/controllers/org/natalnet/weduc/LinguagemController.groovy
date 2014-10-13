@@ -12,6 +12,8 @@ class LinguagemController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def salvar() {
 
+		// Início do cadastro de linguagem
+
 		// Linguagem propriamente dita
         def linguagem = new Linguagem()
         linguagem.name = params.nome
@@ -188,11 +190,8 @@ class LinguagemController {
         defines.type="int"
         linguagem.addToDefines(defines).save(flush: true, failOnError: true)
         
-        // Funções
-        println "Iniciando cadastro das funcoes da linguagem " + linguagem.name
-        
-        
-        
-        //
+        println "Cadastro da linguagem " + linguagem.nome + " concluído por " + springSecurityService.getCurrentUser()
+
+        // Fim docadastro de linguagem
 	}
 }
