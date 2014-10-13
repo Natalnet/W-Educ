@@ -47,27 +47,19 @@ class LinguagemController {
         linguagem.operators.logicalAnd = params.e
         linguagem.operators.logicalOr = params.ou
         linguagem.operators.logicalNot = params.nao
-        linguagem.operators.name = ""
+        linguagem.operators.name = params.nome
         linguagem.operators.save(flush: true, failOnError: true)
 
         // Controles de fluxo da linguagem
         linguagem.controlFlow = new ControleDeFluxo()
-        linguagem.controlFlow.languageName = "NXC"
-        linguagem.controlFlow.breakCode = "break;"
-        linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
-        linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
-        linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
-        linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
-        linguagem.controlFlow.whileCode = "while(condicao){comandos}"
-        linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
-                                           "//teste1\n" +
-                                           "case (valor1): comandos1\n" +
-                                           "break;\n" +
-                                           "//teste2\n" +
-                                           "default: comandos2\n" +
-                                           "break;\n" +
-                                           "//fim\n" +
-                                           "}"
+        linguagem.controlFlow.languageName = params.nome
+        linguagem.controlFlow.breakCode = params.sair
+        linguagem.controlFlow.doCode = params.farei
+        linguagem.controlFlow.forCode = params.para
+        linguagem.controlFlow.ifCode = params.se
+        linguagem.controlFlow.repeatCode = params.repeat
+        linguagem.controlFlow.whileCode = params.enquanto
+        linguagem.controlFlow.switchCode = params.teste
         linguagem.controlFlow.save(flush: true, failOnError: true)
 
         // Salvando a linguagem

@@ -448,7 +448,7 @@
             <div class="col-lg-8">
                 <h4>Se</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="16" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="16" id="se" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -475,7 +475,7 @@
             <div class="col-lg-8">
                 <h4>Enquanto</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="11" id="enquanto" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -497,7 +497,7 @@
             <div class="col-lg-8">
                 <h4>Repita</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="11" id="repita" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -519,7 +519,7 @@
             <div class="col-lg-8">
                 <h4>Teste</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="18" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="18" id="teste" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -548,7 +548,7 @@
             <div class="col-lg-8">
                 <h4>Para</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="17" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="17" id="para" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -570,7 +570,7 @@
             <div class="col-lg-8">
                 <h4>Farei</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="11" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="11" id="farei" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -592,7 +592,7 @@
             <div class="col-lg-8">
                 <h4>Sair</h4>
                 <div class="well">
-                    <textarea class="form-control" rows="7" id="funcao-principal"></textarea>
+                    <textarea class="form-control" rows="7" id="sair" required></textarea>
                 </div>
             </div>
             <div class="col-lg-4">
