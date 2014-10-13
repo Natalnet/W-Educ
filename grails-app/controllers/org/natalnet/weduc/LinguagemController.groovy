@@ -64,10 +64,8 @@ class LinguagemController {
 
         // Salvando a linguagem
         linguagem.save(flush: true, failOnError: true)
-        
-        // Funções
-        println "Iniciando cadastro das funcoes da linguagem " + linguagem.name
-        
+
+        // Definições
         def defines = new Definicao()
         defines.name = "a"
         defines.alreadyExists = true
@@ -186,6 +184,11 @@ class LinguagemController {
         defines.text="6"
         defines.type="int"
         linguagem.addToDefines(defines).save(flush: true, failOnError: true)
+        
+        // Funções
+        println "Iniciando cadastro das funcoes da linguagem " + linguagem.name
+        
+        
         
         //
 	}

@@ -47,6 +47,7 @@ class BootStrap {
             linguagem.mainFunction = "task main(){comandos}"
             linguagem.otherFunctions = "task funcao(){comandos}"
             linguagem.callFunction = "funcao();"
+            linguagem.autor = usuario
 
             // Tipos da linguagem
             linguagem.types = new Tipos()
