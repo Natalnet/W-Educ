@@ -4,6 +4,8 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class LinguagemController {
 
+	def springSecurityService
+
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def nova() {}
 
@@ -25,6 +27,7 @@ class LinguagemController {
         linguagem.mainFunction = params.funcaoPrincipal
         linguagem.otherFunctions = params.funcao
         linguagem.callFunction = params.chamadaDeFuncao
+        linguagem.autor = springSecurityService.getCurrentUser()
 
         // Tipos da linguagem
         linguagem.types = new Tipos()
