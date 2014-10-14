@@ -190,8 +190,17 @@ class LinguagemController {
         defines.type="int"
         linguagem.addToDefines(defines).save(flush: true, failOnError: true)
         
-        println "Cadastro da linguagem " + linguagem.nome + " concluído por " + springSecurityService.getCurrentUser()
+        println "Cadastro da linguagem " + linguagem.name + " concluído por " + springSecurityService.getCurrentUser()
 
         // Fim docadastro de linguagem
+
+        if(linguagem.id != null) {
+        	flash.message = "Linguagem " + linguagem.name + " cadastrada com sucesso."
+        	redirect action: "editar" //, id: linguagem.id
+        } else {
+        	flash.message = "Erro ao cadastrar a linguagem " + linguagem.name + "."
+        	redirect action: "nova" //, params: params
+        }
+
 	}
 }

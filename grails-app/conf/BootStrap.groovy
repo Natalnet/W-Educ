@@ -11,9 +11,9 @@ class BootStrap {
 
     	// Registra usuário padrão
     	def privilegio = Privilegio.findWhere(authority: "ROLE_ADMIN")
-    	def usuario = Usuario.findWhere(username: "admin")
+    	def usuario = Professor.findWhere(username: "admin")
     	if(!usuario) {
-    		usuario = new Usuario()
+    		usuario = new Professor()
     		usuario.username = "admin"
     		usuario.password = "admin"
     		usuario.email = "admin@email.com"
