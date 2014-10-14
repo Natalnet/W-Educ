@@ -137,3 +137,43 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**':                            ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
+// Tratamento de eventos do
+// Spring Security plugin
+grails.plugin.springsecurity.useSecurityEventListener = true
+
+// Tratamento do evento "login bem sucedido"
+// do Spring Security plugin
+grails.plugin.springsecurity.onAuthenticationSuccessEvent = { e, appCtx ->
+
+    // Define a data atual
+    def data = new Date().clearTime()
+
+    // Define o usuário atual
+    def usuario = org.natalnet.weduc.Usuario.get(e.authentication.principal.id)
+
+    // Verifica se o usuário já 
+    // fez login no dia de hoje
+    def loginFlag = org.natalnet.weduc.Login.withCriteria(uniqueResult: true) {
+        eq('usuario', usuario)
+        between('data', data, data + 1)
+        eq('primeiro', true)
+    }
+
+    // Caso não exista registro de
+    // login na data atual, cria
+    org.natalnet.weduc.Login.withTransaction {
+
+        // Cria novo objeto em branco
+        // e define suas propriedades
+        login = new org.natalnet.weduc.Login()
+        login.usuario = usuario
+        login.data = data
+
+        login.primeiro = loginFlag == null ? true : false
+
+        // Salva o novo objeto        
+        login.save flush: true, failOnError: true
+    }
+
+}
+

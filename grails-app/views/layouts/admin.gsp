@@ -29,12 +29,37 @@
         <!-- Custom Fonts -->
         <asset:stylesheet src="font-awesome-4.1.0/css/font-awesome.min.css"/>
 
+        <!-- Chosen jQuery Plugin -->
+        <asset:stylesheet src="css/chosen.min.css"/>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <!-- jQuery Version 1.11.0 -->
+        <asset:javascript src="js/jquery-1.11.0.js"/>
+
+        <!-- Bootstrap Core JavaScript -->
+        <asset:javascript src="js/bootstrap.min.js"/>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
+
+        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
+            <!-- Morris Charts JavaScript -->
+            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris.min.js"/>
+        </g:if>
+
+        <!-- Custom Theme JavaScript -->
+        <asset:javascript src="js/sb-admin-2.js"/>
+
+        <!-- Chosen jQuery UI -->
+        <asset:javascript src="js/chosen.jquery.min.js"/>
+        <asset:javascript src="js/chosen.proto.min.js"/>
 
         <g:layoutHead/>
 
@@ -143,7 +168,7 @@
                                 <!-- /input-group -->
                             <!-- </li> -->
                             <li>
-                                <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <li>
@@ -167,7 +192,7 @@
                                         <a href="flot.html">Estatísticas do professor</a>
                                     </li>
                                     <li>
-                                        <a href="flot.html">Cadastrar linguagem</a>
+                                        <g:link controller="linguagem" action="nova">Cadastrar linguagem</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Gerenciar linguagens</a>
@@ -216,23 +241,6 @@
 
         </div>
         <!-- /#wrapper -->
-
-        <!-- jQuery Version 1.11.0 -->
-        <asset:javascript src="js/jquery-1.11.0.js"/>
-
-        <!-- Bootstrap Core JavaScript -->
-        <asset:javascript src="js/bootstrap.min.js"/>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
-
-        <!-- Morris Charts JavaScript -->
-        <asset:javascript src="js/plugins/morris/raphael.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris.min.js"/>
-        <asset:javascript src="js/plugins/morris/morris-data.js"/>
-
-        <!-- Custom Theme JavaScript -->
-        <asset:javascript src="js/sb-admin-2.js"/>
 
     </body>
 
