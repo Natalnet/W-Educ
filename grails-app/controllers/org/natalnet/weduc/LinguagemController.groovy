@@ -12,6 +12,10 @@ class LinguagemController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def salvar() {
 
+		println "----------------------------------------------- >"
+		println params.nome
+		println "----------------------------------------------- >"
+
 		// Início do cadastro de linguagem
 
 		// Linguagem propriamente dita
@@ -62,7 +66,7 @@ class LinguagemController {
         linguagem.controlFlow.doCode = params.farei
         linguagem.controlFlow.forCode = params.para
         linguagem.controlFlow.ifCode = params.se
-        linguagem.controlFlow.repeatCode = params.repeat
+        linguagem.controlFlow.repeatCode = params.repita
         linguagem.controlFlow.whileCode = params.enquanto
         linguagem.controlFlow.switchCode = params.teste
         linguagem.controlFlow.save(flush: true, failOnError: true)
@@ -196,11 +200,17 @@ class LinguagemController {
 
         if(linguagem.id != null) {
         	flash.message = "Linguagem " + linguagem.name + " cadastrada com sucesso."
-        	redirect action: "editar" //, id: linguagem.id
+        	redirect action: "editar", id: linguagem.id
         } else {
         	flash.message = "Erro ao cadastrar a linguagem " + linguagem.name + "."
         	redirect action: "nova" //, params: params
         }
 
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def editar() {
+		def linguagem = Linguagem.get(params.id)
+		[linguagem: linguagem]
 	}
 }
