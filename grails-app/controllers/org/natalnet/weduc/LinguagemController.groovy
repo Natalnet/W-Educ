@@ -12,63 +12,59 @@ class LinguagemController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def salvar() {
 
-		println "----------------------------------------------- >"
-		println params.nome
-		println "----------------------------------------------- >"
-
 		// Início do cadastro de linguagem
 
 		// Linguagem propriamente dita
         def linguagem = new Linguagem()
-        linguagem.name = params.nome
-        linguagem.description = params.descricao
-        linguagem.robot = params.robo
-        linguagem.extension = params.extensao
-        linguagem.compileCode = params.codigoDeCompilacao
-        linguagem.compilerFile = params.arquivo
-        linguagem.sendCode = params.codigoDeEnvio
-        linguagem.sentExtension = params.extensaoDoArquivo
-        linguagem.header = params.cabecalho
-        linguagem.footnote = params.rodape
-        linguagem.mainFunction = params.funcaoPrincipal
-        linguagem.otherFunctions = params.funcao
-        linguagem.callFunction = params.chamadaDeFuncao
+        linguagem.name = params.nome.toString()
+        linguagem.description = params.descricao.toString()
+        linguagem.robot = params.robo.toString()
+        linguagem.extension = params.extensao.toString()
+        linguagem.compileCode = params.codigoDeCompilacao.toString()
+        linguagem.compilerFile = params.arquivo.toString()
+        linguagem.sendCode = params.codigoDeEnvio.toString()
+        linguagem.sentExtension = params.extensaoDoArquivo.toString()
+        linguagem.header = params.cabecalho.toString()
+        linguagem.footnote = params.rodape.toString()
+        linguagem.mainFunction = params.funcaoPrincipal.toString()
+        linguagem.otherFunctions = params.funcao.toString()
+        linguagem.callFunction = params.chamadaDeFuncao.toString()
         linguagem.autor = springSecurityService.getCurrentUser()
 
         // Tipos da linguagem
         linguagem.types = new Tipos()
         linguagem.types.name = ""
-        linguagem.types.declareFalse = params.falso
-        linguagem.types.declareTrue = params.verdadeiro
-        linguagem.types.declareFloat = params.numero
-        linguagem.types.declareString = params.texto
-        linguagem.types.declareBoolean = params.booleano
+        linguagem.types.declareFalse = params.falso.toString()
+        linguagem.types.declareTrue = params.verdadeiro.toString()
+        linguagem.types.declareFloat = params.numero.toString()
+        linguagem.types.declareString = params.texto.toString()
+        linguagem.types.declareBoolean = params.booleano.toString()
         linguagem.types.save(flush: true, failOnError: true)
 
         // Operadores da linguagem
         linguagem.operators = new Operadores()
-        linguagem.operators.equalTo = params.igual
-        linguagem.operators.notEqualTo = params.diferente
-        linguagem.operators.greaterThan = params.maior
-        linguagem.operators.lessThan = params.menor
-        linguagem.operators.greaterThanOrEqualTo = params.maiorOuIgual
-        linguagem.operators.lessThanOrEqualTo = params.menorOuIgual
-        linguagem.operators.logicalAnd = params.e
-        linguagem.operators.logicalOr = params.ou
-        linguagem.operators.logicalNot = params.nao
-        linguagem.operators.name = params.nome
+        linguagem.operators.equalTo = params.igual.toString()
+        linguagem.operators.notEqualTo = params.diferente.toString()
+        linguagem.operators.greaterThan = params.maior.toString()
+        linguagem.operators.lessThan = params.menor.toString()
+        linguagem.operators.greaterThanOrEqualTo = params.maiorOuIgual.toString()
+        linguagem.operators.lessThanOrEqualTo = params.menorOuIgual.toString()
+        linguagem.operators.logicalAnd = params.e.toString()
+        linguagem.operators.logicalOr = params.ou.toString()
+        linguagem.operators.logicalNot = params.nao.toString()
+        linguagem.operators.name = params.nome.toString()
         linguagem.operators.save(flush: true, failOnError: true)
 
         // Controles de fluxo da linguagem
         linguagem.controlFlow = new ControleDeFluxo()
-        linguagem.controlFlow.languageName = params.nome
-        linguagem.controlFlow.breakCode = params.sair
-        linguagem.controlFlow.doCode = params.farei
-        linguagem.controlFlow.forCode = params.para
-        linguagem.controlFlow.ifCode = params.se
-        linguagem.controlFlow.repeatCode = params.repita
-        linguagem.controlFlow.whileCode = params.enquanto
-        linguagem.controlFlow.switchCode = params.teste
+        linguagem.controlFlow.languageName = params.nome.toString()
+        linguagem.controlFlow.breakCode = params.sair.toString()
+        linguagem.controlFlow.doCode = params.farei.toString()
+        linguagem.controlFlow.forCode = params.para.toString()
+        linguagem.controlFlow.ifCode = params.se.toString()
+        linguagem.controlFlow.repeatCode = params.repita.toString()
+        linguagem.controlFlow.whileCode = params.enquanto.toString()
+        linguagem.controlFlow.switchCode = params.teste.toString()
         linguagem.controlFlow.save(flush: true, failOnError: true)
 
         // Salvando a linguagem
@@ -196,7 +192,7 @@ class LinguagemController {
         
         println "Cadastro da linguagem " + linguagem.name + " concluído por " + springSecurityService.getCurrentUser()
 
-        // Fim docadastro de linguagem
+        // Fim do cadastro de linguagem
 
         if(linguagem.id != null) {
         	flash.message = "Linguagem " + linguagem.name + " cadastrada com sucesso."
@@ -212,5 +208,77 @@ class LinguagemController {
 	def editar() {
 		def linguagem = Linguagem.get(params.id)
 		[linguagem: linguagem]
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def atualizar() {
+
+		// Início do cadastro de linguagem
+
+		// Linguagem propriamente dita
+        def linguagem = Linguagem.get(params.id)
+        linguagem.name = params.nome.toString()
+        linguagem.description = params.descricao.toString()
+        linguagem.robot = params.robo.toString()
+        linguagem.extension = params.extensao.toString()
+        linguagem.compileCode = params.codigoDeCompilacao.toString()
+        linguagem.compilerFile = params.arquivo.toString()
+        linguagem.sendCode = params.codigoDeEnvio.toString()
+        linguagem.sentExtension = params.extensaoDoArquivo.toString()
+        linguagem.header = params.cabecalho.toString()
+        linguagem.footnote = params.rodape.toString()
+        linguagem.mainFunction = params.funcaoPrincipal.toString()
+        linguagem.otherFunctions = params.funcao.toString()
+        linguagem.callFunction = params.chamadaDeFuncao.toString()
+        linguagem.autor = springSecurityService.getCurrentUser()
+
+        // Tipos da linguagem
+        linguagem.types.name = ""
+        linguagem.types.declareFalse = params.falso.toString()
+        linguagem.types.declareTrue = params.verdadeiro.toString()
+        linguagem.types.declareFloat = params.numero.toString()
+        linguagem.types.declareString = params.texto.toString()
+        linguagem.types.declareBoolean = params.booleano.toString()
+        linguagem.types.save(flush: true, failOnError: true)
+
+        // Operadores da linguagem
+        linguagem.operators.equalTo = params.igual.toString()
+        linguagem.operators.notEqualTo = params.diferente.toString()
+        linguagem.operators.greaterThan = params.maior.toString()
+        linguagem.operators.lessThan = params.menor.toString()
+        linguagem.operators.greaterThanOrEqualTo = params.maiorOuIgual.toString()
+        linguagem.operators.lessThanOrEqualTo = params.menorOuIgual.toString()
+        linguagem.operators.logicalAnd = params.e.toString()
+        linguagem.operators.logicalOr = params.ou.toString()
+        linguagem.operators.logicalNot = params.nao.toString()
+        linguagem.operators.name = params.nome.toString()
+        linguagem.operators.save(flush: true, failOnError: true)
+
+        // Controles de fluxo da linguagem
+        linguagem.controlFlow.languageName = params.nome.toString()
+        linguagem.controlFlow.breakCode = params.sair.toString()
+        linguagem.controlFlow.doCode = params.farei.toString()
+        linguagem.controlFlow.forCode = params.para.toString()
+        linguagem.controlFlow.ifCode = params.se.toString()
+        linguagem.controlFlow.repeatCode = params.repita.toString()
+        linguagem.controlFlow.whileCode = params.enquanto.toString()
+        linguagem.controlFlow.switchCode = params.teste.toString()
+        linguagem.controlFlow.save(flush: true, failOnError: true)
+
+        // Salvando a linguagem
+        linguagem.save(flush: true, failOnError: true)
+        
+        println "Cadastro da linguagem " + linguagem.name + " atualizado por " + springSecurityService.getCurrentUser()
+
+        // Fim do cadastro de linguagem
+
+        if(linguagem.id != null) {
+        	flash.message = "Linguagem " + linguagem.name + " atualizada com sucesso."
+        	redirect action: "editar", id: linguagem.id
+        } else {
+        	flash.message = "Erro ao atualizar a linguagem " + linguagem.name + "."
+        	redirect action: "editar" //, params: params
+        }
+
 	}
 }
