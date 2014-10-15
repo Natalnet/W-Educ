@@ -9,6 +9,8 @@ class AdminController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def index() {
 
+		def usuario = springSecurityService.getCurrentUser()
+
 		// Estatíscias de acesso - Início
 
 		// Mês e ano atuais
@@ -32,13 +34,13 @@ class AdminController {
 			// Conta logins totais
 			loginsTotais.add(Login.withCriteria {
 				between("data", dataAnterior, dataPosterior)
-				eq("usuario", springSecurityService.getCurrentUser())
+				eq("usuario", usuario)
 			}.size())
 
 			// Conta logins únicos
 			loginsUnicos.add(Login.withCriteria {
 				between("data", dataAnterior, dataPosterior)
-				eq("usuario", springSecurityService.getCurrentUser())
+				eq("usuario", usuario)
 				eq("primeiro", true)
 			}.size())
 
@@ -50,7 +52,37 @@ class AdminController {
 
 		// Estatísticas de acesso - Fim
 
-		[datas: datas, loginsUnicos: loginsUnicos, loginsTotais: loginsTotais]
+		// Minhas estatísticas - Início
+
+		def programasCadastrados = usuario.programas
+
+		def totalDeCompilacoes = 0
+		def compilacoesBemSucedidas = 0
+		def compilacoesMalSucedidas = 0
+		def linguagensUtilizadas = 0
+		def listaDeLinguagens = []
+
+		programasCadastrados.each {
+			totalDeCompilacoes += it.compilacoes
+			compilacoesBemSucedidas += it.compilacoesBemSucedidas
+			compilacoesMalSucedidas += it.compilacoesMalSucedidas
+			listaDeLinguagens.add(it.linguagem)
+		}
+
+		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+
+		// Minhas estatísticas - Fim
+
+		[
+			datas: 						datas, 
+			loginsUnicos: 				loginsUnicos, 
+			loginsTotais: 				loginsTotais,
+			programasCadastrados: 		programasCadastrados.size(),
+			totalDeCompilacoes: 		totalDeCompilacoes,
+			compilacoesBemSucedidas: 	compilacoesBemSucedidas,
+			compilacoesMalSucedidas: 	compilacoesMalSucedidas,
+			linguagensUtilizadas: 		linguagensUtilizadas
+		]
 	}
 
 }

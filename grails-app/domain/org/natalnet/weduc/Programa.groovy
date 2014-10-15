@@ -11,6 +11,7 @@ class Programa {
     String extensao
     String local
     boolean REduc
+    Linguagem linguagem
     
     String codigo
     

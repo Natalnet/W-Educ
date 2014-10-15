@@ -14,6 +14,8 @@ class Usuario {
 
 	static transients = ['springSecurityService']
 
+	static hasMany = [programas: Programa]
+
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false

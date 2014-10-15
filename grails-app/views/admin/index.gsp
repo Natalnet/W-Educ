@@ -150,52 +150,36 @@
                         <div class="list-group">
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-comment fa-fw"></i> Publicações no fórum
-                                <span class="pull-right text-muted small"><em>150</em>
+                                <span class="pull-right text-muted small"><em>X</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-twitter fa-fw"></i> Programas cadastrados
-                                <span class="pull-right text-muted small"><em>12</em>
+                                <span class="pull-right text-muted small"><em>${programasCadastrados}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-envelope fa-fw"></i> Total de compilações
-                                <span class="pull-right text-muted small"><em>27</em>
+                                <span class="pull-right text-muted small"><em>${totalDeCompilacoes}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-tasks fa-fw"></i> Compilações bem-sucedidas
-                                <span class="pull-right text-muted small"><em>20</em>
+                                <span class="pull-right text-muted small"><em>${compilacoesBemSucedidas}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-upload fa-fw"></i> Compilações mal-sucedidas
-                                <span class="pull-right text-muted small"><em>7</em>
+                                <span class="pull-right text-muted small"><em>${compilacoesMalSucedidas}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
                                 <i class="fa fa-bolt fa-fw"></i> Linguagens utilizadas
-                                <span class="pull-right text-muted small"><em>3</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-money fa-fw"></i> Payment Received
-                                <span class="pull-right text-muted small"><em>Yesterday</em>
+                                <span class="pull-right text-muted small"><em>${linguagensUtilizadas}</em>
                                 </span>
                             </a>
                         </div>
                         <!-- /.list-group -->
-                        <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                     </div>
                     <!-- /.panel-body -->
                 </div>
