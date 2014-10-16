@@ -195,7 +195,7 @@
                                         <g:link controller="linguagem" action="nova">Cadastrar linguagem</g:link>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Gerenciar linguagens</a>
+                                        <g:link controller="linguagem" action="listar">Gerenciar linguagens</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Procurar linguagens</a>

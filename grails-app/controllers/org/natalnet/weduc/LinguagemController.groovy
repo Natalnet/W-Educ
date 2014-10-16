@@ -7,6 +7,11 @@ class LinguagemController {
 	def springSecurityService
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def index() {
+		redirect action: "listar"
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def nova() {}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
@@ -280,5 +285,11 @@ class LinguagemController {
         	redirect action: "editar" //, params: params
         }
 
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def listar() {
+		def usuario = springSecurityService.getCurrentUser()
+		[linguagens: Linguagem.findAllByAutor(usuario)]
 	}
 }

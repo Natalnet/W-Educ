@@ -526,7 +526,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <input type="submit" class="btn btn-default" value="Salvar linguagem" />
+                    <input type="submit" class="btn btn-default" value="Atualizar linguagem" />
                 </div>
                 <p>
                     &nbsp;
