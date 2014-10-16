@@ -1,6 +1,12 @@
 package org.natalnet.weduc
 
+import grails.plugin.springsecurity.annotation.Secured
+
 class AmbienteController {
 	def index() {}
-	def programar() {}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def programar() {
+		[linguagem: Linguagem.get(params.id)]
+	}
 }
