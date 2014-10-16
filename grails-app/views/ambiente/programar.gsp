@@ -7,7 +7,7 @@
             #editor { 
                 height: 600px;
                 position: absolute;
-                top: 12em;
+                top: 22em;
                 right: 0;
                 bottom: 0;
                 left: 0;
@@ -29,9 +29,10 @@
                         <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
                         ${linguagem?.name}
                     </label>
-                    &nbsp;&nbsp;
+                    <br/>
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" style="display: inline; width: 200px;" />
+                    <button type="button" class="btn btn-outline btn-default">Salvar o programa</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
             </div>

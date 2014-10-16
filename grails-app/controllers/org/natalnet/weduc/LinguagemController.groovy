@@ -292,4 +292,9 @@ class LinguagemController {
 		def usuario = springSecurityService.getCurrentUser()
 		[linguagens: Linguagem.findAllByAutor(usuario)]
 	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def procurar() {
+		[linguagens: Linguagem.findAll()]
+	}
 }
