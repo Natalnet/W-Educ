@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta name="layout" content="admin"/>
-        <title>Lista de Linguagem - W-Educ</title>
+        <title>Ambiente Textual - W-Educ</title>
     </head>
     <body>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Lista de Linguagens</h1>
+                <h1 class="page-header">Programar em ${linguagem?.name}</h1>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
