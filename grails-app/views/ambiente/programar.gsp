@@ -5,7 +5,7 @@
         <title>Ambiente Textual - W-Educ</title>
         <style type="text/css" media="screen">
             #editor { 
-                height: 100%;
+                height: 600px;
                 position: absolute;
                 top: 8em;
                 right: 0;
@@ -28,6 +28,8 @@
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/github");
             editor.getSession().setMode("ace/mode/c_cpp");
+            var editor_height = $("#editor_container").height();
+            $("#editor").height(editor_height);
         </script>
     </body>
 </html>
