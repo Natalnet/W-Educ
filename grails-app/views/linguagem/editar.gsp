@@ -109,7 +109,7 @@
                     <p>
                         <h4>Nome do arquivo:</h4>
                         <div class="well">
-                            <input type="text" class="form-control" id="arquivo" value="${linguagem?.compilerFile}" />
+                            <input type="text" class="form-control" id="arquivo" name="arquivo" value="${linguagem?.compilerFile}" />
                         </div>
                     </p>
                 </div>
@@ -192,7 +192,7 @@
                 <div class="col-lg-8">
                     <h4>Função na Linguagem Alvo</h4>
                     <div class="well">
-                        <textarea class="form-control" rows="11" id="funcao">${linguagem?.otherFunctions}</textarea>
+                        <textarea class="form-control" rows="11" id="funcao" name="funcao">${linguagem?.otherFunctions}</textarea>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -327,7 +327,7 @@
                 <div class="col-lg-3">
                     <h4>Falso</h4>
                     <div class="well">
-                        <textarea class="form-control" rows="7" id="falso"required>${linguagem?.types.declareFalse}</textarea>
+                        <textarea class="form-control" rows="7" id="falso" name="falso" required>${linguagem?.types.declareFalse}</textarea>
                     </div>
                 </div>
                 <div class="col-lg-3">
