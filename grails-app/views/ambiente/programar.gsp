@@ -7,7 +7,7 @@
             #editor { 
                 height: 600px;
                 position: absolute;
-                top: 8em;
+                top: 12em;
                 right: 0;
                 bottom: 0;
                 left: 0;
@@ -19,6 +19,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Programar em ${linguagem?.name}</h1>
+                <div class="form-group">
+                    <label>Selecione a linguagem: </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
+                        R-Educ
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
+                        ${linguagem?.name}
+                    </label>
+                    &nbsp;&nbsp;
+                    <label>Nome do programa: </label>
+                    <input class="form-control" type="text" style="display: inline; width: 200px;" />
+                </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
             </div>
         </div>
