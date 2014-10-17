@@ -215,7 +215,7 @@
                                 <a href="#"><i class="fa fa-pencil fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Procurar professores</a>
+                                        <g:link controller="professor" action="procurar">Procurar professores</g:link>
                                     </li>
                                     <li>
                                         <a href="flot.html">Procurar linguagens</a>
