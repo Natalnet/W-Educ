@@ -34,34 +34,53 @@ class ProfessorController {
 
 	}
 
-
-	@Secured(['ROLE_ADMIN', 'ROLE_ALUNO'])
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def aceitar() {
-
-		def antigoProfessor = null
-		def novoProfessor = null
 
 		// Define usuário atual
 		def usuario = springSecurityService.getCurrentUser()
 
-		// Verifica se o aluno já possui algum professor
-		if(usuario.professor != null) {
+		// Define a requisição
+		def requisicao = RequisicaoDeAluno.get(params.id)
 
-			// Armazena o nome
-			antigoProfessor = usuario.professor.username
+		// Define o professor do aluno
+		requisicao.aluno.professor = usuario
 
-			// Desfaz a relação existente entre os dois
-			usuario.professor.removeFromAlunos(usuario)
+		// Salva as alterações
+		requisicao.aluno.save(flush: true)
 
-		}
+		// Define um aluno para o professor
+		usuario.addToAlunos(requisicao.aluno)
 
-		// Define o  novo professor do aluno
-		def professor = Professor.get(params.id)
+		// Salva as alteraçÕes
+		usuario.save(flush: true)
 
-		// Salva os dados
-		usuario.save flush: true
+		// Remove requisicao
+		requisicao.delete(flush: true)
 
-		[antigoProfessor: antigoProfessor, novoProfessor: usuario.professor.username]
+		flash.message = requisicao.aluno.username + " foi aceito"
 
+		redirect action: "gerenciarAlunos"
+
+	}
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def recusar() {
+
+		// Define a requisição
+		def requisicao = RequisicaoDeAluno.get(params.id)
+
+		// Remove requisicao
+		requisicao.delete(flush: true)
+
+		flash.message = requisicao.aluno.username + " foi recusado"
+
+		redirect action: "gerenciarAlunos"
+
+	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def gerenciarAlunos() {
+		def usuario = springSecurityService.getCurrentUser()
+		[requisicoes: RequisicaoDeAluno.findAllWhere(professor: usuario), alunos: Aluno.findAllWhere(professor: usuario)]
 	}
 }
