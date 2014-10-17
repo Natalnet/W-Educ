@@ -201,7 +201,7 @@
                                         <a href="morris.html">Procurar linguagens</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Gerenciar alunos</a>
+                                        <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Fórum de discussão</a>

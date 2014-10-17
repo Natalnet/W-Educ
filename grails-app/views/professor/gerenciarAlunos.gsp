@@ -32,7 +32,7 @@
                             <tr>
                                 <td>${aluno?.username}</td>
                                 <td>
-                                    <g:link controller="mensagem" action="enviar" id="${aluno?.id}">Enviar mensagem</g:link>
+                                    <g:link controller="mensagem" action="escrever" id="${aluno?.id}">Enviar mensagem</g:link>
                                 </td>
                             </tr>
                             </g:each>
