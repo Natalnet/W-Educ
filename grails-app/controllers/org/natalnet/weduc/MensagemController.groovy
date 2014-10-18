@@ -1,16 +1,21 @@
-package org.natalnet.weduc;
+package org.natalnet.weduc
+
+import grails.plugin.springsecurity.annotation.Secured
 
 class MensagemController {
 
 	def springSecurityService
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def index() {}
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def escrever() {
 		def usuario = Usuario.get(params.id)
 		[destinatario: usuario]
 	}
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def enviar() {
 		def mensagem = new Mensagem()
 		mensagem.destinatario = Usuario.get(params.id)
@@ -23,6 +28,7 @@ class MensagemController {
 		redirect controller: "professor", action: "gerenciarAlunos"
 	}
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def todas() {
 		def usuario = springSecurityService.getCurrentUser()
 		def mensagens = Mensagem.findAllWhere(destinatario: usuario)

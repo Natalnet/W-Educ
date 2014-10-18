@@ -178,7 +178,7 @@
                                         <g:link controller="linguagem" action="listar">Gerenciar linguagens</g:link>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Procurar linguagens</a>
+                                        <g:link controller="linguagem" action="procurar">">Procurar linguagens</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
@@ -198,7 +198,7 @@
                                         <g:link controller="professor" action="procurar">Procurar professores</g:link>
                                     </li>
                                     <li>
-                                        <a href="flot.html">Procurar linguagens</a>
+                                        <g:link controller="linguagem" action="procurar">Procurar linguagens</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Fórum de discussão</a>
