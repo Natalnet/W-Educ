@@ -23,12 +23,6 @@ class MensagemController {
 		redirect controller: "professor", action: "gerenciarAlunos"
 	}
 
-	def ultimas() {
-		def usuario = springSecurityService.getCurrentUser()
-		def mensagens = Mensagem.list(max: 3, fetch: [destinatario: usuario])
-		[mensagens: mensagens]
-	}
-
 	def todas() {
 		def usuario = springSecurityService.getCurrentUser()
 		def mensagens = Mensagem.findAllWhere(destinatario: usuario)
