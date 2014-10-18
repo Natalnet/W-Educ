@@ -125,10 +125,10 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a class="text-center" href="#">
+                                <g:link class="text-center" controller="mensagem" action="todas">
                                     <strong>Ler Todas as Mensagens</strong>
                                     <i class="fa fa-angle-right"></i>
-                                </a>
+                                </g:link>
                             </li>
                         </ul>
                         <!-- /.dropdown-messages -->
@@ -179,6 +179,9 @@
                                     </li>
                                     <li>
                                         <a href="morris.html">Gerenciar professores</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Broadcast de mensagens</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

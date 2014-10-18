@@ -25,7 +25,7 @@ class MensagemController {
 
 	def ultimas() {
 		def usuario = springSecurityService.getCurrentUser()
-		def mensagens = Mensagem.list(max: 5, fetch: [destinatario: usuario])
+		def mensagens = Mensagem.list(max: 3, fetch: [destinatario: usuario])
 		[mensagens: mensagens]
 	}
 

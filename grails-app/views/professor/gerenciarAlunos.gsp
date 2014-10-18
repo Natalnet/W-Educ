@@ -9,6 +9,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Gerenciar Alunos</h1>
+                <g:if test="${flash.message}">
+                <g:if test="${flash.message.contains("recusado")}">
+                <div class="alert alert-danger">
+                </g:if>
+                <g:else>
+                <div class="alert alert-success">    
+                </g:else>
+                    ${flash.message}
+                </div>
+                </g:if>
                 <h2>Meus alunos</h2>
                 <div class="table-responsive">
                     <table class="table">
@@ -19,16 +29,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <g:if test="${flash.message}">
-                            <g:if test="${flash.message.contains("recusado")}">
-                            <div class="alert alert-danger">
-                            </g:if>
-                            <g:else>
-                            <div class="alert alert-success">    
-                            </g:else>
-                                ${flash.message}
-                            </div>
-                            </g:if>
                             <g:each in="${alunos}" var="aluno">
                             <tr>
                                 <td>${aluno?.username}</td>
@@ -50,15 +50,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <g:if test="${flash.message}">
-                            <g:if test="${flash.message.contains("recusado")}">
-                            <div class="alert alert-danger">
-                            </g:if><g:if test="${flash.message.contains("aceito")}">
-                            <div class="alert alert-success">    
-                            </g:if>
-                                ${flash.message}
-                            </div>
-                            </g:if>
                             <g:each in="${requisicoes}" var="requisicao">
                             <tr>
                                 <td>${requisicao?.aluno?.username}</td>
