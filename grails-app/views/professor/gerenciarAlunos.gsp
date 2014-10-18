@@ -22,9 +22,10 @@
                             <g:if test="${flash.message}">
                             <g:if test="${flash.message.contains("recusado")}">
                             <div class="alert alert-danger">
-                            </g:if><g:if test="${flash.message.contains("aceito")}">
-                            <div class="alert alert-success">    
                             </g:if>
+                            <g:else>
+                            <div class="alert alert-success">    
+                            </g:else>
                                 ${flash.message}
                             </div>
                             </g:if>
