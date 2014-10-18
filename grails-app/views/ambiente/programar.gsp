@@ -34,6 +34,12 @@
                     <input class="form-control" type="text" style="display: inline; width: 200px;" />
                     <button type="button" class="btn btn-outline btn-default">Salvar o programa</button>
                 </div>
+                <div class="form-group">
+                    <button class="btn btn-info">Novo programa</button>
+                    <button class="btn btn-success">Compilar programa</button>
+                    <button class="btn btn-warning">Enviar programa</button>
+                    <button class="btn btn-danger">Apagar programa</button>
+                </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
             </div>
         </div>
