@@ -14,6 +14,7 @@
                         <thead>
                             <tr>
                                 <th>Nome da Linguagem</th>
+                                <th>Robô</th>
                                 <th>Autor</th>
                                 <th>Opções</th>
                             </tr>
@@ -22,6 +23,7 @@
                             <g:each in="${linguagens}" var="linguagem">
                             <tr>
                                 <td>${linguagem?.name}</td>
+                                <td>${linguagem?.robot}</td>
                                 <td>${linguagem?.autor?.username}</td>
                                 <td><g:link controller="ambiente" action="programar" id="${linguagem?.id}">Programar linguagem</g:link></td>
                             </tr>
