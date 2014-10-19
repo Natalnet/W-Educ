@@ -1,5 +1,9 @@
 package org.natalnet.weduc
 
+import com.roboeduc.compiladorreduc.*
+import java.io.File
+import groovy.io.FileType
+
 import grails.plugin.springsecurity.annotation.Secured
 
 class AmbienteController {
@@ -78,9 +82,141 @@ class AmbienteController {
 			reduc: reduc
 		)
 
+		// Salva programa em arquivo temporário
+        def t = System.currentTimeMillis().toString();
+        String fName = programa.nome + t;
+        File f = new File("/tmp/weduc/compilador/" + fName + "." + extensao)
+        f << programa.codigo //.replaceAll("\n", "\r\n");
+
 		// Verifica se é R-Educ
 		if(reduc) {
-			//
+
+			// Compila o arquivo utilizando o compilador REduc
+            
+            // Define o local do programa, para utilização futura
+            programa.local = fName + programa.extensao + "." + linguagem.extension
+
+            def language;
+            language = new Language();
+            language.setId(linguagem.id);
+            language.setName(linguagem.name);
+            language.setDescription(linguagem.description);
+            language.setRobot(linguagem.robot);
+            language.setExtension(linguagem.extension);
+
+            language.setCompileCode(linguagem.compileCode);
+            language.setCompilerFile(linguagem.compilerFile);
+            language.setSendCode(linguagem.sendCode);
+            language.setSentExtension(linguagem.sentExtension);
+
+            language.setHeader(linguagem.header);
+            language.setFootnote(linguagem.footnote);
+
+            language.setMainFunction(linguagem.mainFunction);
+            language.setOtherFunctions(linguagem.otherFunctions);
+            language.setCallFunction(linguagem.callFunction);
+
+            // Tipos
+            def tipos = Tipos.findWhere(id: linguagem.types.id)
+            def types;
+            types = new Types();
+            types.setId(tipos.id);
+            types.setName(tipos.name);
+            types.setDeclareFalse(tipos.declareFalse);
+            types.setDeclareTrue(tipos.declareTrue);
+            types.setDeclareFloat(tipos.declareFloat);
+            types.setDeclareString(tipos.declareString);
+            types.setDeclareBoolean(tipos.declareBoolean);
+            language.setTypes(types);
+
+            // Funções
+            def funcoes = Funcao.findAllWhere(linguagem: linguagem)
+
+            def functions = new ArrayList();
+
+            funcoes.each() {
+                obj ->
+
+                def function = new LFunction();
+
+                function.setId(obj.id);
+                function.setName(obj.name);
+                function.setType(obj.type);
+                function.setReturnType(obj.returnType);
+                function.setQntParameters(obj.qntParameters);
+                function.setCode(obj.code);
+                function.setDescription(obj.description);
+                function.setTypeAliases(obj.typeAliases);
+                function.setImageURL(obj.imageURL);
+                functions.add(function);
+            }
+
+            // Defines
+            def defines = Definicao.findAllWhere(linguagem: linguagem)
+
+            def defines2 = new ArrayList();
+
+            defines.each() {
+                obj ->
+
+                def defines3 = new Defines();
+                
+                defines3.setId(obj.id);
+                defines3.setName(obj.name);
+                defines3.setType(obj.type);
+                defines3.setText(obj.text);
+                defines3.setAlreadyExists(obj.alreadyExists);
+                defines2.add(defines3);
+            }
+
+            // Operadores
+            def operadores = Operadores.findWhere(id: linguagem.operators.id)
+            def operators;
+            operators = new Operators();
+            operators.setId(operadores.id);
+            operators.setEqualTo(operadores.equalTo);
+            operators.setNotEqualTo(operadores.notEqualTo);
+            operators.setGreaterThan(operadores.greaterThan);
+            operators.setLessThan(operadores.lessThan);
+            operators.setLessThanOrEqualTo(operadores.lessThanOrEqualTo);
+            operators.setGreaterThanOrEqualTo(operadores.greaterThanOrEqualTo);
+            operators.setLogicalAnd(operadores.logicalAnd);
+            operators.setLogicalOr(operadores.logicalOr);
+            operators.setLogicalNot(operadores.logicalNot);
+            operators.setName(operadores.name);
+
+            // Controle de fluxo
+            def controleDeFluxo = ControleDeFluxo.findWhere(id: linguagem.controlFlow.id)
+            ControlFlow controlFlow;
+            controlFlow = new ControlFlow();
+            controlFlow.setId(controleDeFluxo.id);
+            controlFlow.setLanguageName(controleDeFluxo.languageName);
+            controlFlow.setBreakCode(controleDeFluxo.breakCode);
+            controlFlow.setDoCode(controleDeFluxo.doCode);
+            controlFlow.setForCode(controleDeFluxo.forCode);
+            controlFlow.setIfCode(controleDeFluxo.ifCode);
+            controlFlow.setRepeatCode(controleDeFluxo.repeatCode);
+            controlFlow.setSwitchCode(controleDeFluxo.switchCode);
+            controlFlow.setWhileCode(controleDeFluxo.whileCode);
+
+            def lexico = new analisadorLexico();
+            lexico.readFile(f.path);
+            def sintatico = new analisadorSintatico(lexico, "/tmp/weduc/compilador/" + fName, extensao, linguagem.name, language.extesion);
+            sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
+            sintatico.startCompile();
+            sintatico.closeFile();
+            // println(sintatico.isError());
+            // render sintatico.isError();
+            
+            if(!sintatico.isError()) {
+                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+                programa.save(flush: true)
+                render "Compilação bem sucedida!"
+            } else {
+                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+                programa.save(flush: true)
+                render "Linha: " + sintatico.getErrorInt() + " Erro: " + sintatico.getErrorStr();
+            }
 		}
 		// Verifica se é a linguagem alvo
 		else {
