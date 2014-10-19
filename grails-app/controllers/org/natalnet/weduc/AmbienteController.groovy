@@ -57,4 +57,35 @@ class AmbienteController {
 		render "OK"
 
 	}
+
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def compilarPrograma() {
+
+		// Define usuário atual
+		def usuario = springSecurityService.getCurrentUser()
+
+		// Define a linguagem
+		def linguagem = Linguagem.get(params.linguagem)
+
+		// Define se é R-Educ ou não
+		def reduc = params.reduc == "1" ? true : false
+
+		// Procura um programa de mesmo nome;
+		// caso não exista, o cria
+		def programa = Programa.findOrCreateWhere(
+			usuario: usuario, 
+			linguagem: linguagem,
+			reduc: reduc
+		)
+
+		// Verifica se é R-Educ
+		if(reduc) {
+			//
+		}
+		// Verifica se é a linguagem alvo
+		else {
+			//
+		}
+	}
+
 }
