@@ -15,6 +15,16 @@
         </style>
     </head>
     <body>
+        <script type="text/javascript">
+            // Apaga o conteúdo do editor de texto
+            // e limpa o nome do programa
+            var novoPrograma = function () {
+                // Apaga o conteúdo do editor
+                editor.setValue("// Olá! Comece a programar aqui.");
+                // Limpa o nome do programa
+                $("#nome-do-programa").val("");
+            };
+        </script>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
@@ -31,11 +41,11 @@
                     </label>
                     <br/>
                     <label>Nome do programa: </label>
-                    <input class="form-control" type="text" style="display: inline; width: 200px;" />
+                    <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
                     <button type="button" class="btn btn-outline btn-default">Salvar o programa</button>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-info">Novo programa</button>
+                    <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
                     <button class="btn btn-success">Compilar programa</button>
                     <button class="btn btn-warning">Enviar programa</button>
                     <button class="btn btn-danger">Apagar programa</button>
