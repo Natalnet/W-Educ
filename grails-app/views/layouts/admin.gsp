@@ -178,7 +178,7 @@
                                         <g:link controller="linguagem" action="listar">Gerenciar linguagens</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">">Procurar linguagens</g:link>
+                                        <g:link controller="linguagem" action="procurar">Procurar linguagens</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
