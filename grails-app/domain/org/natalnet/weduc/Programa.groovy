@@ -10,7 +10,7 @@ class Programa {
     Long compilacoesMalSucedidas
     String extensao
     String local
-    boolean REduc
+    boolean reduc
     Linguagem linguagem
     
     String codigo

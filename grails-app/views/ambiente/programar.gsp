@@ -24,6 +24,37 @@
                 // Limpa o nome do programa
                 $("#nome-do-programa").val("");
             };
+
+            // Verifica se a linguagem selecionada
+            // é a R-Educ ou a Linguagem Alvo
+            var verificarLinguagem = function () {
+                if($("#radio1").is(":checked")) {
+                    return "1"
+                } else {
+                    return "0"
+                }
+            };
+
+            // Salva o programa no banco de dados
+            var salvarPrograma = function () {
+                // Inicia requisição assíncrona
+                // para salvar o programa no banco
+                $.ajax({
+                    url: "<g:createLink action="salvarPrograma"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                        codigo: editor.getValue()
+                    },
+                    success: function () {
+                        alert("Programa salvo no banco de dados com sucesso.");
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar gravar o programa no banco de dados.");
+                    }
+                });
+            };
         </script>
         <!-- /.row -->
         <div class="row">
@@ -42,7 +73,7 @@
                     <br/>
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
-                    <button type="button" class="btn btn-outline btn-default">Salvar o programa</button>
+                    <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar o programa</button>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
