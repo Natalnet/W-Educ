@@ -21,7 +21,10 @@
                             <g:each in="${linguagens}" var="linguagem">
                             <tr>
                                 <td><g:link controller="ambiente" action="programar" id="${linguagem?.id}">${linguagem?.name}</g:link></td>
-                                <td><g:link controller="linguagem" action="editar" id="${linguagem?.id}">Editar linguagem</g:link></td>
+                                <td>
+                                    <g:link controller="linguagem" action="editar" id="${linguagem?.id}">Editar linguagem</g:link>&nbsp;
+                                    <g:link controller="funcao" action="listar" id="${linguagem?.id}">Editar funções</g:link>
+                                </td>
                             </tr>
                             </g:each>
                         </tbody>
