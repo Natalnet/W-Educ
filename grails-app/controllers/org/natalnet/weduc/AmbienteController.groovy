@@ -260,6 +260,8 @@ class AmbienteController {
             catch (IOException ex) {
                 System.out.println("Erro ao compilar o programa com o NBC");
             }
+
+            println saida
             
             if(!sintatico.isError()) {
                 programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
