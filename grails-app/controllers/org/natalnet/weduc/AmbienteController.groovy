@@ -229,8 +229,8 @@ class AmbienteController {
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Prepara o comando Make
-            def comando = "/usr/bin/make -C /tmp/weduc/compilador/" 
-            	comando += usuario?.username + "/CV3"
+            def comando = "sh -c \"/usr/bin/make -C /tmp/weduc/compilador/" 
+            	comando += usuario?.username + "/CV3\""
 
             println "------>"
             println comando
