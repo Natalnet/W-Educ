@@ -217,6 +217,11 @@ class AmbienteController {
             sintatico.closeFile();
             // println(sintatico.isError());
             // render sintatico.isError();
+
+            // Copia os arquivos para a pasta temporária
+            File fSource = new File("/tmp/weduc/compilador/CV3")
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username)
+            org.apache.commons.io.FileUtils.copyDirectory(fSource, fTarget);
             
             if(!sintatico.isError()) {
                 programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
