@@ -899,7 +899,7 @@ class BootStrap {
             println "Cadastro da linguagem " + linguagem.name + " concluido"
             
         } else {
-            println "Linguagem NXC ja existe no banco de dados"
+            println "Linguagem CV3 ja existe no banco de dados"
         }
         
         // Fim do cadastro de linguagem
