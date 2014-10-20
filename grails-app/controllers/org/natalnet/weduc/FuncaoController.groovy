@@ -18,15 +18,15 @@ class FuncaoController {
 	def salvar() {
 
 
-        // Fim do cadastro de linguagem
+                // Fim do cadastro de função
 
-        if(linguagem.id != null) {
-        	flash.message = "Linguagem " + linguagem.name + " cadastrada com sucesso."
-        	redirect action: "editar", id: linguagem.id
-        } else {
-        	flash.message = "Erro ao cadastrar a linguagem " + linguagem.name + "."
-        	redirect action: "nova" //, params: params
-        }
+                if(linguagem.id != null) {
+                	flash.message = "Linguagem " + linguagem.name + " cadastrada com sucesso."
+                	redirect action: "editar", id: linguagem.id
+                } else {
+                	flash.message = "Erro ao cadastrar a linguagem " + linguagem.name + "."
+                	redirect action: "nova" //, params: params
+                }
 
 	}
 
@@ -60,4 +60,20 @@ class FuncaoController {
 		def usuario = springSecurityService.getCurrentUser()
 		[linguagens: Linguagem.findAllByAutor(usuario)]
 	}
+
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+        def remover() {
+                
+                // Define a função
+                def funcao = Funcao.get(params.id)
+                
+                // Configura mensagem ao usuário
+                flash.message = "Função " + funcao.name + " removida com sucesso."
+
+                // Remove a função do banco
+                funcao.delete(flush: true)
+
+                redirect action: "listar"
+                
+        }
 }
