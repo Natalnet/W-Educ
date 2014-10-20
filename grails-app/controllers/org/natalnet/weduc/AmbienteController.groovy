@@ -222,6 +222,44 @@ class AmbienteController {
             File fSource = new File("/tmp/weduc/compilador/CV3")
             File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username)
             org.apache.commons.io.FileUtils.copyDirectory(fSource, fTarget);
+
+            // Deixa o arquivo com a extensão e identificação desejadas
+            fSource = "/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "." + programa.extensao + "." + linguagem.extension
+            fTarget = "/tmp/weduc/compilador/" + usuario?.username + "/cv3.c"
+            org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
+
+            // Prepara o comando Make
+            def comando = "(cd /tmp/weduc/compilador/" 
+            	comando += usuario?.username + " && make)"
+
+            // Executa o comando Make
+            Process proc;
+            String saida = "";
+            String s;
+
+            try {
+
+                 System.out.println("entrei na compilacao");
+                 proc = Runtime.getRuntime().exec();
+                 System.out.println("sai na compilacao");
+
+                 BufferedReader stdInput = new BufferedReader(new
+                      InputStreamReader(proc.getInputStream()));
+
+                 BufferedReader stdError = new BufferedReader(new
+                      InputStreamReader(proc.getErrorStream()));
+
+                 while ((s = stdInput.readLine()) != null) {
+                     saida += s + "\n";
+                 }
+                 
+                 // System.out.println("proc: " + proc);
+                 // System.out.println("saida: " + saida);
+
+            }
+            catch (IOException ex) {
+                System.out.println("Erro ao compilar o programa com o NBC");
+            }
             
             if(!sintatico.isError()) {
                 programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
