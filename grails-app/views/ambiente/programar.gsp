@@ -45,10 +45,34 @@
                     data: {
                         linguagem: ${linguagem?.id},
                         reduc: verificarLinguagem(),
+                        nome: $("#nome-do-programa").val(),
                         codigo: editor.getValue()
                     },
                     success: function () {
                         alert("Programa salvo no banco de dados com sucesso.");
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar gravar o programa no banco de dados.");
+                    }
+                });
+            };
+
+            // Compilar o programa
+            var compilarPrograma = function () {
+
+                // Inicia requisição assíncrona
+                // para compilar o programa
+                $.ajax({
+                    url: "<g:createLink action="compilarPrograma"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                        nome: $("#nome-do-programa").val(),
+                        codigo: editor.getValue()
+                    },
+                    success: function (returnData) {
+                        alert(returnData);
                     },
                     fail: function () {
                         alert("Erro ao tentar gravar o programa no banco de dados.");
@@ -77,7 +101,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
-                    <button class="btn btn-success">Compilar programa</button>
+                    <button class="btn btn-success" onclick="compilarPrograma();">Compilar programa</button>
                     <button class="btn btn-warning">Enviar programa</button>
                     <button class="btn btn-danger">Apagar programa</button>
                 </div>

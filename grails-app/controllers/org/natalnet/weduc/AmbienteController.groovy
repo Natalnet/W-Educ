@@ -34,7 +34,8 @@ class AmbienteController {
 		def programa = Programa.findOrCreateWhere(
 			usuario: usuario, 
 			linguagem: linguagem,
-			reduc: reduc
+			reduc: reduc,
+			nome: params.nome
 		)
 
 		// Registra data de criação, 
@@ -55,8 +56,14 @@ class AmbienteController {
 		// Define extensão
 		programa.extensao = reduc ? ".rob" : linguagem.extension
 
+		// Define o nome
+		programa.nome = programa.nome ? programa.nome : params.nome
+
 		// Define o código
-		programa.codigo = params.codigo
+		programa.codigo = params.codigo 
+
+		// Salva o programa
+		programa.save(flush: true)
 
 		render "OK"
 
@@ -76,16 +83,19 @@ class AmbienteController {
 
 		// Procura um programa de mesmo nome;
 		// caso não exista, o cria
-		def programa = Programa.findOrCreateWhere(
+		def programa = Programa.findWhere(
 			usuario: usuario, 
 			linguagem: linguagem,
-			reduc: reduc
+			reduc: reduc,
+			nome: params.nome
 		)
 
 		// Salva programa em arquivo temporário
         def t = System.currentTimeMillis().toString();
         String fName = programa.nome + t;
-        File f = new File("/tmp/weduc/compilador/" + fName + "." + extensao)
+        File d = new File("/tmp/weduc/compilador/" + usuario?.username)
+        d.mkdir()
+        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "" + programa.extensao)
         f << programa.codigo //.replaceAll("\n", "\r\n");
 
 		// Verifica se é R-Educ
@@ -201,7 +211,7 @@ class AmbienteController {
 
             def lexico = new analisadorLexico();
             lexico.readFile(f.path);
-            def sintatico = new analisadorSintatico(lexico, "/tmp/weduc/compilador/" + fName, extensao, linguagem.name, language.extesion);
+            def sintatico = new analisadorSintatico(lexico, "/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);
             sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
             sintatico.startCompile();
             sintatico.closeFile();
@@ -220,7 +230,7 @@ class AmbienteController {
 		}
 		// Verifica se é a linguagem alvo
 		else {
-			//
+			render "Não suportado ainda."
 		}
 	}
 
