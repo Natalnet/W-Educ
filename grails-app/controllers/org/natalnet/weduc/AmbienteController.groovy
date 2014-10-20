@@ -225,12 +225,12 @@ class AmbienteController {
 
             // Deixa o arquivo com a extensão e identificação desejadas
             fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
-            fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/cv3.c")
+            fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3/cv3.c")
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Prepara o comando Make
             def comando = "make -C /tmp/weduc/compilador/" 
-            	comando += usuario?.username
+            	comando += usuario?.username + "/CV3"
 
             // Executa o comando Make
             Process proc;
