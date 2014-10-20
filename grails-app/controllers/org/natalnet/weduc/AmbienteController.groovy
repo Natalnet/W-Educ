@@ -232,6 +232,10 @@ class AmbienteController {
             def comando = "/usr/bin/make -C /tmp/weduc/compilador/" 
             	comando += usuario?.username + "/CV3"
 
+            println "------>"
+            println comando
+            println "------>"
+
             // Executa o comando Make
             Process proc;
             String saida = "";
