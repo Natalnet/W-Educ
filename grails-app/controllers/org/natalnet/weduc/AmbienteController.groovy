@@ -228,15 +228,22 @@ class AmbienteController {
             fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3/cv3.c")
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
+            // Define o arquivo onde ficarão os comandos do Make
+            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3/weduc.sh")
+            def comando = "/usr/bin/make -C /tmp/weduc/compilador/" 
+            	comando += usuario?.username + "/CV3"
+            org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
+
             // Prepara o comando Make
-            def comando = "/bin/sh -c \"/usr/bin/make -C /tmp/weduc/compilador/" 
-            	comando += usuario?.username + "/CV3\""
+            comando = "/bin/sh /tmp/weduc/compilador/" 
+            comando += usuario?.username + "/CV3/weduc.sh"
 
             println "------>"
             println comando
             println "------>"
 
             //comando = "/bin/sh -c \"/bin/free -m\""
+            // comando = "/bin/sh -c \"echo haha\""
 
             // Executa o comando Make
             Process proc;
