@@ -224,8 +224,8 @@ class AmbienteController {
             org.apache.commons.io.FileUtils.copyDirectory(fSource, fTarget);
 
             // Deixa o arquivo com a extensão e identificação desejadas
-            fSource = "/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension
-            fTarget = "/tmp/weduc/compilador/" + usuario?.username + "/cv3.c"
+            fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/cv3.c")
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Prepara o comando Make
