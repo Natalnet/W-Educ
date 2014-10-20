@@ -12,7 +12,9 @@ class FuncaoController {
 	}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
-	def nova() {}
+	def nova() {
+                [linguagem: Linguagem.get(params.id)]
+        }
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def salvar() {
