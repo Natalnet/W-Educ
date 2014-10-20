@@ -236,6 +236,8 @@ class AmbienteController {
             println comando
             println "------>"
 
+            //comando = "free -m"
+
             // Executa o comando Make
             Process proc;
             String saida = "";
@@ -244,7 +246,7 @@ class AmbienteController {
             try {
 
                  System.out.println("entrei na compilacao");
-                 proc = Runtime.getRuntime().exec();
+                 proc = Runtime.getRuntime().exec(comando);
                  System.out.println("sai na compilacao");
 
                  BufferedReader stdInput = new BufferedReader(new
@@ -263,6 +265,9 @@ class AmbienteController {
             }
             catch (IOException ex) {
                 System.out.println("Erro ao compilar o programa com o NBC");
+            }
+            catch (Exception e) {
+            	println e
             }
 
             println saida
