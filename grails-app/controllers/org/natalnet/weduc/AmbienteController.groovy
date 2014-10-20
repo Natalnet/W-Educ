@@ -229,14 +229,14 @@ class AmbienteController {
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Prepara o comando Make
-            def comando = "sh -c \"/usr/bin/make -C /tmp/weduc/compilador/" 
+            def comando = "/bin/sh -c \"/usr/bin/make -C /tmp/weduc/compilador/" 
             	comando += usuario?.username + "/CV3\""
 
             println "------>"
             println comando
             println "------>"
 
-            //comando = "free -m"
+            //comando = "/bin/sh -c \"/bin/free -m\""
 
             // Executa o comando Make
             Process proc;
@@ -259,8 +259,8 @@ class AmbienteController {
                      saida += s + "\n";
                  }
                  
-                 // System.out.println("proc: " + proc);
-                 // System.out.println("saida: " + saida);
+                 //System.out.println("proc: " + proc);
+                 //System.out.println("saida: " + saida);
 
             }
             catch (IOException ex) {
