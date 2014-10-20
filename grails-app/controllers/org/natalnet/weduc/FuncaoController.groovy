@@ -58,7 +58,8 @@ class FuncaoController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def listar() {
 		def usuario = springSecurityService.getCurrentUser()
-		[linguagens: Linguagem.findAllByAutor(usuario)]
+                def linguagem = Linguagem.get(params.id)
+		[funcoes: Funcao.findAllByLinguagem(linguagem), linguagem: linguagem]
 	}
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
@@ -74,6 +75,6 @@ class FuncaoController {
                 funcao.delete(flush: true)
 
                 redirect action: "listar"
-                
+
         }
 }
