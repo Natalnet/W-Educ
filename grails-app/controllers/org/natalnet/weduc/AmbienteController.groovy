@@ -220,7 +220,7 @@ class AmbienteController {
 
             // Copia os arquivos para a pasta temporária
             File fSource = new File("/tmp/weduc/compilador/CV3")
-            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username)
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username "/CV3")
             org.apache.commons.io.FileUtils.copyDirectory(fSource, fTarget);
 
             // Deixa o arquivo com a extensão e identificação desejadas
