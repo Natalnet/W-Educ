@@ -46,33 +46,48 @@ class FuncaoController {
                 	redirect action: "editar", id: funcao.id
                 } else {
                 	flash.message = "Erro ao cadastrar a função " + funcao.name + "."
-                	redirect action: "nova" //, params: params
+                	redirect action: "nova", id: linguagem.id //, params: params
                 }
 
 	}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def editar() {
-		def linguagem = Linguagem.get(params.id)
-		[linguagem: linguagem]
+		def funcao = Funcao.get(params.id)
+		[funcao: funcao]
 	}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def atualizar() {
 
-	
+                // Inicio da atualização da função
+
+                def funcao = Funcao.get(params.id)
+                def linguagem = funcao.linguagem
+
+                funcao.name = params.nome
+                funcao.type = params.tipo
+                funcao.returnType = params.retorno
+                funcao.qntParameters = params.qntParametros
+                funcao.code = params.codigo
+                funcao.description = params.descricao
+                funcao.linguagem = linguagem
+                funcao.typeAliases = ""
+                funcao.imageURL = ""
+
+                funcao.save(flush: true)
         
-        println "Cadastro da linguagem " + linguagem.name + " atualizado por " + springSecurityService.getCurrentUser()
+                println "Cadastro da função " + funcao.name + " da linguagem " + linguagem.name + " atualizado por " + springSecurityService.getCurrentUser()
 
-        // Fim do cadastro de linguagem
+                // Fim da atualização da função
 
-        if(linguagem.id != null) {
-        	flash.message = "Linguagem " + linguagem.name + " atualizada com sucesso."
-        	redirect action: "editar", id: linguagem.id
-        } else {
-        	flash.message = "Erro ao atualizar a linguagem " + linguagem.name + "."
-        	redirect action: "editar" //, params: params
-        }
+                if(linguagem.id != null) {
+                	flash.message = "Linguagem " + linguagem.name + " atualizada com sucesso."
+                	redirect action: "editar", id: funcao.id
+                } else {
+                	flash.message = "Erro ao atualizar a linguagem " + linguagem.name + "."
+                	redirect action: "editar", id: funcao.id //, params: params
+                }
 
 	}
 
@@ -88,17 +103,20 @@ class FuncaoController {
                 
                 // Define a função
                 def funcao = Funcao.get(params.id)
+
+                // Define a linguagem
+                def linguagem = Linguagem.get(funcao.linguagem.id)
                 
                 // Configura mensagem ao usuário
                 flash.message = "Função " + funcao.name + " removida com sucesso."
 
                 // Desfaz a relação com a linguagem
-                funcao.linguagem.removeFromFunctions(function).save(flush: true)
+                // linguagem.removeFromFunctions(funcao).save(flush: true)
 
                 // Remove a função do banco
                 funcao.delete(flush: true)
 
-                redirect action: "listar"
+                redirect action: "listar", id: linguagem.id
 
         }
 }
