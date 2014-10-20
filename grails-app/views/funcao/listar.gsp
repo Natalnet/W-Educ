@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Lista de Funções</h1>
-                <h2>Linguagem ${linguagem?.name} <g:link action="nova" params="${[linguagem: linguagem?.id]}" class="btn btn-default">Nova função</g:link></h2>
+                <h2>Linguagem ${linguagem?.name} <g:link action="nova" id="${linguagem?.id}" class="btn btn-default">Nova função</g:link></h2>
                 <g:if test="${flash.message}">
                 <g:if test="${flash.message.contains("removida")}">
                 <div class="alert alert-danger">

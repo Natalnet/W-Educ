@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <form action="<g:createLink action="salvar"/>" method="post">
+        <form action="<g:createLink action="salvar" id="${linguagem?.id}"/>" method="post">
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -37,23 +37,27 @@
                 <div class="col-lg-12">
                     <h2>Nome</h2>
                     <div class="well">
-                        <input type="text" name="haha" id="haha" class="form-control"/>
+                        <input type="text" name="nome" id="nome" class="form-control"/>
+                    </div>
+                    <h2>Descrição</h2>
+                    <div class="well">
+                        <textarea class="form-control" rows="3" name="descricao" id="descricao"></textarea>
                     </div>
                     <h2>Tipo</h2>
                     <div class="well">
-                        <g:select name="haha" id="haha" class="form-control" from="${["Escrita", "Leitura", "Movimentação", "Outros"]}"/>
+                        <g:select name="tipo" id="tipo" class="form-control" from="${["Escrita", "Leitura", "Movimentação", "Outros"]}"/>
                     </div>
                     <h2>Retorno</h2>
                     <div class="well">
-                        <g:select name="haha" id="haha" class="form-control" from="${["boolean", "float", "String", "Void"]}"/>
+                        <g:select name="retorno" id="retorno" class="form-control" from="${["boolean", "float", "String", "Void"]}"/>
                     </div>
                     <h2>Quantidade de parâmetros</h2>
                     <div class="well">
-                        <g:select name="haha" id="haha" class="form-control" from="${0..5}"/>
+                        <g:select name="qntParametros" id="qntParametros" class="form-control" from="${0..5}"/>
                     </div>
                     <h2>Código</h2>
                     <div class="well">
-                        <textarea class="form-control" rows="3" name="descricao" id="descricao"></textarea>
+                        <textarea class="form-control" rows="3" name="codigo" id="codigo"></textarea>
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
