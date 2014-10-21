@@ -79,6 +79,19 @@
                     }
                 });
             };
+
+            // Baixar o programa
+            var baixarPrograma = function () {
+                var hiddenIFrameID = 'hiddenDownloader',
+                    iframe = document.getElementById(hiddenIFrameID);
+                if (iframe === null) {
+                    iframe = document.createElement('iframe');
+                    iframe.id = hiddenIFrameID;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                }
+                iframe.src = "<g:createLink action="baixarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
+            };
         </script>
         <!-- /.row -->
         <div class="row">
@@ -102,7 +115,7 @@
                 <div class="form-group">
                     <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
                     <button class="btn btn-success" onclick="compilarPrograma();">Compilar programa</button>
-                    <button class="btn btn-warning">Enviar programa</button>
+                    <button class="btn btn-warning" onclick="baixarPrograma();">Baixar programa</button>
                     <button class="btn btn-danger">Apagar programa</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>

@@ -295,4 +295,33 @@ class AmbienteController {
 		}
 	}
 
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def baixarPrograma() {
+
+		// Define usuário atual
+		def usuario = springSecurityService.getCurrentUser()
+
+		// Define a linguagem
+		def linguagem = Linguagem.get(params.linguagem)
+
+		// Define se é R-Educ ou não
+		def reduc = params.reduc == "1" ? true : false
+
+		// Procura um programa de mesmo nome;
+		// caso não exista, o cria
+		def programa = Programa.findWhere(
+			usuario: usuario, 
+			linguagem: linguagem,
+			reduc: reduc,
+			nome: params.nome
+		)
+
+		FileInputStream fPrograma = new FileInputStream("/tmp/weduc/compilador/" + usuario?.username + "/CV3/cv3")
+
+		response.setContentType("application/octet-stream")
+        response.setHeader("Content-disposition", "filename=cv3")
+        response.outputStream << fPrograma
+        return
+	}
+
 }
