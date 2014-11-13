@@ -95,7 +95,23 @@
 
             // Listar programas
             var listarProgramas = function () {
-                //
+                
+                // Inicia requisição assíncrona
+                // para listar os programas
+                $.ajax({
+                    url: "<g:createLink action="listarProgramas"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                    },
+                    success: function (returnData) {
+                        bootbox.alert(returnData);
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar listar os programa no banco de dados.");
+                    }
+                });
             };
         </script>
         <!-- /.row -->

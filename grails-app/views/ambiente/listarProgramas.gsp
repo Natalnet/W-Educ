@@ -1,13 +1,24 @@
 <div class="table-responsive">
 	<table class="table">
-		<g:each in="${programas}" var="programa">
+		<thead>
 			<tr>
-				<td>
-					<a href="#" onclick="abrirPrograma(${programa.id})">
-						${programa.nome}
-					</a>
-				</td>
+				<th>Nome do programa</th>
+				<th>Data de criação</th>
+				<th>Data de modificação</th>
 			</tr>
-		</g:each>
+		</thead>
+		<tbody>
+			<g:each in="${programas}" var="programa">
+				<tr>
+					<td>
+						<a href="#" onclick="abrirPrograma(${programa.id})">
+							${programa.nome}
+						</a>
+					</td>
+					<td><g:formatDate format="dd/MM/yyy" date="${programa.criadoEm}"/></td>
+					<td><g:formatDate format="dd/MM/yyy" date="${programa.modificadoEm}"/></td>
+				</tr>
+			</g:each>
+		</tbody>
 	</table>
 </div>

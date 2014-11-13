@@ -61,6 +61,9 @@
         <asset:javascript src="js/chosen.jquery.min.js"/>
         <asset:javascript src="js/chosen.proto.min.js"/>
 
+        <!-- Bootbox.js -->
+        <asset:javascript src="js/bootbox.min.js"/>
+
         <g:layoutHead/>
 
     </head>
