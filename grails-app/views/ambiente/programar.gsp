@@ -92,6 +92,11 @@
                 }
                 iframe.src = "<g:createLink action="baixarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
             };
+
+            // Listar programas
+            var listarProgramas = function () {
+                //
+            };
         </script>
         <!-- /.row -->
         <div class="row">
@@ -111,6 +116,7 @@
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
                     <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar o programa</button>
+                    <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir programa</button>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
