@@ -11,7 +11,7 @@
 			<g:each in="${programas}" var="programa">
 				<tr>
 					<td>
-						<a href="#" onclick="abrirPrograma(${programa.id})">
+						<a href="#" onclick="abrirPrograma(${programa.id}, '${programa.nome}')">
 							${programa.nome}
 						</a>
 					</td>

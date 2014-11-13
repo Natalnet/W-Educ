@@ -113,6 +113,27 @@
                     }
                 });
             };
+
+            // Abrir programa
+            var abrirPrograma = function (id, nome) {
+                
+                // Inicia requisição assíncrona
+                // para acessar o código do programa
+                $.ajax({
+                    url: "<g:createLink action="abrirPrograma"/>",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function (returnData) {
+                        $("#nome-do-programa").val(nome);
+                        editor.setValue(returnData);
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar acessar o código do programa no banco de dados.");
+                    }
+                });
+            };
         </script>
         <!-- /.row -->
         <div class="row">

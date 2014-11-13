@@ -353,7 +353,7 @@ class AmbienteController {
         // Procura pelo programa de id específico
         def programa = Programa.get(params.id)
 
-        [programa: programa]
+        render programa.codigo
     }
 
 }
