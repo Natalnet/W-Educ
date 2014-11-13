@@ -347,4 +347,13 @@ class AmbienteController {
         [programas: programas]
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def abrirPrograma() {
+
+        // Procura pelo programa de id específico
+        def programa = Programa.get(params.id)
+
+        [programa: programa]
+    }
+
 }
