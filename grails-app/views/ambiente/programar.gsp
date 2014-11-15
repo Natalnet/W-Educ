@@ -196,7 +196,7 @@
                     <button class="btn btn-primary" onclick="novoPrograma();">Novo</button>
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
-                    <button class="btn btn-info">Exportar</button>
+                    <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
                     <button class="btn btn-danger">Apagar</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
