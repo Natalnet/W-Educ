@@ -152,14 +152,15 @@
                     <br/>
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
-                    <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar o programa</button>
-                    <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir programa</button>
+                    <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
+                    <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir</button>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-info" onclick="novoPrograma();">Novo programa</button>
-                    <button class="btn btn-success" onclick="compilarPrograma();">Compilar programa</button>
-                    <button class="btn btn-warning" onclick="baixarPrograma();">Baixar programa</button>
-                    <button class="btn btn-danger">Apagar programa</button>
+                    <button class="btn btn-primary" onclick="novoPrograma();">Novo</button>
+                    <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
+                    <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
+                    <button class="btn btn-info">Exportar</button>
+                    <button class="btn btn-danger">Apagar</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
             </div>
