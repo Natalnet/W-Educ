@@ -126,13 +126,50 @@
                         id: id
                     },
                     success: function (returnData) {
+                        // Substitui o nome do programa
                         $("#nome-do-programa").val(nome);
+                        // Substitui o conteúdo do editor de texto
                         editor.setValue(returnData);
                     },
                     fail: function () {
                         alert("Erro ao tentar acessar o código do programa no banco de dados.");
                     }
                 });
+            };
+
+            // Exportar programa
+            var exportarPrograma = function () {
+                // Verifica se a linguagem selecionada
+                // é a R-Educ ou a Linguagem Alvo
+                if($("#radio1").is(":checked")) {
+                    // A linguagem seleciona é a R-Educ.
+                    // Inicia requisição assíncrona
+                    // para acessar o código do programa.
+                    $.ajax({
+                        url: "<g:createLink action="exportarPrograma"/>",
+                        type: "post",
+                        data: {
+                            linguagem: ${linguagem?.id},
+                            reduc: verificarLinguagem(),
+                            nome: $("#nome-do-programa").val()
+                        },
+                        success: function (returnData) {
+                            // Limpa o nome do programa
+                            $("#nome-do-programa").val("");
+                            // Seleciona a linguagem alvo
+                            $("#radio2").click();
+                            // Substitui o conteúdo do editor de texto
+                            editor.setValue(returnData);
+                        },
+                        fail: function () {
+                            alert("Erro ao tentar acessar o código do programa no banco de dados.");
+                        }
+                    });
+                } else {
+                    // A linguagem alvo está selecionada.
+                    // Não há o que fazer.
+                    bootbox.alert("Não é possível exportar um programa que já está escrito na Linguagem Alvo.");
+                }
             };
         </script>
         <!-- /.row -->
