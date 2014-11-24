@@ -350,6 +350,90 @@
                     </p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Operadores na Linguagem Alvo</h4>
+                    <div class="well operadores">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">e</span>
+                            <input type="text" class="form-control" id="e" name="e" value="${linguagem?.operators.logicalAnd}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">ou</span>
+                            <input type="text" class="form-control" id="ou" name="ou" value="${linguagem?.operators.logicalOr}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">!</span>
+                            <input type="text" class="form-control" id="nao" name="nao" value="${linguagem?.operators.logicalNot}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">=</span>
+                            <input type="text" class="form-control" id="igual" name="igual" value="${linguagem?.operators.equalTo}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">!=</span>
+                            <input type="text" class="form-control" id="diferente" name="diferente" value="${linguagem?.operators.notEqualTo}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&gt;</span>
+                            <input type="text" class="form-control" id="maior" name="maior" value="${linguagem?.operators.greaterThan}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&gt;=</span>
+                            <input type="text" class="form-control" id="maiorOuIgual" name="maiorOuIgual" value="${linguagem?.operators.greaterThanOrEqualTo}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&lt;</span>
+                            <input type="text" class="form-control" id="menor" name="menor" value="${linguagem?.operators.lessThan}" required />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&lt;=</span>
+                            <input type="text" class="form-control" id="menorOuIgual" name="menorOuIgual" value="${linguagem?.operators.lessThanOrEqualTo}" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Linguagem R-Educ e Linguagem C</h4>
+                    <div class="well operadores">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">e</span>
+                            <input type="text" class="form-control" value="&amp;&amp;" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">ou</span>
+                            <input type="text" class="form-control" value="&#124;&#124;" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">!</span>
+                            <input type="text" class="form-control" value="!" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">=</span>
+                            <input type="text" class="form-control" value="==" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">!=</span>
+                            <input type="text" class="form-control" value="!=" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&gt;</span>
+                            <input type="text" class="form-control" value="&gt;" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&gt;=</span>
+                            <input type="text" class="form-control" value="&gt;=" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&lt;</span>
+                            <input type="text" class="form-control" value="&lt;" readonly />
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">&lt;=</span>
+                            <input type="text" class="form-control" value="&lt;=" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="row">
                 <div class="col-lg-12">
