@@ -8,6 +8,11 @@
                 width: 5em;
             }
         </style>
+        <script type="text/javascript">
+            var uploadDesativado = function () {
+                bootbox.alert("O upload de arquivos estrá disponível apenas após a finalização do cadastro da linguagem.")
+            };
+        </script>
     </head>
     <body>
         <form action="<g:createLink action="salvar"/>" method="post">
@@ -72,7 +77,7 @@
                     <p>
                         <h4>Upload do compilador:</h4>
                         <div class="well">
-                            <button class="btn btn-default" id="fazer-upload" name="fazer-upload">Faça o upload do compilador</button><br />
+                            <div class="btn btn-default" id="fazer-upload" name="fazer-upload" onclick="uploadDesativado();">Faça o upload do compilador</div><br />
                             <label>
                                 <input type="checkbox" id="requer-instalacao" name="requer-instalacao"> Requer instalação</input> 
                             </label>
@@ -100,7 +105,7 @@
                     <p>
                         <h4>Upload do arquivo a ser enviado ao computador local para permitir o envio: </h4>
                         <div class="well">
-                            <button class="btn btn-default" id="fazer-upload-envio" name="fazer-upload-envio">Faça o upload do programa de envio</button><br />
+                            <div class="btn btn-default" id="fazer-upload-envio" name="fazer-upload-envio" onclick="uploadDesativado();">Faça o upload do programa de envio</div><br />
                             <label>
                                 <input type="checkbox" id="envio-necessario" name="envio-necessario"> Envio necessário</input> 
                             </label>
