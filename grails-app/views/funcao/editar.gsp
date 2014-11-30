@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="admin"/>
-        <title>Cadastro de Linguagem - W-Educ</title>
+        <title>Edição do Cadastro de Linguagem - W-Educ</title>
         <style type="text/css">
             .operadores > div > span {
                 width: 5em;
@@ -14,8 +14,8 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cadastro de Funções</h1>
-                    <h2>Linguagem ${linguagem?.name}</h2>
+                    <h1 class="page-header">Edição do Cadastro de Funções</h1>
+                    <h2>Linguagem ${funcao?.linguagem?.name}</h2>
                     <p>
                         Nesta seção você deve definir as chamadas de funções que fazem parte da Linguagem Alvo. Estas funções devem possuir retornos do tipo <strong>float</strong>, <strong>String</strong>, <strong>void</strong> ou <strong>boolean</strong> que deve ser selecionado.
                     </p>
