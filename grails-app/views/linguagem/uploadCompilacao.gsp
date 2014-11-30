@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <form action="<g:createLink action="atualizar" id="${linguagem?.id}"/>" method="post">
+        <form action="<g:createLink action="atualizar" id="${linguagem?.id}"/>" method="post" enctype="multipart/form-data">
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -24,7 +24,7 @@
                 <div class="col-lg-12">
                     <h2>Linguagem ${linguagem?.name}</h2>
                     <div class="well">
-                        <input type="text" class="form-control" id="nome" name="nome" required value="${linguagem?.name}" />
+                        <input type="file" class="form-control" id="arquivo" name="arquivo" required />
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
