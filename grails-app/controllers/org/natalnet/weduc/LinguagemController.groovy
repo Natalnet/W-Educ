@@ -310,11 +310,35 @@ class LinguagemController {
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
         def salvarCompilacao() {
-                
+                // Captura o arquivo enviado através do formulário
+                def arquivo = request.getFile("arquivo")
+
+                // Se a pasta de destino do arquivo não existir, cria
+                File pastaDeDestino = new File("/weduc/arquivos-de-compilacao/" + params.id + "/")
+                if (!pastaDeDestino.exists()) {
+                        pastaDeDestino.mkdir()
+                }
+
+                // Transfere o arquivo enviado para a a pasta de destino
+                // e fornece um nome específico a ele
+                File destinoDoArquivo = new File("/weduc/arquivos-de-compilacao/" + params.id + "/arquivo.zip")
+                arquivo.transferTo(destinoDoArquivo)
         }
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
         def salvarEnvio() {
-                
+                // Captura o arquivo enviado através do formulário
+                def arquivo = request.getFile("arquivo")
+
+                // Se a pasta de destino do arquivo não existir, cria
+                File pastaDeDestino = new File("/weduc/arquivos-de-envio/" + params.id + "/")
+                if (!pastaDeDestino.exists()) {
+                        pastaDeDestino.mkdir()
+                }
+
+                // Transfere o arquivo enviado para a a pasta de destino
+                // e fornece um nome específico a ele
+                File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo.zip")
+                arquivo.transferTo(destinoDoArquivo)       
         }
 }
