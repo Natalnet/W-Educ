@@ -14,7 +14,7 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cadastro de Linguagem</h1>
+                    <h1 class="page-header">Edição do Cadastro de Linguagem</h1>
                     <p>
                         Para cadastrar uma linguagem você deverá preencher todos os campos seguindo os exemplos aprensentados. Observe que existem algumas palavras específicas que são utilizadas para identificar e tratar os dados fornecidos, como por exemplo: <strong>comandos</strong>, <strong>comandos1</strong>, <strong>comandos2</strong>, <strong>principal</strong>, <strong>nomedoprograma</strong>, <strong>funcao</strong>, <strong>variavel</strong>, <strong>valor</strong>. 
                     </p>
