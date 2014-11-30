@@ -75,9 +75,9 @@
                         </div>
                     </p>
                     <p>
-                        <h4>Upload do compilador:</h4>
+                        <h4>Upload dos arquivos de compilação:</h4>
                         <div class="well">
-                            <div class="btn btn-default" id="fazer-upload" name="fazer-upload" onclick="uploadDesativado();">Faça o upload do compilador</div><br />
+                            <div class="btn btn-default" id="fazer-upload" name="fazer-upload" onclick="uploadDesativado();">Faça o upload dos arquivos de compilação</div><br />
                             <label>
                                 <input type="checkbox" id="requer-instalacao" name="requer-instalacao"> Requer instalação</input> 
                             </label>
@@ -103,9 +103,9 @@
                         </div>
                     </p>
                     <p>
-                        <h4>Upload do arquivo a ser enviado ao computador local para permitir o envio: </h4>
+                        <h4>Upload dos arquivos a serem enviados ao computador local para permitir o envio: </h4>
                         <div class="well">
-                            <div class="btn btn-default" id="fazer-upload-envio" name="fazer-upload-envio" onclick="uploadDesativado();">Faça o upload do programa de envio</div><br />
+                            <div class="btn btn-default" id="fazer-upload-envio" name="fazer-upload-envio" onclick="uploadDesativado();">Faça o upload dos arquivos de envio</div><br />
                             <label>
                                 <input type="checkbox" id="envio-necessario" name="envio-necessario"> Envio necessário</input> 
                             </label>
