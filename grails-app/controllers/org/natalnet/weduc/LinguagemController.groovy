@@ -299,8 +299,12 @@ class LinguagemController {
 	}
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
-        def uploadCompilacao() {}
+        def uploadCompilacao() {
+                [linguagem: Linguagem.get(params.id)]
+        }
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
-        def uploadEnvio() {}
+        def uploadEnvio() {
+                [linguagem: Linguagem.get(params.id)]
+        }
 }
