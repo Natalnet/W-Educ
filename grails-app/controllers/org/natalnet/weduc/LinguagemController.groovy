@@ -297,4 +297,10 @@ class LinguagemController {
 	def procurar() {
 		[linguagens: Linguagem.findAll()]
 	}
+
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+        def uploadCompilacao() {}
+
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+        def uploadEnvio() {}
 }
