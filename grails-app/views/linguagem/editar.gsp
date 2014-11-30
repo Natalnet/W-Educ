@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="admin"/>
-        <title>Cadastro de Linguagem - W-Educ</title>
+        <title>Edição do Cadastro de Linguagem - W-Educ</title>
         <style type="text/css">
             .operadores > div > span {
                 width: 5em;
