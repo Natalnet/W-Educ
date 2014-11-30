@@ -72,7 +72,7 @@
                     <p>
                         <h4>Upload do compilador:</h4>
                         <div class="well">
-                            <button class="btn btn-default" id="fazer-upload">Faça o upload do compilador</button><br />
+                            <a href="<g:createLink action="uploadCompilacao"/>" target="_blank" class="btn btn-default" id="fazer-upload">Faça o upload do compilador</a><br />
                             <label>
                                 <input type="checkbox" id="requer-instalacao"> Requer instalação</input> 
                             </label>
@@ -100,7 +100,7 @@
                     <p>
                         <h4>Upload do arquivo a ser enviado ao computador local para permitir o envio: </h4>
                         <div class="well">
-                            <button class="btn btn-default" id="fazer-upload-envio">Faça o upload do programa de envio</button><br />
+                            <a href="<g:createLink action="uploadEnvio"/>" target="_blank" class="btn btn-default" id="fazer-upload-envio">Faça o upload do programa de envio</button><br />
                             <label>
                                 <input type="checkbox" id="envio-necessario"> Envio necessário</input> 
                             </label>
