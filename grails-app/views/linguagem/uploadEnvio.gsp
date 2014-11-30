@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="admin"/>
-        <title>Upload de Arquivos de Compilação - W-Educ</title>
+        <title>Upload de Arquivos de Envio - W-Educ</title>
         <style type="text/css">
             .operadores > div > span {
                 width: 5em;
@@ -10,11 +10,11 @@
         </style>
     </head>
     <body>
-        <form action="<g:createLink action="salvarCompilacao" id="${linguagem?.id}"/>" method="post" enctype="multipart/form-data">
+        <form action="<g:createLink action="salvarEnvio" id="${linguagem?.id}"/>" method="post" enctype="multipart/form-data">
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Upload de Arquivos de Compilação</h1>
+                    <h1 class="page-header">Upload de Arquivos de Envio</h1>
                     <p>
                         [Espaço reservado a instruções para organização e upload dos arquivos]. 
                     </p>

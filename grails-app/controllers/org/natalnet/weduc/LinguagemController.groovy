@@ -323,6 +323,8 @@ class LinguagemController {
                 // e fornece um nome específico a ele
                 File destinoDoArquivo = new File("/weduc/arquivos-de-compilacao/" + params.id + "/arquivo.zip")
                 arquivo.transferTo(destinoDoArquivo)
+
+                [linguagem: Linguagem.get(params.id)]
         }
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
@@ -339,6 +341,8 @@ class LinguagemController {
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
                 File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo.zip")
-                arquivo.transferTo(destinoDoArquivo)       
+                arquivo.transferTo(destinoDoArquivo)     
+
+                [linguagem: Linguagem.get(params.id)]  
         }
 }
