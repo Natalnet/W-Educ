@@ -16,25 +16,28 @@
                 <div class="col-md-12 col-md-offset-2">
                     <div class="col-md-4">
                         <div class="login-panel panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Sobre</h3>
+                            <div class="panel-heading" style="background-color:#FFEB99">
+                                <h3 class="panel-title" ><b>Bem Vindo</b></h3>
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    O W-Educ é um ambiente de desenvolvimento web multiplataforma configurável para aplicações em robótica educacional.
+                                    &nbsp;&nbsp;&nbsp;&nbsp;O <b>W-Educ</b> é um ambiente de desenvolvimento web multiplataforma configurável para aplicações em robótica educacional.
                                 </p>
-                                <p>
-                                    Este projeto, desenvolvido por pesquisadores do laboratório NatalNet da Universidade Federal do Rio Grande do Norte, é um projeto aberto, que surgiu como uma extensão do software educacional RoboEduc, e que possibilita que a programação de diversos robôs programáveis possa ser realizada utilizando a linguagem R-Educ. Tornamos possível que o usuário programa na linguagem R-Educ e que seu código seja traduzido para uma linguagem cadastrada por um usuário professor, compilado e em seguida enviado e/ou executado pelo robô.
+				<p align="justify">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Este projeto, desenvolvido por pesquisadores do laboratório NatalNet da Universidade Federal do Rio Grande do Norte, é um projeto aberto, que surgiu como uma extensão do software educacional RoboEduc, e que possibilita que a programação de diversos robôs programáveis possa ser realizada utilizando a linguagem R-Educ. Tornamos possível que o usuário programe na linguagem R-Educ e que seu código seja traduzido para uma linguagem cadastrada por um usuário professor, compilado e em seguida enviado e/ou executado pelo robô.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="login-panel panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Login</h3>
+                            <div class="panel-heading" style="background-color:#FFEB99">
+                                <h3 class="panel-title"><b>Login</b></h3>
                             </div>
                             <div class="panel-body">
+                                <p>
+			           <CENTER><g:img dir="images" file="capa.jpg" width="150" height="150"/></CENTER>
+				</p>
                                 <form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off' role="form">
                                     <fieldset>
                                     <div class="form-group">

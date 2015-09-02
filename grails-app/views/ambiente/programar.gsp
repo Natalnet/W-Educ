@@ -15,8 +15,12 @@
         </style>
     </head>
     <body>
-        <script type="text/javascript">
-            // Apaga o conteúdo do editor de texto
+          <applet id="CodeRhino" archive="CodeRhino.jar" code="coderhino.CodeRhinoApplet" MAYSCRIPT width="0" height="0"></applet>
+
+
+        <script>	
+		CodeRhino.isReady();		
+	    // Apaga o conteúdo do editor de texto
             // e limpa o nome do programa
             var novoPrograma = function () {
                 // Apaga o conteúdo do editor

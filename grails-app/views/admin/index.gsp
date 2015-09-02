@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="admin"/>
-        <title>Dashboard - W-Educ</title>
+        <title>Home - W-Educ</title>
     </head>
     <body>
         <script type="text/javascript">
@@ -29,7 +29,7 @@
         </script>
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header"></h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -70,7 +70,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a href="/weduc/linguagem/procurar">
+
                         <div class="panel-footer">
                             <span class="pull-left">Veja Mais</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -129,7 +130,7 @@
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Estatísticas de acesso
+                        <i class="fa fa-bar-chart-o fa-fw"></i> <b>Estatísticas de acesso</b>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -143,7 +144,7 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Minhas Estatísticas
+                        <i class="fa fa-bell fa-fw"></i> <b>Minhas Estatísticas</b>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

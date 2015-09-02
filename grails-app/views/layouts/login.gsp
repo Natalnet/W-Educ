@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Ambiente de programação web para robótica educacional">
-        <meta name="author" content="Victor Torres, Sarah Thomaz, Carla Fernandes">
+        <meta name="author" content="Victor Torres, Sarah Thomaz">
 
         <title><g:layoutTitle default="Login - W-Educ"/></title>
 

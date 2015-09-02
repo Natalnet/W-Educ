@@ -69,18 +69,24 @@
                         </div>
                     </p>
                     <p>
-                        <h4>Extensão dos arquivos na linguaem:</h4>
+                        <h4>Extensão dos arquivos na linguagem:</h4>
                         <div class="well">
                             <input type="text" class="form-control" id="extensao" name="extensao" required />
                         </div>
                     </p>
                     <p>
-                        <h4>Upload dos arquivos de compilação:</h4>
+                        <h4>Upload dos arquivos do compilador:</h4>
                         <div class="well">
-                            <div class="btn btn-default" id="fazer-upload" name="fazer-upload" onclick="uploadDesativado();">Faça o upload dos arquivos de compilação</div><br />
+                            <div class="btn btn-default" id="fazer-upload" name="fazer-upload" onclick="uploadDesativado();">Faça o upload dos arquivos do compilador</div><br />
                             <label>
                                 <input type="checkbox" id="requer-instalacao" name="requer-instalacao"> Requer instalação</input> 
                             </label>
+                        </div>
+                    </p>
+                    <p>
+                        <h4>Upload dos arquivos de includes:</h4>
+                        <div class="well">
+                            <div class="btn btn-default" id="fazer-upload-include" name="fazer-upload-include" onclick="uploadDesativado();">Faça o upload dos arquivos de compilação</div><br/>
                         </div>
                     </p>
                     <h3>Envio</h3>
@@ -99,7 +105,7 @@
                     <p>
                         <h4>Extensão do arquivo enviado:</h4>
                         <div class="well">
-                            <input type="text" class="form-control" id="extensaoDoArquivo" name="extensaoDoArquivo" required />
+                            <input type="text" class="form-control" id="extensaoDoArquivo" name="extensaoDoArquivo"  />
                         </div>
                     </p>
                     <p>
@@ -137,13 +143,13 @@
                 <div class="col-lg-6">
                     <h3>Cabeçalho</h3>
                     <div class="well">
-                        <textarea class="form-control" rows="3" id="cabecalho" name="cabecalho" required></textarea>
+                        <textarea class="form-control" rows="3" id="cabecalho" name="cabecalho" ></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <h3>Rodapé</h3>
                     <div class="well">
-                        <textarea class="form-control" rows="3" id="rodape" name="rodape" required></textarea>
+                        <textarea class="form-control" rows="3" id="rodape" name="rodape" ></textarea>
                     </div>
                 </div>
             </div>

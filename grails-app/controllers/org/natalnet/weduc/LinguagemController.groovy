@@ -197,6 +197,15 @@ class LinguagemController {
         
         println "Cadastro da linguagem " + linguagem.name + " concluído por " + springSecurityService.getCurrentUser()
 
+        
+	// Se a pasta de destino do arquivo não existir, cria	
+	File pastadaLinguagem = new File("/tmp/weduc/compilador/" + linguagem.id)
+        
+	if (!pastadaLinguagem.exists()) {
+           pastadaLinguagem.mkdirs()
+        }
+
+
         // Fim do cadastro de linguagem
 
         if(linguagem.id != null) {
@@ -304,24 +313,75 @@ class LinguagemController {
         }
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+        def uploadIncludes() {
+                [linguagem: Linguagem.get(params.id)]
+        }
+
+
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
         def uploadEnvio() {
                 [linguagem: Linguagem.get(params.id)]
         }
 
+	//Salva compilador
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
         def salvarCompilacao() {
                 // Captura o arquivo enviado através do formulário
                 def arquivo = request.getFile("arquivo")
 
+		//Apaga os arquivos enviados anteriormente
+		File fDell = new File("/weduc/arquivos-de-compilacao/" + params.id + "/")
+	        fDell.deleteDir()
+			
+
                 // Se a pasta de destino do arquivo não existir, cria
                 File pastaDeDestino = new File("/weduc/arquivos-de-compilacao/" + params.id + "/")
                 if (!pastaDeDestino.exists()) {
-                        pastaDeDestino.mkdir()
+                        pastaDeDestino.mkdirs()
                 }
 
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
-                File destinoDoArquivo = new File("/weduc/arquivos-de-compilacao/" + params.id + "/arquivo.zip")
+                File destinoDoArquivo = new File("/weduc/arquivos-de-compilacao/" + params.id + "/arquivo")
+                arquivo.transferTo(destinoDoArquivo)
+
+		//Copia os arquivos de include e extrai na pasta	
+/*	   	def ant = new AntBuilder()   
+	   	def origem = "/weduc/arquivos-de-compilacao/" + params.id + "/arquivo"	
+	   	def destino = "/weduc/arquivos-de-compilacao/" + params.id + "/" 
+	   	ant.unzip(  src:origem,
+           	dest: destino,
+           	overwrite:"false",)
+
+		println "Dando permissao!"
+		Process proc;
+                 proc = Runtime.getRuntime().exec("chmod -R 777 /weduc/arquivos-de-compilacao");
+                 proc.waitFor();
+		println "Terminando!"*/
+			
+                [linguagem: Linguagem.get(params.id)]
+        }
+
+	//Salva os arquivos necessários para compilar
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+        def salvarIncludes() {
+                // Captura o arquivo enviado através do formulário
+                def arquivo = request.getFile("arquivo")
+		
+		//Apaga os arquivos enviados anteriormente
+		File fDell = new File("/weduc/arquivos-de-include/" + params.id + "/")
+	        fDell.deleteDir()
+			
+		
+                // Se a pasta de destino do arquivo não existir, cria
+                File pastaDeDestino = new File("/weduc/arquivos-de-include/" + params.id + "/")
+                if (!pastaDeDestino.exists()) {
+                        pastaDeDestino.mkdirs()
+                }
+
+                // Transfere o arquivo enviado para a a pasta de destino
+                // e fornece um nome específico a ele
+                File destinoDoArquivo = new File("/weduc/arquivos-de-include/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)
 
                 [linguagem: Linguagem.get(params.id)]
@@ -335,12 +395,13 @@ class LinguagemController {
                 // Se a pasta de destino do arquivo não existir, cria
                 File pastaDeDestino = new File("/weduc/arquivos-de-envio/" + params.id + "/")
                 if (!pastaDeDestino.exists()) {
-                        pastaDeDestino.mkdir()
+                        pastaDeDestino.mkdirs()
                 }
+
 
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
-                File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo.zip")
+                File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)     
 
                 [linguagem: Linguagem.get(params.id)]  

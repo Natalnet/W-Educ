@@ -64,7 +64,7 @@
                         </div>
                     </p>
                     <p>
-                        <h4>Extensão dos arquivos na linguaem:</h4>
+                        <h4>Extensão dos arquivos na linguagem:</h4>
                         <div class="well">
                             <input type="text" class="form-control" id="extensao" name="extensao" required value="${linguagem?.extension}" />
                         </div>
@@ -76,6 +76,12 @@
                             <label>
                                 <input type="checkbox" id="requer-instalacao"> Requer instalação</input> 
                             </label>
+                        </div>
+                    </p>
+                    <p>
+                        <h4>Upload dos arquivos de includes:</h4>
+                        <div class="well">
+                            <a href="<g:createLink action="uploadIncludes" id="${linguagem?.id}"/>" target="_blank" class="btn btn-default" id="fazer-upload-includes">Faça o upload dos arquivos de includes</a><br />
                         </div>
                     </p>
                     <h3>Envio</h3>
@@ -94,13 +100,13 @@
                     <p>
                         <h4>Extensão do arquivo enviado:</h4>
                         <div class="well">
-                            <input type="text" class="form-control" id="extensaoDoArquivo" name="extensaoDoArquivo" required value="${linguagem?.sentExtension}" />
+                            <input type="text" class="form-control" id="extensaoDoArquivo" name="extensaoDoArquivo" value="${linguagem?.sentExtension}" />
                         </div>
                     </p>
                     <p>
                         <h4>Upload dos arquivos a serem enviados ao computador local para permitir o envio: </h4>
                         <div class="well">
-                            <a href="<g:createLink action="uploadEnvio" id="${linguagem?.id}"/>" target="_blank" class="btn btn-default" id="fazer-upload-envio">Faça o upload dos arquivos de envio</button><br />
+                            <a href="<g:createLink action="uploadEnvio" id="${linguagem?.id}"/>" target="_blank" class="btn btn-default" id="fazer-upload-envio">Faça o upload dos arquivos de envio</button></a><br />
                             <label>
                                 <input type="checkbox" id="envio-necessario"> Envio necessário</input> 
                             </label>
@@ -132,13 +138,13 @@
                 <div class="col-lg-6">
                     <h3>Cabeçalho</h3>
                     <div class="well">
-                        <textarea class="form-control" rows="3" id="cabecalho" name="cabecalho" required>${linguagem?.header}</textarea>
+                        <textarea class="form-control" rows="3" id="cabecalho" name="cabecalho" >${linguagem?.header}</textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <h3>Rodapé</h3>
                     <div class="well">
-                        <textarea class="form-control" rows="3" id="rodape" name="rodape" required>${linguagem?.footnote}</textarea>
+                        <textarea class="form-control" rows="3" id="rodape" name="rodape" >${linguagem?.footnote}</textarea>
                     </div>
                 </div>
             </div>

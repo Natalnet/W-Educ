@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Ambiente de programação web para robótica educacional">
-        <meta name="author" content="Victor Torres, Sarah Thomaz, Carla Fernandes">
+        <meta name="author" content="Victor Torres, Sarah Thomaz">
 
         <title><g:layoutTitle default="W-Educ"/></title>
 
@@ -81,7 +81,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">W-Educ</a>
+                   <a class="navbar-brand" href="index.html"><b>W-Educ</b> - Ambiente de Desenvolviento Web para Robótica Educacional</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -148,7 +148,7 @@
                                 <!-- /input-group -->
                             <!-- </li> -->
                             <li>
-                                <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</g:link>
+                                <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Principal</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <li>
@@ -181,7 +181,7 @@
                                         <g:link controller="linguagem" action="listar">Gerenciar linguagens</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Procurar linguagens</g:link>
+                                        <g:link controller="linguagem" action="procurar">Linguagens cadastradas</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
@@ -201,7 +201,7 @@
                                         <g:link controller="professor" action="procurar">Procurar professores</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Procurar linguagens</g:link>
+                                        <g:link controller="linguagem" action="procurar">Linguagens cadastradas</g:link>
                                     </li>
                                     <li>
                                         <a href="morris.html">Fórum de discussão</a>

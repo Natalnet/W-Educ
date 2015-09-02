@@ -18,7 +18,7 @@ class AmbienteController {
 	}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-	def salvarPrograma() {
+	def salvarPrograma() {   
 
 		// Define usuário atual
 		def usuario = springSecurityService.getCurrentUser()
@@ -36,7 +36,7 @@ class AmbienteController {
 			linguagem: linguagem,
 			reduc: reduc,
 			nome: params.nome
-		)
+		)	
 
 		// Registra data de criação, 
 		// caso programa seja novo
@@ -89,19 +89,28 @@ class AmbienteController {
 			reduc: reduc,
 			nome: params.nome
 		)
+	
+	//Apaga todos os arquivos da pasta do usuário
+	File fDelete = new File("/tmp/weduc/compilador/" + usuario?.username)
+	fDelete.deleteDir()
+      	    
 
 		// Salva programa em arquivo temporário
         def t = System.currentTimeMillis().toString();
         String fName = programa.nome + t;
-        File d = new File("/tmp/weduc/compilador/" + usuario?.username)
-        d.mkdir()
+   
+	File c = new File("/tmp/weduc/compilador/" + usuario?.username)
+	if (!c.exists()) {
+            c.mkdirs()
+            }  
+
         File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "" + programa.extensao)
         f << programa.codigo //.replaceAll("\n", "\r\n");
 
-		// Verifica se é R-Educ
-		if(reduc) {
 
-			// Compila o arquivo utilizando o compilador REduc
+	if(reduc) { 	// Verifica se é R-Educ
+
+	// Compila o arquivo utilizando o compilador REduc
             
             // Define o local do programa, para utilização futura
             programa.local = fName + programa.extensao + "." + linguagem.extension
@@ -218,44 +227,65 @@ class AmbienteController {
             // println(sintatico.isError());
             // render sintatico.isError();
 
-            // Copia os arquivos para a pasta temporária
-            File fSource = new File("/tmp/weduc/compilador/CV3")
-            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3")
-            org.apache.commons.io.FileUtils.copyDirectory(fSource, fTarget);
+
+
+            //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
+	    File fDell = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id)
+	    fDell.deleteDir()
+      	    
+
+	   //Copia os arquivos de include e extrai na pasta
+	   try {		
+		   def ant = new AntBuilder()   
+		   def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
+		   def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id
+		   ant.unzip(  src:origem,
+		   dest: destino,
+		   overwrite:"false")
+	   }
+	   catch (Exception e) {
+            	println e
+            }
 
             // Deixa o arquivo com a extensão e identificação desejadas
-            fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
-            fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3/cv3.c")
+            File fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension)
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Define o arquivo onde ficarão os comandos do Make
-            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username + "/CV3/weduc.sh")
-            def comando = "/usr/bin/make -C /tmp/weduc/compilador/" 
-            	comando += usuario?.username + "/CV3"
+            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id +"/weduc.sh")
+	    def comando = "" + linguagem.compileCode
+	    println comando;
+            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id)
+            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("nomedoprograma",  fName )
             org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
 
             // Prepara o comando Make
             comando = "/bin/sh /tmp/weduc/compilador/" 
-            comando += usuario?.username + "/CV3/weduc.sh"
+            comando += usuario?.username + "/" + linguagem.id + "/weduc.sh"
+
 
             println "------>"
-            println comando
+            println comando;
             println "------>"
 
             //comando = "/bin/sh -c \"/bin/free -m\""
-            // comando = "/bin/sh -c \"echo haha\""
+            //comando = "/bin/sh -c \"echo haha\""
 
             // Executa o comando Make
-            Process proc;
+           Process proc;
+
             String saida = "";
-            String s;
+            String s; 
 
             try {
 
-                 System.out.println("entrei na compilacao");
+		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
                  proc = Runtime.getRuntime().exec(comando);
-                 System.out.println("sai na compilacao");
-
+                 proc.waitFor();
+		 System.out.println("Finalizei a compilacao na linguagem " + linguagem.id);
+		
                  BufferedReader stdInput = new BufferedReader(new
                       InputStreamReader(proc.getInputStream()));
 
@@ -265,13 +295,12 @@ class AmbienteController {
                  while ((s = stdInput.readLine()) != null) {
                      saida += s + "\n";
                  }
-                 
-                 //System.out.println("proc: " + proc);
-                 //System.out.println("saida: " + saida);
+		 System.out.println("proc: " + proc);
+                 System.out.println("saida: " + saida);
 
             }
             catch (IOException ex) {
-                System.out.println("Erro ao compilar o programa com o NBC");
+                System.out.println("Erro ao compilar o programa.");
             }
             catch (Exception e) {
             	println e
@@ -288,16 +317,40 @@ class AmbienteController {
                 programa.save(flush: true)
                 render "Linha: " + sintatico.getErrorInt() + " Erro: " + sintatico.getErrorStr();
             }
-		}
-		// Verifica se é a linguagem alvo
-		else {
-			render "Não suportado ainda."
-		}
+	} //Termina Compilação em R-Educ
+
+	// Verifica se é a linguagem alvo
+	else {
+		render "Não suportado ainda."
 	}
+	
+	}//Termina compilar programa!
 
-	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def enviarPrograma() {
+	// Define usuário atual
+        def usuario = springSecurityService.getCurrentUser()
+
+        // Define a linguagem
+        def linguagem = Linguagem.get(params.linguagem)
+
+        // Define se é R-Educ ou não
+        def reduc = params.reduc == "1" ? true : false
+
+        // Procura um programa de mesmo nome;
+        // caso não exista, o cria
+        def programa = Programa.findWhere(
+            usuario: usuario, 
+            linguagem: linguagem,
+            reduc: reduc,
+            nome: params.nome
+        )
+
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def baixarPrograma() {
-
         // Define usuário atual
         def usuario = springSecurityService.getCurrentUser()
 
@@ -316,10 +369,24 @@ class AmbienteController {
             nome: params.nome
         )
 
-        FileInputStream fPrograma = new FileInputStream("/tmp/weduc/compilador/" + usuario?.username + "/CV3/cv3")
+	def extension
+	if (!reduc){
+		extension = linguagem.extension
+	}
+	else{
+		extension = "rob"
+	} 
 
+	//Procura se já existe o arquivo, delete e gera novamente para fazer download
+	File fDelete = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + programa.nome + "." + extension)
+	fDelete.delete()
+	
+	File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + programa.nome + "." + extension)
+        f << programa.codigo //.replaceAll("\n", "\r\n");
+
+        FileInputStream fPrograma = new FileInputStream(f)
         response.setContentType("application/octet-stream")
-        response.setHeader("Content-disposition", "filename=cv3")
+        response.setHeader("Content-disposition", "filename=" + params.nome + "."+ extension)
         response.outputStream << fPrograma
         return
     }
