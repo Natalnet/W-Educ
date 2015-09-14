@@ -119,7 +119,7 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                            <li><g:link controller="perfil" action="index"><i class="fa fa-user fa-fw"></i> Perfil</g:link>
                             </li>
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                             </li>

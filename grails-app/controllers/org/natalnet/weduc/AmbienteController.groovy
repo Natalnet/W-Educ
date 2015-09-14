@@ -235,13 +235,10 @@ class AmbienteController {
       	    
 
 	   //Copia os arquivos de include e extrai na pasta
-	   try {		
-		   def ant = new AntBuilder()   
-		   def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
-		   def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id
-		   ant.unzip(  src:origem,
-		   dest: destino,
-		   overwrite:"false")
+	   try {		 
+		def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
+		def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id        
+                CommandShellToString.execute("unzip "+origem+" -d "+destino);              
 	   }
 	   catch (Exception e) {
             	println e
@@ -260,43 +257,24 @@ class AmbienteController {
             comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
             comando = comando.replace("nomedoprograma",  fName )
             org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
-
+               
+            println comando;  
             // Prepara o comando Make
-            comando = "/bin/sh /tmp/weduc/compilador/" 
+            comando = "/bin/bash /tmp/weduc/compilador/" 
             comando += usuario?.username + "/" + linguagem.id + "/weduc.sh"
 
 
             println "------>"
             println comando;
             println "------>"
-
-            //comando = "/bin/sh -c \"/bin/free -m\""
-            //comando = "/bin/sh -c \"echo haha\""
-
-            // Executa o comando Make
-           Process proc;
-
-            String saida = "";
-            String s; 
+ 
 
             try {
 
 		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
-                 proc = Runtime.getRuntime().exec(comando);
-                 proc.waitFor();
+                System.out.println(CommandShellToString.execute(comando));
+                
 		 System.out.println("Finalizei a compilacao na linguagem " + linguagem.id);
-		
-                 BufferedReader stdInput = new BufferedReader(new
-                      InputStreamReader(proc.getInputStream()));
-
-                 BufferedReader stdError = new BufferedReader(new
-                      InputStreamReader(proc.getErrorStream()));
-
-                 while ((s = stdInput.readLine()) != null) {
-                     saida += s + "\n";
-                 }
-		 System.out.println("proc: " + proc);
-                 System.out.println("saida: " + saida);
 
             }
             catch (IOException ex) {
@@ -306,7 +284,6 @@ class AmbienteController {
             	println e
             }
 
-            println saida
             
             if(!sintatico.isError()) {
                 programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;

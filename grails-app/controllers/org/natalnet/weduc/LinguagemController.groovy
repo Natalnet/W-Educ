@@ -346,18 +346,9 @@ class LinguagemController {
                 arquivo.transferTo(destinoDoArquivo)
 
 		//Copia os arquivos de include e extrai na pasta	
-/*	   	def ant = new AntBuilder()   
 	   	def origem = "/weduc/arquivos-de-compilacao/" + params.id + "/arquivo"	
 	   	def destino = "/weduc/arquivos-de-compilacao/" + params.id + "/" 
-	   	ant.unzip(  src:origem,
-           	dest: destino,
-           	overwrite:"false",)
-
-		println "Dando permissao!"
-		Process proc;
-                 proc = Runtime.getRuntime().exec("chmod -R 777 /weduc/arquivos-de-compilacao");
-                 proc.waitFor();
-		println "Terminando!"*/
+                CommandShellToString.execute("unzip "+origem+" -d "+destino);
 			
                 [linguagem: Linguagem.get(params.id)]
         }

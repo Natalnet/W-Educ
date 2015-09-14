@@ -5,8 +5,14 @@ class Usuario {
 	transient springSecurityService
 
 	String username
+        String name
 	String password
+        String institution
+        String dateofbirth
+        String gender
+        String address
 	String email
+        String telefone
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -20,6 +26,13 @@ class Usuario {
 		username blank: false, unique: true
 		password blank: false
 		email blank: false
+                name blank: true
+                institution blank: true
+                dateofbirth blank: true
+                gender blank: true
+                address blank: true
+                telefone blank: true
+                
 	}
 
 	static mapping = {

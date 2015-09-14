@@ -15,11 +15,9 @@
         </style>
     </head>
     <body>
-          <applet id="CodeRhino" archive="CodeRhino.jar" code="coderhino.CodeRhinoApplet" MAYSCRIPT width="0" height="0"></applet>
-
-
+        <applet id="CodeRhino" archive="http://localhost:9090/weduc/dist/CodeRhino.jar" code="coderhino.CodeRhinoApplet" MAYSCRIPT width="0" height="0"></applet>
         <script>	
-		CodeRhino.isReady();		
+            
 	    // Apaga o conteúdo do editor de texto
             // e limpa o nome do programa
             var novoPrograma = function () {
@@ -120,7 +118,6 @@
 
             // Abrir programa
             var abrirPrograma = function (id, nome) {
-                
                 // Inicia requisição assíncrona
                 // para acessar o código do programa
                 $.ajax({
@@ -175,6 +172,12 @@
                     bootbox.alert("Não é possível exportar um programa que já está escrito na Linguagem Alvo.");
                 }
             };
+            
+            function test(){
+                alert(CodeRhino.isReady());
+            }
+            
+            test();
         </script>
         <!-- /.row -->
         <div class="row">

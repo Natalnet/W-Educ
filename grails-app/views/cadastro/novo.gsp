@@ -47,16 +47,35 @@
                                         </div>
                                         ${usuario?.username}
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Usuário" name="username" value="${usuario?.username}" type="text" autofocus required>
+                                            <input class="form-control"  name="username" value="${usuario?.username}" type="text" autofocus required>
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Senha" name="password" type="password" required>
+                                            <input class="form-control"  name="password" type="password" required>
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="E-mail" name="email" value="${usuario?.email}" type="email" required>
+                                            <input class="form-control"  name="email" value="${usuario?.email}" type="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Nome" name="name" value="${usuario?.name}" type="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Instituição" name="institution" value="${usuario?.institution}" type="institution" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Data de Nascimento" name="dateofbirth" value="${usuario?.dateofbrith}" type="dateofbirth" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Sexo" name="gender" value="${usuario?.gender}" type="gender" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Telefone" name="telefone" value="${usuario?.telefone}" type="telefone" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Endereço" name="address" value="${usuario?.address}" type="address" required>
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
-                                        <input type="submit" class="btn btn-lg btn-success btn-block" value="Finalizar Cadastro"/>
+                                         
                                         <g:link controller="login" action="auth" class="btn btn-lg btn-info btn-block">
                                             Entrar no Sistema
                                         </g:link>

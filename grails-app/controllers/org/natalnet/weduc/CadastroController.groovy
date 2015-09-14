@@ -11,6 +11,12 @@ class CadastroController {
 		// Faz o cadastro do usuário
 		def usuario = new Aluno()
 		usuario.username = params.username
+                usuario.name = params.name
+                usuario.dateofbirth = params.dateofbirth
+                usuario.address = params.address
+                usuario.gender = params.gender
+                usuario.telefone = params.telefone
+                usuario.institution = params.institution
 		usuario.password = params.password
 		usuario.email = params.email
 

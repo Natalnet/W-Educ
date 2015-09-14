@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class AdminController {
 
 	def springSecurityService
-
+    
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def index() {
 
