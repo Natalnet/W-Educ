@@ -14,9 +14,15 @@ class BootStrap {
     	def usuario = Professor.findWhere(username: "admin")
     	if(!usuario) {
     		usuario = new Professor()
-    		usuario.username = "weduc-admin"
-    		usuario.password = "udtqcssond"
-    		usuario.email = "sarah@dca.ufrn.br"
+    		usuario.username = "admin"
+    		usuario.password = "admin"
+    		usuario.email = "-"
+		usuario.gender = "-"
+		usuario.telefone = "-"
+		usuario.name = "-"
+		usuario.institution = "-"
+		usuario.dateofbirth = "-"
+		usuario.address = "-"
     		usuario.save flush: true, failOnError: true
 
     		def usuarioPrivilegio = new UsuarioPrivilegio()

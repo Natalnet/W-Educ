@@ -26,12 +26,12 @@ class Usuario {
 		username blank: false, unique: true
 		password blank: false
 		email blank: false
-                name blank: true
-                institution blank: true
-                dateofbirth blank: true
-                gender blank: true
-                address blank: true
-                telefone blank: true
+                name blank: true, nulable:true
+                institution blank: true, nulable:true
+                dateofbirth blank: true, nulable:true
+                gender blank: true, nulable:true
+                address blank: true, nulable:true
+                telefone blank: true, nulable:true
                 
 	}
 
