@@ -64,7 +64,7 @@ public class Mapeamento {
                 //System.out.println("getName: " + elemFunction.getCode());
                 //System.out.println("getName: " + elemFunction.getQntParameters());
                 //System.out.println("getName: " + elemFunction.getReturnType());
-                functionsNumber.add("Carlinha");
+                // functionsNumber.add("Carlinha");
                 functionsNumber.add(elemFunction.getName());
             }
             else if (elemFunction.getReturnType().equalsIgnoreCase("String")) {
@@ -82,7 +82,7 @@ public class Mapeamento {
         
         for (ListIterator it = defines.listIterator(); it.hasNext();) {
             elemDefines = (Defines) it.next();
-            //System.out.println("elemfed " + elemDefines.getName());
+            System.out.println("elemfed " + elemDefines.getName() + " type: " + elemDefines.getType());
             if (elemDefines.getType().equalsIgnoreCase("int") || elemDefines.getType().equalsIgnoreCase("float") || elemDefines.getType().equalsIgnoreCase("double")) {
                 definesNumber.add(elemDefines.getName());
                 //System.out.println("DefinesName: " + elemDefines.getName());
@@ -124,13 +124,13 @@ public class Mapeamento {
         List<List<String>> definesList = new ArrayList();
         for (ListIterator it = defines.listIterator(); it.hasNext();) {
             elemDefines = (Defines) it.next();
-            if (!elemDefines.isAlreadyExists()) {
+            //if (!elemDefines.isAlreadyExists()) {
                 definesText.add("#define " + elemDefines.getName() + " " + elemDefines.getText() + "\n");
                 definesNameNE.add(elemDefines.getName());
-            }
-            else {
-                definesNameE.add(elemDefines.getName());
-            }
+            //}
+            //else {
+            //    definesNameE.add(elemDefines.getName());
+            //}
         }
         definesList.add(definesText);
         definesList.add(definesNameNE);

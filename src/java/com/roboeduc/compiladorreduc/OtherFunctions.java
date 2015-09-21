@@ -135,33 +135,49 @@ public class OtherFunctions {
         if (declaring) {
             writeOnFile(getDeclareNumber()[0]);
         }
-        if (!keywords(getName(getPosition()+index)) && getName(getPosition()+index+1).equals("=") &&
+        if (!keywords(getName(getPosition()+index)) && /*getName(getPosition()+index+1).equals("=") &&*/
             !sintatico.getMapeamento().defines().get(1).contains(getName(getPosition()+index)) &&
             !sintatico.getMapeamento().defines().get(2).contains(getName(getPosition()+index))) {
 
-            writeOnFile(getName(getPosition()+index));
-            writeOnFile(getDeclareNumber()[1]);
-            if (isNumberList(getName(getPosition()+index+2)) || isNumber(getName(getPosition()+index+2))||
-                    sintatico.getMapeamento().getFunctionsNumber().contains(getName(getPosition()+index+2))) {
-                if (declaring) {
-                    addNumber(getName(getPosition()+index));
-                }
-                if (sintatico.getMapeamento().getFunctionsNumber().contains(getName(getPosition()+index+2))) {
-                    sintatico.getCheckParameters(getName(getPosition()+index+2), 4);
+            setPosition(index);
+
+            writeOnFile(getName(getPosition()));
+
+            System.out.println("Identifiquei " + getName(getPosition()));
+
+            if (declaring) {
+                if (!sintatico.numberListContains(getName(getPosition()+index)) &&
+                    !sintatico.nameListContains(getName(getPosition()+index)) &&
+                    !sintatico.booleanListContains(getName(getPosition()+index))) {
+                    addNumber(getName(getPosition()));
                 }
                 else {
-                    writeOnFile(getName(getPosition()+index+2));
-                    setPosition(index+3);
+                    errorFunction(getLine(getPosition()+index), "Uma variável com esse nome já existe.");
                 }
-                System.out.println("Cheguei na adição de numeros!");
-                writeOnFile(getDeclareNumber()[2]);
+            }
+
+            if (getName(getPosition()+1).equals("=")) {
+                writeOnFile(getDeclareNumber()[1]);
+                if (sintatico.isMathOperation(2, false, false, false)) {
+                    sintatico.writeMathOperation(2, false);
+                    writeOnFile(getDeclareNumber()[2]);
+                    System.out.println("Nome " + getName(getPosition()));
+                }
+                else {
+                    errorFunction(getLine(getPosition()+index), "1Erro na declaração.");
+                }    
+            }
+            else if (!declaring) {
+                errorFunction(getLine(getPosition()+index), "2Erro na declaração.");
             }
             else {
-                errorFunction(getLine(getPosition()+index), "Erro na declaração.");
+                writeOnFile(getDeclareNumber()[2]);
+                setPosition(1);
             }
+            
         }
         else {
-            errorFunction(getLine(getPosition()+index), "Erro na declaração.");
+            errorFunction(getLine(getPosition()+index), "3Erro na declaração.");
         }
     }
     
