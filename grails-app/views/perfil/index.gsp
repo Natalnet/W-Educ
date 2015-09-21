@@ -83,10 +83,20 @@
                             <g:link controller="perfil" action="editar" type="button" class="btn btn-sm btn-warning">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </g:link>
-                            <a data-original-title="Remover Usuário" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            </span>
+                            </div>
+                            
+                            <div class="panel-footer">
+                            <a data-original-title="Remover Usuário" action="excluir" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        <span class="pull-right">     
+                        <g:link  action="excluir" type="button" class="btn btn-sm btn-warning">
+                            <i class="glyphicon glyphicon-remove"> </i>
+                             </g:link>
                         </span>
+                       
                     </div>
-            
+                                
+              
           </div>
         </div>
       </div>
