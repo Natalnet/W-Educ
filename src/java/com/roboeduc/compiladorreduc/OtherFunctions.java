@@ -122,7 +122,7 @@ public class OtherFunctions {
     
     public void sair() {
         if (loopFunc == 0) {
-            errorFunction(getLine(getPosition()), "Função Sair está fora de um laço de repetição.");
+            errorFunction(getLine(getPosition()), "22 - SAIR está fora de um laço de repetição.");
         }
         else {
             writeOnFile(getMapeamento().breakFunction()+"\n");
@@ -143,8 +143,6 @@ public class OtherFunctions {
 
             writeOnFile(getName(getPosition()));
 
-            System.out.println("Identifiquei " + getName(getPosition()));
-
             if (declaring) {
                 if (!sintatico.numberListContains(getName(getPosition()+index)) &&
                     !sintatico.nameListContains(getName(getPosition()+index)) &&
@@ -152,7 +150,7 @@ public class OtherFunctions {
                     addNumber(getName(getPosition()));
                 }
                 else {
-                    errorFunction(getLine(getPosition()+index), "Uma variável com esse nome já existe.");
+                    errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
                 }
             }
 
@@ -161,14 +159,13 @@ public class OtherFunctions {
                 if (sintatico.isMathOperation(2, false, false, false)) {
                     sintatico.writeMathOperation(2, false);
                     writeOnFile(getDeclareNumber()[2]);
-                    System.out.println("Nome " + getName(getPosition()));
                 }
                 else {
-                    errorFunction(getLine(getPosition()+index), "1Erro na declaração.");
+                    errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
                 }    
             }
             else if (!declaring) {
-                errorFunction(getLine(getPosition()+index), "2Erro na declaração.");
+                errorFunction(getLine(getPosition()+index), "24 - Falta expressão.");
             }
             else {
                 writeOnFile(getDeclareNumber()[2]);
@@ -177,7 +174,7 @@ public class OtherFunctions {
             
         }
         else {
-            errorFunction(getLine(getPosition()+index), "3Erro na declaração.");
+            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
     
@@ -205,11 +202,11 @@ public class OtherFunctions {
                 writeOnFile(getDeclareBoolean()[2]);
             }
             else {
-                errorFunction(getLine(getPosition()+index), "Erro na declaração.");
+                errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+index), "Erro na declaração.");
+            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
     
@@ -230,11 +227,11 @@ public class OtherFunctions {
                 writeString(true);
             }
             else {
-                errorFunction(getLine(getPosition()+index), "Tipo incorreto.");
+                errorFunction(getLine(getPosition()+index), "11 - Está faltando \".");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+index), "Erro na declaração.");
+            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
 }

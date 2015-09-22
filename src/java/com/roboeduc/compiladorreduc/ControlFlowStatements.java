@@ -154,7 +154,7 @@ public class ControlFlowStatements {
                     }
                     if (getName(getPosition()).equals("entao")) {
                         if (getBracketsCounter() != 0) {
-                            errorFunction(getLine(getPosition()+2),"Está faltando ')'.");
+                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
                         }
                         setPosition(1);
                         break;
@@ -162,7 +162,7 @@ public class ControlFlowStatements {
                     testCondition();
                 }
                 if ((getPosition()-1)==getListSize()) {
-                    errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
+                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
                 }
                 if (!getError()) {
                     if (getName(getPosition()).equals("{")) {
@@ -190,7 +190,7 @@ public class ControlFlowStatements {
                                     }
                                 }
                                 else {
-                                    errorFunction(getLine(getPosition()),"Está faltando '('.");
+                                    errorFunction(getLine(getPosition()),"4 - Falta '{'.");
                                 }
                             }
                             else {
@@ -199,16 +199,16 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
                     }
                 }
             }
             else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
         }
     }
     
@@ -224,7 +224,7 @@ public class ControlFlowStatements {
                     }
                     if (getName(getPosition()).equals("farei")) {
                         if (getBracketsCounter() != 0) {
-                            errorFunction(getLine(getPosition()+2),"Está faltando ')'.");
+                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
                         }
                         setPosition(1);
                         break;
@@ -232,7 +232,7 @@ public class ControlFlowStatements {
                     testCondition();
                 }
                 if ((getPosition()-1)==getListSize()) {
-                    errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
+                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
                 }
                 if (!getError()) {
                     if (getName(getPosition()).equals("{")) {
@@ -249,16 +249,16 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
                     }
                 }
             }
             else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
         }
     }
     
@@ -291,24 +291,24 @@ public class ControlFlowStatements {
                         writeOnFile(doCondition()[2]);
                     }
                     if ((getPosition()-1)==getListSize()) {
-                        errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
+                        errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
                     }
                 }
                 else {
-                    errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+                    errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
                 }
             }
             else {
-                errorFunction(getLine(getPosition()),"tErro na expressão.");
+                errorFunction(getLine(getPosition()),"18 - ENQUANTO não encontrado.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+            errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
         }
     }
     
     public void repita() {
-        if (isNumber(getName(getPosition()+1)) || isNumberList(getName(getPosition()+1))) {
+        if (isNumber(getName(getPosition()+1)) || isNumberList(getName(getPosition()+1)) || getMapeamento().isNumberDefine(getName(getPosition()+1))) {
             if ((getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vez")) ||
                     (!getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vezes"))) {
                 if (getName(getPosition()+3).equals("{")) {
@@ -327,15 +327,15 @@ public class ControlFlowStatements {
                     }
                 }
                 else {
-                    errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
                 }
             }
             else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
+                errorFunction(getLine(getPosition()+2),"19 - Confira a gramática da sua expressão.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1),"Argumento inválido.");
+            errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
         }
     }
     
@@ -346,7 +346,8 @@ public class ControlFlowStatements {
                             getName(getPosition()+3), getName(getPosition()+5),
                             getName(getPosition()+7));
         if (!isNumberList(getName(getPosition()+1)) && !keywords(getName(getPosition()+1)) &&
-                !isNameList(getName(getPosition()+1))) {
+                !isNameList(getName(getPosition()+1)) && !getMapeamento().isNumberDefine(getName(getPosition()+1)) &&
+                !getMapeamento().isNameDefine(getName(getPosition()+1))) {
             if (isNumber(getName(getPosition()+3)) && isNumber(getName(getPosition()+5))  && isNumber(getName(getPosition()+7))) {
                 if (getName(getPosition()+2).equals("de") && getName(getPosition()+4).equals("ate") &&
                         getName(getPosition()+6).equals("passo") && getName(getPosition()+8).equals("farei")) {
@@ -368,19 +369,19 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
                     }
                 }
                 else {
-                    errorFunction(getLine(getPosition()),"15Erro na expressão.");
+                    errorFunction(getLine(getPosition()),"21 - Erro na sintaxe do PARA.");
                 }
             }
             else {
-                errorFunction(getLine(getPosition()), "Valores incorretos.");
+                errorFunction(getLine(getPosition()), "20 - É exigido um número nesta expressão.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1), "Erro na declaração.");
+            errorFunction(getLine(getPosition()+1), "3 - Utilização de nome inválido.");
         }
     }
     
@@ -418,15 +419,15 @@ public class ControlFlowStatements {
                     testVariableCondition(3);
                 }
                 else {
-                    errorFunction(getLine(getPosition()),"BParâmetro incorreto.");
+                    errorFunction(getLine(getPosition()),"14 - Parâmetro com valor inválido.");
                 }
             }
             else {
-                errorFunction(getLine(getPosition()+2),"1Erro na expressão.");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
             }
         }
         else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
         }
     }
 }
