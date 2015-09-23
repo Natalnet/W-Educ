@@ -25,9 +25,12 @@ class Linguagem {
     static belongsTo = [autor: Professor]
 
     static constraints = {
+    }
+    static mapping = {
         description sqlType: 'longtext'
         header sqlType: 'longtext'
         footnote sqlType: 'longtext'
     }
+    
     
 }

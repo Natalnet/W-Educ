@@ -19,6 +19,10 @@ class Programa {
 
     static constraints = {
         local nullable: true
-        codigo sqlType: 'longtext'
     }
+    static mapping = {
+        codigo sqlType: 'longtext'
+    }        
+        
 }
+
