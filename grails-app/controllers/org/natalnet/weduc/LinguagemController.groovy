@@ -322,6 +322,15 @@ class LinguagemController {
         def uploadEnvio() {
                 [linguagem: Linguagem.get(params.id)]
         }
+	
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	def excluir(){
+ 		def linguagem = Linguagem.get(params.id)                
+        	linguagem.delete(flush:true)
+       redirect controller:"admin", action:"index"
+        
+    }
+       
 
 	//Salva compilador
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])

@@ -10,7 +10,7 @@ class AdminController {
 	def index() {
 
 		def usuario = springSecurityService.getCurrentUser()
-
+              
 		// Estatíscias de acesso - Início
 
 		// Mês e ano atuais
@@ -53,7 +53,7 @@ class AdminController {
 		// Estatísticas de acesso - Fim
 
 		// Minhas estatísticas - Início
-
+               
 		def programasCadastrados = usuario.programas
 
 		def totalDeCompilacoes = 0
@@ -61,14 +61,14 @@ class AdminController {
 		def compilacoesMalSucedidas = 0
 		def linguagensUtilizadas = 0
 		def listaDeLinguagens = []
-
+                
 		programasCadastrados.each {
 			totalDeCompilacoes += it.compilacoes
 			compilacoesBemSucedidas += it.compilacoesBemSucedidas
 			compilacoesMalSucedidas += it.compilacoesMalSucedidas
 			listaDeLinguagens.add(it.linguagem)
 		}
-
+                
 		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
 
 		// Minhas estatísticas - Fim
@@ -84,5 +84,6 @@ class AdminController {
 			linguagensUtilizadas: 		linguagensUtilizadas
 		]
 	}
+        
 
 }

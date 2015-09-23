@@ -24,7 +24,10 @@
                                 <td>
                                     <g:link controller="linguagem" action="editar" id="${linguagem?.id}">Editar linguagem</g:link>&nbsp;
                                     <g:link controller="funcao" action="listar" id="${linguagem?.id}">Editar funções</g:link>
+				
+				<g:link controllwe="linguagem" action="excluir" id="${linguagem?.id}">Excluir linguagem</g:link>
                                 </td>
+
                             </tr>
                             </g:each>
                         </tbody>

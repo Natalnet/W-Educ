@@ -16,13 +16,7 @@ class BootStrap {
     		usuario = new Professor()
     		usuario.username = "admin"
     		usuario.password = "admin"
-    		usuario.email = "-"
-		usuario.gender = "-"
-		usuario.telefone = "-"
-		usuario.name = "-"
-		usuario.institution = "-"
-		usuario.dateofbirth = "-"
-		usuario.address = "-"
+    		usuario.email = "sarah@dca.ufrn.br"
     		usuario.save flush: true, failOnError: true
 
     		def usuarioPrivilegio = new UsuarioPrivilegio()

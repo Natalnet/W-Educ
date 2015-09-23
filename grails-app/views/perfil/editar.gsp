@@ -58,7 +58,14 @@
                       </tr>
                       <tr>
                         <td>Sexo</td>
-                        <td><input class="form-control" name="gender" value="${usuario?.gender}" type="gender" required></td>
+                        <td><form>
+   
+    
+  <input placeholder="Sexo" type="radio" name="gender" value="M"> M
+
+  <input placeholder="Sexo" type="radio" name="gender" value="F"> F
+</form>  
+</td>
                       </tr>
                    
                       <tr>
@@ -85,15 +92,22 @@
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">
                             <input type="submit" class="btn btn-sm btn-success" value="Atualizar cadastro" >
+                            
                             <g:link controller="perfil" action="index" type="button" data-original-title="Cancelar Edição" data-toggle="tooltip" class="btn btn-sm btn-danger">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </g:link>
+                           
+                            
                             
                         </span>
+                        
                     </div>
             
+                    
           </div>
           </fieldset>
+                 
+
           </form>
         </div>
       </div>
