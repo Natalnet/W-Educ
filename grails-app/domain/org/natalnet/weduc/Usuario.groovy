@@ -26,6 +26,7 @@ class Usuario {
 		username blank: false, unique: true
 		password blank: false
 		email blank: false
+<<<<<<< HEAD
                 programas blank: true, nullable: true
                 name blank: true, nullable:true
                 institution blank: true, nullable:true
@@ -33,6 +34,14 @@ class Usuario {
                 gender blank: true, nullable:true
                 address blank: true, nullable:true
                 telefone blank: true, nullable:true
+=======
+                name blank: true, nulable:true
+                institution blank: true, nulable:true
+                dateofbirth blank: true, nulable:true
+                gender blank: true, nulable:true
+                address blank: true, nulable:true
+                telefone blank: true, nulable:true
+>>>>>>> 075c239feb4f9f765718ea0efb0d7159f10cc2b3
                 
 	}
 
