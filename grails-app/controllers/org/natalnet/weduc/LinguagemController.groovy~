@@ -327,8 +327,6 @@ class LinguagemController {
 	def excluir(){
  		def linguagem = Linguagem.get(params.id)                
         	linguagem.delete(flush:true)
-       redirect controller:"admin", action:"index"
-        
     }
        
 
