@@ -29,7 +29,7 @@ class BootStrap {
         
         if(!Linguagem.findWhere(name: "NXC")) {
             
-            println "Linguagem NXC nao encontrada no banco de dados"
+            println "Linguagem NXC nao encontrada no banco de dados."
             println "Iniciando cadastro da linguagem NXC"
             
             // Linguagem propriamente dita
@@ -432,7 +432,7 @@ class BootStrap {
         
         if(!Linguagem.findWhere(name: "CV3")) {
             
-            println "Linguagem CV3 nao encontrada no banco de dados"
+            println "Linguagem CV3 nao encontrada no banco de dados."
             println "Iniciando cadastro da linguagem CV3"
             
             // Linguagem propriamente dita
@@ -445,7 +445,7 @@ class BootStrap {
             linguagem.compilerFile = ""
             linguagem.sendCode = "dll -r ProgramaCV3.rbf & dll -d cv3"
             linguagem.sentExtension = ""
-            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/w-educ\n* (C) Copyright 2014\n* Programa 1 - Andar em sentido direto por 4 segundos\n*/\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
+            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/w-educ\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
             linguagem.footnote = ""
             linguagem.mainFunction = "int main(){\nOutputInit();\nButtonLedInit();\nLCD tela;\nLcdInit(tela.Lcd);\nLcdClear(tela.Lcd);\nSoundInit();\nSoundOpen();\ncomandos\nButtonLedExit();\nSoundClose();\nSoundExit();\nLcdExit();\nOutputClose();\nOutputExit();\n}"
             linguagem.otherFunctions = "void funcao(){comandos}"

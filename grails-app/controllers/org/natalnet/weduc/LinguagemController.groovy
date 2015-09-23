@@ -325,7 +325,8 @@ class LinguagemController {
 	
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def excluir(){
- 		def linguagem = Linguagem.get(params.id)                
+ 		def linguagem = Linguagem.get(params.id)   
+                Programa.findAll{linguagem == linguagem}.each{it.delete(flush:true)}
         	linguagem.delete(flush:true)
        redirect controller:"admin", action:"index"
         
