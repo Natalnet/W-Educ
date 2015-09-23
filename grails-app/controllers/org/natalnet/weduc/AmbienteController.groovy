@@ -296,9 +296,81 @@ class AmbienteController {
             }
 	} //Termina Compilação em R-Educ
 
-	// Verifica se é a linguagem alvo
+	// Se não for a linguagem alvo:
 	else {
-		render "Não suportado ainda."
+            
+            //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
+	    File fDell = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id)
+	    fDell.deleteDir()
+            
+            //Copia os arquivos de include e extrai na pasta
+            try {		 
+                 def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
+                 def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id        
+                 CommandShellToString.execute("unzip "+origem+" -d "+destino);              
+            }
+            catch (Exception e) {
+                 println e
+             }
+             
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension);
+            org.apache.commons.io.FileUtils.writeStringToFile(fTarget, programa.codigo, null)
+            
+            // Deixa o arquivo com a extensão e identificação desejadas
+            //File fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            //File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension)
+            //org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
+
+            // Define o arquivo onde ficarão os comandos do Make
+            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id +"/weduc.sh")
+	    def comando = "" + linguagem.compileCode
+	    println comando;
+            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id)
+            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("nomedoprograma",  fName )
+            org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
+               
+            println comando;  
+            // Prepara o comando Make
+            comando = "/bin/bash /tmp/weduc/compilador/" 
+            comando += usuario?.username + "/" + linguagem.id + "/weduc.sh"
+
+
+            println "------>"
+            println comando;
+            println "------>"
+            
+            def retorno;
+
+            try {
+
+		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
+                retorno = CommandShellToString.execute(comando);
+		 System.out.println(retorno);
+                
+		 System.out.println("Finalizei a compilacao na linguagem " + linguagem.id);
+
+            }
+            catch (IOException ex) {
+                System.out.println("Erro ao compilar o programa.");
+            }
+            catch (Exception e) {
+            	println e
+            }
+
+            
+            if(!(retorno.find("erro")||retorno.find("Erro")|| retorno.find("Error: "))) {
+                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+                programa.save(flush: true)
+                render "Compilação bem sucedida!"
+            } else {
+                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+                programa.save(flush: true)
+                render "Ocorreram erros durante a compilação: \n" + retorno; 
+            }
+            
+             
+	//antigo codigo	render "Não suportado ainda."
 	}
 	
 	}//Termina compilar programa!
