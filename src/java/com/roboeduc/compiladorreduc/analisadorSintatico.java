@@ -53,6 +53,8 @@ public class analisadorSintatico {
     
     private String errorStr = "";
     private int errorInt = 0;
+
+    private String errorType = "";
     
     private Mapeamento mapeamento;
     private String otherFunction[]=new String[3];
@@ -118,6 +120,7 @@ public class analisadorSintatico {
         writeOnFile(mapeamento.footnote());
         
         if (!mainFunc && !error) {
+            setErrorType("sintaxe");
             errorFunction(0, "1 - INICIO não encontrado.");
         }
     }
@@ -242,12 +245,14 @@ public class analisadorSintatico {
         }
         else if (getName(position).equals("tarefa")) {
             if (mainFunc) {
+                setErrorType("tarefa");
                 errorFunction(getLine(position), "2 - Não é possível declarar TAREFAS dentro da função INICIO.");
             }
             else {
                 writeOnFile(otherFunction[0]);
                 if (keywords(getName(position+1)) || mapeamento.defines().get(1).contains(getName(position+1)) ||
                     mapeamento.defines().get(2).contains(getName(position+1))) {
+                    setErrorType("nome");
                     errorFunction(getLine(position+1), "3 - Utilização de nome inválido.");
                 }
                 else {
@@ -265,6 +270,7 @@ public class analisadorSintatico {
                         }
                     }
                     else {
+                        setErrorType("sintaxe");
                         errorFunction(getLine(position+2), "4 - Falta '{'.");
                     }
                 }
@@ -272,6 +278,7 @@ public class analisadorSintatico {
         }
         else if (getName(position).equals("inicio")) {
             if (mainFunc) {
+                setErrorType("sintaxe");
                 errorFunction(getLine(position), "5 - Função INICIO em duplicidade.");
             }
             else {
@@ -284,6 +291,7 @@ public class analisadorSintatico {
                     
                 }
                 if(position >= fileList.size() && !error && !getName(position-1).equals("fim")){
+                    setErrorType("sintaxe");
                     errorFunction(getLine(position-1), "6 - FIM não encontrado.");
                 
                 }
@@ -310,6 +318,7 @@ public class analisadorSintatico {
             //}
         }
         else {
+            setErrorType("sintaxe");
             errorFunction(getLine(position), "7 - Esta declaração deve ser feita dentro do INICIO.");
         }
     }
@@ -349,9 +358,11 @@ public class analisadorSintatico {
         // O que fazer com as variaveis???
             // Tem que add acoes aqui tmb!
         else if (getName(position).equals("senao")){
+            setErrorType("sintaxe");
             errorFunction(getLine(position), "8 - Está faltando um SE.");
         }
         else if (getName(position).equals("fim")){
+            setErrorType("sintaxe");
             errorFunction(getLine(position), "10 - Expressão inexistente.");
         }
         /*else if (getName(position).equals("numero")){
@@ -375,12 +386,14 @@ public class analisadorSintatico {
                 writeFunctionOnFile(getName(position), 2);
             }
             else {
+                setErrorType("funcao");
                 errorFunction(getLine(position), "9 - Erro nos parâmetros da função " + getName(position) + ".");
             }
         }
         else {
             //System.out.println("Nome que aparece " + getName(position));
             //System.out.println("qual o nome: " + getName(position));
+            setErrorType("sintaxe");
             errorFunction(getLine(position), "10 - Expressão inexistente.");
         }
     }
@@ -411,6 +424,7 @@ public class analisadorSintatico {
             position++;
         }
         else {
+            setErrorType("sintaxe");
             errorFunction(getLine(position-1), "11 - Está faltando \".");
         }
     }
@@ -426,6 +440,7 @@ public class analisadorSintatico {
     
     public void writeNumberOperand() {
         if (mapeamento.writeOperator(getName(position), getName(position+1)).equals("error")) {
+            setErrorType("sintaxe");
             errorFunction(getLine(position),"30 - Operador inválido.");
         }
         else {
@@ -647,6 +662,7 @@ public class analisadorSintatico {
                     break;
                 }
                 if (param >= functionParameters.size()) {
+                    setErrorType("funcao");
                     errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
                     break;
                 }
@@ -735,25 +751,30 @@ public class analisadorSintatico {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
+                        setErrorType("funcao");
                         errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
                         break;
                     }
                 }
                 else {
+                    setErrorType("funcao");
                     errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
                     break;
                 }
             }
 
             if (param < functionParameters.size()) {
+                setErrorType("funcao");
                 errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
             }
             if (i == fileList.size()-1) {
+                setErrorType("sintaxe");
                 errorFunction(getLine(checkPosition-1), "15 - Está faltando '('.");
             }
             position += i+1;
         }
         else {
+            setErrorType("sintaxe");
             errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
         }
     }
@@ -773,6 +794,7 @@ public class analisadorSintatico {
                     break;
                 }
                 if (param >= functionParameters.size()) {
+                    setErrorType("funcao");
                     errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
                     break;
                 }
@@ -780,6 +802,7 @@ public class analisadorSintatico {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
+                        setErrorType("funcao");
                         errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
                         break;
                     }
@@ -869,24 +892,29 @@ public class analisadorSintatico {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
+                        setErrorType("funcao");
                         errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
                         break;
                     }
                 }
                 else {
+                    setErrorType("funcao");
                     errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
                     break;
                 }
             }
             if (param < functionParameters.size()) {
+                setErrorType("funcao");
                 errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
             }
             if (i == fileList.size()-1) {
+                setErrorType("sintaxe");
                 errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
             }
             position += i+1;
         }
         else {
+            setErrorType("sintaxe");
             errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
         }
 
@@ -1280,6 +1308,14 @@ public class analisadorSintatico {
 
     public String[] getDeclareBoolean() {
         return declareBoolean;
+    }
+
+    public String getErrorType() {
+        return errorType;
+    }
+
+    public void setErrorType(String _errorType) {
+        errorType=errorType+" "+_errorType;
     }
     
     
