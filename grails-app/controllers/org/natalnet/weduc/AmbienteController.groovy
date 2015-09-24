@@ -222,6 +222,7 @@ class AmbienteController {
             lexico.readFile(f.path);
             def sintatico = new analisadorSintatico(lexico, "/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);
             sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
+            lexico.defineUsedStructures(sintatico)
             sintatico.startCompile();
             sintatico.closeFile();
             // println(sintatico.isError());
@@ -290,9 +291,18 @@ class AmbienteController {
                 programa.save(flush: true)
                 render "Compilação bem sucedida!"
             } else {
+                //Adicionar aqui a equação das categorias.
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "1", "variavel");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "2", "funcao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "3", "tarefa");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "4", "estrutura");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "5", "condicao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "6", "repeticao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "7", "nome");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "8", "sintaxe");
                 programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
                 programa.save(flush: true)
-                render "Linha: " + sintatico.getErrorInt() + " Erro: " + sintatico.getErrorStr();
+                render "Linha: " + sintatico.getErrorInt() + " -> Erro " + sintatico.getErrorStr();
             }
 	} //Termina Compilação em R-Educ
 
@@ -302,6 +312,26 @@ class AmbienteController {
 	}
 	
 	}//Termina compilar programa!
+
+    def categorizarErros(String errorType, String usedStructures, String tipo, String descricao) {
+        def usuario = springSecurityService.getCurrentUser()
+        if (errorType.contains(descricao)) {
+            def error = new Erro()
+            error.usuario = usuario
+            error.data = new Date()
+            error.tipo = tipo
+            error.quant = 1
+            error.save(flush: true)
+        }
+        else if (usedStructures.contains(tipo)) {
+            def error = new Erro()
+            error.usuario = usuario
+            error.data = new Date()
+            error.tipo = tipo
+            error.quant = 0
+            error.save(flush: true)
+        }
+    }
 
 	
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])

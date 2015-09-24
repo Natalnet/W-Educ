@@ -7,22 +7,22 @@ class CadastroController {
 	def novo() {}
 
 	def salvar() {
-
 		// Faz o cadastro do usuário
-		def usuario = new Aluno()
-		usuario.username = params.username
-                usuario.name = params.name
-                usuario.dateofbirth = params.dateofbirth
-                usuario.address = params.address
-                usuario.gender = params.gender
-                usuario.telefone = params.telefone
-                usuario.institution = params.institution
+		def usuario = new Aluno(params)
+		println params
+		/*usuario.username = params.username
+        usuario.name = params.name
+        usuario.dateofbirth = params.dateofbirth
+        usuario.address = params.address
+        usuario.gender = params.gender
+        usuario.telefone = params.telefone
+        usuario.institution = params.institution
 		usuario.password = params.password
-		usuario.email = params.email
+		usuario.email = params.email*/
 
 		// Verifica se o cadastro foi salvo
 		if(usuario.save(flush: true, failOnError: false)) {
-
+			System.out.println("Passou do 2")
 			// Fornece privilégios
 			def privilegio = Privilegio.findWhere(authority: "ROLE_ALUNO")
 			def usuarioPrivilegio = new UsuarioPrivilegio()
@@ -34,7 +34,7 @@ class CadastroController {
 			redirect controller: "login", action: "auth"
 
 		} else {
-
+			System.out.println("Passou do 3")
 			// Verifica se o usuário já existe
 			if(Usuario.findWhere(username: params.username)) {
 
