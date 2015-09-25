@@ -514,13 +514,22 @@ class AmbienteController {
     def abrirPrograma() {
         // Procura pelo programa de id específico
         def programa = Programa.get(params.id)
+<<<<<<< HEAD
+        
+
+=======
+>>>>>>> origin/master
         render programa.codigo
     }
-
      @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def excluirPrograma(){
+        System.out.println("kdsd")
          def programa = Programa.get(params.id) 
-        	programa.delete(flush:true)   
+             System.out.println("jags")
+        	programa.delete(flush:true)
+               System.out.println("asa")
+                	
+
     }
 
     //exportarPrograma
