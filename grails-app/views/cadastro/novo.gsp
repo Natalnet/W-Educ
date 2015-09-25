@@ -79,7 +79,7 @@
                                             <input class="form-control" placeholder="Telefone" name="telefone"  type="text" required>
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Endereco" name="adress"  type="text" required>
+                                            <input class="form-control" placeholder="Endereco" name="address"  type="text" required>
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
                                         <input type="submit" class="btn btn-lg btn-success btn-block" value="Finalizar Cadastro"/>

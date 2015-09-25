@@ -5,3 +5,6 @@
 
 # temporary build files
 /target
+/CodeRhino/build/
+/CodeRhino/dist/
+/CodeRhino/nbproject/private/

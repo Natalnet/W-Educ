@@ -15,7 +15,6 @@
         </style>
     </head>
     <body>
-        <applet id="CodeRhino" archive="http://localhost:9090/weduc/dist/CodeRhino.jar" code="coderhino.CodeRhinoApplet" MAYSCRIPT width="0" height="0"></applet>
         <script>	
             
 	    // Apaga o conteúdo do editor de texto
@@ -173,11 +172,6 @@
                 }
             };
             
-            function test(){
-                alert(CodeRhino.isReady());
-            }
-            
-            test();
         </script>
         <!-- /.row -->
         <div class="row">
