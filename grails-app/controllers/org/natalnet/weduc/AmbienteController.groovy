@@ -9,7 +9,11 @@ import grails.plugin.springsecurity.annotation.Secured
 class AmbienteController {
 
 	def springSecurityService
-
+        
+        //salvar = true
+        //Compile = false
+        def saveCompile = true;
+    
 	def index() {}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
@@ -65,13 +69,18 @@ class AmbienteController {
 		// Salva o programa
 		programa.save(flush: true)
 
-		render "OK"
-
+                if (saveCompile)
+                    render "OK"
 	}
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def compilarPrograma() {
-
+                
+                //salva o programa antes de compilar
+                saveCompile = false;
+                salvarPrograma();
+                saveCompile = true;
+                
 		// Define usuário atual
 		def usuario = springSecurityService.getCurrentUser()
 
@@ -395,6 +404,19 @@ class AmbienteController {
             reduc: reduc,
             nome: params.nome
         )
+        
+        File d = new File("/tmp/weduc/envio/" + usuario?.username)
+        d.mkdir()
+        File weducClient = new File("/tmp/weduc/envio/weducClient.java")
+        
+        def comando = linguagem.compileCode
+        comando = comando.replace("nomedoprograma",  params.nome)
+               
+        def codigo = "public class weducClient {\n "
+        codigo += "public static void main(String[] args) { \n"
+        codigo += "CommandShellToString.execute(\"" + comando + "); \n } \n}"  
+        f << codigo
+        
 
     }
 
@@ -417,6 +439,11 @@ class AmbienteController {
             reduc: reduc,
             nome: params.nome
         )
+        
+        if (programa == null){
+            render "É necessário salvar o programa antes de baixá-lo."
+            return
+        }
 
 	def extension
 	if (!reduc){
@@ -426,6 +453,11 @@ class AmbienteController {
 		extension = "rob"
 	} 
 
+        File c = new File("/tmp/weduc/compilador/" + usuario?.username)
+	if (!c.exists()) {
+            c.mkdirs()
+            }
+        
 	//Procura se já existe o arquivo, delete e gera novamente para fazer download
 	File fDelete = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + programa.nome + "." + extension)
 	fDelete.delete()

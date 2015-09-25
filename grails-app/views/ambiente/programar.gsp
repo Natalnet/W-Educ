@@ -76,7 +76,7 @@
                         alert(returnData);
                     },
                     fail: function () {
-                        alert("Erro ao tentar gravar o programa no banco de dados.");
+                        alert("Erro ao tentar compilar o programa.");
                     }
                 });
             };

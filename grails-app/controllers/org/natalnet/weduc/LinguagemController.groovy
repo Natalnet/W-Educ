@@ -328,11 +328,10 @@ class LinguagemController {
  		def linguagem = Linguagem.get(params.id)   
                 Programa.findAll{linguagem == linguagem}.each{it.delete(flush:true)}
         	linguagem.delete(flush:true)
-       redirect controller:"admin", action:"index"
+                redirect controller:"admin", action:"index"
         
     }
        
-
 	//Salva compilador
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
         def salvarCompilacao() {
