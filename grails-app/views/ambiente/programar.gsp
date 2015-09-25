@@ -173,12 +173,17 @@
                             nome: $("#nome-do-programa").val()
                         },
                         success: function (returnData) {
-                            // Limpa o nome do programa
-                            $("#nome-do-programa").val("");
-                            // Seleciona a linguagem alvo
-                            $("#radio2").click();
-                            // Substitui o conteúdo do editor de texto
-                            editor.setValue(returnData);
+                            if (returnData == "NO"){
+                                alert("É necessário salvar o programa antes de exportar.");
+                            } 
+                            else{
+                                editor.setValue(returnData);
+                                // Limpa o nome do programa
+                                $("#nome-do-programa").val("");
+                                // Seleciona a linguagem alvo
+                                $("#radio2").click();
+                                // Substitui o conteúdo do editor de texto
+                            }
                         },
                         fail: function () {
                             alert("Erro ao tentar acessar o código do programa no banco de dados.");
@@ -187,7 +192,7 @@
                 } else {
                     // A linguagem alvo está selecionada.
                     // Não há o que fazer.
-                    bootbox.alert("Não é possível exportar um programa que já está escrito na Linguagem Alvo.");
+                    bootbox.alert("Só é possível exportar um programa escrito em R-Educ.");
                 }
             };
             
