@@ -115,7 +115,26 @@
                 });
             };
 
-            // Abrir programa
+            // Excluir programa
+            var excluirPrograma = function (id) {
+                // Inicia requisição assíncrona
+                // para acessar o código do programa
+                $.ajax({
+                    url: "<g:createLink action="excluirPrograma"/>",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        // Substitui o nome do programa
+                         alert("Programa excluído com sucesso.");
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar acessar o código do programa no banco de dados.");
+                    }
+                });
+            };
+             // Abrir programa
             var abrirPrograma = function (id, nome) {
                 // Inicia requisição assíncrona
                 // para acessar o código do programa

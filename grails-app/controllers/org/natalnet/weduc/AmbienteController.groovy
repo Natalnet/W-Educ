@@ -500,8 +500,19 @@ class AmbienteController {
 
         // Procura pelo programa de id específico
         def programa = Programa.get(params.id)
+        
 
         render programa.codigo
+    }
+     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def excluirPrograma(){
+        System.out.println("kdsd")
+         def programa = Programa.get(params.id) 
+             System.out.println("jags")
+        	programa.delete(flush:true)
+               System.out.println("asa")
+                	
+
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
@@ -668,5 +679,6 @@ class AmbienteController {
         }
 
     }
+   
 
 }
