@@ -80,7 +80,32 @@
                     }
                 });
             };
+            
+            // Enviar o programa
+            var enviarPrograma = function () {
 
+                // Inicia requisição assíncrona
+                // para enviar o programa
+                $.ajax({
+                    url: "<g:createLink action="enviarPrograma"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                        nome: $("#nome-do-programa").val(),
+                        codigo: editor.getValue()
+                    },
+                    success: function (returnData) {
+                        alert(returnData);
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar enviar os arquivos para o computador .");
+                    }
+                });
+            };
+
+
+            
             // Baixar o programa
             var baixarPrograma = function () {
                 var hiddenIFrameID = 'hiddenDownloader',
@@ -92,7 +117,8 @@
                     document.body.appendChild(iframe);
                 }
                 iframe.src = "<g:createLink action="baixarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
-            };
+
+                };
 
             // Listar programas
             var listarProgramas = function () {
@@ -136,6 +162,8 @@
                     }
                 });
             };
+            
+
 
             // Exportar programa
             var exportarPrograma = function () {
@@ -203,6 +231,7 @@
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
+                    <button class="btn btn-success" onclick="enviarPrograma();">Enviar</button>
                     <button class="btn btn-danger">Apagar</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>

@@ -108,8 +108,7 @@ class AmbienteController {
       	    
 
 		// Salva programa em arquivo temporário
-        def t = System.currentTimeMillis().toString();
-        String fName = programa.nome + t;
+        String fName = programa.nome;
    
 	File c = new File("/tmp/weduc/compilador/" + usuario?.username)
 	if (!c.exists()) {
@@ -407,18 +406,28 @@ class AmbienteController {
             reduc: reduc,
             nome: params.nome
         )
+        File fDell = new File("/tmp/weduc/envio/" + usuario?.username + "/")
+	fDell.deleteDir()
         
+       
         File d = new File("/tmp/weduc/envio/" + usuario?.username)
-        d.mkdir()
-        File weducClient = new File("/tmp/weduc/envio/weducClient.java")
+        d.mkdirs()
+        File weducClient = new File("/tmp/weduc/envio/"+ usuario?.username +"/weducClient.java")
+       
+        CommandShellToString.execute("cp /home/sarah/W-Educ/grails-app/services/CommandShellToString.java /tmp/weduc/envio/" + usuario?.username + "/");
         
         def comando = linguagem.compileCode
         comando = comando.replace("nomedoprograma",  params.nome)
                
         def codigo = "public class weducClient {\n "
         codigo += "public static void main(String[] args) { \n"
-        codigo += "CommandShellToString.execute(\"" + comando + "); \n } \n}"  
-        f << codigo
+        codigo += "CommandShellToString.execute(\"" + comando + "\"); \n } \n}"  
+        weducClient << codigo
+       
+        def retorno = CommandShellToString.execute("javac /tmp/weduc/envio/" + usuario?.username + "/weducClient.java");
+        System.out.println(retorno);
+        
+        render "Programa enviado com sucesso."
         
 
     }
@@ -503,16 +512,14 @@ class AmbienteController {
     //abrirPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def abrirPrograma() {
-
         // Procura pelo programa de id específico
         def programa = Programa.get(params.id)
-
         render programa.codigo
     }
 
     //exportarPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def exportarPrograma() {
+    def exportarPrograma(){
 
         // Define usuário atual
         def usuario = springSecurityService.getCurrentUser()
@@ -539,8 +546,7 @@ class AmbienteController {
         }    
 
         // Salva programa em arquivo temporário
-        def t = System.currentTimeMillis().toString();
-        String fName = programa.nome + t;
+        String fName = programa.nome;
         File d = new File("/tmp/weduc/compilador/" + usuario?.username)
         d.mkdir()
         File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "" + programa.extensao)
