@@ -15,12 +15,14 @@ class AmbienteController {
         def saveCompile = true;
     
 	def index() {}
-
+        
+        //programar
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def programar() {
 		[linguagem: Linguagem.get(params.id)]
 	}
 
+        //salvarPrograma
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def salvarPrograma() {   
 
@@ -73,6 +75,7 @@ class AmbienteController {
                     render "OK"
 	}
 
+        //compilarPrograma
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def compilarPrograma() {
                 
@@ -384,7 +387,7 @@ class AmbienteController {
 	
 	}//Termina compilar programa!
 
-	
+    //enviarPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def enviarPrograma() {
 	// Define usuário atual
@@ -420,6 +423,7 @@ class AmbienteController {
 
     }
 
+    //baixarPrograma    
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def baixarPrograma() {
         // Define usuário atual
@@ -472,6 +476,7 @@ class AmbienteController {
         return
     }
 
+    //listarProgramas    
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def listarProgramas() {
 
@@ -495,6 +500,7 @@ class AmbienteController {
         [programas: programas]
     }
 
+    //abrirPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def abrirPrograma() {
 
@@ -504,6 +510,7 @@ class AmbienteController {
         render programa.codigo
     }
 
+    //exportarPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def exportarPrograma() {
 
@@ -518,12 +525,18 @@ class AmbienteController {
 
         // Procura um programa de mesmo nome;
         // caso não exista, o cria
+        
         def programa = Programa.findWhere(
             usuario: usuario, 
             linguagem: linguagem,
             reduc: reduc,
             nome: params.nome
         )
+        
+        if (programa == null){
+            render "NO"
+            return
+        }    
 
         // Salva programa em arquivo temporário
         def t = System.currentTimeMillis().toString();
