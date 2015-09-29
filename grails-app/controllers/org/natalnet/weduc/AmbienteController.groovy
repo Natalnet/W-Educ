@@ -412,20 +412,36 @@ class AmbienteController {
        
         File d = new File("/tmp/weduc/envio/" + usuario?.username)
         d.mkdirs()
-        File weducClient = new File("/tmp/weduc/envio/"+ usuario?.username +"/weducClient.java")
+        File weducClient = new File("/tmp/weduc/envio/"+ usuario?.username +"/WeducClient.java")
        
-        CommandShellToString.execute("cp /home/sarah/W-Educ/grails-app/services/CommandShellToString.java /tmp/weduc/envio/" + usuario?.username + "/");
-        
-        def comando = linguagem.compileCode
+        def origem = "/home/sarah/W-Educ/grails-app/services/weducClient.zip"	
+        def destino = "/tmp/weduc/envio/" + usuario?.username + "/"     
+        CommandShellToString.execute("unzip " + origem + " -d " + destino); 
+
+        def comando = linguagem.sendCode
         comando = comando.replace("nomedoprograma",  params.nome)
-               
-        def codigo = "public class weducClient {\n "
+        
+        def codigo = "import javax.swing.JOptionPane; \n"
+        codigo += "public class WeducClient {\n "
         codigo += "public static void main(String[] args) { \n"
-        codigo += "CommandShellToString.execute(\"" + comando + "\"); \n } \n}"  
+        codigo += "String comando = \" " + comando + "\"; \n"
+        codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Please choose a port:\", \"W-Educ Port Names\", \n"
+        codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
+        codigo +=  "comando.replace(\"porta\",  portName); \n}\n"
+        codigo += "System.out.println(CommandShellToString.execute(\"" + comando + "\")); \n } \n}"  
         weducClient << codigo
        
-        def retorno = CommandShellToString.execute("javac /tmp/weduc/envio/" + usuario?.username + "/weducClient.java");
+        //Compilação e geração do jar
+        def retorno = CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& javac *.java -classpath jssc.jar ");
+        CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class")    
         System.out.println(retorno);
+        
+        File f = new File("/tmp/weduc/envio/" + usuario?.username + "/W-Educ.jar" )
+        
+        FileInputStream fWEduc = new FileInputStream(f)
+        response.setContentType("application/octet-stream")
+        response.setHeader("Content-disposition", "filename= W-Educ.jar")
+        response.outputStream << fWEduc
         
         render "Programa enviado com sucesso."
         

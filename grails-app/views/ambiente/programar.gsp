@@ -81,30 +81,42 @@
                 });
             };
             
+//            // Enviar o programa
+//            var enviarPrograma = function () {
+//
+//                // Inicia requisição assíncrona
+//                // para enviar o programa
+//                $.ajax({
+//                    url: "<g:createLink action="enviarPrograma"/>",
+//                    type: "post",
+//                    data: {
+//                        linguagem: ${linguagem?.id},
+//                        reduc: verificarLinguagem(),
+//                        nome: $("#nome-do-programa").val(),
+//                        codigo: editor.getValue()
+//                    },
+//                    success: function (returnData) {
+//                        alert(returnData);
+//                    },
+//                    fail: function () {
+//                        alert("Erro ao tentar enviar os arquivos para o computador .");
+//                    }
+//                });
+//            };
+
             // Enviar o programa
             var enviarPrograma = function () {
+                var hiddenIFrameID = 'hiddenDownloader',
+                    iframe = document.getElementById(hiddenIFrameID);
+                if (iframe === null) {
+                    iframe = document.createElement('iframe');
+                    iframe.id = hiddenIFrameID;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                }
+                iframe.src = "<g:createLink action="enviarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
 
-                // Inicia requisição assíncrona
-                // para enviar o programa
-                $.ajax({
-                    url: "<g:createLink action="enviarPrograma"/>",
-                    type: "post",
-                    data: {
-                        linguagem: ${linguagem?.id},
-                        reduc: verificarLinguagem(),
-                        nome: $("#nome-do-programa").val(),
-                        codigo: editor.getValue()
-                    },
-                    success: function (returnData) {
-                        alert(returnData);
-                    },
-                    fail: function () {
-                        alert("Erro ao tentar enviar os arquivos para o computador .");
-                    }
-                });
-            };
-
-
+                };
             
             // Baixar o programa
             var baixarPrograma = function () {
