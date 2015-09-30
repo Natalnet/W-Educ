@@ -74,6 +74,7 @@
                     },
                     success: function (returnData) {
                         alert(returnData);
+                        enviarBtn.disabled = false;
                     },
                     fail: function () {
                         alert("Erro ao tentar compilar o programa.");
@@ -266,7 +267,7 @@
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
-                    <button class="btn btn-success" onclick="enviarCliente();">Enviar</button>
+                    <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
                     <button class="btn btn-danger">Apagar</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
