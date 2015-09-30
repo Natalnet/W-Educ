@@ -93,35 +93,8 @@
                     document.body.appendChild(iframe);
                 }
                 iframe.src = "<g:createLink action="enviarCliente"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
-                enviarArquivoEnvio();    
-                };
-                
-            // Enviar arquivo de envio
-            var enviarArquivoEnvio = function () {
-                var hiddenIFrameID = 'hiddenDownloader2',
-                    iframe = document.getElementById(hiddenIFrameID);
-                if (iframe === null) {
-                    iframe = document.createElement('iframe');
-                    iframe.id = hiddenIFrameID;
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                }
-                iframe.src = "<g:createLink action="enviarArquivoEnvio"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
-                enviarPrograma();    
-                };
-                
-            // Enviar arquivo compilado
-            var enviarPrograma = function () {
-                var hiddenIFrameID = 'hiddenDownloader3',
-                    iframe = document.getElementById(hiddenIFrameID);
-                if (iframe === null) {
-                    iframe = document.createElement('iframe');
-                    iframe.id = hiddenIFrameID;
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                }
-                iframe.src = "<g:createLink action="enviarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
-                };   
+                //enviarArquivoEnvio();    
+                };  
             
             // Baixar o programa
             var baixarPrograma = function () {

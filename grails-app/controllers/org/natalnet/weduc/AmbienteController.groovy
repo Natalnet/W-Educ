@@ -426,21 +426,31 @@ class AmbienteController {
         def comando = linguagem.sendCode
         comando = comando.replace("nomedoprograma",  params.nome)
         
+        def copiarArquivoEnvio = "cp /weduc/arquivos-de-envio/" + linguagem.id + "/" + linguagem.compilerFile 
+        copiarArquivoEnvio += " /tmp/weduc/envio/"+ usuario?.username
+        System.out.println(CommandShellToString.execute(copiarArquivoEnvio))
+         
+        def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + programaCompilado 
+        copiarArquivoCompilado += " /tmp/weduc/envio/"+ usuario?.username
+        System.out.println(CommandShellToString.execute(copiarArquivoCompilado))
+        
+        
         def codigo = "import javax.swing.JOptionPane; \n"
-        codigo += "public class WeducClient {\n "
-        codigo += "public static void main(String[] args) { \n"
-        codigo += "String comando = \" " + comando + "\"; \n"
-        codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seleção de Portas\", \n"
-        codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
-        codigo +=  "comando = comando.replace(\"porta\",  portName); \n}\n"
-        codigo += "System.out.println(CommandShellToString.execute(comando));  \n"  
-        codigo += "System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
-                codigo += "System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n}"
+            codigo += "public class WeducClient {\n "
+            codigo += "public static void main(String[] args) { \n"
+            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar oioio.rxe nbc\")); \n"
+            codigo += "String comando = \" " + comando + "\"; \n"
+            codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seleção de Portas\", \n"
+            codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
+            codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n"
+            codigo += "System.out.println(CommandShellToString.execute(comando)); \n }  \n"  
+            codigo += "System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
+            codigo += "System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n}"
         weducClient << codigo
        
         //Compilação e geração do jar
         def retorno = CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& javac *.java -classpath jssc.jar ");
-        CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class")    
+        CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class " + linguagem.compilerFile + " " +  programaCompilado)    
         System.out.println(retorno);
         
         File f = new File("/tmp/weduc/envio/" + usuario?.username + "/W-Educ.jar" )
