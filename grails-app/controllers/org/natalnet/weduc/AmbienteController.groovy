@@ -13,6 +13,7 @@ class AmbienteController {
         //salvar = true
         //Compile = false
         def saveCompile = true;
+      
     
 	def index() {}
         
@@ -406,6 +407,12 @@ class AmbienteController {
             reduc: reduc,
             nome: params.nome
         )
+        
+        if(params.nome == null){
+            render "Não é possível enviar um programa que ainda não foi salvo e compilado."
+            return
+        }
+        
         File fDell = new File("/tmp/weduc/envio/" + usuario?.username + "/")
 	fDell.deleteDir()
         
@@ -469,14 +476,17 @@ class AmbienteController {
             nome: params.nome
         )
         
+        if(programa == null){
+            render "Não é possível enviar um programa que ainda não foi salvo e compilado."
+        return
+        }
+        
         File f = new File("/weduc/arquivos-de-envio/" + linguagem.id + "/" + linguagem.compilerFile)
         
         FileInputStream fWEduc = new FileInputStream(f)
         response.setContentType("application/octet-stream")
         response.setHeader("Content-disposition", "filename= " + linguagem.compilerFile)
         response.outputStream << fWEduc
-        
-        render "Programa enviado com sucesso."
         
     }
     
@@ -500,6 +510,11 @@ class AmbienteController {
             reduc: reduc,
             nome: params.nome
         )
+        
+        if(programa == null){
+            render "Não é possível enviar um programa que ainda não foi salvo e compilado."
+        return
+        }
 
        def programaCompilado = linguagem.sentExtension
        programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
