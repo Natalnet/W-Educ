@@ -408,6 +408,9 @@ class AmbienteController {
             nome: params.nome
         )
         
+        def programaCompilado = linguagem.sentExtension
+        programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
+        
         File fDell = new File("/tmp/weduc/envio/" + usuario?.username + "/")
 	fDell.deleteDir()
         
@@ -427,10 +430,12 @@ class AmbienteController {
         codigo += "public class WeducClient {\n "
         codigo += "public static void main(String[] args) { \n"
         codigo += "String comando = \" " + comando + "\"; \n"
-        codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Please choose a port:\", \"W-Educ Port Names\", \n"
+        codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seleção de Portas\", \n"
         codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
-        codigo +=  "comando.replace(\"porta\",  portName); \n}\n"
-        codigo += "System.out.println(CommandShellToString.execute(\"" + comando + "\")); \n } \n}"  
+        codigo +=  "comando = comando.replace(\"porta\",  portName); \n}\n"
+        codigo += "System.out.println(CommandShellToString.execute(comando));  \n"  
+        codigo += "System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
+                codigo += "System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n}"
         weducClient << codigo
        
         //Compilação e geração do jar
