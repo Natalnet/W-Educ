@@ -403,6 +403,11 @@ class LinguagemController {
                 // e fornece um nome específico a ele
                 File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)     
+                
+        	//Copia os arquivos de include e extrai na pasta	
+	   	def origem = "/weduc/arquivos-de-envio/" + params.id + "/arquivo"	
+	   	def destino = "/weduc/arquivos-de-envio/" + params.id + "/" 
+                CommandShellToString.execute("unzip "+origem+" -d "+destino);
 
                 [linguagem: Linguagem.get(params.id)]  
         }

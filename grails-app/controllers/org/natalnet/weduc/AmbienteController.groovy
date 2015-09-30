@@ -386,9 +386,9 @@ class AmbienteController {
 	
 	}//Termina compilar programa!
 
-    //enviarPrograma
+    //enviarCliente
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def enviarPrograma() {
+    def enviarCliente() {
 	// Define usuário atual
         def usuario = springSecurityService.getCurrentUser()
 
@@ -443,9 +443,76 @@ class AmbienteController {
         response.setHeader("Content-disposition", "filename= W-Educ.jar")
         response.outputStream << fWEduc
         
-        render "Programa enviado com sucesso."
+       // render "Programa enviado com sucesso."
         
 
+    }
+    
+        //enviarCliente
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def enviarArquivoEnvio() {
+	// Define usuário atual
+        def usuario = springSecurityService.getCurrentUser()
+
+        // Define a linguagem
+        def linguagem = Linguagem.get(params.linguagem)
+
+        // Define se é R-Educ ou não
+        def reduc = params.reduc == "1" ? true : false
+
+        // Procura um programa de mesmo nome;
+        // caso não exista, o cria
+        def programa = Programa.findWhere(
+            usuario: usuario, 
+            linguagem: linguagem,
+            reduc: reduc,
+            nome: params.nome
+        )
+        
+        File f = new File("/weduc/arquivos-de-envio/" + linguagem.id + "/" + linguagem.compilerFile)
+        
+        FileInputStream fWEduc = new FileInputStream(f)
+        response.setContentType("application/octet-stream")
+        response.setHeader("Content-disposition", "filename= " + linguagem.compilerFile)
+        response.outputStream << fWEduc
+        
+        render "Programa enviado com sucesso."
+        
+    }
+    
+            //enviarPrograma
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def enviarPrograma() {
+	// Define usuário atual
+        def usuario = springSecurityService.getCurrentUser()
+
+        // Define a linguagem
+        def linguagem = Linguagem.get(params.linguagem)
+
+        // Define se é R-Educ ou não
+        def reduc = params.reduc == "1" ? true : false
+
+        // Procura um programa de mesmo nome;
+        // caso não exista, o cria
+        def programa = Programa.findWhere(
+            usuario: usuario, 
+            linguagem: linguagem,
+            reduc: reduc,
+            nome: params.nome
+        )
+
+       def programaCompilado = linguagem.sentExtension
+       programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
+        
+        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + programaCompilado)
+        
+        FileInputStream fWEduc = new FileInputStream(f)
+        response.setContentType("application/octet-stream")
+        response.setHeader("Content-disposition", "filename= " + programaCompilado)
+        response.outputStream << fWEduc
+        
+        render "Programa enviado com sucesso."
+        
     }
 
     //baixarPrograma    

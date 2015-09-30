@@ -80,32 +80,9 @@
                     }
                 });
             };
-            
-//            // Enviar o programa
-//            var enviarPrograma = function () {
-//
-//                // Inicia requisição assíncrona
-//                // para enviar o programa
-//                $.ajax({
-//                    url: "<g:createLink action="enviarPrograma"/>",
-//                    type: "post",
-//                    data: {
-//                        linguagem: ${linguagem?.id},
-//                        reduc: verificarLinguagem(),
-//                        nome: $("#nome-do-programa").val(),
-//                        codigo: editor.getValue()
-//                    },
-//                    success: function (returnData) {
-//                        alert(returnData);
-//                    },
-//                    fail: function () {
-//                        alert("Erro ao tentar enviar os arquivos para o computador .");
-//                    }
-//                });
-//            };
 
             // Enviar o programa
-            var enviarPrograma = function () {
+            var enviarCliente = function () {
                 var hiddenIFrameID = 'hiddenDownloader',
                     iframe = document.getElementById(hiddenIFrameID);
                 if (iframe === null) {
@@ -114,9 +91,36 @@
                     iframe.style.display = 'none';
                     document.body.appendChild(iframe);
                 }
-                iframe.src = "<g:createLink action="enviarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
-
+                iframe.src = "<g:createLink action="enviarCliente"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
+                enviarArquivoEnvio();    
                 };
+                
+            // Enviar arquivo de envio
+            var enviarArquivoEnvio = function () {
+                var hiddenIFrameID = 'hiddenDownloader2',
+                    iframe = document.getElementById(hiddenIFrameID);
+                if (iframe === null) {
+                    iframe = document.createElement('iframe');
+                    iframe.id = hiddenIFrameID;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                }
+                iframe.src = "<g:createLink action="enviarArquivoEnvio"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
+                enviarPrograma();    
+                };
+                
+            // Enviar arquivo compilado
+            var enviarPrograma = function () {
+                var hiddenIFrameID = 'hiddenDownloader3',
+                    iframe = document.getElementById(hiddenIFrameID);
+                if (iframe === null) {
+                    iframe = document.createElement('iframe');
+                    iframe.id = hiddenIFrameID;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                }
+                iframe.src = "<g:createLink action="enviarPrograma"/>?linguagem=${linguagem?.id}&reduc=" + verificarLinguagem() + "&nome=" + $("#nome-do-programa").val();
+                };   
             
             // Baixar o programa
             var baixarPrograma = function () {
@@ -262,7 +266,7 @@
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
-                    <button class="btn btn-success" onclick="enviarPrograma();">Enviar</button>
+                    <button class="btn btn-success" onclick="enviarCliente();">Enviar</button>
                     <button class="btn btn-danger">Apagar</button>
                 </div>
                 <div id="editor">// Olá! Comece a programar aqui.</div>
