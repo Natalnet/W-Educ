@@ -442,10 +442,12 @@ class AmbienteController {
             codigo += "String comando = \" " + comando + "\"; \n"
             codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seleção de Portas\", \n"
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
-            codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n"
-            codigo += "System.out.println(CommandShellToString.execute(comando)); \n }  \n"  
-            codigo += "System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
-            codigo += "System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n}"
+            codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
+            codigo += "System.out.println(CommandShellToString.execute(comando)); \n   \n"  
+            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n System.out.println(CommandShellToString.execute(\" del "+ linguagem.compilerFile + "\")); \n"
+            codigo += "System.out.println(CommandShellToString.execute(\" del "+ programaCompilado + "\")); \n "
+            codigo += "} else { \n System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
+            codigo += " System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n} \n}"
         weducClient << codigo
        
         //Compilação e geração do jar
