@@ -170,9 +170,7 @@ public class TestCondition {
             }
             else {
                 writeOnFile(getName(getPosition()));
-                System.out.println("Entrei1");
                 if (sintatico.writeNumericalOperator(1)) {
-                    System.out.println("Entrei2");
                     setPosition(1);
                     writeOnFile(getName(getPosition()));
                     setPosition(1);
@@ -339,11 +337,14 @@ public class TestCondition {
                 errorFunction(getLine(getPosition()),"10 - Expressão inexistente.");
             }
         }
+        /*
+        //Tirei isso agora!
         else {
             setErrorType("sintaxe estrutura");
             // Fechou os parenteses e depois escreveu alguma coisa
             errorFunction(getLine(getPosition()+1),"16 - Confira os parênteses.");
         }
+        */
     }
     
     private void writeOnFile(String name) {

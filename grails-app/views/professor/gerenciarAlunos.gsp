@@ -31,7 +31,10 @@
                         <tbody>
                             <g:each in="${alunos}" var="aluno">
                             <tr>
-                                <td>${aluno?.username}</td>
+                                <!--<td>${aluno?.username}</td>-->
+                                <td>
+                                    <g:link controller="erro" action="exibir" id="${aluno?.id}">${aluno?.username}</g:link>
+                                </td>
                                 <td>
                                     <g:link controller="mensagem" action="escrever" id="${aluno?.id}">Enviar mensagem</g:link>
                                 </td>

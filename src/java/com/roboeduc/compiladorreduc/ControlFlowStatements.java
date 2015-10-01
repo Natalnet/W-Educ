@@ -29,6 +29,11 @@ public class ControlFlowStatements {
                         setPosition(1);
                         break;
                     }
+                    else if (getBracketsCounter() == 0) {
+                        setErrorType("sintaxe condicao");
+                        errorFunction(getLine(getPosition()+2),"31 - Confira a sintaxe da estrutura.");
+                        break;
+                    }
                     testCondition();
                 }
                 if ((getPosition()-1)==getListSize()) {
