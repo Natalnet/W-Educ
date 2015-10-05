@@ -30,7 +30,7 @@ class ErroController {
 		def indiceAtual=0;
 
 		
-
+		//Testa para cada um dos tipos de erros
 		for (int j = 8; j > 0; j--) {
 			def dia = new Date()
 			def quantidadeErros = 0
@@ -39,11 +39,18 @@ class ErroController {
 			dia++
 			indiceAtual=0
 			
+			//Analiza se há erros deste tipo
 			if (erros1.size() > 0) {
 				dia = erros1.get(0).data
 
+				//Percorre todos os erros
 				for (int i = 0; i < erros1.size(); i++) {
+					//Vê se mudou de data
 					if (erros1.get(i).data.clearTime() < dia.clearTime()) {
+						//Se for uma data nova e já houverem 10 na tabela, não colocar mais!
+						if (!datas.contains(dia.format('yyyy-MM-dd')) && datas.size() >= 10) {
+							break;
+						}
 						if (j == 8) {
 							datas.add(dia.format('yyyy-MM-dd'))
 							errosTotais.add(quantidadeErros)
@@ -59,13 +66,18 @@ class ErroController {
 						quantidadeErros = erros1.get(i).quant
 						dia = erros1.get(i).data
 					}
+					//Senão, soma os erros
 					else if (erros1.get(i).data.clearTime() == dia.clearTime()) {
 						quantidadeErros+=erros1.get(i).quant
 					}
 
 				}
-				datas.add(dia.format('yyyy-MM-dd'))
-				errosTotais.add(quantidadeErros)
+				if (datas.contains(dia.format('yyyy-MM-dd')) || datas.size() < 10) {
+					datas.add(dia.format('yyyy-MM-dd'))
+					errosTotais.add(quantidadeErros)
+				}
+
+				datas = datas.unique()
 			}
 
 			switch(j) {
@@ -87,8 +99,6 @@ class ErroController {
 						break
 			}
 		}
-
-		datas = datas.unique()
 
 		[
 			aluno:                      Aluno.get(params.id),
