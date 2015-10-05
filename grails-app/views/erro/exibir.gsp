@@ -40,6 +40,8 @@
             });
         </script>
         <div class="col-lg-8">
+            <h1 class="page-header">Gráfico de erros por aluno</h1>
+            <h2>Aluno: ${aluno?.name}</h2>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-bar-chart-o fa-fw"></i> <b>Estatísticas de erros</b>

@@ -33,7 +33,7 @@
                             <tr>
                                 <!--<td>${aluno?.username}</td>-->
                                 <td>
-                                    <g:link controller="erro" action="exibir" id="${aluno?.id}">${aluno?.username}</g:link>
+                                    <g:link controller="erro" action="exibir" id="${aluno?.id}">${aluno?.name}</g:link>
                                 </td>
                                 <td>
                                     <g:link controller="mensagem" action="escrever" id="${aluno?.id}">Enviar mensagem</g:link>

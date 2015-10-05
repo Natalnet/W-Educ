@@ -11,7 +11,7 @@ class ErroController {
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def exibir() {
-		 
+
 		def usuario = Usuario.findWhere(id:Long.parseLong(params.id.trim()))
 
 		// Estatíscias de acesso - Início
@@ -49,10 +49,7 @@ class ErroController {
 							errosTotais.add(quantidadeErros)
 						}
 						else {
-							println("Nao é 8! " + j)
-							println(dia.format('yyyy-MM-dd') + " " + datas.get(indiceAtual))
 							while (dia.format('yyyy-MM-dd') != datas.get(indiceAtual)) {
-								println(j + " -> add -1")
 								errosTotais.add(-1)
 								indiceAtual++
 							}
@@ -93,17 +90,8 @@ class ErroController {
 
 		datas = datas.unique()
 
-		for (int i = 0; i < datas.size(); i++) {
-			println(datas.get(i))
-		}
-
-		println(errosSintaxe)
-		println(errosNome)
-		println(errosRepeticao)
-		println(errosCondicao)
-		println(errosEstrutura)
-
 		[
+			aluno:                      Aluno.get(params.id),
 			datas: 						datas, 
 			errosVariavel:              errosVariavel,
 			errosFuncao:                errosFuncao,
