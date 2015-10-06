@@ -16,102 +16,43 @@ class ErroController {
 
 		// Estatíscias de acesso - Início
 
-		// Mês e ano atuais
+		// Variáveis auxiliares
 		def datas = []
-		def errosVariavel = []
-		def errosFuncao = []
-		def errosTarefa = []
-		def errosEstrutura = []
-		def errosCondicao = []
-		def errosRepeticao = []
-		def errosNome = []
-		def errosSintaxe = []
+		def totalDeErros = [:]
 
-		def indiceAtual=0;
-
-		
-		//Testa para cada um dos tipos de erros
-		for (int j = 8; j > 0; j--) {
-			def dia = new Date()
-			def quantidadeErros = 0
-			def errosTotais = []
-			def erros1 = Erro.findAllWhere(usuario:usuario, tipo:j.toString()).sort{it.data}.reverse()
-			dia++
-			indiceAtual=0
-			
-			//Analiza se há erros deste tipo
-			if (erros1.size() > 0) {
-				dia = erros1.get(0).data
-
-				//Percorre todos os erros
-				for (int i = 0; i < erros1.size(); i++) {
-					//Vê se mudou de data
-					if (erros1.get(i).data.clearTime() < dia.clearTime()) {
-						//Se for uma data nova e já houverem 10 na tabela, não colocar mais!
-						if (!datas.contains(dia.format('yyyy-MM-dd')) && datas.size() >= 10) {
-							break;
-						}
-						if (j == 8) {
-							datas.add(dia.format('yyyy-MM-dd'))
-							errosTotais.add(quantidadeErros)
-						}
-						else {
-							while (dia.format('yyyy-MM-dd') != datas.get(indiceAtual)) {
-								errosTotais.add(-1)
-								indiceAtual++
-							}
-							indiceAtual++;
-							errosTotais.add(quantidadeErros)
-						}
-						quantidadeErros = erros1.get(i).quant
-						dia = erros1.get(i).data
-					}
-					//Senão, soma os erros
-					else if (erros1.get(i).data.clearTime() == dia.clearTime()) {
-						quantidadeErros+=erros1.get(i).quant
-					}
-
+		// Testando cada um dos 8 tipos de erros
+		(8..1).each { tipo, indice->
+			def data = null
+			def totalDeErros[indice] = 0
+			def erros = Erro.findAllWhere(usuario:usuario, tipo:tipo.toString()).sort{ -it.data }
+			// Para cada erro desse tipo encontrado
+			erros.each { erro ->
+				// A data do erro atual é a mesma anterior?
+				if(erro.data.clearTime() == data.clearTime()) {
+					// Sim, então vamos somar o número de erros
+					totalDeErros[indice] += erro.quant
+				} else if (datas.size() < 10) {
+					// A data é diferente, mas há espaço na lista, vamos somar os erros
+					totalDeErros[indice] += erro.quant
+					// Adicionando a nova data na lista
+					datas.add(data)
 				}
-				if (datas.contains(dia.format('yyyy-MM-dd')) || datas.size() < 10) {
-					datas.add(dia.format('yyyy-MM-dd'))
-					errosTotais.add(quantidadeErros)
-				}
-
-				datas = datas.unique()
-			}
-
-			switch(j) {
-				case 1: errosVariavel = errosTotais
-						break
-				case 2: errosFuncao = errosTotais
-						break
-				case 3: errosTarefa = errosTotais
-						break
-				case 4: errosEstrutura = errosTotais
-						break
-				case 5: errosCondicao = errosTotais
-						break
-				case 6: errosRepeticao = errosTotais
-						break
-				case 7: errosNome = errosTotais
-						break
-				case 8: errosSintaxe = errosTotais
-						break
+				// Guarda a data do erro atual para comparar na próxima vez
+				data = erro.data
 			}
 		}
 
 		[
-			aluno:                      Aluno.get(params.id),
-			datas: 						datas, 
-			errosVariavel:              errosVariavel,
-			errosFuncao:                errosFuncao,
-			errosTarefa:                errosTarefa,
-			errosEstrutura:             errosEstrutura,
-			errosCondicao:              errosCondicao,
-			errosRepeticao:             errosRepeticao,
-			errosNome:                  errosNome,
-			errosSintaxe:               errosSintaxe
+			aluno: Aluno.get(params.id),
+			datas: datas,
+			errosVariavel: totalDeErros[1],
+			errosFuncao: totalDeErros[2],
+			errosTarefa: totalDeErros[3],
+			errosEstrutura: totalDeErros[4],
+			errosCondicao: totalDeErros[5],
+			errosRepeticao: totalDeErros[6],
+			errosNome: totalDeErros[7],
+			errosSintaxe: totalDeErros[8],
 		]
 	}
-
 }
