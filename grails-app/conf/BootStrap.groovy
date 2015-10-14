@@ -902,7 +902,108 @@ class BootStrap {
             println "Linguagem CV3 ja existe no banco de dados"
         }
         
+        //Cadastro da Linguagem Ino - Arduino UNO
+        
+        if(!Linguagem.findWhere(name: "INO")) {
+            
+            println "Linguagem INO nao encontrada no banco de dados."
+            println "Iniciando cadastro da linguagem INO"
+            
+            // Linguagem propriamente dita
+            def linguagem = new Linguagem()
+            linguagem.name = "INO"
+            linguagem.description = "Linguagem baseada em C utilizada para programação de robôs com Arduino UNO."
+            linguagem.robot = "Arduino Uno"
+            linguagem.extension = "ino"
+            linguagem.compileCode = "arduino --pref build.path=diretorio --verify nomedoprograma.ino"
+            linguagem.compilerFile = "ArduinoUploader.exe"
+            linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
+            linguagem.sentExtension = ".cpp.hex"
+            linguagem.header = ""
+            linguagem.footnote = ""
+            linguagem.mainFunction = "void loop(){\n comandos} \n"
+            linguagem.otherFunctions = "void funcao(){\n comandos} \n"
+            linguagem.callFunction = "funcao();"
+            linguagem.autor = usuario
+
+            // Tipos da linguagem
+            linguagem.types = new Tipos()
+            linguagem.types.name = ""
+            linguagem.types.declareFalse = "false"
+            linguagem.types.declareTrue = "true"
+            linguagem.types.declareFloat = "float variavel = valor;"
+            linguagem.types.declareString = "char variavel[] = \"valor\";"
+            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.save(flush: true, failOnError: true)
+
+            // Operadores da linguagem
+            linguagem.operators = new Operadores()
+            linguagem.operators.equalTo = "=="
+            linguagem.operators.notEqualTo = "!="
+            linguagem.operators.greaterThan = ">"
+            linguagem.operators.lessThan = "<"
+            linguagem.operators.greaterThanOrEqualTo = ">="
+            linguagem.operators.lessThanOrEqualTo = "<="
+            linguagem.operators.logicalAnd = "&&"
+            linguagem.operators.logicalOr = "||"
+            linguagem.operators.logicalNot = "!"
+            linguagem.operators.name = ""
+            linguagem.operators.save(flush: true, failOnError: true)
+
+            // Controles de fluxo da linguagem
+            linguagem.controlFlow = new ControleDeFluxo()
+            linguagem.controlFlow.languageName = "INO"
+            linguagem.controlFlow.breakCode = "break;"
+            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
+            linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
+            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
+            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
+                                               "//teste1\n" +
+                                               "case (valor1): comandos1\n" +
+                                               "break;\n" +
+                                               "//teste2\n" +
+                                               "default: comandos2\n" +
+                                               "break;\n" +
+                                               "//fim\n" +
+                                               "}"
+            linguagem.controlFlow.save(flush: true, failOnError: true)
+
+            // Salvando a linguagem
+            linguagem.save(flush: true, failOnError: true)
+            
+            // Funções
+            println "Iniciando cadastro das funcoes da linguagem " + linguagem.name
+            
+//            def defines = new Definicao()
+//            defines.name = "a"
+//            defines.alreadyExists = true
+//            defines.text="OUT_A"
+//            defines.type="int"
+//            linguagem.addToDefines(defines).save(flush: true, failOnError: true)
+//            
+//            def funcao = new Funcao()
+//            funcao.name = "definirtoque"
+//            funcao.type = "Outros"
+//            funcao.returnType = "Void"
+//            funcao.qntParameters = "1"
+//            funcao.code = "SetSensorTouch(IN_var1(int));"
+//            funcao.description = ""
+//            funcao.typeAliases = ""
+//            funcao.imageURL = ""
+//            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+
+            println "Cadastro da linguagem " + linguagem.name + " concluido"
+            
+        } else {
+            println "Linguagem INO ja existe no banco de dados"
+        }
+        
+        
         // Fim do cadastro de linguagem
+        
+        
     }
 
     def destroy = {

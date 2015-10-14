@@ -242,15 +242,15 @@ class AmbienteController {
 
 
             //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
-	    File fDell = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id)
+	    File fDell = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName)
 	    fDell.deleteDir()
       	    
 
 	   //Copia os arquivos de include e extrai na pasta
 	   try {		 
 		def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
-		def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id        
-                CommandShellToString.execute("unzip "+origem+" -d "+destino);              
+		def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + fName        
+                CommandShellToString.execute("unzip "+origem+" -d "+ destino);              
 	   }
 	   catch (Exception e) {
             	println e
@@ -258,22 +258,22 @@ class AmbienteController {
 
             // Deixa o arquivo com a extensão e identificação desejadas
             File fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
-            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension)
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + fName + "." + linguagem.extension)
             org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Define o arquivo onde ficarão os comandos do Make
-            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id +"/weduc.sh")
+            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
 	    def comando = "" + linguagem.compileCode
 	    println comando;
-            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id)
-            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
+            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + fName )
             comando = comando.replace("nomedoprograma",  fName )
             org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
                
             println comando;  
             // Prepara o comando Make
             comando = "/bin/bash /tmp/weduc/compilador/" 
-            comando += usuario?.username + "/" + linguagem.id + "/weduc.sh"
+            comando += usuario?.username + "/" + fName + "/weduc.sh"
 
 
             println "------>"
@@ -318,14 +318,14 @@ class AmbienteController {
             //Copia os arquivos de include e extrai na pasta
             try {		 
                  def origem = "/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
-                 def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id        
+                 def destino = "/tmp/weduc/compilador/" + usuario?.username + "/" + fName        
                  CommandShellToString.execute("unzip "+origem+" -d "+destino);              
             }
             catch (Exception e) {
                  println e
              }
              
-            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension);
+            File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + fName + "." + linguagem.extension);
             org.apache.commons.io.FileUtils.writeStringToFile(fTarget, programa.codigo, null)
             
             // Deixa o arquivo com a extensão e identificação desejadas
@@ -334,18 +334,18 @@ class AmbienteController {
             //org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
 
             // Define o arquivo onde ficarão os comandos do Make
-            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id +"/weduc.sh")
+            File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
 	    def comando = "" + linguagem.compileCode
 	    println comando;
-            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ linguagem.id)
-            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
+            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + fName )
             comando = comando.replace("nomedoprograma",  fName )
             org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
                
             println comando;  
             // Prepara o comando Make
             comando = "/bin/bash /tmp/weduc/compilador/" 
-            comando += usuario?.username + "/" + linguagem.id + "/weduc.sh"
+            comando += usuario?.username + "/" + fName + "/weduc.sh"
 
 
             println "------>"
@@ -430,7 +430,7 @@ class AmbienteController {
         copiarArquivoEnvio += " /tmp/weduc/envio/"+ usuario?.username
         System.out.println(CommandShellToString.execute(copiarArquivoEnvio))
          
-        def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + programaCompilado 
+        def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado 
         copiarArquivoCompilado += " /tmp/weduc/envio/"+ usuario?.username
         System.out.println(CommandShellToString.execute(copiarArquivoCompilado))
         
@@ -438,9 +438,9 @@ class AmbienteController {
         def codigo = "import javax.swing.JOptionPane; \n"
             codigo += "public class WeducClient {\n "
             codigo += "public static void main(String[] args) { \n"
-            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar oioio.rxe nbc\")); \n"
+            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar " + programaCompilado +" " + linguagem.compilerFile + " jssc.jar\")); \n"
             codigo += "String comando = \" " + comando + "\"; \n"
-            codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seleção de Portas\", \n"
+            codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo est conectado:\", \"W-Educ - Seleo de Portas\","
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
             codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
             codigo += "System.out.println(CommandShellToString.execute(comando)); \n   \n"  
@@ -451,7 +451,7 @@ class AmbienteController {
         weducClient << codigo
        
         //Compilação e geração do jar
-        def retorno = CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& javac *.java -classpath jssc.jar ");
+        def retorno = CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& javac *.java -classpath jssc.jar");
         CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class " + linguagem.compilerFile + " " +  programaCompilado)    
         System.out.println(retorno);
         
@@ -521,7 +521,7 @@ class AmbienteController {
        def programaCompilado = linguagem.sentExtension
        programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
         
-        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + programaCompilado)
+        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado)
         
         FileInputStream fWEduc = new FileInputStream(f)
         response.setContentType("application/octet-stream")
@@ -565,7 +565,7 @@ class AmbienteController {
 	else{
 		extension = "rob"
 	} 
-
+        
         File c = new File("/tmp/weduc/compilador/" + usuario?.username)
 	if (!c.exists()) {
             c.mkdirs()
@@ -650,6 +650,10 @@ class AmbienteController {
             render "NO"
             return
         }    
+        
+        //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
+	File fDell = new File("/tmp/weduc/compilador/" + usuario?.username)
+        fDell.deleteDir()
 
         // Salva programa em arquivo temporário
         String fName = programa.nome;
