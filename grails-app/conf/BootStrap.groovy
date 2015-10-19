@@ -445,7 +445,7 @@ class BootStrap {
             linguagem.compilerFile = ""
             linguagem.sendCode = "dll -r ProgramaCV3.rbf & dll -d cv3"
             linguagem.sentExtension = ""
-            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/w-educ\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
+            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
             linguagem.footnote = ""
             linguagem.mainFunction = "int main(){\nOutputInit();\nButtonLedInit();\nLCD tela;\nLcdInit(tela.Lcd);\nLcdClear(tela.Lcd);\nSoundInit();\nSoundOpen();\ncomandos\nButtonLedExit();\nSoundClose();\nSoundExit();\nLcdExit();\nOutputClose();\nOutputExit();\n}"
             linguagem.otherFunctions = "void funcao(){comandos}"
@@ -915,11 +915,12 @@ class BootStrap {
             linguagem.description = "Linguagem baseada em C utilizada para programação de robôs com Arduino UNO."
             linguagem.robot = "Arduino Uno"
             linguagem.extension = "ino"
-            linguagem.compileCode = "arduino --pref build.path=diretorio --verify nomedoprograma.ino"
+            linguagem.compileCode = "arduino --pref build.path=diretorio --verify diretorio/nomedoprograma.ino"
             linguagem.compilerFile = "ArduinoUploader.exe"
             linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
             linguagem.sentExtension = ".cpp.hex"
-            linguagem.header = ""
+            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n*" +
+                               "void setup(){\n  }\n"     
             linguagem.footnote = ""
             linguagem.mainFunction = "void loop(){\n comandos} \n"
             linguagem.otherFunctions = "void funcao(){\n comandos} \n"
@@ -982,17 +983,17 @@ class BootStrap {
 //            defines.text="OUT_A"
 //            defines.type="int"
 //            linguagem.addToDefines(defines).save(flush: true, failOnError: true)
-//            
-//            def funcao = new Funcao()
-//            funcao.name = "definirtoque"
-//            funcao.type = "Outros"
-//            funcao.returnType = "Void"
-//            funcao.qntParameters = "1"
-//            funcao.code = "SetSensorTouch(IN_var1(int));"
-//            funcao.description = ""
-//            funcao.typeAliases = ""
-//            funcao.imageURL = ""
-//            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+
+            def funcao = new Funcao()
+            funcao.name = "comentario"
+            funcao.type = "Outros"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "1"
+            funcao.code = "// var1(String)"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
 
             println "Cadastro da linguagem " + linguagem.name + " concluido"
             
@@ -1000,6 +1001,278 @@ class BootStrap {
             println "Linguagem INO ja existe no banco de dados"
         }
         
+        //Cadastro da Linguagem One - Bot'Roll One A
+        
+        if(!Linguagem.findWhere(name: "ONE")) {
+            
+            println "Linguagem ONE nao encontrada no banco de dados."
+            println "Iniciando cadastro da linguagem ONE"
+            
+            // Linguagem propriamente dita
+            def linguagem = new Linguagem()
+            linguagem.name = "ONE"
+            linguagem.description = "Linguagem baseada em C, semelhante a INO, com bibliotecas específicas para programação de robôs Bot'N Roll One A."
+            linguagem.robot = "Bot'N Roll One A"
+            linguagem.extension = "ino"
+            linguagem.compileCode = "arduino --pref build.path=diretorio --verify diretorio/nomedoprograma.ino"
+            linguagem.compilerFile = "ArduinoUploader.exe"
+            linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
+            linguagem.sentExtension = ".cpp.hex"
+            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n*/ \n" +
+                               "#include <BnrOneA.h> \n #include <SPI.h> \n" +
+                               "BnrOneA one; \n" +          
+                               "#define SSPIN 2 \n"  +
+                               "void setup(){\n one.spiConnect(SSPIN); \n" +
+                                "one.minBat(8.5); \n delay(5); \n" +
+                                "one.obstacleEmitters(ON); \n}\n "
+            linguagem.footnote = ""
+            linguagem.mainFunction = "void loop(){\n comandos} \n"
+            linguagem.otherFunctions = "void funcao(){\n comandos} \n"
+            linguagem.callFunction = "funcao();"
+            linguagem.autor = usuario
+
+            // Tipos da linguagem
+            linguagem.types = new Tipos()
+            linguagem.types.name = ""
+            linguagem.types.declareFalse = "false"
+            linguagem.types.declareTrue = "true"
+            linguagem.types.declareFloat = "float variavel = valor;"
+            linguagem.types.declareString = "char variavel[] = \"valor\";"
+            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.save(flush: true, failOnError: true)
+
+            // Operadores da linguagem
+            linguagem.operators = new Operadores()
+            linguagem.operators.equalTo = "=="
+            linguagem.operators.notEqualTo = "!="
+            linguagem.operators.greaterThan = ">"
+            linguagem.operators.lessThan = "<"
+            linguagem.operators.greaterThanOrEqualTo = ">="
+            linguagem.operators.lessThanOrEqualTo = "<="
+            linguagem.operators.logicalAnd = "&&"
+            linguagem.operators.logicalOr = "||"
+            linguagem.operators.logicalNot = "!"
+            linguagem.operators.name = ""
+            linguagem.operators.save(flush: true, failOnError: true)
+
+            // Controles de fluxo da linguagem
+            linguagem.controlFlow = new ControleDeFluxo()
+            linguagem.controlFlow.languageName = "ANO"
+            linguagem.controlFlow.breakCode = "break;"
+            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
+            linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
+            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
+            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
+                                               "//teste1\n" +
+                                               "case (valor1): comandos1\n" +
+                                               "break;\n" +
+                                               "//teste2\n" +
+                                               "default: comandos2\n" +
+                                               "break;\n" +
+                                               "//fim\n" +
+                                               "}"
+            linguagem.controlFlow.save(flush: true, failOnError: true)
+
+            // Salvando a linguagem
+            linguagem.save(flush: true, failOnError: true)
+            
+            // Funções
+            println "Iniciando cadastro das funcoes da linguagem " + linguagem.name    
+            
+            def funcao = new Funcao()
+            funcao.name = "obstaculoinfra"
+            funcao.type = "Leitura"
+            funcao.returnType = "float"
+            funcao.qntParameters = "0"
+            funcao.code = "one.obstacleSensors()"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "botao"
+            funcao.type = "Leitura"
+            funcao.returnType = "float"
+            funcao.qntParameters = "0"
+            funcao.code = "one.readButton()"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "bateria"
+            funcao.type = "Leitura"
+            funcao.returnType = "float"
+            funcao.qntParameters = "0"
+            funcao.code = "one.readBattery()"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "posicaomotor1"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "1"
+            funcao.code = "one.servo1(var1(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "posicaomotor2"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "1"
+            funcao.code = "one.servo2(var1(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "acenderled"
+            funcao.type = "Escrita"
+            funcao.returnType = "float"
+            funcao.qntParameters = "0"
+            funcao.code = "one.led(HIGH);"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "apagarled"
+            funcao.type = "Escrita"
+            funcao.returnType = "float"
+            funcao.qntParameters = "0"
+            funcao.code = "one.led(LOW);"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "frente"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "3"
+            funcao.code = "one.move(var1(int), var2(int)); delay(var3(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "tras"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "3"
+            funcao.code = "one.move(-var1(int), -var2(int)); delay(var3(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "direita"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "3"
+            funcao.code = "one.move(var1(int), -var2(int)); delay(var3(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "esquerda"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "3"
+            funcao.code = "one.move(-var1(int), var2(int)); delay(var3(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "parar"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "0"
+            funcao.code = "one.stop();"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "travar"
+            funcao.type = "Movimentação"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "2"
+            funcao.code = "one.brake(var1(int),var2(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "escrever"
+            funcao.type = "Escrita"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "2"
+            funcao.code = "one.lcdvar1(int)(var2(String));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "escrevernumero"
+            funcao.type = "Escrita"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "2"
+            funcao.code = "one.lcdvar1(int)(var2(int));"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "seguidorinfra"
+            funcao.type = "Leitura"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "1"
+            funcao.code = "one.readAdc(var1(int));"
+            funcao.description = "Sensor varia de 0 a 7."
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+            
+            funcao = new Funcao()
+            funcao.name = "comentario"
+            funcao.type = "Outros"
+            funcao.returnType = "Void"
+            funcao.qntParameters = "1"
+            funcao.code = "// var1(String)"
+            funcao.description = ""
+            funcao.typeAliases = ""
+            funcao.imageURL = ""
+            linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
+
+            println "Cadastro da linguagem " + linguagem.name + " concluido"
+            
+        } else {
+            println "Linguagem ONE ja existe no banco de dados"
+        }
         
         // Fim do cadastro de linguagem
         
