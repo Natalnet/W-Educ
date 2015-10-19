@@ -44,9 +44,9 @@ class BootStrap {
             linguagem.sentExtension = "nxc"
             linguagem.header = ""
             linguagem.footnote = ""
-            linguagem.mainFunction = "task main(){comandos}"
-            linguagem.otherFunctions = "task funcao(){comandos}"
-            linguagem.callFunction = "funcao();"
+            linguagem.mainFunction = "task main(){\n comandos \n}\n"
+            linguagem.otherFunctions = "task funcao(){\n comandos \n}\n"
+            linguagem.callFunction = "funcao(); \n"
             linguagem.autor = usuario
 
             // Tipos da linguagem
@@ -54,9 +54,9 @@ class BootStrap {
             linguagem.types.name = ""
             linguagem.types.declareFalse = "false"
             linguagem.types.declareTrue = "true"
-            linguagem.types.declareFloat = "float variavel = valor;"
-            linguagem.types.declareString = "string variavel = \"valor\";"
-            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.declareFloat = "float variavel = valor; \n"
+            linguagem.types.declareString = "string variavel = \"valor\"; \n"
+            linguagem.types.declareBoolean = "bool variavel = valor; \n"
             linguagem.types.save(flush: true, failOnError: true)
 
             // Operadores da linguagem
@@ -76,12 +76,12 @@ class BootStrap {
             // Controles de fluxo da linguagem
             linguagem.controlFlow = new ControleDeFluxo()
             linguagem.controlFlow.languageName = "NXC"
-            linguagem.controlFlow.breakCode = "break;"
-            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
-            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
-            linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
-            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
-            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.breakCode = "break;\n"
+            linguagem.controlFlow.doCode = "do {\n comandos \n }\n while (condicao); \n"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {\n comandos \n} \n"
+            linguagem.controlFlow.ifCode = "if(condicao){\n comandos1 \n}else{ \n comandos2 \n} \n"
+            linguagem.controlFlow.repeatCode = "repeat(var){\n comandos \n}\n"
+            linguagem.controlFlow.whileCode = "while(condicao){\n comandos \n}\n"
             linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
@@ -90,7 +90,7 @@ class BootStrap {
                                                "default: comandos2\n" +
                                                "break;\n" +
                                                "//fim\n" +
-                                               "}"
+                                               "}\n"
             linguagem.controlFlow.save(flush: true, failOnError: true)
 
             // Salvando a linguagem
@@ -223,7 +223,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorTouch(IN_var1(int));"
+            funcao.code = "SetSensorTouch(IN_var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -234,7 +234,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorColorFull(IN_var1(int));"
+            funcao.code = "SetSensorColorFull(IN_var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -245,7 +245,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorColorRed(IN_var1(int));"
+            funcao.code = "SetSensorColorRed(IN_var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -256,7 +256,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorLowspeed(IN_var1(int));"
+            funcao.code = "SetSensorLowspeed(IN_var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -300,7 +300,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "Wait(var1(int));"
+            funcao.code = "Wait(var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -312,7 +312,7 @@ class BootStrap {
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
             funcao.code = "OnFwd(var1(int), var2(int));\n" +
-                             "Wait(var3(int));"
+                             "Wait(var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -324,7 +324,7 @@ class BootStrap {
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
             funcao.code = "OnRev(var1(int), var2(int));\n" +
-                             "Wait(var3(int));"
+                             "Wait(var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -337,7 +337,7 @@ class BootStrap {
             funcao.qntParameters = "5"
             funcao.code = "OnFwd(var1(int), var2(int));\n" +
                              "OnRev(var3(int), var4(int));\n" +
-                             "Wait(var5(int));"
+                             "Wait(var5(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -348,7 +348,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "Off(var1(int));"
+            funcao.code = "Off(var1(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -359,7 +359,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "2"
-            funcao.code = "PlayTone(var1(int), var2(int));"
+            funcao.code = "PlayTone(var1(int), var2(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -370,7 +370,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(int), var2(int), var3(int));"
+            funcao.code = "RotateMotor(var1(int), var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -381,7 +381,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(int), var2(int), -var3(int));"
+            funcao.code = "RotateMotor(var1(int), var2(int), -var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -392,7 +392,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "TextOut(var1(int), LCD_LINEvar2(int), var3(String));"
+            funcao.code = "TextOut(var1(int), LCD_LINEvar2(int), var3(String));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -403,7 +403,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "NumOut(var1(int), LCD_LINEvar2(int), var3(int));"
+            funcao.code = "NumOut(var1(int), LCD_LINEvar2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -448,8 +448,8 @@ class BootStrap {
             linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
             linguagem.footnote = ""
             linguagem.mainFunction = "int main(){\nOutputInit();\nButtonLedInit();\nLCD tela;\nLcdInit(tela.Lcd);\nLcdClear(tela.Lcd);\nSoundInit();\nSoundOpen();\ncomandos\nButtonLedExit();\nSoundClose();\nSoundExit();\nLcdExit();\nOutputClose();\nOutputExit();\n}"
-            linguagem.otherFunctions = "void funcao(){comandos}"
-            linguagem.callFunction = "funcao();"
+            linguagem.otherFunctions = "void funcao(){\n comandos \n} \n"
+            linguagem.callFunction = "funcao(); \n"
             linguagem.autor = usuario
 
             // Tipos da linguagem
@@ -457,9 +457,9 @@ class BootStrap {
             linguagem.types.name = ""
             linguagem.types.declareFalse = "false"
             linguagem.types.declareTrue = "true"
-            linguagem.types.declareFloat = "float variavel = valor;"
-            linguagem.types.declareString = "char variavel[] = \"valor\";"
-            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.declareFloat = "float variavel = valor; \n"
+            linguagem.types.declareString = "char variavel[] = \"valor\"; \n"
+            linguagem.types.declareBoolean = "bool variavel = valor; \n"
             linguagem.types.save(flush: true, failOnError: true)
 
             // Operadores da linguagem
@@ -479,12 +479,12 @@ class BootStrap {
             // Controles de fluxo da linguagem
             linguagem.controlFlow = new ControleDeFluxo()
             linguagem.controlFlow.languageName = "NXC"
-            linguagem.controlFlow.breakCode = "break;"
-            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
-            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
-            linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
-            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
-            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.breakCode = "break;\n"
+            linguagem.controlFlow.doCode = "do {\n comandos \n} \n while (condicao); \n"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {\n comandos} \n"
+            linguagem.controlFlow.ifCode = "if(condicao){ \n comandos1 \n }else{ \n comandos2 \n} \n"
+            linguagem.controlFlow.repeatCode = "repeat(var){\n comandos \n}\n"
+            linguagem.controlFlow.whileCode = "while(condicao){\n comandos \n} \n"
             linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
@@ -493,7 +493,7 @@ class BootStrap {
                                                "default: comandos2\n" +
                                                "break;\n" +
                                                "//fim\n" +
-                                               "}"
+                                               "} \n"
             linguagem.controlFlow.save(flush: true, failOnError: true)
 
             // Salvando a linguagem
@@ -626,7 +626,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorTouch(IN_var1(int));"
+            funcao.code = "SetSensorTouch(IN_var1(int)); \n" 
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -637,7 +637,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "0"
-            funcao.code = "CloseTouch();"
+            funcao.code = "CloseTouch(); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -648,7 +648,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "0"
-            funcao.code = "CloseUS();"
+            funcao.code = "CloseUS(); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -659,7 +659,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "0"
-            funcao.code = "CloseColor();"
+            funcao.code = "CloseColor(); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -670,7 +670,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "0"
-            funcao.code = "CloseColor();"
+            funcao.code = "CloseColor(); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -681,7 +681,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorColorFull(IN_var1(int));"
+            funcao.code = "SetSensorColorFull(IN_var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -692,7 +692,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorColorRed(IN_var1(int));"
+            funcao.code = "SetSensorColorRed(IN_var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -703,7 +703,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetSensorUS(IN_var1(int));"
+            funcao.code = "SetSensorUS(IN_var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -758,7 +758,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "Wait(var1(int));"
+            funcao.code = "Wait(var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -769,7 +769,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "OnFwd(var1(String), var2(int)); Wait(var3(int));"
+            funcao.code = "OnFwd(var1(String), var2(int)); \n Wait(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -780,7 +780,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "OnRev(var1(String), var2(int)); Wait(var3(int));"
+            funcao.code = "OnRev(var1(String), var2(int)); \n Wait(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -791,7 +791,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "5"
-            funcao.code = "OnFwd(var1(String), var2(int)); OnRev(var3(String), var4(int)); Wait(var5(int));"
+            funcao.code = "OnFwd(var1(String), var2(int)); OnRev(var3(String), var4(int)); Wait(var5(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -802,7 +802,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "4"
-            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), var4(int), true, true);"
+            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), var4(int), true, true); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -813,7 +813,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "4"
-            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), -var4(int), true, true);"
+            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), -var4(int), true, true); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -824,7 +824,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "2"
-            funcao.code = "PlayTone(var1(int), var2(int));"
+            funcao.code = "PlayTone(var1(int), var2(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -835,7 +835,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(String), var2(int), var3(int));"
+            funcao.code = "RotateMotor(var1(String), var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -846,7 +846,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(String), -var2(int), var3(int));"
+            funcao.code = "RotateMotor(var1(String), -var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -857,7 +857,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "LcdText(tela.Lcd, var1(int), var2(int), var3(String));"
+            funcao.code = "LcdText(tela.Lcd, var1(int), var2(int), var3(String));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -868,7 +868,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "LcdNum(tela.Lcd, var1(int), var2(int), var3(int));"
+            funcao.code = "LcdNum(tela.Lcd, var1(int), var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -879,7 +879,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "LcdClear(tela.Lcd);"
+            funcao.code = "LcdClear(tela.Lcd); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -890,7 +890,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "SetLedWarning(true); Wait(var1(int)); SetLedWarning(false);"
+            funcao.code = "SetLedWarning(true); \n Wait(var1(int)); \n SetLedWarning(false); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -923,8 +923,8 @@ class BootStrap {
                                "void setup(){\n  }\n"     
             linguagem.footnote = ""
             linguagem.mainFunction = "void loop(){\n comandos} \n"
-            linguagem.otherFunctions = "void funcao(){\n comandos} \n"
-            linguagem.callFunction = "funcao();"
+            linguagem.otherFunctions = "void funcao(){\n comandos \n } \n"
+            linguagem.callFunction = "funcao(); \n"
             linguagem.autor = usuario
 
             // Tipos da linguagem
@@ -932,9 +932,9 @@ class BootStrap {
             linguagem.types.name = ""
             linguagem.types.declareFalse = "false"
             linguagem.types.declareTrue = "true"
-            linguagem.types.declareFloat = "float variavel = valor;"
-            linguagem.types.declareString = "char variavel[] = \"valor\";"
-            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.declareFloat = "float variavel = valor; \n"
+            linguagem.types.declareString = "char variavel[] = \"valor\"; \n"
+            linguagem.types.declareBoolean = "bool variavel = valor; \n"
             linguagem.types.save(flush: true, failOnError: true)
 
             // Operadores da linguagem
@@ -955,11 +955,11 @@ class BootStrap {
             linguagem.controlFlow = new ControleDeFluxo()
             linguagem.controlFlow.languageName = "INO"
             linguagem.controlFlow.breakCode = "break;"
-            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
-            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
+            linguagem.controlFlow.doCode = "do {\n comandos \n} \n while (condicao); \n"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {\n comandos \n} \n"
             linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
-            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
-            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.repeatCode = "repeat(var){\n comandos \n} \n"
+            linguagem.controlFlow.whileCode = "while(condicao){\n comandos \n}\n"
             linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
@@ -968,7 +968,7 @@ class BootStrap {
                                                "default: comandos2\n" +
                                                "break;\n" +
                                                "//fim\n" +
-                                               "}"
+                                               "} \n"
             linguagem.controlFlow.save(flush: true, failOnError: true)
 
             // Salvando a linguagem
@@ -989,7 +989,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "// var1(String)"
+            funcao.code = "/* var1(String) */"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1027,8 +1027,8 @@ class BootStrap {
                                 "one.obstacleEmitters(ON); \n}\n "
             linguagem.footnote = ""
             linguagem.mainFunction = "void loop(){\n comandos} \n"
-            linguagem.otherFunctions = "void funcao(){\n comandos} \n"
-            linguagem.callFunction = "funcao();"
+            linguagem.otherFunctions = "void funcao(){\n comandos \n } \n"
+            linguagem.callFunction = "funcao(); \n"
             linguagem.autor = usuario
 
             // Tipos da linguagem
@@ -1036,9 +1036,9 @@ class BootStrap {
             linguagem.types.name = ""
             linguagem.types.declareFalse = "false"
             linguagem.types.declareTrue = "true"
-            linguagem.types.declareFloat = "float variavel = valor;"
-            linguagem.types.declareString = "char variavel[] = \"valor\";"
-            linguagem.types.declareBoolean = "bool variavel = valor;"
+            linguagem.types.declareFloat = "float variavel = valor; \n"
+            linguagem.types.declareString = "char variavel[] = \"valor\"; \n"
+            linguagem.types.declareBoolean = "bool variavel = valor; \n"
             linguagem.types.save(flush: true, failOnError: true)
 
             // Operadores da linguagem
@@ -1058,12 +1058,12 @@ class BootStrap {
             // Controles de fluxo da linguagem
             linguagem.controlFlow = new ControleDeFluxo()
             linguagem.controlFlow.languageName = "ANO"
-            linguagem.controlFlow.breakCode = "break;"
-            linguagem.controlFlow.doCode = "do {comandos} while (condicao);"
-            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {comandos}"
-            linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
-            linguagem.controlFlow.repeatCode = "repeat(var){comandos}"
-            linguagem.controlFlow.whileCode = "while(condicao){comandos}"
+            linguagem.controlFlow.breakCode = "break;\n"
+            linguagem.controlFlow.doCode = "do {\n comandos \n} \n while (condicao); \n"
+            linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo){ \n comandos \n} \n"
+            linguagem.controlFlow.ifCode = "if(condicao){\n comandos1 \n} \n else{ \n comandos2 \n} \n"
+            linguagem.controlFlow.repeatCode = "repeat(var){\n comandos}\n"
+            linguagem.controlFlow.whileCode = "while(condicao){\ncomandos}\n"
             linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
@@ -1072,7 +1072,7 @@ class BootStrap {
                                                "default: comandos2\n" +
                                                "break;\n" +
                                                "//fim\n" +
-                                               "}"
+                                               "}\n"
             linguagem.controlFlow.save(flush: true, failOnError: true)
 
             // Salvando a linguagem
@@ -1119,7 +1119,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "one.servo1(var1(int));"
+            funcao.code = "one.servo1(var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1130,7 +1130,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "one.servo2(var1(int));"
+            funcao.code = "one.servo2(var1(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1141,7 +1141,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "float"
             funcao.qntParameters = "0"
-            funcao.code = "one.led(HIGH);"
+            funcao.code = "one.led(HIGH); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1152,7 +1152,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "float"
             funcao.qntParameters = "0"
-            funcao.code = "one.led(LOW);"
+            funcao.code = "one.led(LOW); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1163,7 +1163,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "one.move(var1(int), var2(int)); delay(var3(int));"
+            funcao.code = "one.move(var1(int), var2(int)); delay(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1174,7 +1174,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "one.move(-var1(int), -var2(int)); delay(var3(int));"
+            funcao.code = "one.move(-var1(int), -var2(int)); delay(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1185,7 +1185,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "one.move(var1(int), -var2(int)); delay(var3(int));"
+            funcao.code = "one.move(var1(int), -var2(int)); delay(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1196,7 +1196,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "one.move(-var1(int), var2(int)); delay(var3(int));"
+            funcao.code = "one.move(-var1(int), var2(int)); delay(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1207,7 +1207,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "0"
-            funcao.code = "one.stop();"
+            funcao.code = "one.stop(); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1218,7 +1218,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "2"
-            funcao.code = "one.brake(var1(int),var2(int));"
+            funcao.code = "one.brake(var1(int),var2(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1229,7 +1229,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "2"
-            funcao.code = "one.lcdvar1(int)(var2(String));"
+            funcao.code = "one.lcdvar1(int)(var2(String)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1240,7 +1240,7 @@ class BootStrap {
             funcao.type = "Escrita"
             funcao.returnType = "Void"
             funcao.qntParameters = "2"
-            funcao.code = "one.lcdvar1(int)(var2(int));"
+            funcao.code = "one.lcdvar1(int)(var2(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1251,7 +1251,7 @@ class BootStrap {
             funcao.type = "Leitura"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "one.readAdc(var1(int));"
+            funcao.code = "one.readAdc(var1(int)); \n"
             funcao.description = "Sensor varia de 0 a 7."
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -1262,7 +1262,7 @@ class BootStrap {
             funcao.type = "Outros"
             funcao.returnType = "Void"
             funcao.qntParameters = "1"
-            funcao.code = "// var1(String)"
+            funcao.code = "/* var1(String) */ \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""

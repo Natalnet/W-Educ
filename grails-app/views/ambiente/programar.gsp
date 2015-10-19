@@ -17,14 +17,6 @@
     <body>
         <script>	
             
-	    // Apaga o conteúdo do editor de texto
-            // e limpa o nome do programa
-            var novoPrograma = function () {
-                // Apaga o conteúdo do editor
-                editor.setValue("// Olá! Comece a programar aqui.");
-                // Limpa o nome do programa
-                $("#nome-do-programa").val("");
-            };
 
             // Verifica se a linguagem selecionada
             // é a R-Educ ou a Linguagem Alvo
@@ -215,20 +207,22 @@
             };
             
         </script>
-        <!-- /.row -->
+        <!-- /.row -->  
+            
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Programar em ${linguagem?.name}</h1>
-                <div class="form-group">
-                    <label>Selecione a linguagem: </label>
-                    <label class="radio-inline">
+                <h1 class="page-header">Programar em 
+                <label class="radio-inline">
                         <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
                         R-Educ
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
                         ${linguagem?.name}
-                    </label>
+                    </label>  
+                </h1>
+                <div class="form-group">
+                    Você está programando um robô <label>${linguagem?.robot} </label>.
                     <br/>
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
@@ -236,17 +230,80 @@
                     <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir</button>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" onclick="novoPrograma();">Novo</button>
+                    <button class="btn btn-primary" id="btn-new">Novo</button>
+                    <button class="btn btn-info" data-toggle="modal" id="dicionario" data-target="#dicionario">Dicionário de Funções</button>
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
                     <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
                     <button class="btn btn-danger">Apagar</button>
                 </div>
-                <div id="editor">// Olá! Comece a programar aqui.</div>
+
+                 <div id="editor_container" style="height: 450px;">
+                	<div id="editor">// Olá! Comece a programar aqui.</div> 
+                </div>
             </div>
         </div>
-            
+
+        <!-- diálogo novo -->
+                <div class="modal fade dialogo-novo" id="dialogo-novo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content" style="text-align: center; padding: 10px;">
+                        <br/><span style="font-size: 18px;">Tem certeza de que deseja criar um novo programa?</span><br/>
+                        Todo o conteúdo do editor será apagado e as alterações não salvas serão perdidas.<br /><br />
+                       <div class="form-group">
+                           <button class="btn  btn-success" onclick="novoPrograma();">Sim</button>
+                           <button class="btn  btn-danger" onclick="$('#dialogo-novo').modal('hide');">Não</button>
+                       </div><br/>
+                    </div>
+                  </div>
+                </div>
+        <!-- / diálogo novo -->  
+
+<!-- Accordion -->
+    <div class="modal fade" id="dicionario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Fechar</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Dicionário de Funções</h4>
+            </div>
+        <div class="modal-body">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <g:each in="${funcoes}" var="funcao">
+                <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="${'heading'+funcao.id}">
+                                <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="${'#'+funcao.id}" aria-expanded="true" aria-controls="${funcao.id}">
+                                                 <strong>${funcao.name} </strong>
+                                        </a>
+                                </h4>
+                        </div>
+                    <div id="${funcao.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="${'heading'+funcao.id}">
+                        <div class="panel-body">
+                            <div class="row">
+                              <div class="col-md-8">
+                              	${funcao.description}
+                              	<br>
+                              	<strong>
+                                Parâmetros:  
+                                </strong> ${funcao.qntParameters.toInteger()}
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </g:each>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+        
         <asset:javascript src="js/ace/ace.js"/>
         <script>
             var editor = ace.edit("editor");
@@ -254,6 +311,40 @@
             editor.getSession().setMode("ace/mode/c_cpp");
             var editor_height = $("#editor_container").height();
             $("#editor").height(editor_height);
+            //var editor_width = $("#editor_container").width();
+            //$("#editor").width(editor_width);
+            
+            
+            $("#radio1").click(function() {
+              
+                dicionario.disabled = false;
+            });
+            
+            $("#radio2").click(function() {
+              
+                dicionario.disabled = true;
+              
+            });
+            
+            // Apaga o conteúdo do editor de texto
+            // e limpa o nome do programa
+            $("#btn-new").click(function() {
+              
+                // Abre modal para informar usuário sobre
+                // possíveis perdas de informação
+                $('#dialogo-novo').modal('show');
+              
+            });
+            
+            var novoPrograma = function () {
+                // Apaga o conteúdo do editor
+                editor.setValue("// Olá! Comece a programar aqui.");
+                // Limpa o nome do programa
+                $("#nome-do-programa").val("");
+                // Fecha modal
+                $('#dialogo-novo').modal('hide');
+            };
+            
         </script>
     </body>
 </html>

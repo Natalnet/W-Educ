@@ -10,8 +10,6 @@ class AmbienteController {
 
 	def springSecurityService
         
-        //salvar = true
-        //Compile = false
         def saveCompile = true;
       
     
@@ -20,8 +18,12 @@ class AmbienteController {
         //programar
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def programar() {
-		[linguagem: Linguagem.get(params.id)]
-	}
+                
+                // Funções
+            def funcoes = Funcao.findAllWhere(linguagem: Linguagem.get(params.id))
+            
+            [linguagem: Linguagem.get(params.id), funcoes: funcoes]    
+        }
 
         //salvarPrograma
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
@@ -608,6 +610,12 @@ class AmbienteController {
 
         [programas: programas]
     }
+    
+    //listarFunções    
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def listarFuncoes() {
+        [linguagem: Linguagem.get(params.id)]
+    }
 
     //abrirPrograma
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
@@ -660,7 +668,7 @@ class AmbienteController {
         File d = new File("/tmp/weduc/compilador/" + usuario?.username)
         d.mkdir()
         File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "" + programa.extensao)
-        f << programa.codigo //.replaceAll("\n", "\r\n");
+        f << programa.codigo.replaceAll("\n", "\r\n");
 
         // Compila o arquivo utilizando o compilador REduc
         
