@@ -383,8 +383,6 @@ class AmbienteController {
                 render "Ocorreram erros durante a compilação: \n" + retorno; 
             }
             
-             
-	//antigo codigo	render "Não suportado ainda."
 	}
 	
 	}//Termina compilar programa!
@@ -410,6 +408,8 @@ class AmbienteController {
             nome: params.nome
         )
         
+        String fName = programa.nome;
+        
         def programaCompilado = linguagem.sentExtension
         programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
         
@@ -428,33 +428,50 @@ class AmbienteController {
         def comando = linguagem.sendCode
         comando = comando.replace("nomedoprograma",  params.nome)
         
-        def copiarArquivoEnvio = "cp /weduc/arquivos-de-envio/" + linguagem.id + "/" + linguagem.compilerFile 
+        def copiarArquivoEnvio = "cp /weduc/arquivos-de-envio/" + linguagem.id + "/arquivo" 
         copiarArquivoEnvio += " /tmp/weduc/envio/"+ usuario?.username
+            
         System.out.println(CommandShellToString.execute(copiarArquivoEnvio))
+        
+        origem = "/tmp/weduc/envio/" + usuario?.username + "/arquivo" 	
+        destino = "/tmp/weduc/envio/" + usuario?.username + "/"     
+        CommandShellToString.execute("unzip " + origem + " -d " + destino);  
+        
+        def zipper = new Zipper();
+        def arquivos = zipper.listarEntradasZip(new File("/tmp/weduc/envio/"+ usuario?.username + "/arquivo"))
+        System.out.println(arquivos)
+        
+        String enviar = arquivos.toString()
+        System.out.println(enviar)
+        enviar = enviar.replace('[','')      
+        enviar = enviar.replace(']','')
+        enviar = enviar.replace(',','')
+        System.out.println(enviar)
+        
          
         def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado 
         copiarArquivoCompilado += " /tmp/weduc/envio/"+ usuario?.username
-        System.out.println(CommandShellToString.execute(copiarArquivoCompilado))
+        System.out.println(CommandShellToString.execute(copiarArquivoCompilado) + " estou aqui!")
         
         
         def codigo = "import javax.swing.JOptionPane; \n"
             codigo += "public class WeducClient {\n "
             codigo += "public static void main(String[] args) { \n"
-            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar " + programaCompilado +" " + linguagem.compilerFile + " jssc.jar\")); \n"
+            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\")); \n"
             codigo += "String comando = \" " + comando + "\"; \n"
-            codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo est conectado:\", \"W-Educ - Seleo de Portas\","
+            codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo est conectado:\", \"W-Educ - Seletor de Portas\","
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
             codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
             codigo += "System.out.println(CommandShellToString.execute(comando)); \n   \n"  
-            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n System.out.println(CommandShellToString.execute(\" del "+ linguagem.compilerFile + "\")); \n"
+            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n System.out.println(CommandShellToString.execute(\" del "+ enviar + "\")); \n"
             codigo += "System.out.println(CommandShellToString.execute(\" del "+ programaCompilado + "\")); \n "
-            codigo += "} else { \n System.out.println(CommandShellToString.execute(\" rm "+ linguagem.compilerFile + "\")); \n"
-            codigo += " System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + "\")); \n } \n} \n}"
+            codigo += "} else { \n System.out.println(CommandShellToString.execute(\" rm "+ enviar + "\")); \n"
+            codigo += " System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + " jssc.jar\")); \n } \n} \n}"
         weducClient << codigo
        
         //Compilação e geração do jar
         def retorno = CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& javac *.java -classpath jssc.jar");
-        CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class " + linguagem.compilerFile + " " +  programaCompilado)    
+        CommandShellToString.execute("cd /tmp/weduc/envio/" + usuario?.username + "&& jar cfm W-Educ.jar manifest.mf jssc.jar *.class " + enviar + " " +  programaCompilado)    
         System.out.println(retorno);
         
         File f = new File("/tmp/weduc/envio/" + usuario?.username + "/W-Educ.jar" )
@@ -465,74 +482,8 @@ class AmbienteController {
         response.outputStream << fWEduc
         
        // render "Programa enviado com sucesso."
-        
-
     }
     
-        //enviarCliente
-    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def enviarArquivoEnvio() {
-	// Define usuário atual
-        def usuario = springSecurityService.getCurrentUser()
-
-        // Define a linguagem
-        def linguagem = Linguagem.get(params.linguagem)
-
-        // Define se é R-Educ ou não
-        def reduc = params.reduc == "1" ? true : false
-
-        // Procura um programa de mesmo nome;
-        // caso não exista, o cria
-        def programa = Programa.findWhere(
-            usuario: usuario, 
-            linguagem: linguagem,
-            reduc: reduc,
-            nome: params.nome
-        )
-        
-        File f = new File("/weduc/arquivos-de-envio/" + linguagem.id + "/" + linguagem.compilerFile)
-        
-        FileInputStream fWEduc = new FileInputStream(f)
-        response.setContentType("application/octet-stream")
-        response.setHeader("Content-disposition", "filename= " + linguagem.compilerFile)
-        response.outputStream << fWEduc
-        
-    }
-    
-            //enviarPrograma
-    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def enviarPrograma() {
-	// Define usuário atual
-        def usuario = springSecurityService.getCurrentUser()
-
-        // Define a linguagem
-        def linguagem = Linguagem.get(params.linguagem)
-
-        // Define se é R-Educ ou não
-        def reduc = params.reduc == "1" ? true : false
-
-        // Procura um programa de mesmo nome;
-        // caso não exista, o cria
-        def programa = Programa.findWhere(
-            usuario: usuario, 
-            linguagem: linguagem,
-            reduc: reduc,
-            nome: params.nome
-        )
-
-       def programaCompilado = linguagem.sentExtension
-       programaCompilado = programaCompilado.replace("nomedoprograma",  params.nome)
-        
-        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado)
-        
-        FileInputStream fWEduc = new FileInputStream(f)
-        response.setContentType("application/octet-stream")
-        response.setHeader("Content-disposition", "filename= " + programaCompilado)
-        response.outputStream << fWEduc
-        
-        render "Programa enviado com sucesso."
-        
-    }
 
     //baixarPrograma    
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
