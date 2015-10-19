@@ -428,26 +428,32 @@ class AmbienteController {
         def comando = linguagem.sendCode
         comando = comando.replace("nomedoprograma",  params.nome)
         
-        def copiarArquivoEnvio = "cp /weduc/arquivos-de-envio/" + linguagem.id + "/arquivo" 
-        copiarArquivoEnvio += " /tmp/weduc/envio/"+ usuario?.username
-            
-        System.out.println(CommandShellToString.execute(copiarArquivoEnvio))
+        String enviar = ""
         
-        origem = "/tmp/weduc/envio/" + usuario?.username + "/arquivo" 	
-        destino = "/tmp/weduc/envio/" + usuario?.username + "/"     
-        CommandShellToString.execute("unzip " + origem + " -d " + destino);  
-        
-        def zipper = new Zipper();
-        def arquivos = zipper.listarEntradasZip(new File("/tmp/weduc/envio/"+ usuario?.username + "/arquivo"))
-        System.out.println(arquivos)
-        
-        String enviar = arquivos.toString()
-        System.out.println(enviar)
-        enviar = enviar.replace('[','')      
-        enviar = enviar.replace(']','')
-        enviar = enviar.replace(',','')
-        System.out.println(enviar)
-        
+        try {
+            def copiarArquivoEnvio = "cp /weduc/arquivos-de-envio/" + linguagem.id + "/arquivo" 
+            copiarArquivoEnvio += " /tmp/weduc/envio/"+ usuario?.username
+
+            System.out.println(CommandShellToString.execute(copiarArquivoEnvio))
+
+            origem = "/tmp/weduc/envio/" + usuario?.username + "/arquivo" 	
+            destino = "/tmp/weduc/envio/" + usuario?.username + "/"     
+            CommandShellToString.execute("unzip " + origem + " -d " + destino);  
+
+            def zipper = new Zipper();
+            def arquivos = zipper.listarEntradasZip(new File("/tmp/weduc/envio/"+ usuario?.username + "/arquivo"))
+            System.out.println(arquivos)
+
+            enviar = arquivos.toString()
+            System.out.println(enviar)
+            enviar = enviar.replace('[','')      
+            enviar = enviar.replace(']','')
+            enviar = enviar.replace(',','')
+            System.out.println(enviar)
+        }  
+        catch (Exception e) {
+                 println e
+        }
          
         def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado 
         copiarArquivoCompilado += " /tmp/weduc/envio/"+ usuario?.username

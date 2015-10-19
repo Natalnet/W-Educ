@@ -103,7 +103,7 @@
                         </div>
                     </p>
                     <p>
-                        <h4>Extensão do arquivo enviado:</h4>
+                        <h4>Nome do arquivo a ser enviado com sua respectiva extensão:</h4>
                         <div class="well">
                             <input type="text" class="form-control" id="extensaoDoArquivo" name="extensaoDoArquivo"  />
                         </div>
