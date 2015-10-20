@@ -393,7 +393,7 @@ public class ControlFlowStatements {
                 if (isNameList(getName(getPosition())) || isName(getPosition())>0) {
                     testVariableCondition(2);
                 }
-                else if (isNumberList(getName(getPosition())) || isNumber(getName(getPosition()))) {
+                else if (isNumberList(getName(getPosition())) || isNumber(getName(getPosition())) || getMapeamento().isNumberDefine(getName(getPosition()))) {
                     testVariableCondition(1);
                 }
                 else if (isBooleanList(getName(getPosition())) || isBoolean(getName(getPosition()))) {

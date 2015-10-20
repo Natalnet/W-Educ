@@ -39,7 +39,7 @@ public class TestCondition {
                         writeOnFile(switchCondition()[2]);
                         switch (type) {
                             case (1):
-                                if (isNumber(getName(getPosition()+1))) {
+                                if (isNumber(getName(getPosition()+1)) || getMapeamento().isNumberDefine(getName(getPosition()+1))) {
                                     writeOnFile(getName(getPosition()+1));
                                     setPosition(2);
                                 }
@@ -193,6 +193,7 @@ public class TestCondition {
 //                analyzeSensor();
 //                enableComparison = true;
 //            }
+            System.out.println("NOME:: " + getName(getPosition()));
             for (int l = 0; l < sintatico.getNumberList().size(); l++) {
                 System.out.println("nlist: " + l + " - " + sintatico.getNumberList().get(l));
             }
@@ -202,17 +203,19 @@ public class TestCondition {
             /*if (isNumberList(getName(getPosition())) || isNumber(getName(getPosition())) ||
                     getMapeamento().isNumberFunction(getName(getPosition())) ||
                     getMapeamento().isNumberDefine(getName(getPosition()))) {*/
-                
-            if (sintatico.isValidNumberExpression(0)) {
-                writeNumberCondition();
-                //setPosition(1);
-                writeNumberOperand();
-                setPosition(1);
-                System.out.println("novo nome " + getName(getPosition()));
-                writeNumberCondition();
-                enableComparison = true;
-            }
-            else if (isNameList(getName(getPosition())) || isName(getPosition())>0 ||
+            
+
+            // Daqui pra baixo é antigo!!!
+
+            // else if (sintatico.isValidNumberExpression(0)) {
+            //     writeNumberCondition();
+            //     //setPosition(1);
+            //     writeNumberOperand();
+            //     setPosition(1);
+            //     writeNumberCondition();
+            //     enableComparison = true;
+            // }
+            if (isNameList(getName(getPosition())) || isName(getPosition())>0 ||
                     getMapeamento().isNameFunction(getName(getPosition())) || getMapeamento().isNameDefine(getName(getPosition()))) {
                 if (getMapeamento().isNameFunction(getName(getPosition()))) {
                     checkParameters(getName(getPosition()), 2);
@@ -263,6 +266,7 @@ public class TestCondition {
                 setPosition(1);
             }
             else if (getName(getPosition()).equals("e") || getName(getPosition()).equals("ou")) {
+                System.out.println("Entrei no E");
                 if (enableComparison) {
                     writeOnFile(getMapeamento().writeRelationalOperator(getName(getPosition())));
                     enableComparison = false;
@@ -280,6 +284,24 @@ public class TestCondition {
                 }
                 else {
                     errorFunction(getLine(getPosition()),"Erro no início da expressão.");
+                }
+            }
+            else if (sintatico.isMathOperation(0, false, false, false)) {
+                sintatico.writeMathOperation(0, false);
+                if (sintatico.isLogicalOperator(getName(getPosition()))) {
+                    writeNumberOperand();
+                    setPosition(1);
+                    if (sintatico.isMathOperation(0, true, false, false)) {
+                        sintatico.writeMathOperation(0, true);
+                        //setPosition(1);
+                        enableComparison=true;
+                    }
+                    else {
+                        errorFunction(getLine(getPosition()),"Erro na expressão.");
+                    }
+                }
+                else {
+                    errorFunction(getLine(getPosition()),"Erro no operador.");
                 }
             }
             else if (isBoolean(getName(getPosition())) ||
