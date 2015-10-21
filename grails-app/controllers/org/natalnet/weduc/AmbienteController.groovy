@@ -340,7 +340,7 @@ class AmbienteController {
 	    def comando = "" + linguagem.compileCode
 	    println comando;
             comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
-            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + fName )
+            comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
             comando = comando.replace("nomedoprograma",  fName )
             org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
                
