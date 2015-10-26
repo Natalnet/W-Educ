@@ -27,7 +27,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8"
             username = "weduc"
-            password = "r]:{-(3C1;k/Y5N"
+            password = "r]:{-(3C1;k/Y5N" 
         }
     }
     production {

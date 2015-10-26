@@ -231,7 +231,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" id="btn-new">Novo</button>
-                    <button class="btn btn-info" data-toggle="modal" id="dicionario" data-target="#dicionario">Dicionário de Funções</button>
+                    <button class="btn btn-info" data-toggle="modal" id="dicionario1" data-target="#dicionario">Dicionário de Funções</button>
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
@@ -317,12 +317,12 @@
             
             $("#radio1").click(function() {
               
-                dicionario.disabled = false;
+                dicionario1.disabled = false;
             });
             
             $("#radio2").click(function() {
               
-                dicionario.disabled = true;
+                dicionario1.disabled = true;
               
             });
             

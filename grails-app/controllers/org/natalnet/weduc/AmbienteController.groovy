@@ -458,20 +458,22 @@ class AmbienteController {
         def copiarArquivoCompilado = "cp /tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado 
         copiarArquivoCompilado += " /tmp/weduc/envio/"+ usuario?.username
         
+        System.out.println(CommandShellToString.execute(copiarArquivoCompilado))
         
-        def codigo = "import javax.swing.JOptionPane; \n"
+        
+        def codigo = "import javax.swing.JOptionPane; \n import java.io.*;"
             codigo += "public class WeducClient {\n "
             codigo += "public static void main(String[] args) { \n"
-            codigo += "System.out.println(CommandShellToString.execute(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\")); \n"
+            codigo += "try {Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\");} catch(IOException e){ } \n"
             codigo += "String comando = \" " + comando + "\"; \n"
             codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seletor de Portas\","
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
             codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
-            codigo += "System.out.println(CommandShellToString.execute(comando)); \n   \n"  
-            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n System.out.println(CommandShellToString.execute(\" del "+ enviar + "\")); \n"
-            codigo += "System.out.println(CommandShellToString.execute(\" del "+ programaCompilado + "jssc.jar\")); \n "
-            codigo += "} else { \n System.out.println(CommandShellToString.execute(\" rm "+ enviar + "\")); \n"
-            codigo += " System.out.println(CommandShellToString.execute(\" rm "+ programaCompilado + " jssc.jar\")); \n } \n} \n}"
+            codigo += "try {Runtime.getRuntime().exec(comando);} catch(IOException e){ } \n   \n"  
+            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n try{Runtime.getRuntime().exec(\" del "+ enviar + "\");} catch(IOException e){ } \n"
+            codigo += "try{Runtime.getRuntime().exec(\" del "+ programaCompilado + "jssc.jar\");} catch(IOException e){ } \n "
+            codigo += "} else { \n try{Runtime.getRuntime().exec(\" rm "+ enviar + "\");} catch(IOException e){ } \n"
+            codigo += " try{Runtime.getRuntime().exec(\" rm "+ programaCompilado + " jssc.jar\");} catch(IOException e){ } \n } \n} \n}"
         weducClient << codigo
        
         //Compilação e geração do jar
