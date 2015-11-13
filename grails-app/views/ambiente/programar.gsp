@@ -32,22 +32,45 @@
             var salvarPrograma = function () {
                 // Inicia requisição assíncrona
                 // para salvar o programa no banco
-                $.ajax({
-                    url: "<g:createLink action="salvarPrograma"/>",
-                    type: "post",
-                    data: {
-                        linguagem: ${linguagem?.id},
-                        reduc: verificarLinguagem(),
-                        nome: $("#nome-do-programa").val(),
-                        codigo: editor.getValue()
-                    },
-                    success: function () {
-                        alert("Programa salvo no banco de dados com sucesso.");
-                    },
-                    fail: function () {
-                        alert("Erro ao tentar gravar o programa no banco de dados.");
-                    }
-                });
+                
+                var apelido = $("#nome-do-programa").val() ;
+                var msg = "" ;
+                if ( apelido.search( /\s/g ) != -1 )
+                {
+                        msg+= "Não é permitido espaços em branco.\n" ;
+                        apelido = apelido.replace( /\s/g , "" ) ;
+                }	
+                if ( apelido.search( /[^a-z0-9]/i ) != -1 )
+                {
+                        msg += "Não é permitido caracteres especiais.\n" ;
+                        apelido = apelido.replace( /[^a-z0-9]/gi , "" ) ;
+                }
+                if ( msg )
+                {
+                        $("#nome-do-programa").val(apelido) ;
+                        msg += "Nome do programa substituido por: ";
+                        msg += apelido;
+                        msg += ".";
+                        alert(msg);
+                }
+                
+                    $.ajax({
+                        url: "<g:createLink action="salvarPrograma"/>",
+                        type: "post",
+                        data: {
+                            linguagem: ${linguagem?.id},
+                            reduc: verificarLinguagem(),
+                            nome: $("#nome-do-programa").val(),
+                            codigo: editor.getValue()
+                        },
+                        success: function () {
+                            alert("Programa salvo no banco de dados com sucesso.");
+                        },
+                        fail: function () {
+                            alert("Erro ao tentar gravar o programa no banco de dados.");
+                        }
+                    });
+                
             };
 
             // Compilar o programa

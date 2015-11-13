@@ -47,7 +47,7 @@
                                         </div>
                                         ${usuario?.username}
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Usuário" name="username" type="text" autofocus required>
+                                            <input class="form-control" id="user" placeholder="Usuário" name="username" type="text" onblur="valida();" autofocus required>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Senha" name="password" type="password" required>
@@ -94,7 +94,30 @@
                 </div>
             </div>
         </div>
-
+<script language="javascript">
+function valida()
+{
+	var apelido = user.value ;
+	var msg = "" ;
+	if ( apelido.search( /\s/g ) != -1 )
+	{
+		msg+= "Não é permitido espaços em branco.\n" ;
+		apelido = apelido.replace( /\s/g , "" ) ;
+	}	
+	if ( apelido.search( /[^a-z0-9]/i ) != -1 )
+	{
+		msg += "Não é permitido caracteres especiais." ;
+		apelido = apelido.replace( /[^a-z0-9]/gi , "" ) ;
+	}
+	if ( msg )
+	{
+		alert( msg ) ;
+		user.value = apelido ;
+		return false ;
+	}
+	return true ;	
+}
+</script>
     </body>
 
 </html>
