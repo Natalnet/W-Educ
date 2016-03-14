@@ -187,7 +187,7 @@
                                         <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Fórum de discussão</a>
+                                        <g:link controller="forum" action="home">Fórum de Discussão</g:link>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -204,7 +204,7 @@
                                         <g:link controller="linguagem" action="procurar">Linguagens cadastradas</g:link>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Fórum de discussão</a>
+                                        <g:link controller="forum" action="home">Fórum de Discussão</g:link>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

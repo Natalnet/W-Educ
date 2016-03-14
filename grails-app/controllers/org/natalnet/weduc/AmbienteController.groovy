@@ -118,7 +118,12 @@ class AmbienteController {
             c.mkdirs()
             }  
 
-        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "" + programa.extensao)
+        def pontuacao
+        if(reduc)
+            pontuacao = ""
+        else
+            pontuacao = "."
+        File f = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + pontuacao + programa.extensao)
         f << programa.codigo //.replaceAll("\n", "\r\n");
 
 
