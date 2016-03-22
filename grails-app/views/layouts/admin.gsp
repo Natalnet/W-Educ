@@ -106,8 +106,14 @@
                             </g:each>
                             <li>
                                 <g:link class="text-center" controller="mensagem" action="todas">
-                                    <strong>Ler Todas as Mensagens</strong>
-                                    <i class="fa fa-angle-right"></i>
+                                    <i class="fa fa-inbox"></i>
+                                    <strong>&nbsp;&nbsp;Caixa de Entrada</strong>
+                                </g:link>
+                            </li>
+                            <li>
+                                <g:link class="text-center" controller="mensagem" action="escrever">
+                                    <i class="fa fa-paper-plane-o"></i>
+                                    <strong>&nbsp;&nbsp;Enviar Mensagem</strong>
                                 </g:link>
                             </li>
                         </ul>
@@ -159,9 +165,6 @@
                                     </li>
                                     <li>
                                         <a href="morris.html">Gerenciar professores</a>
-                                    </li>
-                                    <li>
-                                        <a href="morris.html">Broadcast de mensagens</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

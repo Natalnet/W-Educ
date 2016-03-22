@@ -7,26 +7,61 @@ class MensagemController {
 	def springSecurityService
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-	def index() {}
+	def index() {
+            def usuario = springSecurityService.getCurrentUser()
+	    [usuario: usuario]
+        }
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def escrever() {
-		def usuario = Usuario.get(params.id)
-		[destinatario: usuario]
+                def usuario = springSecurityService.getCurrentUser()
+		[usuario: usuario]
+                def destinatarios = Usuario.findAll()
+                [destinatarios: destinatarios]
+                
 	}
+        
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+        def selecionarDest() {
+                def destinatarios = Usuario.get(params.id)
+                render destinatarios.username
+        }
+        
+         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+        def excluirMensagem(){
+            def mensagem = Mensagem.get(params.id) 
+            mensagem.delete(flush:true)
+            redirect controller: "mensagem", action: "todas"
+        }
+        
+        
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+        def listarUsuarios() {
+            [destinatarios: Usuario.findAll()]
+        }
+    
 
-	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
-	def enviar() {
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def enviar() {                    
 		def mensagem = new Mensagem()
-		mensagem.destinatario = Usuario.get(params.id)
+		mensagem.destinatario = Usuario.findByUsername(params.destinatario)
 		mensagem.autor = springSecurityService.getCurrentUser()
 		mensagem.data = new Date()
-		mensagem.mensagem = params.mensagem
-		mensagem.save(flush: true)
+                mensagem.mensagem = params.mensagem
+		mensagem.save(flush: true, failOnError: true)
 
-		flash.message = "Mensagem a " + mensagem.destinatario.username + " enviada com sucesso."
-		redirect controller: "professor", action: "gerenciarAlunos"
-	}
+                if(mensagem.id != null) {
+                	flash.message = "Mensagem a " + params.destinatario + " enviada com sucesso."
+                	redirect controller: "mensagem", action: "todas"
+                } else {
+                	flash.message = "Erro ao enviar a mensagem."
+                        redirect controller: "mensagem", action: "todas"
+
+                }
+		
+	
+    
+        }
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def todas() {

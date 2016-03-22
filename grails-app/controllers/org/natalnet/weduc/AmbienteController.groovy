@@ -270,7 +270,7 @@ class AmbienteController {
 
             // Define o arquivo onde ficarão os comandos do Make
             File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
-	    def comando = "" + linguagem.compileCode
+	    def comando = "(Xvfb :1 -nolisten tcp -screen :1 1280x800x24 &);DISPLAY=:1 " + linguagem.compileCode + ";   killall Xvfb"
 	    println comando;
             comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
             comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
@@ -342,7 +342,8 @@ class AmbienteController {
 
             // Define o arquivo onde ficarão os comandos do Make
             File fShell = new File("/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
-	    def comando = "" + linguagem.compileCode
+	    def comando = "(Xvfb :1 -nolisten tcp -screen :1 1280x800x24 &);DISPLAY=:1 " + linguagem.compileCode + ";   killall Xvfb"
+
 	    println comando;
             comando = comando.replace("diretorio", "/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
             comando = comando.replace("localdocompilador", "/weduc/arquivos-de-compilacao/" + linguagem.id )
@@ -591,7 +592,7 @@ class AmbienteController {
      @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def excluirPrograma(){
          def programa = Programa.get(params.id) 
-        	programa.delete(flush:true)   
+         programa.delete(flush:true)   
     }
 
     //exportarPrograma

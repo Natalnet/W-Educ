@@ -159,6 +159,7 @@
                     success: function () {
                         // Substitui o nome do programa
                          alert("Programa excluído com sucesso.");
+                         window.location.reload();
                     },
                     fail: function () {
                         alert("Erro ao tentar acessar o código do programa no banco de dados.");
