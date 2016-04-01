@@ -23,7 +23,7 @@
 					<td><g:formatDate format="dd/MM/yyy" date="${programa.modificadoEm}"/></td>
                                         <td>
                         
-             <a data-original-title="Remover Usuário" onclick="excluirPrograma(${programa.id});window.location.reload();" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+             <a data-original-title="Remover Usuário" onclick="excluirPrograma(${programa.id});" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                                             
                                             </td>
 				</tr>
