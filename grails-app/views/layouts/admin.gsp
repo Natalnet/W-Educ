@@ -161,10 +161,13 @@
                                 <a href="#"><i class="fa fa-legal fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Estatísticas do sistema</a>
+                                        <a href="flot.html">Estatísticas do Sistema</a>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Gerenciar professores</a>
+                                        <g:link controller="gerenciar" action="professores">Gerenciar Professores</g:link>
+                                    </li>
+                                    <li>
+                                        <g:link controller="gerenciar" action="usuarios">Gerenciar Alunos</g:link>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -175,19 +178,19 @@
                                 <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Estatísticas do professor</a>
+                                        <a href="flot.html">Estatísticas do Professor</a>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="nova">Cadastrar linguagem</g:link>
+                                        <g:link controller="linguagem" action="nova">Cadastrar Linguagem</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="listar">Gerenciar linguagens</g:link>
+                                        <g:link controller="linguagem" action="listar">Gerenciar Linguagens</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Linguagens cadastradas</g:link>
+                                        <g:link controller="linguagem" action="procurar">Linguagens Cadastradas</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="professor" action="gerenciarAlunos">Gerenciar alunos</g:link>
+                                        <g:link controller="professor" action="gerenciarAlunos">Gerenciar Alunos</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="forum" action="home">Fórum de Discussão</g:link>
@@ -201,10 +204,10 @@
                                 <a href="#"><i class="fa fa-pencil fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <g:link controller="professor" action="procurar">Procurar professores</g:link>
+                                        <g:link controller="professor" action="procurar">Procurar Professores</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Linguagens cadastradas</g:link>
+                                        <g:link controller="linguagem" action="procurar">Linguagens Cadastradas</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="forum" action="home">Fórum de Discussão</g:link>

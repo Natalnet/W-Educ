@@ -52,13 +52,14 @@ class PerfilController {
    def excluir(){
        def usuario = springSecurityService.getCurrentUser()    
        def privilegio = UsuarioPrivilegio.find{usuario == usuario}
+       
         if(privilegio != null)
            privilegio.delete(flush:true, failOnError: true)
            
         Login.findAll{usuario == usuario}.each{it.delete(flush:true)}
 
         usuario.delete(flush:true, failOnError: true)
-       redirect controller:"logout", action:"index"
+        redirect controller:"logout", action:"index"
         
     }
        
