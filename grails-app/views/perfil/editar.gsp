@@ -46,7 +46,7 @@
                       <tr>
                       <tr>
                         <td>Senha:</td>
-                        <td><input class="form-control"  name="password" value="${usuario?.password}" type="text" autofocus required></td>
+                        <td><input class="form-control"  name="password" value="" type="text" autofocus required></td>
                       </tr>    
                       <tr>
                         <td>Instituição:</td>

@@ -47,7 +47,17 @@ class PerfilController {
       
     }
  
-
+   def graduar(){
+       
+        def mensagem = new Mensagem()
+        mensagem.destinatario = Usuario.findByUsername("admin")
+        mensagem.autor = springSecurityService.getCurrentUser()
+        mensagem.data = new Date()
+        mensagem.mensagem = "O usuário " + springSecurityService.getCurrentUser().username + " solicitou graduação no sistema."
+        mensagem.save(flush: true, failOnError: true)
+        
+        redirect controller: "admin", action: "index"
+   }
     
    def excluir(){
        def usuario = springSecurityService.getCurrentUser()    

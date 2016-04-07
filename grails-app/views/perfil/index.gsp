@@ -78,9 +78,15 @@
               </div>
             </div>
                  <div class="panel-footer">
-                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">  
-                            <g:link controller="perfil" action="editar" type="button" class="btn btn-sm btn-warning">
+
+                            
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                                Graduação <span class="glyphicon glyphicon-star-empty"></span> 
+                            </button>
+                            
+                            <g:link controller="perfil" action="editar" type="button" class="btn btn btn-warning">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </g:link>
                             </span>
@@ -95,7 +101,29 @@
                         </span>
                        
                     </div>-->
-                                
+                 <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Graduação</h4>
+                          </div>
+                          <div class="modal-body">
+                            Você deseja realmente solicitar graduação no sistema? Dessa forma você passará a ter acesso de professor, sendo possível
+                            cadastrar linguagens e orientar usuários em atividades.
+                            <br>
+                            Caso sua solicitação seja aceita você será informado por e-mail dos procedimentos necessários.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <g:link controller="perfil" action="graduar" type="button" class="btn btn-success">
+                                Solicitar Graduação <span class="glyphicon glyphicon-star-empty"></span>
+                            </g:link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>               
               
           </div>
         </div>
