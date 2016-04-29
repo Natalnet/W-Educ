@@ -10,9 +10,9 @@ class MensagemController {
 	def index() {
             def usuario = springSecurityService.getCurrentUser()
 	    [usuario: usuario]
-        }
+        } 
 
-	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def escrever() {
                 def usuario = springSecurityService.getCurrentUser()
 		[usuario: usuario]

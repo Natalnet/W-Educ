@@ -2,25 +2,38 @@
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<title>Grails Forum</title>
+		<title>Forum</title>
 	</head>
 	<body>
-        <g:each in="${sections}" var="section">
-            <div class="section">
-                <div class="sectionTitle">${section.title}</div>
-                <g:each in="${section.topics.sort{it.title}}" var="topic">
-                    <div class="topic">
-                        <g:link controller="forum" action="topic" params="[topicId:topic.id]" >
-                            ${topic.title}
-                        </g:link>
-                        <span class="topicDesc">${topic.description}</span>
-                        <div class="rightInfo">
-                            <b>threads</b>: ${topic.numberOfThreads}
-                            <b>replies</b>: ${topic.numberOfReplies}
-                        </div>
-                    </div>
-                </g:each>
+        <g:each in="${topic}" var="topicId">
+            <div class="pagination">
+            <g:paginate total="${numberOfThreads}" params="${[topicId:topic.id]}"/>
+        </div>
+        <div class="section">
+            <div class="sectionTitle">
+                ${topic.title}
+                <span class="topicDesc">${topic.description}</span>
             </div>
+            <g:each in="${threads}" var="thread">
+                <div class="topic">
+                    <g:link controller="forum" action="thread" params="[threadId:thread.id]" >
+                        ${thread.subject}
+                    </g:link>
+                    <div class="rightInfo">
+                        <b>replies</b>: ${thread.numberOfReplies}
+                    </div>
+                    <div>
+                        Started by: ${thread.opener.username}
+                        on: <g:formatDate date="${thread.createDate}" format="dd MMM yyyy"/>
+                    </div>
+                </div>
+            </g:each>
+        </div>
+        <div class="pagination">
+            <g:paginate total="${numberOfThreads}" params="${[topicId:topic.id]}"/>
+        </div>
         </g:each>
+        
 	</body>
+        
 </html>

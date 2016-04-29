@@ -1,3 +1,4 @@
+
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -5,7 +6,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-grails.server.port.http = 8080
+grails.server.port.http = 9090
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [

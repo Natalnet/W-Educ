@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<title>Grails Forum</title>
+		<title>Forum</title>
 	</head>
 	<body>
         <div class="pagination">

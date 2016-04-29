@@ -67,8 +67,8 @@ class GerenciarController {
             usuarioProf.save flush: true, failOnError: true 
         
             def mensagem = new Mensagem()
-            mensagem.destinatario = usuarioProf
-            mensagem.autor = springSecurityService.getCurrentUser()
+            mensagem.destinatario = springSecurityService.getCurrentUser()
+            mensagem.autor = usuarioProf
             mensagem.data = new Date()
             mensagem.mensagem = "Olá, agora você faz parte do corpo de professores do W-Educ. Seja bem vindo!"
             mensagem.save(flush: true, failOnError: true)
@@ -93,6 +93,13 @@ class GerenciarController {
 
                 Programa.findAll{usuario == usuario}.each{it.delete(flush:true)}
                 Login.findAll{usuario == usuario}.each{it.delete(flush:true)}
+                Mensagem.findAll{autor == usuario}.each{it.delete(flush:true)}
+                Mensagem.findAll{destinatario == usuario}.each{it.delete(flush:true)}
+
+                if(params.tipo != "Professor")
+                    RequisicaoDeAluno.findAll{aluno == usuario}.each{it.delete(flush:true)}
+                else
+                    RequisicaoDeAluno.findAll{professor == usuario}.each{it.delete(flush:true)}
 
                 usuario.delete(flush:true, failOnError: true)
 

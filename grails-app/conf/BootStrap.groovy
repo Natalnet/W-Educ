@@ -24,6 +24,27 @@ class BootStrap {
     		usuarioPrivilegio.privilegio = privilegio
     		usuarioPrivilegio.save flush: true, failOnError: true
     	}
+        def section = Topic.findWhere(title: "Principal")
+        
+        if (!section) {
+            
+            section = new Section()
+            section.title = "Principal"
+            section.save(flush: true, failOnError: true)
+            
+        }
+        
+        def topic = Topic.findWhere(title: "Principal")
+
+        if (!topic) {
+       
+            topic = new Topic ()
+            topic.section = section
+            topic.title = "Principal"
+            topic.description = "Funciona pvfr"
+            topic.save(flush: true, failOnError: true)
+        
+        }
 
         // Cadastro de linguagem - NXC
         

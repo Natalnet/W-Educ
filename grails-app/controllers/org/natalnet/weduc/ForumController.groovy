@@ -6,19 +6,22 @@ class ForumController {
     def springSecurityService
 
     def home() {
-        [sections:Section.listOrderByTitle()]
+        [sections: Section.listOrderByTitle(), 
+        topic: Topic.listOrderByTitle(), threads:DiscussionThread.findAllByTopic(topic, params)]
     }
+    
+ 
 
-    def topic(long topicId) {
-        Topic topic = Topic.get(topicId)
+   def topic(long topicId) {
+    Topic topic
+    
+    params.max = 10
+    params.sort = 'createDate'
+    params.order = 'desc'
 
-        params.max = 10
-        params.sort = 'createDate'
-        params.order = 'desc'
-
-        [threads:DiscussionThread.findAllByTopic(topic, params),
-         numberOfThreads:DiscussionThread.countByTopic(topic), topic:topic]
-    }
+    [threads:DiscussionThread.findAllByTopic(topic, params),
+     numberOfThreads:DiscussionThread.countByTopic(topic), topic:topic]
+}
 
     def thread(long threadId) {
         DiscussionThread thread = DiscussionThread.get(threadId)
@@ -29,7 +32,9 @@ class ForumController {
 
         [comments:Comment.findAllByThread(thread, params),
          numberOfComments:Comment.countByThread(thread), thread:thread]
+  
     }
+ 
 
     @Secured(['ROLE_USER'])
     def postReply(long threadId, String body) {

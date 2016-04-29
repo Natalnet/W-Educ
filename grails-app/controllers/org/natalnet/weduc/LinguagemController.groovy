@@ -199,7 +199,7 @@ class LinguagemController {
 
         
 	// Se a pasta de destino do arquivo não existir, cria	
-	File pastadaLinguagem = new File("/tmp/weduc/compilador/" + linguagem.id)
+	File pastadaLinguagem = new File("/data/sites/weduc/tmp/weduc/compilador/" + linguagem.id)
         
 	if (!pastadaLinguagem.exists()) {
            pastadaLinguagem.mkdirs()
@@ -339,24 +339,24 @@ class LinguagemController {
                 def arquivo = request.getFile("arquivo")
 
 		//Apaga os arquivos enviados anteriormente
-		File fDell = new File("/weduc/arquivos-de-compilacao/" + params.id + "/")
+		File fDell = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + params.id + "/")
 	        fDell.deleteDir()
 			
 
                 // Se a pasta de destino do arquivo não existir, cria
-                File pastaDeDestino = new File("/weduc/arquivos-de-compilacao/" + params.id + "/")
+                File pastaDeDestino = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + params.id + "/")
                 if (!pastaDeDestino.exists()) {
                         pastaDeDestino.mkdirs()
                 }
 
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
-                File destinoDoArquivo = new File("/weduc/arquivos-de-compilacao/" + params.id + "/arquivo")
+                File destinoDoArquivo = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)
 
 		//Copia os arquivos de include e extrai na pasta	
-	   	def origem = "/weduc/arquivos-de-compilacao/" + params.id + "/arquivo"	
-	   	def destino = "/weduc/arquivos-de-compilacao/" + params.id + "/" 
+	   	def origem = "/data/sites/weduc/weduc/arquivos-de-compilacao/" + params.id + "/arquivo"	
+	   	def destino = "/data/sites/weduc/weduc/arquivos-de-compilacao/" + params.id + "/" 
                 CommandShellToString.execute("unzip "+origem+" -d "+destino);
 			
                 [linguagem: Linguagem.get(params.id)]
@@ -369,19 +369,19 @@ class LinguagemController {
                 def arquivo = request.getFile("arquivo")
 		
 		//Apaga os arquivos enviados anteriormente
-		File fDell = new File("/weduc/arquivos-de-include/" + params.id + "/")
+		File fDell = new File("/data/sites/weduc/weduc/arquivos-de-include/" + params.id + "/")
 	        fDell.deleteDir()
 			
 		
                 // Se a pasta de destino do arquivo não existir, cria
-                File pastaDeDestino = new File("/weduc/arquivos-de-include/" + params.id + "/")
+                File pastaDeDestino = new File("/data/sites/weduc/weduc/arquivos-de-include/" + params.id + "/")
                 if (!pastaDeDestino.exists()) {
                         pastaDeDestino.mkdirs()
                 }
 
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
-                File destinoDoArquivo = new File("/weduc/arquivos-de-include/" + params.id + "/arquivo")
+                File destinoDoArquivo = new File("/data/sites/weduc/weduc/arquivos-de-include/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)
 
                 [linguagem: Linguagem.get(params.id)]
@@ -393,7 +393,7 @@ class LinguagemController {
                 def arquivo = request.getFile("arquivo")
 
                 // Se a pasta de destino do arquivo não existir, cria
-                File pastaDeDestino = new File("/weduc/arquivos-de-envio/" + params.id + "/")
+                File pastaDeDestino = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + params.id + "/")
                 if (!pastaDeDestino.exists()) {
                         pastaDeDestino.mkdirs()
                 }
@@ -401,12 +401,12 @@ class LinguagemController {
 
                 // Transfere o arquivo enviado para a a pasta de destino
                 // e fornece um nome específico a ele
-                File destinoDoArquivo = new File("/weduc/arquivos-de-envio/" + params.id + "/arquivo")
+                File destinoDoArquivo = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + params.id + "/arquivo")
                 arquivo.transferTo(destinoDoArquivo)     
                 
         	//Copia os arquivos de include e extrai na pasta	
-	   	def origem = "/weduc/arquivos-de-envio/" + params.id + "/arquivo"	
-	   	def destino = "/weduc/arquivos-de-envio/" + params.id + "/" 
+	   	def origem = "/data/sites/weduc/weduc/arquivos-de-envio/" + params.id + "/arquivo"	
+	   	def destino = "/data/sites/weduc/weduc/arquivos-de-envio/" + params.id + "/" 
                 CommandShellToString.execute("unzip "+origem+" -d "+destino);
 
                 [linguagem: Linguagem.get(params.id)]  

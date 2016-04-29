@@ -14,12 +14,14 @@
                         <thead>
                             <tr>
                                 <th>Nome do professor</th>
+                                <th>Nome de usuário</th>
                                 <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each in="${professores}" var="professor">
                             <tr>
+                                <td>${professor?.name}</td>
                                 <td>${professor?.username}</td>
                                 <td><g:link controller="professor" action="selecionar" id="${professor?.id}">Selecionar professor</g:link></td>
                             </tr>
