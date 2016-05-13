@@ -2,15 +2,20 @@
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<title>Forum</title>
+		<title>Fórum</title>
 	</head>
-	<body>
+	<body>    
+            <h1 class="page-header">Fórum</h1>
         <g:each in="${topic}" var="topicId">
         <div class="section">
-            <div class="sectionTitle">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
                 ${topic.title}
-                <span class="topicDesc">${topic.description}</span>
+              </div>
+              <div class="panel-footer">&emsp; ${topic.description}</div>
             </div>
+                
+                
             <g:each in="${threads}" var="thread">
                 <div class="topic">
                     <g:link controller="forum" action="thread" params="[threadId:thread.id]" >
@@ -28,6 +33,8 @@
         </div>
        
         </g:each>
+        </div>
+
         
 	</body>
         
