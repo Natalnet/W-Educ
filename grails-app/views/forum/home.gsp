@@ -6,9 +6,6 @@
 	</head>
 	<body>
         <g:each in="${topic}" var="topicId">
-            <div class="pagination">
-            <g:paginate total="${numberOfThreads}" params="${[topicId:topic.id]}"/>
-        </div>
         <div class="section">
             <div class="sectionTitle">
                 ${topic.title}
@@ -29,9 +26,7 @@
                 </div>
             </g:each>
         </div>
-        <div class="pagination">
-            <g:paginate total="${numberOfThreads}" params="${[topicId:topic.id]}"/>
-        </div>
+       
         </g:each>
         
 	</body>

@@ -6,8 +6,15 @@ class ForumController {
     def springSecurityService
 
     def home() {
-        [sections: Section.listOrderByTitle(), 
-        topic: Topic.listOrderByTitle(), threads:DiscussionThread.findAllByTopic(topic, params)]
+        def topic = Topic.findAll()
+        def section =  Section.findAll()
+        def thread = DiscussionThread.findAll()
+        def numberOfThreads
+        
+        
+        [sections: section, topic: topic, threads: thread]
+    
+        
     }
     
  
