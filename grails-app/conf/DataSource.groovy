@@ -17,25 +17,61 @@ environments {
     development {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
             username = "weduc"
             password = "r]:{-(3C1;k/Y5N"
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 1800000
+                timeBetweenEvictionRunsMillis = 1800000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = true
+            }
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
             username = "weduc"
             password = "r]:{-(3C1;k/Y5N" 
+                        properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 1800000
+                timeBetweenEvictionRunsMillis = 1800000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = true
+            }
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/weduc?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
             username = "weduc"
             password = "r]:{-(3C1;k/Y5N"
+             properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 1800000
+                timeBetweenEvictionRunsMillis = 1800000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = true
+            }
         }
     }
 }

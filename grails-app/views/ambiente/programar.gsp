@@ -260,23 +260,7 @@
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
                     <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
-                    <button class="btn btn-danger">Apagar</button>
-		    <button class="btn btn-info" onclick="exportarPrograma();">Solicitar Correção</button>
-
-			// Exportar texto pro fórum: 	
-
-<script>
-function sync()
-{
-  var n1 = document.getElementById('n1');
-  var n2 = document.getElementById('n2');
-  n2.value = n1.value;
-}
-</script>
-<input type="text" name="n1" id="n1" onkeyup="sync()">
-<input type="text" name="n2" id="n2"/>
-
-
+                    <button class="btn btn-danger">Apagar</button>	
                 </div>
 
                  <div id="editor_container" style="height: 450px;">

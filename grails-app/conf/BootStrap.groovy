@@ -9,6 +9,7 @@ class BootStrap {
     		Privilegio.findOrSaveWhere(authority: "ROLE_" + it)
     	}
 
+        
     	// Registra usuário padrão
     	def privilegio = Privilegio.findWhere(authority: "ROLE_ADMIN")
     	def usuario = Professor.findWhere(username: "admin")

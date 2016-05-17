@@ -8,7 +8,7 @@ class Topic {
     Section section
     String title
     String description
-
+    
     public long getNumberOfThreads() {
         DiscussionThread.countByTopic(this)
     }

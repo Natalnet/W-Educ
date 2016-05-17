@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<title>Forum</title>
+		<title>Fórum</title>
 	</head>
 	<body>
         <div class="pagination">

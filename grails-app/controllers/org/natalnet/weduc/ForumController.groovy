@@ -14,9 +14,8 @@ class ForumController {
         
         [sections: section, topic: topic, threads: thread]
     
-        
     }
-    
+   
  
 
    def topic(long topicId) {
