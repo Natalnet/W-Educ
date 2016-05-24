@@ -56,7 +56,7 @@
                         
                                 <div class="input-group">
                                  <span class="input-group-addon" id="basic-addon2"><b>Para:</b></span> 
-                                 <input type="text" class="form-control" id="destinatario" name="destinatario"/>
+                                 <button style="display:none;" type="text" class="form-control" id="${thread?.subject}" name="destinatario"> </button>
                                   <span class="input-group-btn">
                                     <button class="btn btn-default" id="selecionar" type="button" onclick="listarUsuarios();">Selecionar Destinatário</button>
                                   </span>

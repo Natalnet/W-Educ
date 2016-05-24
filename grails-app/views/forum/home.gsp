@@ -4,18 +4,22 @@
 		<meta name="layout" content="admin">
 		<title>Fórum</title>
 	</head>
-	<body>    
-            <h1 class="page-header">Fórum</h1>
-        <g:each in="${topic}" var="topicId">
+	<body>   
         
-            <div class="section">
-                <div class="panel panel-primary">
-                 <div class="panel-heading">
-                  ${topic.title}
-                </div>
-                <div class="panel-footer">&emsp; ${topic.description}</div>
+        <h1 class="page-header">Fórum</h1>
+        
+        
+        <g:each in="${topic}" var="topicId">
                 
-                     <g:each in="${threads}" var="thread">
+            <div class="section">
+                <div class="list group"> 
+                  <g:link controller="forum" action="topic" id="${topicId?.title}">
+                    <font face ="verdana" size="5" color="blue">  
+                      ${topicId?.title}
+                    </font>
+                  </g:link>
+                </div>
+                     <!--<g:each in="${threads}" var="thread">
                         <div class="topic">
                           <div class="list-group">
                               <a href="#" class="list-group-item">
@@ -32,10 +36,11 @@
                               </a>
                            </div>
                         </div>
-                    </g:each>
+                    </g:each>-->
               
                 </div> 
-            </div>
+                
+               
        
          </g:each>
         

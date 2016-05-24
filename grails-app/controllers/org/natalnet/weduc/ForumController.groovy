@@ -15,46 +15,58 @@ class ForumController {
         [sections: section, topic: topic, threads: thread]
     
     }
+    
+    def section(long sectionID){
+        Section section
+        
+        params.max = 10
+        params.order = 'desc'
+        
+        [topics: topic ]
+    }
    
  
 
-   def topic(long topicId) {
-    Topic topic
-    
-    params.max = 10
-    params.sort = 'createDate'
-    params.order = 'desc'
+   def topic() {
+        def topicName = params.id
+        def topic = Topic.findAllByTitle(topicName)
 
-    [threads:DiscussionThread.findAllByTopic(topic, params),
-     numberOfThreads:DiscussionThread.countByTopic(topic), topic:topic]
-}
+        def threads = DiscussionThread.findAllByTopic(topic)     
+
+
+         [threads:threads,
+          topicName:topicName]
+    }
 
     def thread(long threadId) {
-        DiscussionThread thread = DiscussionThread.get(threadId)
+        def thread = DiscussionThread.findBySubject(params.id)
+        def comments = Comment.findAllByThread(thread)    
 
-        params.max = 10
-        params.sort = 'createDate'
-        params.order = 'asc'
-
-        [comments:Comment.findAllByThread(thread, params),
-         numberOfComments:Comment.countByThread(thread), thread:thread]
+        [comments: comments,   
+         thread:thread]
   
     }
  
 
     @Secured(['ROLE_USER'])
     def postReply(long threadId, String body) {
-        def offset = params.offset
-        if (body != null && body.trim().length() > 0) {
-            DiscussionThread thread = DiscussionThread.get(threadId)
-            def commentBy = springSecurityService.currentUser
-            new Comment(thread:thread, commentBy:commentBy, body:body).save()
 
-            // go to last page so user can view his comment
-            def numberOfComments = Comment.countByThread(thread)
-            def lastPageCount = numberOfComments % 10 == 0 ? 10 : numberOfComments % 10
-            offset = numberOfComments - lastPageCount
-        }
-        redirect(action:'thread', params:[threadId:threadId, offset:offset])
+        
+        def comment = new Comment()
+		comment.commentBy = springSecurityService.getCurrentUser()
+		comment.thread = DiscussionThread.findBySubject(params.thread)
+                comment.body = params.mensagem
+		mensagem.save(flush: true, failOnError: true)
+
+                if(mensagem.id != null) {
+                	flash.message = "Mensagem a " + params.destinatario + " enviada com sucesso."
+                	redirect controller: "mensagem", action: "todas"
+                } else {
+                	flash.message = "Erro ao enviar a mensagem."
+                        redirect controller: "mensagem", action: "todas"
+
+                }
+        
+        
     }
 }

@@ -11,9 +11,7 @@
 		<title>Forum</title>
 	</head>
 	<body>
-        <div class="pagination">
-            <g:paginate total="${numberOfComments}" params="${[threadId:thread.id]}"/>
-        </div>
+        
 
         <div class="section">
             <div class="sectionTitle">
@@ -31,23 +29,20 @@
                     ${comment.body}
                 </div>
             </g:each>
-            <sec:ifLoggedIn>
                 <div class="comment">
-                    <h2>Reply</h2>
-                    <g:form>
-                        <g:textArea name="body"></g:textArea>
-                        <g:hiddenField name="threadId" value="${thread.id}"/>
-                        <fieldset class="buttons">
-                            <g:actionSubmit value="Post Comment" action="postReply"/>
-                        </fieldset>
-
-                    </g:form>
+                    <h2>Responder</h2>
+                <div class="form-group">
+                    <form action="<g:createLink action="postReply" id="enviar"/>" method="post">
+                        <input type="text" class="form-control" id="destinatario" name="destinatario"/>
+                        <textarea class="form-control" id="mensagem" name="mensagem" required placeholder="Escreva aqui sua mensagem..."></textarea><br/>
+                        <input type="submit" class="btn btn-success" value="Enviar mensagem" />
+                    </form>
                 </div>
-            </sec:ifLoggedIn>
+                        
+                    
+                </div>
         </div>
 
-        <div class="pagination">
-            <g:paginate total="${numberOfComments}" params="${[threadId:thread.id]}"/>
-        </div>
+        
 	</body>
 </html>
