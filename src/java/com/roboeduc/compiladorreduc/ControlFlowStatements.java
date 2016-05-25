@@ -10,6 +10,326 @@ package com.roboeduc.compiladorreduc;
  */
 public class ControlFlowStatements {
     analisadorSintatico sintatico;
+    
+    public void se() {
+        if (getName(getPosition()+1).equals("(")) {
+            if (!getName(getPosition()+2).equals(")")) {
+                writeOnFile(ifCondition()[0]);
+                setPosition(2);
+                setBracketsCounter(1);
+                while((getPosition()-1)<getListSize()) {
+                    if (getError()) {
+                        break;
+                    }
+                    if (getName(getPosition()).equals("entao")) {
+                        if (getBracketsCounter() != 0) {
+                            setErrorType("sintaxe condicao");
+                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+                        }
+                        setPosition(1);
+                        break;
+                    }
+                    else if (getBracketsCounter() == 0) {
+                        setErrorType("sintaxe condicao");
+                        errorFunction(getLine(getPosition()+2),"31 - Confira a sintaxe da estrutura.");
+                        break;
+                    }
+                    testCondition();
+                }
+                if ((getPosition()-1)==getListSize()) {
+                    setErrorType("sintaxe condicao");
+                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                }
+                if (!getError()) {
+                    if (getName(getPosition()).equals("{")) {
+                        writeOnFile(ifCondition()[1]);
+                        setPosition(1);
+                        while (!getName(getPosition()).equals("}") && !getError()) {
+                            wordTest();
+                        }
+                        if (!getError()) {
+                            System.out.println("position " + getPosition() + getName(getPosition()));
+                            setPosition(1);
+                            System.out.println("position " + getPosition() + getName(getPosition()));
+                            // Senao
+                            if (getName(getPosition()).equals("senao")) {
+                                if (getName(getPosition()+1).equals("{")) {
+                                    writeOnFile(ifCondition()[2]);
+                                    setPosition(2);
+                                    while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}")
+                                            && !getError()) {
+                                        wordTest();
+                                    }
+                                    if (!getError()) {
+                                        writeOnFile("\n"+ ifCondition()[3] +"\n");
+                                        setPosition(1);
+                                    }
+                                }
+                                else {
+                                    setErrorType("sintaxe condicao");
+                                    errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                                }
+                            }
+                            else {
+                                writeOnFile("\n"+ifCondition()[3]+"\n");
+                            }
+                        }
+                    }
+                    else {
+                        setErrorType("sintaxe condicao");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                    }
+                }
+            }
+            else {
+                setErrorType("estrutura condicao");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+            }
+        }
+        else {
+            setErrorType("sintaxe condicao");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+        }
+    }
+    
+    public void enquanto() {
+        if (getName(getPosition()+1).equals("(")) {
+            if (!getName(getPosition()+2).equals(")")) {
+                writeOnFile(whileCondition()[0]);
+                setPosition(2);
+                setBracketsCounter(1);
+                while((getPosition()-1)<getListSize()) {
+                    if (getError()) {
+                        break;
+                    }
+                    if (getName(getPosition()).equals("farei")) {
+                        if (getBracketsCounter() != 0) {
+                            setErrorType("sintaxe repeticao");
+                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+                        }
+                        setPosition(1);
+                        break;
+                    }
+                    testCondition();
+                }
+                if ((getPosition()-1)==getListSize()) {
+                    setErrorType("sintaxe repeticao");
+                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                }
+                if (!getError()) {
+                    if (getName(getPosition()).equals("{")) {
+                        incrementLoopFunc();
+                        writeOnFile(whileCondition()[1]+"\n");
+                        setPosition(1);
+                        while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
+                            wordTest();
+                        }
+                        decrementLoopFunc();
+                        if (!getError()) {
+                            writeOnFile("\n"+whileCondition()[2]+"\n");
+                            setPosition(1);
+                        }
+                    }
+                    else {
+                        setErrorType("sintaxe repeticao");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                    }
+                }
+            }
+            else {
+                setErrorType("estrutura repeticao");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+            }
+        }
+        else {
+            setErrorType("sintaxe repeticao");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+        }
+    }
+    
+    public void farei() {
+        if (getName(getPosition()+1).equals("{")) {
+            incrementLoopFunc();
+            writeOnFile(doCondition()[0]+"\n");
+            setPosition(2);
+            while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
+                wordTest();
+            }
+            decrementLoopFunc();
+            if (!getError()) {
+                setPosition(1);
+            }
+            if (getName(getPosition()).equals("enquanto")) {
+                if (getName(getPosition()+1).equals("(")) {
+                    writeOnFile(doCondition()[1]);
+                    setPosition(2);
+                    setBracketsCounter(1);
+                    while((getPosition()-1)<getListSize()) {
+                        if (getError()) {
+                            break;
+                        }
+                        if (getBracketsCounter() == 0) {
+//                            setPosition(1);
+                            break;
+                        }
+                        testCondition();
+                        writeOnFile(doCondition()[2]);
+                    }
+                    if ((getPosition()-1)==getListSize()) {
+                        setErrorType("sintaxe repeticao");
+                        errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                    }
+                }
+                else {
+                    setErrorType("sintaxe repeticao");
+                    errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+                }
+            }
+            else {
+                setErrorType("sintaxe repeticao");
+                errorFunction(getLine(getPosition()),"18 - ENQUANTO não encontrado.");
+            }
+        }
+        else {
+            setErrorType("sintaxe repeticao");
+            errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+        }
+    }
+    
+    public void repita() {
+        if (isNumber(getName(getPosition()+1)) || isNumberList(getName(getPosition()+1)) || getMapeamento().isNumberDefine(getName(getPosition()+1))) {
+            if ((getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vez")) ||
+                    (!getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vezes"))) {
+                if (getName(getPosition()+3).equals("{")) {
+                    incrementLoopFunc();
+                    writeOnFile(repeatCondition()[0]);
+                    writeOnFile(getName(getPosition()+1));
+                    writeOnFile(repeatCondition()[1]+"\n");
+                    setPosition(4);
+                    while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
+                        wordTest();
+                    }
+                    decrementLoopFunc();
+                    if (!getError()) {
+                        writeOnFile("\n"+repeatCondition()[2]+"\n");
+                        setPosition(1);
+                    }
+                }
+                else {
+                    setErrorType("sintaxe repeticao");
+                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+                }
+            }
+            else {
+                setErrorType("sintaxe repeticao");
+                errorFunction(getLine(getPosition()+2),"19 - Confira a gramática da sua expressão.");
+            }
+        }
+        else {
+            setErrorType("repeticao");
+            errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
+        }
+    }
+    
+    public void para() {
+        String variable = "";
+        String[] mapFor = new String[2];
+        mapFor = getMapeamento().forCondition(getName(getPosition()+1), 
+                            getName(getPosition()+3), getName(getPosition()+5),
+                            getName(getPosition()+7));
+        if (!isNumberList(getName(getPosition()+1)) && !keywords(getName(getPosition()+1)) &&
+                !isNameList(getName(getPosition()+1)) && !getMapeamento().isNumberDefine(getName(getPosition()+1)) &&
+                !getMapeamento().isNameDefine(getName(getPosition()+1))) {
+            if (isNumber(getName(getPosition()+3)) && isNumber(getName(getPosition()+5))  && isNumber(getName(getPosition()+7))) {
+                if (getName(getPosition()+2).equals("de") && getName(getPosition()+4).equals("ate") &&
+                        getName(getPosition()+6).equals("passo") && getName(getPosition()+8).equals("farei")) {
+                    addNumber(getName(getPosition()+1));
+                    writeOnFile(mapFor[0]);
+                    variable = getName(getPosition()+1);
+                    setPosition(9);
+                    if (getName(getPosition()).equals("{")) {
+                        incrementLoopFunc();
+                        setPosition(1);
+                        while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
+                            wordTest();
+                        }
+                        decrementLoopFunc();
+                        if (!getError()) {
+                            removeNumber(variable);
+                            writeOnFile(mapFor[1]);
+                            setPosition(1);
+                        }
+                    }
+                    else {
+                        setErrorType("sintaxe repeticao");
+                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                    }
+                }
+                else {
+                    setErrorType("sintaxe repeticao");
+                    errorFunction(getLine(getPosition()),"21 - Erro na sintaxe do PARA.");
+                }
+            }
+            else {
+                setErrorType("sintaxe repeticao");
+                errorFunction(getLine(getPosition()), "20 - É exigido um número nesta expressão.");
+            }
+        }
+        else {
+            setErrorType("nome repeticao");
+            errorFunction(getLine(getPosition()+1), "3 - Utilização de nome inválido.");
+        }
+    }
+    
+    public void teste() {
+        System.out.println("sc: " + switchCondition()[0]);
+        writeOnFile(switchCondition()[0]);
+        if (getName(getPosition()+1).equals("(")) {
+            if (!getName(getPosition()+2).equals(")")) {
+                setPosition(2);
+                if (isNameList(getName(getPosition())) || isName(getPosition())>0) {
+                    testVariableCondition(2);
+                }
+                else if (isNumberList(getName(getPosition())) || isNumber(getName(getPosition())) || getMapeamento().isNumberDefine(getName(getPosition()))) {
+                    testVariableCondition(1);
+                }
+                else if (isBooleanList(getName(getPosition())) || isBoolean(getName(getPosition()))) {
+                    testVariableCondition(3);
+                }
+                else if (getMapeamento().isNumberFunction(getName(getPosition()))) {
+                    testVariableCondition(2);
+                }
+                else if (getMapeamento().isNameFunction(getName(getPosition()))) {
+                    testVariableCondition(1);
+                }
+                else if (getMapeamento().isBooleanFunction(getName(getPosition()))) {
+                    testVariableCondition(3);
+                }
+                else if (getMapeamento().isNumberDefine(getName(getPosition()))) {
+                    testVariableCondition(2);
+                }
+                else if (getMapeamento().isNameDefine(getName(getPosition()))) {
+                    testVariableCondition(1);
+                }
+                else if (getMapeamento().isBooleanDefine(getName(getPosition()))) {
+                    testVariableCondition(3);
+                }
+                else {
+                    setErrorType("condicao");
+                    errorFunction(getLine(getPosition()),"14 - Parâmetro com valor inválido.");
+                }
+            }
+            else {
+                setErrorType("estrutura condicao");
+                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+            }
+        }
+        else {
+            setErrorType("sintaxe condicao");
+            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+        }
+    }
+
     public ControlFlowStatements(analisadorSintatico sintatico) {
         this.sintatico = sintatico;
     }
@@ -137,296 +457,12 @@ public class ControlFlowStatements {
     private void incrementLoopFunc() {
         sintatico.getFunctions().setLoopFunc(sintatico.getFunctions().getLoopFunc()+1);
     }
+
+    private void setErrorType(String _errorType) {
+        sintatico.setErrorType(_errorType);
+    }
     
     private void decrementLoopFunc() {
         sintatico.getFunctions().setLoopFunc(sintatico.getFunctions().getLoopFunc()-1);
     }
-    
-    public void se() {
-        if (getName(getPosition()+1).equals("(")) {
-            if (!getName(getPosition()+2).equals(")")) {
-                writeOnFile(ifCondition()[0]);
-                setPosition(2);
-                setBracketsCounter(1);
-                while((getPosition()-1)<getListSize()) {
-                    if (getError()) {
-                        break;
-                    }
-                    if (getName(getPosition()).equals("entao")) {
-                        if (getBracketsCounter() != 0) {
-                            errorFunction(getLine(getPosition()+2),"Está faltando ')'.");
-                        }
-                        setPosition(1);
-                        break;
-                    }
-                    testCondition();
-                }
-                if ((getPosition()-1)==getListSize()) {
-                    errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
-                }
-                if (!getError()) {
-                    if (getName(getPosition()).equals("{")) {
-                        writeOnFile(ifCondition()[1]);
-                        setPosition(1);
-                        while (!getName(getPosition()).equals("}") && !getError()) {
-                            wordTest();
-                        }
-                        if (!getError()) {
-                            System.out.println("position " + getPosition() + getName(getPosition()));
-                            setPosition(1);
-                            System.out.println("position " + getPosition() + getName(getPosition()));
-                            // Senao
-                            if (getName(getPosition()).equals("senao")) {
-                                if (getName(getPosition()+1).equals("{")) {
-                                    writeOnFile(ifCondition()[2]);
-                                    setPosition(2);
-                                    while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}")
-                                            && !getError()) {
-                                        wordTest();
-                                    }
-                                    if (!getError()) {
-                                        writeOnFile("\n"+ ifCondition()[3] +"\n");
-                                        setPosition(1);
-                                    }
-                                }
-                                else {
-                                    errorFunction(getLine(getPosition()),"Está faltando '('.");
-                                }
-                            }
-                            else {
-                                writeOnFile("\n"+ifCondition()[3]+"\n");
-                            }
-                        }
-                    }
-                    else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
-                    }
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-        }
-    }
-    
-    public void enquanto() {
-        if (getName(getPosition()+1).equals("(")) {
-            if (!getName(getPosition()+2).equals(")")) {
-                writeOnFile(whileCondition()[0]);
-                setPosition(2);
-                setBracketsCounter(1);
-                while((getPosition()-1)<getListSize()) {
-                    if (getError()) {
-                        break;
-                    }
-                    if (getName(getPosition()).equals("farei")) {
-                        if (getBracketsCounter() != 0) {
-                            errorFunction(getLine(getPosition()+2),"Está faltando ')'.");
-                        }
-                        setPosition(1);
-                        break;
-                    }
-                    testCondition();
-                }
-                if ((getPosition()-1)==getListSize()) {
-                    errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
-                }
-                if (!getError()) {
-                    if (getName(getPosition()).equals("{")) {
-                        incrementLoopFunc();
-                        writeOnFile(whileCondition()[1]+"\n");
-                        setPosition(1);
-                        while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
-                            wordTest();
-                        }
-                        decrementLoopFunc();
-                        if (!getError()) {
-                            writeOnFile("\n"+whileCondition()[2]+"\n");
-                            setPosition(1);
-                        }
-                    }
-                    else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
-                    }
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-        }
-    }
-    
-    public void farei() {
-        if (getName(getPosition()+1).equals("{")) {
-            incrementLoopFunc();
-            writeOnFile(doCondition()[0]+"\n");
-            setPosition(2);
-            while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
-                wordTest();
-            }
-            decrementLoopFunc();
-            if (!getError()) {
-                setPosition(1);
-            }
-            if (getName(getPosition()).equals("enquanto")) {
-                if (getName(getPosition()+1).equals("(")) {
-                    writeOnFile(doCondition()[1]);
-                    setPosition(2);
-                    setBracketsCounter(1);
-                    while((getPosition()-1)<getListSize()) {
-                        if (getError()) {
-                            break;
-                        }
-                        if (getBracketsCounter() == 0) {
-//                            setPosition(1);
-                            break;
-                        }
-                        testCondition();
-                        writeOnFile(doCondition()[2]);
-                    }
-                    if ((getPosition()-1)==getListSize()) {
-                        errorFunction(getLine(getPosition()+1),"Está faltando ')'.");
-                    }
-                }
-                else {
-                    errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()),"tErro na expressão.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-        }
-    }
-    
-    public void repita() {
-        if (isNumber(getName(getPosition()+1)) || isNumberList(getName(getPosition()+1))) {
-            if ((getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vez")) ||
-                    (!getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vezes"))) {
-                if (getName(getPosition()+3).equals("{")) {
-                    incrementLoopFunc();
-                    writeOnFile(repeatCondition()[0]);
-                    writeOnFile(getName(getPosition()+1));
-                    writeOnFile(repeatCondition()[1]+"\n");
-                    setPosition(4);
-                    while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
-                        wordTest();
-                    }
-                    decrementLoopFunc();
-                    if (!getError()) {
-                        writeOnFile("\n"+repeatCondition()[2]+"\n");
-                        setPosition(1);
-                    }
-                }
-                else {
-                    errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()+2),"10Erro na expressão.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1),"Argumento inválido.");
-        }
-    }
-    
-    public void para() {
-        String variable = "";
-        String[] mapFor = new String[2];
-        mapFor = getMapeamento().forCondition(getName(getPosition()+1), 
-                            getName(getPosition()+3), getName(getPosition()+5),
-                            getName(getPosition()+7));
-        if (!isNumberList(getName(getPosition()+1)) && !keywords(getName(getPosition()+1)) &&
-                !isNameList(getName(getPosition()+1))) {
-            if (isNumber(getName(getPosition()+3)) && isNumber(getName(getPosition()+5))  && isNumber(getName(getPosition()+7))) {
-                if (getName(getPosition()+2).equals("de") && getName(getPosition()+4).equals("ate") &&
-                        getName(getPosition()+6).equals("passo") && getName(getPosition()+8).equals("farei")) {
-                    addNumber(getName(getPosition()+1));
-                    writeOnFile(mapFor[0]);
-                    variable = getName(getPosition()+1);
-                    setPosition(9);
-                    if (getName(getPosition()).equals("{")) {
-                        incrementLoopFunc();
-                        setPosition(1);
-                        while ((getPosition()-1) < getListSize() && !getName(getPosition()).equals("}") && !getError()) {
-                            wordTest();
-                        }
-                        decrementLoopFunc();
-                        if (!getError()) {
-                            removeNumber(variable);
-                            writeOnFile(mapFor[1]);
-                            setPosition(1);
-                        }
-                    }
-                    else {
-                        errorFunction(getLine(getPosition()),"Está faltando '('.");
-                    }
-                }
-                else {
-                    errorFunction(getLine(getPosition()),"15Erro na expressão.");
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()), "Valores incorretos.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1), "Erro na declaração.");
-        }
-    }
-    
-    public void teste() {
-        System.out.println("sc: " + switchCondition()[0]);
-        writeOnFile(switchCondition()[0]);
-        if (getName(getPosition()+1).equals("(")) {
-            if (!getName(getPosition()+2).equals(")")) {
-                setPosition(2);
-                if (isNameList(getName(getPosition())) || isName(getPosition())>0) {
-                    testVariableCondition(2);
-                }
-                else if (isNumberList(getName(getPosition())) || isNumber(getName(getPosition())) || getMapeamento().isNumberDefine(getName(getPosition()))) {
-                    testVariableCondition(1);
-                }
-                else if (isBooleanList(getName(getPosition())) || isBoolean(getName(getPosition()))) {
-                    testVariableCondition(3);
-                }
-                else if (getMapeamento().isNumberFunction(getName(getPosition()))) {
-                    testVariableCondition(2);
-                }
-                else if (getMapeamento().isNameFunction(getName(getPosition()))) {
-                    testVariableCondition(1);
-                }
-                else if (getMapeamento().isBooleanFunction(getName(getPosition()))) {
-                    testVariableCondition(3);
-                }
-                else if (getMapeamento().isNumberDefine(getName(getPosition()))) {
-                    testVariableCondition(2);
-                }
-                else if (getMapeamento().isNameDefine(getName(getPosition()))) {
-                    testVariableCondition(1);
-                }
-                else if (getMapeamento().isBooleanDefine(getName(getPosition()))) {
-                    testVariableCondition(3);
-                }
-                else {
-                    errorFunction(getLine(getPosition()),"BParâmetro incorreto.");
-                }
-            }
-            else {
-                errorFunction(getLine(getPosition()+2),"1Erro na expressão.");
-            }
-        }
-        else {
-            errorFunction(getLine(getPosition()+1),"Está faltando '('.");
-        }
-    }
-}
+} 

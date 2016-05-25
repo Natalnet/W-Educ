@@ -20,6 +20,8 @@ public class analisadorLexico{
         public String name;
     }
     private List<fileListStruct> fileList = new ArrayList();
+
+    private String usedStructures= "";
         
     public analisadorLexico() {
     }
@@ -171,6 +173,42 @@ public class analisadorLexico{
         }
     }
 
+    public void defineUsedStructures(analisadorSintatico sintatico) {
+        if (fileListContains("texto") || fileListContains("numero") || fileListContains("logico")) {
+            usedStructures = usedStructures+"1";
+        }
+        for (int i = 0; i < fileList.size(); i++) {
+            if (sintatico.getMapeamento().getFunctionsVoid().contains(fileList.get(i)) ||
+                sintatico.getMapeamento().getFunctionsNumber().contains(fileList.get(i)) || 
+                sintatico.getMapeamento().getFunctionsName().contains(fileList.get(i)) ) {
+                usedStructures = usedStructures+"2";
+                break;
+            }
+        }
+        if (fileListContains("tarefa")) {
+            usedStructures = usedStructures+"3";
+        }
+        if (fileListContains("se") || fileListContains("enquanto") || fileListContains("farei")) {
+            usedStructures = usedStructures+"4";
+        }
+        if (fileListContains("se") || fileListContains("teste")) {
+            usedStructures = usedStructures+"5";
+        }
+        if (fileListContains("repita") || fileListContains("enquanto") || fileListContains("farei") || fileListContains("para")) {
+            usedStructures = usedStructures+"6";
+        }
+        usedStructures=usedStructures+"78";
+    }
+
+    private boolean fileListContains (String text) {
+        for (int i = 0; i < fileList.size(); i++) {
+            if (fileList.get(i).name.equals(text)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getFileListLine(int index) {
         return fileList.get(index).line;
     }
@@ -180,6 +218,13 @@ public class analisadorLexico{
     public List<fileListStruct> getFileList() {
         return fileList;
     }
+
+    public boolean hasText(String name) {
+        return fileList.contains(name);
+    }
     
+    public String getUsedStructures() {
+        return usedStructures;
+    }
     
 }
