@@ -26,6 +26,7 @@ class BootStrap {
     		usuarioPrivilegio.save flush: true, failOnError: true
     	}
 
+        //Cadastros dos tópicos do fórum
         def section = Section.findAll(); 
         if (!section) {
             
@@ -115,14 +116,8 @@ class BootStrap {
             montagem.section = section1
             montagem.title = "Montagem de Robôs"
             montagem.description = ""
-            montagem.save(flush: true, failOnError: true)
-            
-            
-        
+            montagem.save(flush: true, failOnError: true) 
         }
-        
-     
-        
 
         // Cadastro de linguagem - NXC
         

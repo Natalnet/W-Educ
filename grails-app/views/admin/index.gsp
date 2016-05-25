@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a href="/weduc/forum/home">
                         <div class="panel-footer">
                             <span class="pull-left">Veja Mais</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -155,22 +155,22 @@
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-twitter fa-fw"></i> Programas cadastrados
+                                <i class="fa fa-book fa-fw"></i> Programas cadastrados
                                 <span class="pull-right text-muted small"><em>${programasCadastrados}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-envelope fa-fw"></i> Total de compilações
+                                <i class="fa fa-tasks fa-fw"></i> Total de compilações
                                 <span class="pull-right text-muted small"><em>${totalDeCompilacoes}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-tasks fa-fw"></i> Compilações bem-sucedidas
+                                <i class="fa fa-trophy fa-fw"></i> Compilações bem-sucedidas
                                 <span class="pull-right text-muted small"><em>${compilacoesBemSucedidas}</em>
                                 </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-upload fa-fw"></i> Compilações mal-sucedidas
+                                <i class="fa fa-tag fa-fw"></i> Compilações mal-sucedidas
                                 <span class="pull-right text-muted small"><em>${compilacoesMalSucedidas}</em>
                                 </span>
                             </a>

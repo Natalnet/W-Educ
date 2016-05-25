@@ -40,45 +40,43 @@
                     <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>Nome:</td>
+                        <td><b>Nome:</b></td>
                         <td><input class="form-control"  name="name" value="${usuario?.name}" type="text" autofocus required></td>
                       </tr>
                       <tr>
                       <tr>
-                        <td>Senha:</td>
+                        <td><b>Senha:</b></td>
                         <td><input class="form-control"  name="password" value="" type="text" autofocus required></td>
                       </tr>    
                       <tr>
-                        <td>Instituição:</td>
+                        <td><b>Instituição:</b></td>
                         <td><input class="form-control"  name="institution" value="${usuario?.institution}" type="text" autofocus required></td>
                       </tr>
                       <tr>
-                        <td>Data de Nascimento:</td>
+                        <td><b>Data de Nascimento:</b></td>
                         <td><input class="form-control"  name="dateofbirth" value="${usuario?.dateofbirth}" type="dateofbirth" required></td>
                       </tr>
                       <tr>
-                        <td>Sexo</td>
+                        <td><b>Sexo:</b></td>
                         <td><form>
-   
-    
-  <input placeholder="Sexo" type="radio" name="gender" value="M"> M
+                    <input placeholder="Sexo" type="radio" name="gender" value="M"> M
 
-  <input placeholder="Sexo" type="radio" name="gender" value="F"> F
-</form>  
-</td>
+                    <input placeholder="Sexo" type="radio" name="gender" value="F"> F
+                  </form>  
+                  </td>
                       </tr>
                    
                       <tr>
                       </tr>
                         <tr>
-                        <td>Endereço</td>
+                        <td><b>Endereço:</b></td>
                         <td><input class="form-control" name="address" value="${usuario?.address}" type="address" required></td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td><b>E-mail:</b></td>
                         <td><input class="form-control"  name="email" value="${usuario?.email}" type="email" required></td>
                       </tr>
-                        <td>Telefone</td>
+                        <td><b>Telefone:</b></td>
                         <td><input class="form-control" name="telefone" value="${usuario?.telefone}" type="telefone" required></td>
                            
                       </tr>
@@ -89,12 +87,13 @@
               </div>
             </div>
                  <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope fa-fw"></i></a>
                         <span class="pull-right">
-                            <input type="submit" class="btn btn-sm btn-success" value="Atualizar cadastro" >
-                            
+                             <button type="submit" class="btn btn-success" >
+                                Atualizar Cadastro <span class="fa fa-check fa-fw"></span> 
+                            </button>
                             <g:link controller="perfil" action="index" type="button" data-original-title="Cancelar Edição" data-toggle="tooltip" class="btn btn-sm btn-danger">
-                                <i class="glyphicon glyphicon-remove"></i>
+                                <i class="fa fa-envelope fa-fw"></i>
                             </g:link>
                            
                             

@@ -24,16 +24,16 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nome do aluno</th>
+                                <th>Nome de Usuário</th>
                                 <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each in="${alunos}" var="aluno">
                             <tr>
-                                <!--<td>${aluno?.username}</td>-->
+                                <td>${aluno?.username}</td>
                                 <td>
-                                    <g:link controller="erro" action="exibir" id="${aluno?.id}">${aluno?.name}</g:link>
+                                    <g:link controller="erro" action="exibir" id="${aluno?.id}">Estatísticas</g:link>
                                 </td>
                                 <td>
                                     <g:link controller="mensagem" action="escrever" id="${aluno?.id}">Enviar mensagem</g:link>
@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th>Nome do aluno</th>
-                                <th>Opções</th>
+                                <th>Opções:</th>
                             </tr>
                         </thead>
                         <tbody>

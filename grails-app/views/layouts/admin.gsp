@@ -161,7 +161,7 @@
                                 <a href="#"><i class="fa fa-legal fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Estatísticas do Sistema</a>
+                                        <g:link controller="erro" action="sistema">Estatísticas do Sistema</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="gerenciar" action="professores">Gerenciar Professores</g:link>
@@ -178,7 +178,7 @@
                                 <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="flot.html">Estatísticas do Professor</a>
+                                        <g:link controller="erro" action="exibirProf">Minhas Estatítiscas</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="linguagem" action="nova">Cadastrar Linguagem</g:link>
@@ -201,7 +201,7 @@
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
                             <li>
-                                <a href="#"><i class="fa fa-pencil fa-fw"></i> Aluno<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-pencil fa-fw"></i>Aluno<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <g:link controller="professor" action="procurar">Procurar Professores</g:link>

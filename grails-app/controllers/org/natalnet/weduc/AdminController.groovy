@@ -66,10 +66,13 @@ class AdminController {
 			totalDeCompilacoes += it.compilacoes
 			compilacoesBemSucedidas += it.compilacoesBemSucedidas
 			compilacoesMalSucedidas += it.compilacoesMalSucedidas
-			listaDeLinguagens.add(it.linguagem)
+			if (!listaDeLinguagens.contains(it.linguagem)){
+                            listaDeLinguagens.add(it.linguagem)
+                        }
 		}
                 
-		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+                totalDeCompilacoes = compilacoesBemSucedidas + compilacoesMalSucedidas    
+		linguagensUtilizadas = listaDeLinguagens.size()
 
 		// Minhas estatísticas - Fim
 

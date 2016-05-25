@@ -36,7 +36,7 @@
                                     <g:link class="btn btn-success" controller="gerenciar" action="alternarProf" id="${professor?.id}">Alternar para Aluno</g:link>
                                 </td>
                                 <td>
-                                    <g:link class="btn btn-info" controller="gerenciar" action="estatisticas" id="${professor?.id}" params="[tipo: 'Professor']">Estatísticas</g:link>
+                                    <g:link class="btn btn-info" controller="erro" action="exibirP" id="${professor?.id}">Estatísticas</g:link>
                                 </td>
                                 <td>
                                     <g:link class="btn btn-danger" controller="gerenciar" action="excluir" id="${professor?.id}" params="[tipo: 'Professor']">Excluir</g:link>

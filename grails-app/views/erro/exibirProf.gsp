@@ -2,12 +2,11 @@
 <html>
     <head>
         <asset:stylesheet src="css/plugins/morris.css"/>
-        <g:if test='${"erro".equals(controllerName) && "exibir".equals(actionName)}'>
+        <g:if test='${"erro".equals(controllerName) && "exibirProf".equals(actionName)}'>
             <!-- Morris Charts JavaScript -->
             <asset:javascript src="js/plugins/morris/raphael.min.js"/>
             <asset:javascript src="js/plugins/morris/morris.min.js"/>
         </g:if>
-
         <meta name="layout" content="admin"/>
         <title>Estatísticas</title>
     </head>
@@ -40,41 +39,47 @@
             });
         </script>
         <div class="col-lg-14">
-            <h1 class="page-header">Estatísticas - Aluno</h1>
-            <h2>${aluno?.name}</h2>
+            <h1 class="page-header">Minhas Estatísticas</h1>
+            <h2>${professor?.name}</h2>
                   <div class=" col-md-5 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td><b>Nome de Usuário:</b></td>
-                        <td>${aluno?.username}</td>
+                        <td>${professor?.username}</td>
                       </tr>
                       <tr>
                       <tr>
                         <td><b>Instituição:</b></td>
-                        <td>${aluno?.institution}</td>
+                        <td>${professor?.institution}</td>
                       </tr>
                       <tr>
                         <td><b>Data de Nascimento:</b></td>
-                        <td>${aluno?.dateofbirth}</td>
+                        <td>${professor?.dateofbirth}</td>
                       </tr>
                       <tr>
                         <td><b>Sexo:</b></td>
-                        <td>${aluno?.gender}</td>
+                        <td>${professor?.gender}</td>
                       </tr>
                    
                          <tr>
                       </tr>
                         <tr>
                         <td><b>Endereço:</b></td>
-                        <td>${aluno?.address}</td>
+                        <td>${professor?.address}</td>
                       </tr>
                       <tr>
                         <td><b>Email:</b></td>
-                        <td>${aluno?.email}</td>
+                        <td>${professor?.email}</td>
                       </tr>
+                      <tr>
                         <td><b>Telefone:</b></td>
-                        <td>${aluno?.telefone}
+                        <td>${professor?.telefone}
+                        </td>    
+                      </tr>
+                      <tr>
+                        <td><b>Quantidade de Alunos:</b></td>
+                        <td>${numeroAlunos}
                         </td>
                            
                       </tr>
@@ -140,7 +145,6 @@
                 </div>
                 </div>
                 <!-- /.panel -->
-            </div>
             </div>
     </body>
 </html>

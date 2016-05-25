@@ -22,51 +22,38 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>Nome:</td>
+                        <td><b>Nome:</b></td>
                         <td>${usuario?.name}</td>
                       </tr>
                       <tr>
                       <tr>
-                        <td>Instituição:</td>
+                        <td><b>Instituição:</b></td>
                         <td>${usuario?.institution}</td>
                       </tr>
                       <tr>
-                        <td>Data de Nascimento:</td>
+                        <td><b>Data de Nascimento:</b></td>
                         <td>${usuario?.dateofbirth}</td>
                       </tr>
                       <tr>
-                        <td>Sexo</td>
+                        <td><b>Sexo:</b></td>
                         <td>${usuario?.gender}</td>
                       </tr>
                    
                          <tr>
                       </tr>
                         <tr>
-                        <td>Endereço</td>
+                        <td><b>Endereço:</b></td>
                         <td>${usuario?.address}</td>
                       </tr>
                       <tr>
-                        <td>Email</td>
+                        <td><b>E-mail:</b></td>
                         <td>${usuario?.email}</td>
                       </tr>
-                        <td>Telefone</td>
+                        <td><b>Telefone:</b></td>
                         <td>${usuario?.telefone}
                         </td>
                            
@@ -78,16 +65,16 @@
               </div>
             </div>
                  <div class="panel-footer">
-                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn btn-primary"><i class="fa fa-envelope fa-fw"></i></a>
                         <span class="pull-right">  
 
                             
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-                                Graduação <span class="glyphicon glyphicon-star-empty"></span> 
+                                Graduação <span class="fa fa-graduation-cap fa-fw"></span> 
                             </button>
                             
                             <g:link controller="perfil" action="editar" type="button" class="btn btn btn-warning">
-                                <i class="glyphicon glyphicon-edit"></i>
+                                <i class="fa fa-pencil-square-o fa-fw"></i>
                             </g:link>
                             </span>
                             </div>
