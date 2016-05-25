@@ -151,7 +151,7 @@ class ErroController {
 		def usuario = springSecurityService.getCurrentUser()
                 
                 def professor = "Você ainda não possui um professor."
-                if (usuario.professor){
+                if (!usuario.professor){
                     professor = Aluno.get(params.id).professor.username
                 }
         
