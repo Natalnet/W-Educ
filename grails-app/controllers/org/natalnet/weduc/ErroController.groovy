@@ -122,7 +122,9 @@ class ErroController {
 			listaDeLinguagens.add(it.linguagem)
 		}
                 
-		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+		totalDeCompilacoes = compilacoesBemSucedidas + compilacoesMalSucedidas
+                
+                linguagensUtilizadas = listaDeLinguagens.size()
 
 		// Estatísticas do Aluno - Fim
 
@@ -151,8 +153,8 @@ class ErroController {
 		def usuario = springSecurityService.getCurrentUser()
                 
                 def professor = "Você ainda não possui um professor."
-                if (!usuario.professor){
-                    professor = Aluno.get(params.id).professor.username
+                if (!Aluno.get(usuario.id).professor){
+                    professor = Aluno.get(usuario.id).professor.username
                 }
         
 		// Estatíscias de acesso - Início
@@ -258,7 +260,9 @@ class ErroController {
 			listaDeLinguagens.add(it.linguagem)
 		}
                 
-		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+		totalDeCompilacoes = compilacoesBemSucedidas + compilacoesMalSucedidas
+                
+                linguagensUtilizadas = listaDeLinguagens.size()
 
 		// Estatísticas do Aluno - Fim
 
@@ -541,7 +545,9 @@ class ErroController {
 			listaDeLinguagens.add(it.linguagem)
 		}
                 
-		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+		totalDeCompilacoes = compilacoesBemSucedidas + compilacoesMalSucedidas
+                
+                linguagensUtilizadas = listaDeLinguagens.size()
 
 		// Estatísticas do Professor - Fim
 
@@ -676,7 +682,9 @@ class ErroController {
 			listaDeLinguagens.add(it.linguagem)
 		}
                 
-		linguagensUtilizadas = listaDeLinguagens.unique{}.size()
+		totalDeCompilacoes = compilacoesBemSucedidas + compilacoesMalSucedidas
+                
+                linguagensUtilizadas = listaDeLinguagens.size()
 
 		// Minhas estatísticas - Fim
 
