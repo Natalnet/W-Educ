@@ -204,6 +204,9 @@
                                 <a href="#"><i class="fa fa-pencil fa-fw"></i>Aluno<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
+                                        <g:link controller="erro" action="exibirAluno">Minhas Estatítiscas</g:link>
+                                    </li>
+                                    <li>
                                         <g:link controller="professor" action="procurar">Procurar Professores</g:link>
                                     </li>
                                     <li>

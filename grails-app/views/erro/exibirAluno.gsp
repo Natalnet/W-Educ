@@ -2,7 +2,7 @@
 <html>
     <head>
         <asset:stylesheet src="css/plugins/morris.css"/>
-        <g:if test='${"erro".equals(controllerName) && "exibir".equals(actionName)}'>
+        <g:if test='${"erro".equals(controllerName) && "exibirAluno".equals(actionName)}'>
             <!-- Morris Charts JavaScript -->
             <asset:javascript src="js/plugins/morris/raphael.min.js"/>
             <asset:javascript src="js/plugins/morris/morris.min.js"/>
@@ -40,7 +40,7 @@
             });
         </script>
         <div class="col-lg-14">
-            <h1 class="page-header">Estatísticas - Aluno</h1>
+            <h1 class="page-header">Minhas Estatísticas</h1>
             <h2>${aluno?.name}</h2>
                   <div class=" col-md-5 col-lg-9 "> 
                   <table class="table table-user-information">
