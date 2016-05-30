@@ -148,12 +148,13 @@ class ErroController {
 		]
 	}
         
+	@Secured(['ROLE_ALUNO'])        
 	def exibirAluno() {
 
 		def usuario = springSecurityService.getCurrentUser()
                 
                 def professor = "Você ainda não possui um professor."
-                if (!Aluno.get(usuario.id).professor){
+                if (Aluno.get(usuario.id).professor){
                     professor = Aluno.get(usuario.id).professor.username
                 }
         

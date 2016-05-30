@@ -13,11 +13,17 @@
                 
             <div class="section">
                 <div class="list group"> 
-                  <g:link controller="forum" action="topic" id="${topicId?.title}">
-                    <font face ="verdana" size="5" color="blue">  
-                      ${topicId?.title}
-                    </font>
-                  </g:link>
+                 <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                                <g:link controller="forum" action="topic" id="${topicId?.title}">
+                              <font face ="verdana" size="4" color="blue">  
+                                  ${topicId?.title}
+                              </font>
+                            </g:link>
+                        </div>
+                    </div>
+                </nav>                   
                 </div>
                      <!--<g:each in="${threads}" var="thread">
                         <div class="topic">
