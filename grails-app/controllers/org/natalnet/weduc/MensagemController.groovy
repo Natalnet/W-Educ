@@ -21,6 +21,14 @@ class MensagemController {
                 
 	}
         
+    	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def escreverUsuario() {
+                def usuario = springSecurityService.getCurrentUser()
+		[usuario: usuario]
+                [destinatario: Usuario.get(params.id)]
+                
+	}
+        
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
         def selecionarDest() {
                 def destinatarios = Usuario.get(params.id)

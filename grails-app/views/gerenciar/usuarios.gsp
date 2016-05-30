@@ -38,6 +38,9 @@
                                     <g:link class="btn btn-info" controller="erro" action="exibir" id="${aluno?.id}">Estatísticas</g:link>
                                 </td>
                                 <td>
+                                    <g:link class="btn btn-warning" controller="mensagem" action="escreverUsuario" id="${aluno?.id}">Enviar Mensagem</g:link>
+                                </td>
+                                <td>
                                     <g:link class="btn btn-danger" controller="gerenciar" action="excluir" id="${aluno?.id}" params="[tipo: 'Aluno']">Excluir</g:link>
                                 </td>
                             </tr>

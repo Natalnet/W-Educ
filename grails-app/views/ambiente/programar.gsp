@@ -96,6 +96,28 @@
                     }
                 });
             };
+            
+            // Solicitar correção ao professor
+            var solicitarCorrecao = function () {
+
+                // Inicia requisição assíncrona
+                // para solicitar correção
+                $.ajax({
+                    url: "<g:createLink action="solicitarCorrecao"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                        codigo: editor.getValue()
+                    },
+                    success: function (returnData) {
+                        alert(returnData);
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar solicitar correção ao professor.");
+                    }
+                });
+            };
 
             // Enviar o programa
             var enviarCliente = function () {
@@ -260,6 +282,7 @@
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
                     <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
+                    <button class="btn btn-warning" onclick="solicitarCorrecao();">Correção</button>
                     <button class="btn btn-danger">Apagar</button>	
                 </div>
 

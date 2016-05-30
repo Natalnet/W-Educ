@@ -87,10 +87,10 @@
               </div>
             </div>
                  <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope fa-fw"></i></a>
+                        <g:link data-original-title="Enviar Mensagem" class="btn btn-info" controller="mensagem" action="escreverUsuario" id="1"><i class="fa fa-envelope fa-fw"></i></g:link>
                         <span class="pull-right">
                              <button type="submit" class="btn btn-success" >
-                                Atualizar Cadastro <span class="fa fa-check fa-fw"></span> 
+                                 <span class="fa fa-check fa-fw"></span> 
                             </button>
                             <g:link controller="perfil" action="index" type="button" data-original-title="Cancelar Edição" data-toggle="tooltip" class="btn btn-sm btn-danger">
                                 <i class="fa fa-envelope fa-fw"></i>

@@ -81,7 +81,7 @@
                       </tr>
                       <tr>
                         <td><b>Professor:</b></td>
-                        <td>${professor}
+                        <td><g:link data-original-title="Enviar Mensagem" controller="mensagem" action="escreverUsuario" id="${professorID}">${professor}</g:link>
                         </td>
                            
                       </tr>

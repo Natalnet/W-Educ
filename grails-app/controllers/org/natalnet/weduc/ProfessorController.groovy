@@ -15,7 +15,7 @@ class ProfessorController {
 		[professores: Professor.findAll()]
 	}
 
-	@Secured(['ROLE_ADMIN', 'ROLE_ALUNO'])
+	@Secured('ROLE_ALUNO')
 	def selecionar() {
 
 		// Define usuário atual

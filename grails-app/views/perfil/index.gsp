@@ -65,7 +65,7 @@
               </div>
             </div>
                  <div class="panel-footer">
-                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn btn-primary"><i class="fa fa-envelope fa-fw"></i></a>
+                       <g:link data-original-title="Enviar Mensagem" class="btn btn-info" controller="mensagem" action="escreverUsuario" id="1"><i class="fa fa-envelope fa-fw"></i></g:link>
                         <span class="pull-right">  
 
                             

@@ -79,6 +79,51 @@ class AmbienteController {
                 if (saveCompile)
                     render "OK"
 	}
+        
+        //solicitarCorrecao
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def solicitarCorrecao() {
+            
+            //Define usuário atual
+           def usuario = springSecurityService.getCurrentUser()
+           
+           if (Aluno.get(usuario.id).professor){
+                def professor = Aluno.get(usuario.id).professor.username
+                def professorId = Aluno.get(usuario.id).professor.id
+               // Define a linguagem
+               def linguagem = Linguagem.get(params.linguagem)
+
+               // Define se é R-Educ ou não
+               def reduc = params.reduc == "1" ? true : false
+
+               def codigo = params.codigo
+               def conteudo
+            
+               if (reduc){ 
+                    conteudo = "Caro professor, solicito a correção do código escrito em R-Educ para a linguagem" + linguagem.name + " ."
+                    conteudo = conteudo + "\n  Código: \n"
+                    conteudo = conteudo + codigo
+               }
+               else{
+                    conteudo = "Caro professor, solicito a correção do código escrito diretamente na linguagem " + linguagem.name + " ."
+                    conteudo = conteudo + "\n  Código: \n"
+                    conteudo = conteudo + codigo           
+               }
+                
+               def mensagem = new Mensagem()
+               mensagem.destinatario = Usuario.findByUsername(professor)
+               mensagem.autor = usuario
+               mensagem.data = new Date()
+               mensagem.mensagem = conteudo
+               mensagem.save(flush: true, failOnError: true)
+                
+                render "Correção solicitada com sucesso."
+
+            }
+            
+            else
+                render "Não foi possível solicitar a correção pois você ainda não possui um professor."
+        }
 
         //compilarPrograma
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])

@@ -154,8 +154,10 @@ class ErroController {
 		def usuario = springSecurityService.getCurrentUser()
                 
                 def professor = "Você ainda não possui um professor."
+                def professorId = "1"
                 if (Aluno.get(usuario.id).professor){
                     professor = Aluno.get(usuario.id).professor.username
+                    professorId = Aluno.get(usuario.id).professor.id
                 }
         
 		// Estatíscias de acesso - Início
@@ -274,7 +276,8 @@ class ErroController {
 			compilacoesMalSucedidas: 	compilacoesMalSucedidas,
 			linguagensUtilizadas: 		linguagensUtilizadas,
 			aluno:                      usuario,
-                        professor:                  professor,    
+                        professor:                  professor,
+                        professorID:                professorId,
 			datas: 			    datas, 
 			errosVariavel:              errosVariavel,
 			errosFuncao:                errosFuncao,

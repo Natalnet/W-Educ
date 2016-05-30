@@ -18,6 +18,7 @@
                                 <th>Remetente</th>
                                 <th>Data</th>
                                 <th>Mensagem</th>
+                                <th>Responder</th>
                                 <th>Excluir</th>
                             </tr>
                         </thead>
@@ -27,9 +28,8 @@
                                 <td>${mensagem?.autor?.username}</td>
                                 <td><g:formatDate format="dd/MM/yyyy" date="${mensagem?.data}"/></td>
                                 <td>${mensagem?.mensagem}</td>
-                                <td>             <g:link data-original-title="Exluir" action="excluirMensagem" data-toggle="tooltip" type="button" id="${mensagem?.id}" name="${mensagem?.id}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></g:link></td>
-                                        
-                            
+                                <td><g:link data-original-title="Responder" class="btn btn-info" controller="mensagem" action="escreverUsuario" id="${mensagem?.autor.id}"><i class="fa fa-envelope fa-fw"></i></g:link></td>
+                                <td><g:link data-original-title="Exluir" action="excluirMensagem" data-toggle="tooltip" type="button" id="${mensagem?.id}" name="${mensagem?.id}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></g:link></td>
                             </tr>
                             </g:each>
                         </tbody>

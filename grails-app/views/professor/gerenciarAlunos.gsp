@@ -36,7 +36,7 @@
                                     <g:link controller="erro" action="exibir" id="${aluno?.id}">Estatísticas</g:link>
                                 </td>
                                 <td>
-                                    <g:link controller="mensagem" action="escrever" id="${aluno?.id}">Enviar mensagem</g:link>
+                                    <g:link controller="mensagem" action="escreverUsuario" id="${aluno?.id}">Enviar mensagem</g:link>
                                 </td>
                             </tr>
                             </g:each>

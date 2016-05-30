@@ -24,6 +24,7 @@
                                 <td>${professor?.name}</td>
                                 <td>${professor?.username}</td>
                                 <td><g:link controller="professor" action="selecionar" id="${professor?.id}">Selecionar professor</g:link></td>
+                                <td><g:link controller="mensagem" action="escreverUsuario" id="${professor?.id}">Enviar Mensagem</g:link></td>                              
                             </tr>
                             </g:each>
                         </tbody>
