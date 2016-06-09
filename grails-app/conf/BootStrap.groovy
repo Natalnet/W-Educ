@@ -28,13 +28,14 @@ class BootStrap {
 
         //Cadastros dos tópicos do fórum
         def section = Section.findAll(); 
+        def section1
         if (!section) {
             
             section = new Section()
             section.title = "Discussão Geral"
             section.save(flush: true, failOnError: true)
             
-            def section1 = new Section()
+            section1 = new Section()
             section1.title = "Robótica"
             section1.save(flush: true, failOnError: true)
             
@@ -46,79 +47,94 @@ class BootStrap {
             topic = new Topic()
             topic.section = section
             topic.title = "Conversa Fiada"
-            topic.description = " "
+            topic.description = "Fale aqui sobre assuntos gerais relacionados ou não à robótica"
             topic.save(flush: true, failOnError: true)
         
             def artigos = new Topic()
             artigos.section = section
             artigos.title = "Artigos e Notícias"
-            artigos.description = " "
+            artigos.description = "Veja aqui artigos e notícias do mundo da robótica"
             artigos.save(flush: true, failOnError: true)
             
             def sugestoes
             sugestoes = new Topic()
             sugestoes.section = section
             sugestoes.title = "Sugestões e Reclamações"
-            sugestoes.description = ""
+            sugestoes.description = "Coloque aqui suas sugestões e/ou reclamações para/sobre o sistema"
             sugestoes.save(flush: true, failOnError: true)
             
             def duvidas
             duvidas = new Topic()
             duvidas.section = section
-            duvidas.title = "Dúvidas diversas/Outros"
-            duvidas.description = ""
+            duvidas.title = "Dúvidas diversas"
+            duvidas.description = "Poste aqui suas dúvidas relacionadas ou não à robótica"
             duvidas.save(flush: true, failOnError: true)
             
             def apostilas
             apostilas = new Topic()
             apostilas.section = section
             apostilas.title = "E-books, Apostilas, Livros"
-            apostilas.description = ""
+            apostilas.description = "Veja ou poste aqui livros, e-books e apostilas sobre robótica"
             apostilas.save(flush: true, failOnError: true)
             
             def competicoes
             competicoes = new Topic()
             competicoes.section = section1
             competicoes.title = "Competições de Robótica"
-            competicoes.description =""
+            competicoes.description ="Veja ou poste assuntos relacionados a competições de robótica"
             competicoes.save(flush: true, failOnError: true)
             
             def codigos
             codigos = new Topic()
             codigos.section = section1
             codigos.title = "Códigos de Robótica"
-            codigos.description = ""
+            codigos.description = "Poste aqui códigos que você deseja compartilhar"
             codigos.save(flush: true, failOnError: true)
             
             def video
             video = new Topic()
             video.section = section1
             video.title = "Vídeo Aulas"
-            video.description = ""
+            video.description = "Veja ou poste aqui vídeo aulas sobre robótica"
             video.save(flush: true, failOnError: true)
             
             def projetos
             projetos = new Topic()
             projetos.section = section1
             projetos.title = "Projetos e Ideias"
-            projetos.description = ""
+            projetos.description = "Poste aqui projetos que você deseja compartilhar com a comunidade"
             projetos.save(flush: true, failOnError: true)
             
             def programacao
             programacao = new Topic()
             programacao.section = section1
             programacao.title = "Programação de Robôs"
-            programacao.description = ""
+            programacao.description = "Tópico relacionado a programação de robôs em geral"
             programacao.save(flush: true, failOnError: true)
             
             def montagem
             montagem = new Topic()
             montagem.section = section1
             montagem.title = "Montagem de Robôs"
-            montagem.description = ""
+            montagem.description = "Tópico destinado a falar cobre montagem de robôs"
             montagem.save(flush: true, failOnError: true) 
+        
+            def thread1
+            thread1 = new DiscussionThread()
+            thread1.topic = artigos
+            thread1.subject = "OBR"
+            thread1.opener = usuario
+            thread1.save(flush: true, failOnError: true)
+            
+                
+            
+            def comment1
+            comment1 = new Comment()
+            comment1.thread = thread1 
+            comment1.commentBy = usuario
+            comment1.body = "A OBR nacional ocorrerá em outubro"
+            comment1.save(flush: true, failOnError: true)
         }
-
         // Cadastro de linguagem - NXC
         
         if(!Linguagem.findWhere(name: "NXC")) {

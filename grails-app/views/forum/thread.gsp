@@ -15,18 +15,30 @@
 
         <div class="section">
             <div class="sectionTitle">
+                 <font face ="verdana" size="5" color="black"> 
                 ${thread.subject}
+                </font>
             </div>
             <g:each in="${comments}" var="comment">
                 <div class="comment">
-                    <div>
-                        <b>${comment.commentBy.username}</b>
-                        <span class="topicDesc">
-                            <g:formatDate date="${comment.createDate}" format="dd MMM yyyy hh:mma"/>
-                        </span>
+                    <div class="w3-container">
+                        <div class ="row">
+                         <div class="col-md-6 ">
+                            <div>
+                                <b>${comment.commentBy.username}</b>
+                                <span class="topicDesc">
+                                    <g:formatDate date="${comment.createDate}" format="dd MMM yyyy hh:mma"/>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
-                    ${comment.body}
+                    <div class="row">
+                    
+                        <div class="col-md-12">
+                            ${comment.body}
+                        </div>
+                    
+                    </div>
                 </div>
             </g:each>
                 <div class="comment">

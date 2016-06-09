@@ -3,13 +3,13 @@
     
     <head>
         <meta name="layout" content="admin"/>
-        <title>Enviar Mensagem - W-Educ</title>
+        <title>Correio - W-Educ</title>
     </head>
     <body>    
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Enviar Mensagem</h1>
+                <h1 class="page-header">Correio Eletrônico</h1>
                 <div class="form-group">
                     <form action="<g:createLink action="enviar" id="enviar"/>" method="post">
                         

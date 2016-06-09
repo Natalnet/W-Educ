@@ -81,7 +81,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                   <a class="navbar-brand" href="index.html"><b>W-Educ</b> - Ambiente de Desenvolviento Web para Robótica Educacional</a>
+                   <a class="navbar-brand" href=""><b>W-Educ</b> - Ambiente de Desenvolviento Web para Robótica Educacional</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -92,7 +92,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-messages"><g:each in="${ultimasMensagens}" var="mensagem">
                             <li>
-                                <a href="#">
+                                <a href="mensagem/todas">
                                     <div>
                                         <strong>${mensagem?.autor?.username}</strong>
                                         <span class="pull-right text-muted">
@@ -157,9 +157,7 @@
                                 <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Principal</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <li>
                                 <a href="#"><i class="fa fa-legal fa-fw"></i> Administrador<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
                                     <li>
                                         <g:link controller="erro" action="sistema">Estatísticas do Sistema</g:link>
                                     </li>
@@ -169,16 +167,14 @@
                                     <li>
                                         <g:link controller="gerenciar" action="usuarios">Gerenciar Alunos</g:link>
                                     </li>
-                                </ul>
                                 <!-- /.nav-second-level -->
-                            </li>
+                            </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_PROFESSOR">
-                            <li>
-                                <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
                                     <li>
-                                        <g:link controller="erro" action="exibirProf">Minhas Estatítiscas</g:link>
+                                        <g:link controller="erro" action="exibirProf">Estatítiscas</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="linguagem" action="nova">Cadastrar Linguagem</g:link>
@@ -187,37 +183,38 @@
                                         <g:link controller="linguagem" action="listar">Gerenciar Linguagens</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Linguagens Cadastradas</g:link>
+                                        <g:link controller="linguagem" action="procurar">Programar</g:link>
                                     </li>
                                     <li>
                                         <g:link controller="professor" action="gerenciarAlunos">Gerenciar Alunos</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="forum" action="home">Fórum de Discussão</g:link>
+                                        <g:link controller="forum" action="home">Fórum</g:link>
                                     </li>
-                                </ul>
                                 <!-- /.nav-second-level -->
-                            </li>
+                            
+                            </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <a href="#"><i class="fa fa-male fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
-                            <li>
-                                <a href="#"><i class="fa fa-pencil fa-fw"></i>Aluno<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            
+                                
                                     <li>
-                                        <g:link controller="erro" action="exibirAluno">Minhas Estatítiscas</g:link>
+                                        <g:link controller="erro" action="exibirAluno">Desempenho</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="professor" action="procurar">Procurar Professores</g:link>
+                                        <g:link controller="professor" action="procurar">Professores</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="procurar">Linguagens Cadastradas</g:link>
+                                        <g:link controller="linguagem" action="procurar">Programar</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="forum" action="home">Fórum de Discussão</g:link>
+                                        <g:link controller="forum" action="home">Fórum</g:link>
                                     </li>
-                                </ul>
+                                
                                 <!-- /.nav-second-level -->
-                            </li>
+                            
                             </sec:ifAnyGranted>
                         </ul>
                     </div>

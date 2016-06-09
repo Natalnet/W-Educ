@@ -39,8 +39,15 @@
                 });
             });
         </script>
-        <div class="col-lg-14">
-            <h1 class="page-header">Minhas Estatísticas</h1>
+        
+            <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <div class="jumbotron">
+                <div class="container">
+                    <p>Esses são os seus <b>dados pessoais</b> e <b>estatísticas de desempenho</b>. Verifique seus erros, dificuldades e peça orientação ao seu professor, caso necessite.</p>
+                </div>
+                </div>
             <h2>${aluno?.name}</h2>
                   <div class=" col-md-5 col-lg-9 "> 
                   <table class="table table-user-information">

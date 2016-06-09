@@ -27,24 +27,26 @@
                 });
             });
         </script>
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"></h1>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
         <!-- /.row -->
-        <div class="row">
+        <br>
+                <div class="jumbotron">
+                <div class="container">
+                    <h2><b>Seja bem vindo ao W-Educ!</b></h2>
+                    <p>Este é um ambiente completo para robótica educacional. Aqui você pode <a href="/weduc/linguagem/procurar">programar</a> diversos robôs, discutir sobre robótica no nosso <a href="/weduc/forum/home">fórum</a>, ser acompanhado por <a href="/weduc/professores/procurar">professores</a> de robótica de todo o mundo  e muito mais! </p>
+                    <p><a class="btn btn-primary btn-lg" href="/weduc/linguagem/procurar" role="button">Começar a programar!</a></p>
+                </div>
+                </div>
+         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-comments fa-5x"></i>
+                                <i class="fa fa-comments-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">Fórum</div>
-                                <div>de discussão</div>
+                                <div>de discussão <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
                             </div>
                         </div>
                     </div>
@@ -62,11 +64,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
+                                <i class="fa fa-language fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">R-Educ</div>
-                                <div>e outras linguagens</div>
+                                <div class="huge">Robôs</div>
+                                <div>e linguagens de programação</div>
                             </div>
                         </div>
                     </div>
@@ -85,11 +87,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-sort-numeric-asc fa-5x"></i>
+                                <i class="fa fa-sort-amount-asc fa-4x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">E-Aval</div>
-                                <div>avaliações</div>
+                                <div>avaliação de softwares para robótica</div>
                             </div>
                         </div>
                     </div>
@@ -107,11 +109,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-support fa-5x"></i>
+                                <i class="fa fa-book fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">Ajuda</div>
-                                <div>do sistema</div>
+                                <div>do sistema e manuais &emsp;</div>
                             </div>
                         </div>
                     </div>
@@ -124,70 +126,7 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> <b>Estatísticas de acesso</b>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div id="morris-area-chart"></div>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-8 -->
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> <b>Minhas Estatísticas</b>
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-comment fa-fw"></i> Publicações no fórum
-                                <span class="pull-right text-muted small"><em>X</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-book fa-fw"></i> Programas cadastrados
-                                <span class="pull-right text-muted small"><em>${programasCadastrados}</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-tasks fa-fw"></i> Total de compilações
-                                <span class="pull-right text-muted small"><em>${totalDeCompilacoes}</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-trophy fa-fw"></i> Compilações bem-sucedidas
-                                <span class="pull-right text-muted small"><em>${compilacoesBemSucedidas}</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-tag fa-fw"></i> Compilações mal-sucedidas
-                                <span class="pull-right text-muted small"><em>${compilacoesMalSucedidas}</em>
-                                </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-bolt fa-fw"></i> Linguagens utilizadas
-                                <span class="pull-right text-muted small"><em>${linguagensUtilizadas}</em>
-                                </span>
-                            </a>
-                        </div>
-                        <!-- /.list-group -->
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-4 -->
-        </div>
-        <!-- /.row -->
+        </div>        
+
     </body>
 </html>

@@ -5,8 +5,14 @@
 		<title>Fórum</title>
 	</head>
 	<body>   
-        
-        <h1 class="page-header">Fórum</h1>
+                <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <div class="jumbotron">
+                <div class="container">
+                    <p>Este é o <b>Fórum de Discussão</b> do <b>W-Educ</b>. Compartilhe projetos, notícias, eventos, desafios e sinta-se a vontade para tirar dúvidas!</p>
+                </div>
+                </div>
         
         
         <g:each in="${topic}" var="topicId">
@@ -17,10 +23,15 @@
                     <div class="container-fluid">
                         <div class="navbar-header">
                                 <g:link controller="forum" action="topic" id="${topicId?.title}">
-                              <font face ="verdana" size="4" color="blue">  
-                                  ${topicId?.title}
+                              <font face ="times" size="5">  
+                                  <b>${topicId?.title}</b>
                               </font>
                             </g:link>
+                        <div class="navbar-footer">
+                                <font face="verdana">
+                                    ${topicId?.description}  
+                                </font>
+                         </div>
                         </div>
                     </div>
                 </nav>                   
