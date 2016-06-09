@@ -45,13 +45,20 @@
                         msg += "Não é permitido caracteres especiais.\n" ;
                         apelido = apelido.replace( /[^a-z0-9]/gi , "" ) ;
                 }
+                if ( apelido == "" ){
+                        msg += "É necessário nomear o programa para salvar. \n"
+                }
                 if ( msg )
-                {
-                        $("#nome-do-programa").val(apelido) ;
-                        msg += "Nome do programa substituido por: ";
-                        msg += apelido;
-                        msg += ".";
-                        alert(msg);
+                {       
+                        if (apelido == "")
+                            alert(msg);
+                        else{    
+                            $("#nome-do-programa").val(apelido) ;
+                            msg += "Nome do programa substituido por: ";
+                            msg += apelido;
+                            msg += ".";
+                            alert(msg);
+                        }    
                 }
                 
                     $.ajax({
@@ -280,7 +287,7 @@
                     <button class="btn btn-info" data-toggle="modal" id="dicionario1" data-target="#dicionario">Dicionário de Funções</button>
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
-                    <button class="btn btn-info" onclick="exportarPrograma();">Exportar</button>
+                    <button class="btn btn-info" id="converter" onclick="exportarPrograma();">Converter para ${linguagem?.name}</button>
                     <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
                     <button class="btn btn-warning" onclick="solicitarCorrecao();">Correção</button>
                     <button class="btn btn-danger">Apagar</button>	
@@ -365,12 +372,13 @@
             $("#radio1").click(function() {
               
                 dicionario1.disabled = false;
+                converter.disabled = false;
             });
             
             $("#radio2").click(function() {
               
                 dicionario1.disabled = true;
-              
+                converter.disabled = true;
             });
             
             // Apaga o conteúdo do editor de texto

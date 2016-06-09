@@ -29,6 +29,9 @@ class AmbienteController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def salvarPrograma() {   
 
+                if (params.nome == "")
+                    return
+                    
         
                 System.out.println(CommandShellToString.execute("pwd"));
 		// Define usuário atual

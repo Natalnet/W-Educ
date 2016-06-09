@@ -28,10 +28,10 @@
                         <tbody>
                             <g:each in="${linguagens}" var="linguagem">
                             <tr>
-                                <td>${linguagem?.robot}</td>
-                                <td>${linguagem?.name}</td>
-                                <td>${linguagem?.autor?.username}</td>
-                                <td><g:link controller="ambiente" action="programar" id="${linguagem?.id}">Programar</g:link></td>
+                                <td><b>${linguagem?.robot}</b></td>
+                                <td><b>${linguagem?.name}</b>  <div class="alert alert-success" role="alert">${linguagem?.description}</div></td>
+                                <td><b>${linguagem?.autor?.username}</b></td>
+                                <td><br><g:link class="btn btn-success" controller="ambiente" action="programar" id="${linguagem?.id}">Programar</g:link></td>
                             </tr>
                             </g:each>
                         </tbody>

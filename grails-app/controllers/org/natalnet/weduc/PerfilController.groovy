@@ -6,16 +6,18 @@ class PerfilController {
 
     def springSecurityService
      
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def index() { 
     	def usuario = springSecurityService.getCurrentUser()
         [usuario: usuario]
     }
     
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def editar() {
 	def usuario = springSecurityService.getCurrentUser()
 	[usuario: usuario]
 	}
-        
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])    
     def atualizar(){
         def usuario = springSecurityService.getCurrentUser()    
         usuario.name = params.name.toString()
@@ -46,7 +48,7 @@ class PerfilController {
         
       
     }
- 
+  @Secured(['ROLE_ALUNO'])
    def graduar(){
        
         def mensagem = new Mensagem()
@@ -58,7 +60,7 @@ class PerfilController {
         
         redirect controller: "admin", action: "index"
    }
-    
+   @Secured(['ROLE_ADMIN']) 
    def excluir(){
        def usuario = springSecurityService.getCurrentUser()    
        def privilegio = UsuarioPrivilegio.find{usuario == usuario}

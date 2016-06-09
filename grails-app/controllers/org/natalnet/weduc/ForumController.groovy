@@ -48,7 +48,7 @@ class ForumController {
     }
  
 
-    @Secured(['ROLE_USER'])
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def postReply(long threadId, String body) {
 
         

@@ -21,10 +21,18 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;O <b>W-Educ</b> é um ambiente de desenvolvimento web multiplataforma configurável para aplicações em robótica educacional.
+                                    &nbsp;&nbsp;&nbsp;&nbsp;O <a href="https://github.com/Natalnet/W-Educ/wiki"><b>W-Educ</b></a> é um ambiente de desenvolvimento web multiplataforma configurável para aplicações em robótica educacional.
                                 </p>
 				<p align="justify">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;Este projeto, desenvolvido por pesquisadores do laboratório NatalNet da Universidade Federal do Rio Grande do Norte, é um projeto aberto, que surgiu como uma extensão do software educacional RoboEduc, e que possibilita que a programação de diversos robôs programáveis possa ser realizada utilizando a linguagem R-Educ. Tornamos possível que o usuário programe na linguagem R-Educ e que seu código seja traduzido para uma linguagem cadastrada por um usuário professor, compilado e em seguida enviado e/ou executado pelo robô.
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Este projeto, desenvolvido por pesquisadores do laboratório <a href="www.natalnet.br"><b>NatalNet</b></a> da <a href="www.ufrn.br"><b>Universidade Federal do Rio Grande do Norte</b></a>, 
+                                    é um projeto aberto, que surgiu como uma extensão do software educacional RoboEduc, e que possibilita que a programação de qualqeur robô programável possa ser realizada utilizando a linguagem <b>R-Educ</b>. </p>
+                                <p align="justify">  
+                                    &nbsp;&nbsp;&nbsp;&nbsp;O sistema <a href="https://github.com/Natalnet/W-Educ/wiki"><b>W-Educ</b></a> é uma plataforma completa e gratuita para robótica educacional!
+                                </p>
+                                
+                                
+                                <p align="justify">  
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Não deixe de participar e conferir as últimas nóticias do nosso <a href="/weduc/forum/home"><b>Fórum de Discussão</b></a>
                                 </p>
                             </div>
                         </div>

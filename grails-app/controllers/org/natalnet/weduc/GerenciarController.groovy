@@ -5,7 +5,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class GerenciarController {
 
  	def springSecurityService
-
+        
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
 	def index() {
 		redirect action: "usuarios"
 	}
