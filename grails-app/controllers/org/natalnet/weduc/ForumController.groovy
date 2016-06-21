@@ -28,10 +28,17 @@ class ForumController {
  
 
    def topic() {
-        def topicName = params.id
-        def topic = Topic.findAllByTitle(topicName)
-
-        def threads = DiscussionThread.findAllByTopic(topic)     
+        def topicName
+        def topic
+        if(Topic.findByTitle(params.id)){
+            topic = Topic.findByTitle(params.id)
+            topicName = params.id
+        }    
+        else{
+            topic = Topic.findWhere( id : params.topicId.toLong())
+            topicName = topic.title
+        }
+            def threads = DiscussionThread.findAllByTopic(topic)     
 
 
          [threads:threads,
@@ -46,24 +53,51 @@ class ForumController {
          thread:thread]
   
     }
+    
+    def postthread(){
+        def topic = Topic.findByTitle(params.topic)
+        [topic: topic.id]
+    }
  
+        @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def newTopic() {
+
+        
+        def thread = new DiscussionThread()
+        thread.topic = Topic.findWhere( id : params.topic.toLong())
+        thread.subject = params.threadSubject
+        thread.opener = springSecurityService.getCurrentUser()
+        thread.save(flush: true, failOnError: true)
+
+        if(params.topic != null) {
+            flash.message = "Tópico criado com sucesso."
+            redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
+        } else {
+            flash.message = "Erro ao criar um novo tópico."
+            redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
+
+                }
+        
+        
+    }
+    
 
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def postReply(long threadId, String body) {
+    def postReply() {
 
         
         def comment = new Comment()
 		comment.commentBy = springSecurityService.getCurrentUser()
 		comment.thread = DiscussionThread.findBySubject(params.thread)
                 comment.body = params.mensagem
-		mensagem.save(flush: true, failOnError: true)
+		comment.save(flush: true, failOnError: true)
 
-                if(mensagem.id != null) {
-                	flash.message = "Mensagem a " + params.destinatario + " enviada com sucesso."
-                	redirect controller: "mensagem", action: "todas"
+                if(comment.body != null) {
+                	flash.message = "Mensagem a " + comment.thread + " enviada com sucesso."
+                	redirect controller: "forum", action: "thread", params: [id: comment.thread.subject]
                 } else {
                 	flash.message = "Erro ao enviar a mensagem."
-                        redirect controller: "mensagem", action: "todas"
+                        redirect controller: "forum", action: "thread", params: [id: comment.thread.subject]
 
                 }
         

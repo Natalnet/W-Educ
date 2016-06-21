@@ -1,8 +1,15 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta name="layout" content="admin">
 		<title>Fórum</title>
+                
+                <style>
+                    #nav {
+                        background-color: AliceBlue
+                    }
+                </style>
 	</head>
 	<body>   
                 <div class="row">
@@ -19,7 +26,7 @@
                 
             <div class="section">
                 <div class="list group"> 
-                 <nav class="navbar navbar-default">
+                 <nav class="navbar navbar-default" id="nav">
                     <div class="container-fluid">
                         <div class="navbar-header">
                                 <g:link controller="forum" action="topic" id="${topicId?.title}">
@@ -28,8 +35,8 @@
                               </font>
                             </g:link>
                         <div class="navbar-footer">
-                                <font face="verdana">
-                                    ${topicId?.description}  
+                                <font face="verdana" color="#696969">
+                                    <b>${topicId?.description}</b>  
                                 </font>
                          </div>
                         </div>
