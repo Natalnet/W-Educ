@@ -58,7 +58,7 @@
                     
                                 <tr>
                                     <th>
-                                 <g:link controller="forum" action="thread" id="${thread?.subject}">
+                                 <g:link controller="forum" action="thread" id="${thread?.id}">
                                  ${thread.subject}
                                  </g:link>
                                     </th>

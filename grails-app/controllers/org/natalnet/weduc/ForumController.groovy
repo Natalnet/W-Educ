@@ -46,9 +46,9 @@ class ForumController {
     }
 
     def thread(long threadId) {
-        def thread = DiscussionThread.findBySubject(params.id)
+        def thread = DiscussionThread.findWhere( id : params.id.toLong())
         def comments = Comment.findAllByThread(thread)    
-
+        
         [comments: comments,   
          thread:thread]
   
@@ -64,6 +64,7 @@ class ForumController {
 
         
         def thread = new DiscussionThread()
+        System.out.println("Estou aqui new Topic")
         thread.topic = Topic.findWhere( id : params.topic.toLong())
         thread.subject = params.threadSubject
         thread.opener = springSecurityService.getCurrentUser()
@@ -85,19 +86,18 @@ class ForumController {
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def postReply() {
 
-        
         def comment = new Comment()
 		comment.commentBy = springSecurityService.getCurrentUser()
-		comment.thread = DiscussionThread.findBySubject(params.thread)
+		comment.thread = DiscussionThread.findWhere( id : params.thread.toLong())
                 comment.body = params.mensagem
 		comment.save(flush: true, failOnError: true)
 
                 if(comment.body != null) {
                 	flash.message = "Mensagem a " + comment.thread + " enviada com sucesso."
-                	redirect controller: "forum", action: "thread", params: [id: comment.thread.subject]
+                	redirect controller: "forum", action: "thread", params: [id: comment.thread.id]
                 } else {
                 	flash.message = "Erro ao enviar a mensagem."
-                        redirect controller: "forum", action: "thread", params: [id: comment.thread.subject]
+                        redirect controller: "forum", action: "thread", params: [id: comment.thread.id]
 
                 }
         

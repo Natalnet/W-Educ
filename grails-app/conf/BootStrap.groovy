@@ -25,7 +25,17 @@ class BootStrap {
     		usuarioPrivilegio.privilegio = privilegio
     		usuarioPrivilegio.save flush: true, failOnError: true
     	}
-
+  
+        //Limpar o banco!
+//        def comments = Comment.findAll();
+//        comments.delete(flush: true, failOnError: true)
+//        def threads = DiscussionThread.findAll();
+//        threads.delete(flush: true, failOnError: true)
+//        def topics = Topic.findAll();
+//        topics.delete(flush: true, failOnError: true)
+//        def sections = Section.findAll();
+//        sections.delete(flush: true, failOnError: true)
+  
         //Cadastros dos tópicos do fórum
         def section = Section.findAll(); 
         def section1
@@ -122,7 +132,7 @@ class BootStrap {
             def thread1
             thread1 = new DiscussionThread()
             thread1.topic = artigos
-            thread1.subject = "OBR"
+            thread1.subject = "OBR 2016"
             thread1.opener = usuario
             thread1.save(flush: true, failOnError: true)
             
@@ -132,7 +142,7 @@ class BootStrap {
             comment1 = new Comment()
             comment1.thread = thread1 
             comment1.commentBy = usuario
-            comment1.body = "A OBR nacional ocorrerá em outubro"
+            comment1.body = "A etapa nacional da OBR ocorrerá em outubro!"
             comment1.save(flush: true, failOnError: true)
         }
         // Cadastro de linguagem - NXC

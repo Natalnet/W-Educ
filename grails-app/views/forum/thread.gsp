@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-            
 		<meta name="layout" content="admin">
 		<title>Fórum de Discussão</title>
 	</head>
@@ -42,7 +41,7 @@
                     <div class="form-group">
                         <form action="<g:createLink controller="forum" action="postReply" id="enviar"/>" method="post">
                             <textarea class="form-control" id="mensagem" name="mensagem" required placeholder="Escreva aqui seu comentário..."></textarea><br/>
-                            <input type="hidden" id="thread" name ="thread" value ="${thread.subject}">
+                            <input type="hidden" id="thread" name ="thread" value ="${thread.id}">
                             <input type="submit" class="btn btn-info" value="Enviar mensagem" align="right" />
                         </form>
                     </div>
