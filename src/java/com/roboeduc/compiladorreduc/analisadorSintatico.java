@@ -792,153 +792,162 @@ public class analisadorSintatico {
         //writeOnFile(writeFunction[0]);
         List<String> functionParameters = mapeamento.getFunctionParameters();
         int positionAnt = position+checkPosition-2;
-        if (getName(position+checkPosition-1).equals("(")) {
-            int i = checkPosition;
-            int param = 0;      
-            int paramEnd = position+i+2*functionParameters.size()-1;
-            if (paramEnd < fileList.size()){ 
-                if(!getName(position+i+2*functionParameters.size()-1).equals(")")){
-                    setErrorType("sintaxe");
-                    errorFunction(getLine(checkPosition-1),"16 - Está faltando ')'.");
-                }
-            else{
-                while (!getName(position+i).equals(")")) {
-                    if (position+i == fileList.size()-1) {
-                        break;
+        System.out.println("e a gora jose?");
+        if(position+checkPosition-1 != fileList.size()){
+            if (getName(position+checkPosition-1).equals("(")) {
+                int i = checkPosition;
+                int param = 0;      
+                int paramEnd = position+i+2*functionParameters.size()-1;
+                if (paramEnd < fileList.size()){ 
+                    if(!getName(position+i+2*functionParameters.size()-1).equals(")")){
+                        setErrorType("sintaxe");
+                        errorFunction(getLine(checkPosition-1),"16 - Está faltando ')'.");
                     }
-                    if (param >= functionParameters.size()) {
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
-                        break;
-                    }
-                    if (getName(position+i).equals(",")) {
-                        newParameter=true;
-                        i++;
-                        if (getName(position+i).equals(")")) {
+                else{
+                    while (!getName(position+i).equals(")")) {
+                        if (position+i == fileList.size()-1) {
+                            break;
+                        }
+                        if (param >= functionParameters.size()) {
                             setErrorType("funcao");
-                            errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+                            errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
+                            break;
+                        }
+                        if (getName(position+i).equals(",")) {
+                            newParameter=true;
+                            i++;
+                            if (getName(position+i).equals(")")) {
+                                setErrorType("funcao");
+                                errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+                                break;
+                            }
+                        }
+                        else if (newParameter && /*isValidNumberExpression(i) &&*/
+                                (functionParameters.get(param).equalsIgnoreCase("int") ||
+                                functionParameters.get(param).equalsIgnoreCase("float") ||
+                                functionParameters.get(param).equalsIgnoreCase("double"))) {
+                            if (isMathOperation(i,true, true, true)) {
+                                System.out.println("será?");
+                                param++;
+                                i++;
+                                if (getName(position).equals(")")) {
+                                    position-=i;
+                                }
+                                else if (getName(position+1).equals(",")) {
+                                    position-=(i-1);
+                                }
+                                //position-=(i+1);
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                        else if (newParameter && (isName(position+i)>0 || nameList.contains(getName(position+i)) ||
+                                mapeamento.getFunctionsName().contains(getName(position+i)) || 
+                                mapeamento.isNameDefine(getName(getPosition()+i))) &&
+                                functionParameters.get(param).equalsIgnoreCase("String")) {
+                            if (mapeamento.getFunctionsName().contains(getName(position+i))) {
+                                //checkParameters(getName(position+i), i+2);
+                                checkFunction(getName(position+i), i+2, false);
+                                //writeOnFile(writeFunction[param+1]);
+                                i=0;
+                                param++;
+                                //writeFunction = mapeamento.writeFunction(functionName);
+                            }
+                            else if (isName(position+i)>0) {
+                                //writeName(position+i);
+                                //writeOnFile(writeFunction[param+1]);
+                                i = isName(position+i)-position;
+                                param++;
+                            }
+                            else if (mapeamento.isNameDefine(getName(getPosition()+i))) {
+                                //writeOnFile(mapeamento.getDefineText(getName(getPosition()+i)));
+                                //writeOnFile(writeFunction[param+1]);
+                                i++;
+                                param++;
+                            }
+                            else {
+                                //writeOnFile(getName(position+i));
+                                //writeOnFile(writeFunction[param+1]);
+                                i++;
+                                param++;
+                            }
+                            newParameter=false;
+                        }
+                        else if (newParameter && (isBoolean(getName(position+i)) || booleanList.contains(getName(position+i)) ||
+                                mapeamento.getFunctionsBoolean().contains(getName(position+i)) || mapeamento.isBooleanDefine(getName(getPosition()+i))) &&
+                                functionParameters.get(param).equalsIgnoreCase("boolean")) {
+                            if (mapeamento.getFunctionsBoolean().contains(getName(position+i))) {
+                                checkParameters(getName(position+i), i+2);
+                                //writeOnFile(writeFunction[param+1]);
+                                i=0;
+                                param++;
+                                writeFunction = mapeamento.writeFunction(functionName);
+                            }
+                            else if (mapeamento.isBooleanDefine(getName(getPosition()+i))) {
+                                //writeOnFile(getMapeamento().getDefineText(getName(getPosition()+i)));
+                                //writeOnFile(writeFunction[param+1]);
+                                i++;
+                                param++;
+                            }
+                            else if (isBoolean(getName(position+i))) {
+                                //writeBoolean(getName(position+i));
+                                //writeOnFile(writeFunction[param+1]);
+                                i++;
+                                param++;
+                            }
+                            else {
+                                //writeOnFile(getName(position+i));
+                                //writeOnFile(writeFunction[param+1]);
+                                i++;
+                                param++;
+                            }
+                            newParameter=false;
+                        }
+                        else if (getName(position+i).equals(",")) {
+                            newParameter=true;
+                            i++;
+                            if (getName(position+i).equals(")")) {
+                                setErrorType("funcao");
+                                errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+                                break;
+                            }
+                        }
+                        else {
+                            setErrorType("funcao");
+                            errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
                             break;
                         }
                     }
-                    else if (newParameter && /*isValidNumberExpression(i) &&*/
-                            (functionParameters.get(param).equalsIgnoreCase("int") ||
-                            functionParameters.get(param).equalsIgnoreCase("float") ||
-                            functionParameters.get(param).equalsIgnoreCase("double"))) {
-                        if (isMathOperation(i,true, true, true)) {
-                            param++;
-                            i++;
-                            if (getName(position).equals(")")) {
-                                position-=i;
-                            }
-                            else if (getName(position+1).equals(",")) {
-                                position-=(i-1);
-                            }
-                            //position-=(i+1);
-                        }
-                        else {
-                            return false;
-                        }
-                    }
-                    else if (newParameter && (isName(position+i)>0 || nameList.contains(getName(position+i)) ||
-                            mapeamento.getFunctionsName().contains(getName(position+i)) || 
-                            mapeamento.isNameDefine(getName(getPosition()+i))) &&
-                            functionParameters.get(param).equalsIgnoreCase("String")) {
-                        if (mapeamento.getFunctionsName().contains(getName(position+i))) {
-                            //checkParameters(getName(position+i), i+2);
-                            checkFunction(getName(position+i), i+2, false);
-                            //writeOnFile(writeFunction[param+1]);
-                            i=0;
-                            param++;
-                            //writeFunction = mapeamento.writeFunction(functionName);
-                        }
-                        else if (isName(position+i)>0) {
-                            //writeName(position+i);
-                            //writeOnFile(writeFunction[param+1]);
-                            i = isName(position+i)-position;
-                            param++;
-                        }
-                        else if (mapeamento.isNameDefine(getName(getPosition()+i))) {
-                            //writeOnFile(mapeamento.getDefineText(getName(getPosition()+i)));
-                            //writeOnFile(writeFunction[param+1]);
-                            i++;
-                            param++;
-                        }
-                        else {
-                            //writeOnFile(getName(position+i));
-                            //writeOnFile(writeFunction[param+1]);
-                            i++;
-                            param++;
-                        }
-                        newParameter=false;
-                    }
-                    else if (newParameter && (isBoolean(getName(position+i)) || booleanList.contains(getName(position+i)) ||
-                            mapeamento.getFunctionsBoolean().contains(getName(position+i)) || mapeamento.isBooleanDefine(getName(getPosition()+i))) &&
-                            functionParameters.get(param).equalsIgnoreCase("boolean")) {
-                        if (mapeamento.getFunctionsBoolean().contains(getName(position+i))) {
-                            checkParameters(getName(position+i), i+2);
-                            //writeOnFile(writeFunction[param+1]);
-                            i=0;
-                            param++;
-                            writeFunction = mapeamento.writeFunction(functionName);
-                        }
-                        else if (mapeamento.isBooleanDefine(getName(getPosition()+i))) {
-                            //writeOnFile(getMapeamento().getDefineText(getName(getPosition()+i)));
-                            //writeOnFile(writeFunction[param+1]);
-                            i++;
-                            param++;
-                        }
-                        else if (isBoolean(getName(position+i))) {
-                            //writeBoolean(getName(position+i));
-                            //writeOnFile(writeFunction[param+1]);
-                            i++;
-                            param++;
-                        }
-                        else {
-                            //writeOnFile(getName(position+i));
-                            //writeOnFile(writeFunction[param+1]);
-                            i++;
-                            param++;
-                        }
-                        newParameter=false;
-                    }
-                    else if (getName(position+i).equals(",")) {
-                        newParameter=true;
-                        i++;
-                        if (getName(position+i).equals(")")) {
-                            setErrorType("funcao");
-                            errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
-                            break;
-                        }
-                    }
-                    else {
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
-                        break;
-                    }
-                }
-                
-            
-                if (param < functionParameters.size()) {
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
-                }
-                if (i == fileList.size()-1) {
-                    setErrorType("sintaxe");
-                    errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
-                }
-                position += i+1;
-            }
-            }
-            else{
-                setErrorType("sintaxe");
-                errorFunction(getLine(checkPosition-1),"17 - Erro na escrita da função.");
-            }
-        }
-        else {
-            setErrorType("sintaxe");
-            errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
-        }
 
+
+                    if (param < functionParameters.size()) {
+                        setErrorType("funcao");
+                        errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
+                    }
+                    if (i == fileList.size()-1) {
+                        setErrorType("sintaxe");
+                        errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+                    }
+                    position += i+1;
+                }
+                }
+                else{
+                    setErrorType("sintaxe");
+                    errorFunction(getLine(checkPosition-1),"17 - Erro na escrita da função.");
+                }
+            }
+            else {
+                setErrorType("sintaxe");
+                errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+            }
+        }
+        else{
+            setErrorType("sintaxe");
+            errorFunction(getLine(checkPosition-1),"17 - Erro na escrita da função.");
+            return false;
+        
+        }
         if (backToBegin) {
             position = positionAnt;
         }
@@ -1005,11 +1014,15 @@ public class analisadorSintatico {
         position+=index;
         if(getName(position).equals("fim")){
                 return false;
-        } 
+        }
         while ( (!keywords(getName(position)) || getName(position).equals("(") || getName(position).equals(")") ||
            isNumber(getName(position)) || mapeamento.isNumberDefine(getName(position)) ||
            mapeamento.getFunctionsNumber().contains(getName(position)) ||
            (numberList.contains(getName(position)) && !getName(position+1).equals("=")) ) && stop==false ) {
+            
+            if(position+1 == fileList.size()){
+                return false;
+            }
             
             if(isOperator(getName(position+1))&& (position+2)==fileList.size()){
                 return false;
@@ -1020,9 +1033,6 @@ public class analisadorSintatico {
                 }
                 parenteses++;
                 position+=1;
-            }
-            if(getName(position+2).equals("fim")){
-                return false;
             }
             else if (getName(position).equals(")")) {
                 if ((condition == true && parenteses == 0) ||
