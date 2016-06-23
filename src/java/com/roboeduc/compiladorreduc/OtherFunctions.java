@@ -50,14 +50,21 @@ public class OtherFunctions {
 
             if (getName(getPosition()+1).equals("=")) {
                 writeOnFile(getDeclareNumber()[1]);
-                if (sintatico.isMathOperation(2, false, false, false)) {
-                    sintatico.writeMathOperation(2, false);
-                    writeOnFile(getDeclareNumber()[2]);
+                if(getPosition()+ 1 != getListSize()-1){
+                    if (sintatico.isMathOperation(2, false, false, false)) {
+                            sintatico.writeMathOperation(2, false);
+                            writeOnFile(getDeclareNumber()[2]);
+                    }
+                    else {
+                        setErrorType("sintaxe variavel");
+                        errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
+                    }
+                
                 }
                 else {
                     setErrorType("sintaxe variavel");
-                    errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
-                }    
+                    errorFunction(getLine(getPosition()+index), "24 - Expressão incompleta.");
+                }
             }
             else if (!declaring) {
                 setErrorType("sintaxe variavel");
