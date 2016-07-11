@@ -5,7 +5,7 @@ class DiscussionThread {
     static hasMany = [comments:Comment]
 
     Topic topic
-    String subject
+    String subject 
     Usuario opener
     Date createDate = new Date()
 

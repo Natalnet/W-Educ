@@ -33,6 +33,7 @@ class ForumController {
         if(Topic.findByTitle(params.id)){
             topic = Topic.findByTitle(params.id)
             topicName = params.id
+            
         }    
         else{
             topic = Topic.findWhere( id : params.topicId.toLong())
@@ -42,7 +43,8 @@ class ForumController {
 
 
          [threads:threads,
-          topicName:topicName]
+          topicName:topicName,
+          topicId: topic.id  ]
     }
 
     def thread(long threadId) {
@@ -55,7 +57,7 @@ class ForumController {
     }
     
     def postthread(){
-        def topic = Topic.findByTitle(params.topic)
+        def topic = Topic.findWhere(id: params.topicId.toLong())
         [topic: topic.id]
     }
  

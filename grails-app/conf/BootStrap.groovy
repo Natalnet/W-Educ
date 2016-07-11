@@ -17,25 +17,33 @@ class BootStrap {
     		usuario = new Professor()
     		usuario.username = "admin"
     		usuario.password = "admin"
-    		usuario.email = "sarah@dca.ufrn.br"
+    		usuario.email = "admin@natalnet.br"
     		usuario.save flush: true, failOnError: true
 
     		def usuarioPrivilegio = new UsuarioPrivilegio()
     		usuarioPrivilegio.usuario = usuario
     		usuarioPrivilegio.privilegio = privilegio
     		usuarioPrivilegio.save flush: true, failOnError: true
+                
     	}
-  
-        //Limpar o banco!
-//        def comments = Comment.findAll();
-//        comments.delete(flush: true, failOnError: true)
-//        def threads = DiscussionThread.findAll();
-//        threads.delete(flush: true, failOnError: true)
-//        def topics = Topic.findAll();
-//        topics.delete(flush: true, failOnError: true)
-//        def sections = Section.findAll();
-//        sections.delete(flush: true, failOnError: true)
-  
+        
+        //usuário padrão para postagens no fórum
+//        def privilegioDeletado = Privilegio.findWhere(authority: "ROLE_ALUNO")
+//        def deletado = Aluno.findWhere(username: "deletado")
+//        if(!deletado) {
+//    		deletado = new Aluno()
+//    		deletado.username = "deletado"
+//    		deletado.password = "deletado"
+//    		deletado.email = "deletado@natalnet.br"
+//    		deletado.save flush: true, failOnError: true
+//
+//    		def usuarioPrivilegioD = new UsuarioPrivilegio()
+//    		usuarioPrivilegioD.usuario = deletado
+//    		usuarioPrivilegioD.privilegio = privilegioDeletado
+//    		usuarioPrivilegioD.save flush: true, failOnError: true
+//                
+//    	}
+        
         //Cadastros dos tópicos do fórum
         def section = Section.findAll(); 
         def section1
@@ -889,7 +897,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "OnFwd(var1(String), var2(int)); \n Wait(var3(int)); \n"
+            funcao.code = "OnFwd(var1(int), var2(int)); \n Wait(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -900,7 +908,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "OnRev(var1(String), var2(int)); \n Wait(var3(int)); \n"
+            funcao.code = "OnRev(var1(int), var2(int)); \n Wait(var3(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -911,7 +919,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "5"
-            funcao.code = "OnFwd(var1(String), var2(int)); OnRev(var3(String), var4(int)); Wait(var5(int)); \n"
+            funcao.code = "OnFwd(var1(int), var2(int)); OnRev(var3(int), var4(int)); Wait(var5(int)); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -922,7 +930,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "4"
-            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), var4(int), true, true); \n"
+            funcao.code = "RotateMotorEx(var1(int), var2(int), var3(int), var4(int), true, true); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -933,7 +941,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "4"
-            funcao.code = "RotateMotorEx(var1(string), var2(int), var3(int), -var4(int), true, true); \n"
+            funcao.code = "RotateMotorEx(var1(int), var2(int), var3(int), -var4(int), true, true); \n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -955,7 +963,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(String), var2(int), var3(int));\n"
+            funcao.code = "RotateMotor(var1(int), var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -966,7 +974,7 @@ class BootStrap {
             funcao.type = "Movimentação"
             funcao.returnType = "Void"
             funcao.qntParameters = "3"
-            funcao.code = "RotateMotor(var1(String), -var2(int), var3(int));\n"
+            funcao.code = "RotateMotor(var1(int), -var2(int), var3(int));\n"
             funcao.description = ""
             funcao.typeAliases = ""
             funcao.imageURL = ""
@@ -998,7 +1006,7 @@ class BootStrap {
             funcao.name = "limpar"
             funcao.type = "Escrita"
             funcao.returnType = "Void"
-            funcao.qntParameters = "1"
+            funcao.qntParameters = "0"
             funcao.code = "LcdClear(tela.Lcd); \n"
             funcao.description = ""
             funcao.typeAliases = ""

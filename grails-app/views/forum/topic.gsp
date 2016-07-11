@@ -39,7 +39,7 @@
                 ${topicName}
                 </font>
                     <g:link controller="forum" action="postthread" type="button" 
-                        data-toggle="tooltip" class="btn btn-sm btn-danger" id="topic" params="[topic: "${topicName}"]">
+                        data-toggle="tooltip" class="btn btn-sm btn-danger" id="topicId" params="[topicId: "${topicId}"]">
                         Novo Tópico
                     </g:link>
              
