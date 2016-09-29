@@ -32,7 +32,7 @@
                 <div class="jumbotron">
                 <div class="container">
                     <h2><b>Seja bem vindo ao W-Educ!</b></h2>
-                    <p>Este é um ambiente completo para robótica educacional. Aqui você pode <a href="/weduc/linguagem/procurar">programar</a> diversos robôs, discutir sobre robótica no nosso <a href="/weduc/forum/home">fórum</a>, ser acompanhado por <a href="/weduc/professores/procurar">professores</a> de robótica de todo o mundo  e muito mais! </p>
+                    <p>Este é um ambiente completo para robótica educacional. Aqui você pode <a href="/weduc/linguagem/procurar">programar</a> diversos robôs, discutir sobre robótica no nosso <a href="/weduc/forum/home">fórum</a>, ser acompanhado por <a href="/weduc/professor/procurar">professores</a> de robótica de todo o mundo  e muito mais! </p>
                     <p><a class="btn btn-primary btn-lg" href="/weduc/linguagem/procurar" role="button">Começar a programar!</a></p>
                 </div>
                 </div>

@@ -16,7 +16,7 @@ class MensagemController {
 	def escrever() {
                 def usuario = springSecurityService.getCurrentUser()
 		[usuario: usuario]
-                def destinatarios = Usuario.findAll()
+                def destinatarios = Usuario.findAllByEnabled(true)
                 [destinatarios: destinatarios]
                 
 	}
@@ -45,7 +45,7 @@ class MensagemController {
         
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
         def listarUsuarios() {
-            [destinatarios: Usuario.findAll()]
+            [destinatarios: Usuario.findAllByEnabled(true)]
         }
     
 

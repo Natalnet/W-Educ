@@ -13,12 +13,15 @@ class GerenciarController {
 
 	@Secured('ROLE_ADMIN')
 	def usuarios() {
-		[alunos: Aluno.findAll()]
+            
+        [alunos: Aluno.findAllByEnabled(true),
+         alunosI: Aluno.findAllByEnabled(false)]
 	}
         
     	@Secured('ROLE_ADMIN')
 	def professores() {
-		[professores: Professor.findAll()]
+            [professores: Professor.findAllByEnabled(true),
+             professoresI: Professor.findAllByEnabled(false)]
 	}
         
         @Secured('ROLE_ADMIN')
@@ -96,28 +99,15 @@ class GerenciarController {
 	}
         
     	@Secured('ROLE_ADMIN')
-	def excluir() {
+	def desativar() {
             
             def usuario = Usuario.get(params.id)
             
             if(usuario.username != "admin"){
-                def privilegio = UsuarioPrivilegio.find{usuario == usuario}
 
-                if(privilegio != null)
-                   privilegio.delete(flush:true, failOnError: true)
+                usuario.enabled = false
+                usuario.save(flush: true, failOnError: true)
 
-
-                Programa.findAll{usuario == usuario}.each{it.delete(flush:true)}
-                Login.findAll{usuario == usuario}.each{it.delete(flush:true)}
-                Mensagem.findAll{autor == usuario}.each{it.delete(flush:true)}
-                Mensagem.findAll{destinatario == usuario}.each{it.delete(flush:true)}
-
-                if(params.tipo != "Professor")
-                    RequisicaoDeAluno.findAll{aluno == usuario}.each{it.delete(flush:true)}
-                else
-                    RequisicaoDeAluno.findAll{professor == usuario}.each{it.delete(flush:true)}
-
-                usuario.delete(flush:true, failOnError: true)
 
                 if(params.tipo != "Professor")
                     redirect action: "usuarios"
@@ -126,10 +116,26 @@ class GerenciarController {
 
             }
             else{
-                render "Não é possível excluir o administrador do sistema."
+                render "Não é possível desativar o administrador do sistema."
             }
         }
         
+        @Secured('ROLE_ADMIN')
+	def ativar() {
+            
+            def usuario = Usuario.get(params.id)
+
+                usuario.enabled = true
+                usuario.save(flush: true, failOnError: true)
+
+
+                if(params.tipo != "Professor")
+                    redirect action: "usuarios"
+                else
+                    redirect action: "professores"  
+
+            }
+
         
     
         

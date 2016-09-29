@@ -27,7 +27,7 @@ class BootStrap {
                 
     	}
         
-        //usuário padrão para postagens no fórum
+//        usuário padrão para postagens no fórum
 //        def privilegioDeletado = Privilegio.findWhere(authority: "ROLE_ALUNO")
 //        def deletado = Aluno.findWhere(username: "deletado")
 //        if(!deletado) {
@@ -1088,7 +1088,7 @@ class BootStrap {
             linguagem.controlFlow.ifCode = "if(condicao){comandos1}else{comandos2}"
             linguagem.controlFlow.repeatCode = "repeat(var){\n comandos \n} \n"
             linguagem.controlFlow.whileCode = "while(condicao){\n comandos \n}\n"
-            linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
+            linguagem.controlFlow.switchCode = "switch ((int)variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
                                                "break;\n" +
@@ -1192,7 +1192,7 @@ class BootStrap {
             linguagem.controlFlow.ifCode = "if(condicao){\n comandos1 \n} \n else{ \n comandos2 \n} \n"
             linguagem.controlFlow.repeatCode = "repeat(var){\n comandos}\n"
             linguagem.controlFlow.whileCode = "while(condicao){\ncomandos}\n"
-            linguagem.controlFlow.switchCode = "switch (variavel) {\n" +
+            linguagem.controlFlow.switchCode = "switch ((int)variavel) {\n" +
                                                "//teste1\n" +
                                                "case (valor1): comandos1\n" +
                                                "break;\n" +

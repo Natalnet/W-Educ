@@ -289,14 +289,23 @@ class AmbienteController {
 
             def lexico = new analisadorLexico();
             lexico.readFile(f.path);
-            def sintatico = new analisadorSintatico(lexico, "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);
+            def sintatico = new analisadorSintatico(lexico, "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);            
             sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
             lexico.defineUsedStructures(sintatico);
-            sintatico.startCompile();
-            sintatico.closeFile();
-            // println(sintatico.isError());
-            // render sintatico.isError();
+            
+            try{
 
+
+                sintatico.startCompile();
+                sintatico.closeFile();
+                // println(sintatico.isError());
+                // render sintatico.isError();
+            }
+            catch (Exception e) {
+            	//println e
+                render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+                return;    
+            }
 
 
             //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
@@ -829,10 +838,19 @@ class AmbienteController {
         lexico.readFile(f.path);
         def sintatico = new analisadorSintatico(lexico, "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);
         sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
-        sintatico.startCompile();
-        sintatico.closeFile();
-        // println(sintatico.isError());
-        // render sintatico.isError();
+        
+        try{
+
+
+            sintatico.startCompile();
+            sintatico.closeFile();
+
+        }
+        catch (Exception e) {
+            render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+            return;    
+        }
+
             
         if(!sintatico.isError()) {
             programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;

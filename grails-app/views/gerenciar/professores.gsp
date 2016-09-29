@@ -20,6 +20,7 @@
                     ${flash.message}
                 </div>
                 </g:if>
+                <h2 class="page-header">Professores Ativos</h2>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -42,7 +43,7 @@
                                     <g:link class="btn btn-warning" controller="mensagem" action="escreverUsuario" id="${professor?.id}">Enviar Mensagem</g:link>
                                 </td>
                                 <td>
-                                    <g:link class="btn btn-danger" controller="gerenciar" action="excluir" id="${professor?.id}" params="[tipo: 'Professor']">Excluir</g:link>
+                                    <g:link class="btn btn-danger" controller="gerenciar" action="desativar" id="${professor?.id}" params="[tipo: 'Professor']">Desativar</g:link>
                                 </td>
                             </tr>
                             </g:each>
@@ -50,6 +51,36 @@
                     </table>
                 </div>
             </div>
+                <h2 class="page-header">Professores Inativos</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome de Usuário</th>
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <g:each in="${professoresI}" var="professor">
+                            <tr>
+                                <td>${professor?.username}</td>
+                                <td>
+                                    <g:link class="btn btn-success" controller="gerenciar" action="alternarProf" id="${professor?.id}">Alternar para Aluno</g:link>
+                                </td>
+                                <td>
+                                    <g:link class="btn btn-info" controller="erro" action="exibirP" id="${professor?.id}">Estatísticas</g:link>
+                                </td>
+                                <td>
+                                    <g:link class="btn btn-warning" controller="mensagem" action="escreverUsuario" id="${professor?.id}">Enviar Mensagem</g:link>
+                                </td>
+                                <td>
+                                    <g:link class="btn btn-danger" controller="gerenciar" action="ativar" id="${professor?.id}" params="[tipo: 'Professor']">Ativar</g:link>
+                                </td>
+                            </tr>
+                            </g:each>
+                        </tbody>
+                    </table>
+                </div>
         </div>
         
     </body>

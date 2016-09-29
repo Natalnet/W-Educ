@@ -46,7 +46,6 @@ class ForumController {
           topicName:topicName,
           topicId: topic.id  ]
     }
-
     def thread(long threadId) {
         def thread = DiscussionThread.findWhere( id : params.id.toLong())
         def comments = Comment.findAllByThread(thread)    
@@ -55,7 +54,7 @@ class ForumController {
          thread:thread]
   
     }
-    
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def postthread(){
         def topic = Topic.findWhere(id: params.topicId.toLong())
         [topic: topic.id]
