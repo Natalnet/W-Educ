@@ -80,6 +80,7 @@ class AmbienteController {
 		programa.save(flush: true)
 
                 if (saveCompile)
+                    
                     render "OK"
 	}
         
@@ -132,6 +133,11 @@ class AmbienteController {
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def compilarPrograma() {
                 
+                if (params.nome == ""){
+                    render "É preciso nomear e salvar o programa para compilar."
+                    return
+            
+                }
                 //salva o programa antes de compilar
                 saveCompile = false;
                 salvarPrograma();
