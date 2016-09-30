@@ -11,4 +11,3 @@ Este projeto, desenvolvido por pesquisadores do laboratório NatalNet da Univers
 - Ubuntu Linux 14.04 LTS
 - Groovy on Grails 2.4.3
 - Java 8
-- CodeRhino 1.2
