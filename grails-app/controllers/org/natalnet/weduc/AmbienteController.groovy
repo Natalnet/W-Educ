@@ -552,24 +552,22 @@ class AmbienteController {
         catch (Exception e) {
                  println e
         }
-         
+                
         def copiarArquivoCompilado = "cp /data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + programaCompilado 
         copiarArquivoCompilado += " /data/sites/weduc/tmp/weduc/envio/"+ usuario?.username
-        
         System.out.println(CommandShellToString.execute(copiarArquivoCompilado))
         
-        
-        def codigo = "import javax.swing.JOptionPane; \n import java.io.*;"
+        def codigo = "import javax.swing.JOptionPane; \n import java.io.*; \n"
             codigo += "public class WeducClient {\n "
             codigo += "public static void main(String[] args) { \n"
-            codigo += "try {Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\");} catch(IOException e){ } \n"
+            codigo += "try {Process p = Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\"); \n p.waitFor(); } catch(Exception ex){ \n } \n"
             codigo += "String comando = \" " + comando + "\"; \n"
             codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seletor de Portas\","
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
             codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
             codigo += "try {Runtime.getRuntime().exec(comando);} catch(IOException e){ } \n   \n"  
             codigo += "if (CodeRhino.getOS() == \"windows\"){ \n try{Runtime.getRuntime().exec(\" del "+ enviar + "\");} catch(IOException e){ } \n"
-            codigo += "try{Runtime.getRuntime().exec(\" del "+ programaCompilado + "jssc.jar\");} catch(IOException e){ } \n "
+            codigo += "try{Runtime.getRuntime().exec(\" del "+ programaCompilado + " jssc.jar\");} catch(IOException e){ } \n "
             codigo += "} else { \n try{Runtime.getRuntime().exec(\" rm "+ enviar + "\");} catch(IOException e){ } \n"
             codigo += " try{Runtime.getRuntime().exec(\" rm "+ programaCompilado + " jssc.jar\");} catch(IOException e){ } \n } \n} \n}"
         weducClient << codigo

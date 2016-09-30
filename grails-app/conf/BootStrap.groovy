@@ -27,22 +27,6 @@ class BootStrap {
                 
     	}
         
-//        usuário padrão para postagens no fórum
-//        def privilegioDeletado = Privilegio.findWhere(authority: "ROLE_ALUNO")
-//        def deletado = Aluno.findWhere(username: "deletado")
-//        if(!deletado) {
-//    		deletado = new Aluno()
-//    		deletado.username = "deletado"
-//    		deletado.password = "deletado"
-//    		deletado.email = "deletado@natalnet.br"
-//    		deletado.save flush: true, failOnError: true
-//
-//    		def usuarioPrivilegioD = new UsuarioPrivilegio()
-//    		usuarioPrivilegioD.usuario = deletado
-//    		usuarioPrivilegioD.privilegio = privilegioDeletado
-//    		usuarioPrivilegioD.save flush: true, failOnError: true
-//                
-//    	}
         
         //Cadastros dos tópicos do fórum
         def section = Section.findAll(); 
@@ -548,10 +532,10 @@ class BootStrap {
             funcao.imageURL = ""
             linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
             
-            println "Cadastro da linguagem " + linguagem.name + " concluido"
+            println "Cadastro da linguagem " + linguagem.name + " concluído."
             
         } else {
-            println "Linguagem NXC ja existe no banco de dados"
+            println "Linguagem NXC jÁ existe no banco de dados."
         }
         
         // Fim do cadastro de linguagem
@@ -573,7 +557,7 @@ class BootStrap {
             linguagem.compilerFile = ""
             linguagem.sendCode = "dll -r ProgramaCV3.rbf & dll -d cv3"
             linguagem.sentExtension = ""
-            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
+            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
             linguagem.footnote = ""
             linguagem.mainFunction = "int main(){\nOutputInit();\nButtonLedInit();\nLCD tela;\nLcdInit(tela.Lcd);\nLcdClear(tela.Lcd);\nSoundInit();\nSoundOpen();\ncomandos\nButtonLedExit();\nSoundClose();\nSoundExit();\nLcdExit();\nOutputClose();\nOutputExit();\n}"
             linguagem.otherFunctions = "void funcao(){\n comandos \n} \n"
@@ -606,7 +590,7 @@ class BootStrap {
 
             // Controles de fluxo da linguagem
             linguagem.controlFlow = new ControleDeFluxo()
-            linguagem.controlFlow.languageName = "NXC"
+            linguagem.controlFlow.languageName = "CV3"
             linguagem.controlFlow.breakCode = "break;\n"
             linguagem.controlFlow.doCode = "do {\n comandos \n} \n while (condicao); \n"
             linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo) {\n comandos} \n"
@@ -628,7 +612,7 @@ class BootStrap {
             linguagem.save(flush: true, failOnError: true)
             
             // Funções
-            println "Iniciando cadastro das funcoes da linguagem " + linguagem.name
+            println "Iniciando cadastro das funcoes da linguagem " + linguagem.name + "."
             
             def defines = new Definicao()
             defines.name = "a"
@@ -1047,7 +1031,7 @@ class BootStrap {
             linguagem.compilerFile = "ArduinoUploader.exe"
             linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
             linguagem.sentExtension = ".cpp.hex"
-            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n*" +
+            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n*" +
                                "void setup(){\n  }\n"     
             linguagem.footnote = ""
             linguagem.mainFunction = "void loop(){\n comandos} \n"
@@ -1146,7 +1130,7 @@ class BootStrap {
             linguagem.compilerFile = "ArduinoUploader.exe"
             linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
             linguagem.sentExtension = ".cpp.hex"
-            linguagem.header = "/*\n* W-Educ\n* www2.natalnet.br/w-educ\n* (C) Copyright 2014\n*/ \n" +
+            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n*/ \n" +
                                "#include <BnrOneA.h> \n #include <SPI.h> \n" +
                                "BnrOneA one; \n" +          
                                "#define SSPIN 2 \n"  +
@@ -1185,7 +1169,7 @@ class BootStrap {
 
             // Controles de fluxo da linguagem
             linguagem.controlFlow = new ControleDeFluxo()
-            linguagem.controlFlow.languageName = "ANO"
+            linguagem.controlFlow.languageName = "ONE"
             linguagem.controlFlow.breakCode = "break;\n"
             linguagem.controlFlow.doCode = "do {\n comandos \n} \n while (condicao); \n"
             linguagem.controlFlow.forCode = "for (int variavel = valor1; variavel < valor2; variavel+=passo){ \n comandos \n} \n"
@@ -1207,7 +1191,7 @@ class BootStrap {
             linguagem.save(flush: true, failOnError: true)
             
             // Funções
-            println "Iniciando cadastro das funcoes da linguagem " + linguagem.name    
+            println "Iniciando cadastro das funções da linguagem " + linguagem.name + "."   
             
             def funcao = new Funcao()
             funcao.name = "obstaculoinfra"
@@ -1396,10 +1380,10 @@ class BootStrap {
             funcao.imageURL = ""
             linguagem.addToFunctions(funcao).save(flush: true, failOnError: true)
 
-            println "Cadastro da linguagem " + linguagem.name + " concluido"
+            println "Cadastro da linguagem " + linguagem.name + " concluído"
             
         } else {
-            println "Linguagem ONE ja existe no banco de dados"
+            println "Linguagem ONE já existe no banco de dados."
         }
         
         // Fim do cadastro de linguagem
