@@ -152,9 +152,9 @@ class BootStrap {
             linguagem.extension = "nxc"
             linguagem.compileCode = "localdocompilador/nbc diretorio/nomedoprograma.nxc -O=diretorio/nomedoprograma.rxe"
             linguagem.compilerFile = "nbc"
-            linguagem.sendCode = "diretorio/nbc.exe -d diretorio/nomedoprograma.nxc"
-            linguagem.sentExtension = "nxc"
-            linguagem.header = ""
+            linguagem.sendCode = "nbc.exe -d nomedoprograma.nxc"
+            linguagem.sentExtension = "nomedoprograma.nxc"
+            linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n*/ \n"
             linguagem.footnote = ""
             linguagem.mainFunction = "task main(){\n comandos \n}\n"
             linguagem.otherFunctions = "task funcao(){\n comandos \n}\n"
@@ -556,7 +556,7 @@ class BootStrap {
             linguagem.compileCode = "make -C diretorio"
             linguagem.compilerFile = ""
             linguagem.sendCode = "dll -r ProgramaCV3.rbf & dll -d cv3"
-            linguagem.sentExtension = ""
+            linguagem.sentExtension = "cv3"
             linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n* */\n#include \"CV3.h\"\n#define a OUT_A\n#define b OUT_B\n#define c OUT_C\n#define d OUT_D\n#define ab OUT_AB\n#define ac OUT_AC\n#define ad OUT_AD\n#define ba OUT_BA\n#define bc OUT_BC\n#define bd OUT_BD\n#define ca OUT_CA\n#define cb OUT_BC\n#define cd OUT_CD\n#define da OUT_DA\n#define db OUT_DB\n#define dc OUT_DC\n#define abcd OUT_ALL\n#define abc OUT_ABC\n"
             linguagem.footnote = ""
             linguagem.mainFunction = "int main(){\nOutputInit();\nButtonLedInit();\nLCD tela;\nLcdInit(tela.Lcd);\nLcdClear(tela.Lcd);\nSoundInit();\nSoundOpen();\ncomandos\nButtonLedExit();\nSoundClose();\nSoundExit();\nLcdExit();\nOutputClose();\nOutputExit();\n}"
@@ -1030,7 +1030,7 @@ class BootStrap {
             linguagem.compileCode = "arduino --pref build.path=diretorio --verify diretorio/nomedoprograma.ino"
             linguagem.compilerFile = "ArduinoUploader.exe"
             linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
-            linguagem.sentExtension = ".cpp.hex"
+            linguagem.sentExtension = "nomedoprograma.cpp.hex"
             linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n*" +
                                "void setup(){\n  }\n"     
             linguagem.footnote = ""
@@ -1129,7 +1129,7 @@ class BootStrap {
             linguagem.compileCode = "arduino --pref build.path=diretorio --verify diretorio/nomedoprograma.ino"
             linguagem.compilerFile = "ArduinoUploader.exe"
             linguagem.sendCode = "ArduinoUploader.exe nomedoprograma.cpp.hex 1 porta"
-            linguagem.sentExtension = ".cpp.hex"
+            linguagem.sentExtension = "nomedoprograma.cpp.hex"
             linguagem.header = "/*\n* W-Educ\n* www.natalnet.br/weduc\n* (C) Copyright 2014\n*/ \n" +
                                "#include <BnrOneA.h> \n #include <SPI.h> \n" +
                                "BnrOneA one; \n" +          
