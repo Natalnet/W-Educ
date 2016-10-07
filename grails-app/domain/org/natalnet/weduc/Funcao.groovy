@@ -15,4 +15,8 @@ class Funcao {
     
     static constraints = {
     }
+    static mapping = {
+        description sqlType: 'longtext'
+        code sqlType: 'longtext'
+    }
 }
