@@ -1,12 +1,14 @@
 package org.natalnet.weduc
 
 class DiscussionThread {
-    static belongsTo = Topic
-    static hasMany = [comments:Comment]
 
-    Topic topic
-    String subject 
+    static belongsTo = [topic: Topic]
+    static hasMany = [comments: Comment]
+
+    String title
+    String subject
     Usuario opener
+    boolean blocked
     Date createDate = new Date()
 
     public long getNumberOfReplies() {
@@ -15,5 +17,4 @@ class DiscussionThread {
 
     static constraints = {
     }
-    
 }

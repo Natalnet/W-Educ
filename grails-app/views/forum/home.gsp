@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta name="layout" content="admin">
-		<title>Fórum</title>
-                
-                <style>
-                    #nav {
-                        background-color: AliceBlue
-                    }
-                </style>
-	</head>
-	<body>   
-                <div class="row">
-            <div class="col-lg-12">
-                <br>
-                <div class="jumbotron">
-                <div class="container">
-                    <p>Este é o <b>Fórum de Discussão</b> do <b>W-Educ</b>. Compartilhe projetos, notícias, eventos, desafios e sinta-se a vontade para tirar dúvidas!</p>
-                </div>
-                </div>
-        
-        
-        <g:each in="${topic}" var="topicId">
-                
-            <div class="section">
-                <div class="list group"> 
-                 <nav class="navbar navbar-default" id="nav">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                                <g:link controller="forum" action="topic" id="${topicId?.title}">
-                              <font face ="times" size="5">  
-                                  <b>${topicId?.title}</b>
-                              </font>
+<head>
+
+    <meta name="layout" content="admin"/>
+    <title>Fórum</title>
+
+</head>
+<body>   
+        <div class="row">
+        <div class="col-lg-12">
+            <br>
+            <div class="jumbotron">
+            <div class="container">
+                <p>Este é o <b>Fórum de Discussão</b> do <b>W-Educ</b>. Compartilhe projetos, notícias, eventos, desafios e sinta-se a vontade para tirar dúvidas!</p>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <g:each in="${sections}" var="section">
+        <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                ${section?.title}
+                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu slidedown">
+                        <li>
+                            <g:link controller="forum" action="topicCreate" type="button" params='[sectionId: "${section.id}"]'>
+                                <i class="fa fa-plus fa-fw"></i> Adicionar
                             </g:link>
-                        <div class="navbar-footer">
-                                <font face="verdana" color="#696969">
-                                    <b>${topicId?.description}</b>  
-                                </font>
-                         </div>
-                        </div>
-                    </div>
-                </nav>                   
+                        </li>
+                    </ul>
                 </div>
-                     <!--<g:each in="${threads}" var="thread">
-                        <div class="topic">
-                          <div class="list-group">
-                              <a href="#" class="list-group-item">
-                                 <g:link controller="forum" action="thread" params="[threadId:thread.id]" >
-                                  ${thread.subject}
-                                  </g:link>
-                                     <div class="rightInfo">
-                                        <b>replies</b>: ${thread.numberOfReplies}
-                                    </div>
-                                     <div>
-                                         Started by: ${thread.opener.username}
-                                    on: <g:formatDate date="${thread.createDate}" format="dd MMM yyyy"/>
-                                    </div>
-                              </a>
-                           </div>
-                        </div>
-                    </g:each>-->
-              
-                </div> 
-                
-               
-       
-         </g:each>
+                </sec:ifAnyGranted>
+            </div>
+            <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tópico</th>
+                                    <th>Posts</th>
+                                    <th>Respostas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <g:each in="${section.topics}" var="topic">
+                                <tr>
+                                    <td>
+                                      <g:link controller="forum" action="topic" id="${topic?.title}">
+                                        <b>${topic?.title}</b>
+                                      </g:link>
+                                      <p>${topic?.description}</p>
+                                    </td>
+                                    <td>${topic?.getNumberOfThreads()}</td>
+                                    <td>${topic?.getNumberOfReplies()}</td>
+                                </tr>
+                              </g:each>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+            </div>
+        </div>
+        </div>
+        </g:each>
+        </div>
         
-	</body>
+  </body>
         
 </html>

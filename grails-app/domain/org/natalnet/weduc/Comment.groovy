@@ -1,7 +1,7 @@
 package org.natalnet.weduc
 
 class Comment {
-    
+
     static belongsTo = DiscussionThread
     DiscussionThread thread
     Usuario commentBy
@@ -11,5 +11,4 @@ class Comment {
     static constraints = {
         body( maxSize: 8000)
     }
-    
 }

@@ -1,85 +1,58 @@
-<!--
-  To change this license header, choose License Headers in Project Properties.
-    To change this template file, choose Tools | Templates
-  and open the template in the editor.
--->
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta name="layout" content="admin">
-		<title>Fórum</title>
-                
-            <style>
-                table#t01 thead {
-                    background-color: teal;
-                    color: White;
-                }
-                table#t01 tbody {
-                    background-color: AliceBlue ;
-                    color: Black;
-                }
-                button#b01{
-                    position: relative;
-                    right: -600px;
-                    color: white;
-                    background-color: royalblue;
-                    border-radius: 8px;
-                    padding: 12px 28px;
-                    text-align: center;
-                    border: 2px solid white;
-                }
-            </style>
-	</head>
-	<body>
-            
-        <div class="section">
-            <div class="sectionTitle">
-                <font face ="verdana" size="6" color="black"> 
-                ${topicName}
-                </font>
-                    <g:link controller="forum" action="postthread" type="button" 
-                        data-toggle="tooltip" class="btn btn-sm btn-danger" id="topicId" params="[topicId: "${topicId}"]">
-                        Novo Tópico
-                    </g:link>
-             
-            </div>
-            <g:each in="${threads}" var="thread">
-                <div class="topic">
-                    <table class = "table" id="t01">
-                            <thead>
-                                <tr>
-                                    <th>Assunto</th>
-                                    <th>Comentários</th>
-                                    <th>Criado por/Data de Criação</th>
-                                </tr>
-                            </thead> 
-                            <tbody>
-                    
-                                <tr>
-                                    <th>
-                                 <g:link controller="forum" action="thread" id="${thread?.id}">
-                                 ${thread.subject}
-                                 </g:link>
-                                    </th>
-                                    <th>
-                                        <div class="rightInfo">
-                                            <b>Comentários</b>: ${thread.numberOfReplies}
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            Criado por <b> ${thread.opener.username} </b> <br>
-                                            em <g:formatDate date="${thread.createDate}" format="dd MMM yyyy"/>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </g:each>
-                </div>
-        
 
-	</body>
+<html>
+<head>
+
+    <meta name="layout" content="admin"/>
+    <title>Fórum</title>
+
+</head>
+<body>   
+    <h1 class="page-header">
+        ${topic?.title}
+        <div class="btn-group pull-right">
+            <g:link controller="forum" action="postCreate" type="button" class="btn btn-sm btn-primary" params='[topicId: "${topic.id}"]'>
+                Nova Postagem
+            </g:link>
+        </div>
+    </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Post</th>
+                                        <th>Respostas</th>
+                                        <th>Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <g:each in="${topic.threads}" var="thread">
+                                        <g:if test="${thread.blocked == false}">
+                                        <tr>
+                                            <td>
+                                              <g:link controller="forum" action="thread" id="${thread?.id}">
+                                                <b>${thread?.title}</b>
+                                                <p>por ${thread?.opener.username}</p>
+                                              </g:link>
+                                            </td>
+                                            <td>${thread?.getNumberOfReplies()}</td>
+                                            <td><g:formatDate date="${thread.createDate}" format="dd/MM/yyyy HH:mm:ss"/></td>
+                                        </tr>
+                                        </g:if>
+                                    </g:each>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+        
+  </body>
+        
 </html>
