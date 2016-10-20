@@ -9,14 +9,19 @@
 </head>
 <body>   
         <div class="row">
-        <div class="col-lg-12">
-            <br>
-            <div class="jumbotron">
-            <div class="container">
-                <p>Este é o <b>Fórum de Discussão</b> do <b>W-Educ</b>. Compartilhe projetos, notícias, eventos, desafios e sinta-se a vontade para tirar dúvidas!</p>
+            <div class="col-lg-12">
+                <br>
+                <g:if test="${flash?.success}">
+                    <div class="alert alert-success">
+                        ${flash?.success}
+                    </div>
+                </g:if>
+                <div class="jumbotron">
+                    <div class="container">
+                        <p>Este é o <b>Fórum de Discussão</b> do <b>W-Educ</b>. Compartilhe projetos, notícias, eventos, desafios e sinta-se a vontade para tirar dúvidas!</p>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
         </div>
         <div class="row">
         <g:each in="${sections}" var="section">

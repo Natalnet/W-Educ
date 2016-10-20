@@ -11,11 +11,16 @@
     <h1 class="page-header">
         ${topic?.title}
         <div class="btn-group pull-right">
-            <g:link controller="forum" action="postCreate" type="button" class="btn btn-sm btn-primary" params='[topicId: "${topic.id}"]'>
+            <g:link controller="thread" action="create" type="button" class="btn btn-sm btn-primary" params='[topicId: "${topic.id}"]'>
                 Nova Postagem
             </g:link>
         </div>
     </h1>
+    <g:if test="${flash?.success}">
+        <div class="alert alert-success">
+            ${flash?.success}
+        </div>
+    </g:if>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
@@ -34,7 +39,7 @@
                                         <g:if test="${thread.blocked == false}">
                                         <tr>
                                             <td>
-                                              <g:link controller="forum" action="thread" id="${thread?.id}">
+                                              <g:link controller="thread" action="show" id="${thread?.id}">
                                                 <b>${thread?.title}</b>
                                                 <p>por ${thread?.opener.username}</p>
                                               </g:link>

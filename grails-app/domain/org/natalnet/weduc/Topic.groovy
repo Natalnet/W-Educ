@@ -17,5 +17,11 @@ class Topic {
     }
 
     static constraints = {
+        title(blank: false)
+        description(blank: false)
+    }
+    
+    static mapping = {
+        threads sort: 'createDate', order: 'desc'
     }
 }

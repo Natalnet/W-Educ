@@ -7,7 +7,7 @@
     <h3 class="page-header">Confirmação</h3>
     <div class="alert alert-warning">
         <div class="pull-right">
-            <form action='<g:createLink controller="forum" action="confirmBlock" id="${thread?.id}"/>' method="post">
+            <form action='<g:createLink controller="thread" action="updateBlock" id="${thread?.id}"/>' method="post">
                 <p><button type="submit" class="btn btn-danger">Confirmar</button></p>
             </form>
         </div>

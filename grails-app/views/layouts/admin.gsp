@@ -1,72 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Ambiente de programação web para robótica educacional">
-        <meta name="author" content="Victor Torres, Sarah Thomaz">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ambiente de programação web para robótica educacional">
+    <meta name="author" content="Victor Torres, Sarah Thomaz">
 
-        <title><g:layoutTitle default="W-Educ"/></title>
+    <title><g:layoutTitle default="W-Educ"/></title>
 
-        <!-- Bootstrap Core CSS -->
-        <asset:stylesheet src="css/bootstrap.min.css"/>
+    <!-- Bootstrap Core CSS -->
+    <asset:stylesheet src="css/bootstrap.min.css"/>
 
-        <!-- MetisMenu CSS -->
-        <asset:stylesheet src="css/plugins/metisMenu/metisMenu.min.css"/>
+    <!-- MetisMenu CSS -->
+    <asset:stylesheet src="css/plugins/metisMenu/metisMenu.min.css"/>
 
-        <!-- Timeline CSS -->
-        <asset:stylesheet src="css/plugins/timeline.css"/>
+    <!-- Timeline CSS -->
+    <asset:stylesheet src="css/plugins/timeline.css"/>
 
-        <!-- Custom CSS -->
-        <asset:stylesheet src="css/sb-admin-2.css"/>
+    <!-- Custom CSS -->
+    <asset:stylesheet src="css/sb-admin-2.css"/>
 
-        <!-- Morris Charts CSS -->
-        <asset:stylesheet src="css/plugins/morris.css"/>
+    <!-- Morris Charts CSS -->
+    <asset:stylesheet src="css/plugins/morris.css"/>
 
-        <!-- Custom Fonts -->
-        <asset:stylesheet src="font-awesome-4.1.0/css/font-awesome.min.css"/>
+    <!-- Custom Fonts -->
+    <asset:stylesheet src="font-awesome-4.1.0/css/font-awesome.min.css"/>
 
-        <!-- Chosen jQuery Plugin -->
-        <asset:stylesheet src="css/chosen.min.css"/>
+    <!-- Chosen jQuery Plugin -->
+    <asset:stylesheet src="css/chosen.min.css"/>
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-        <!-- jQuery Version 1.11.0 -->
-        <asset:javascript src="js/jquery-1.11.0.js"/>
+    <g:layoutHead/>
 
-        <!-- Bootstrap Core JavaScript -->
-        <asset:javascript src="js/bootstrap.min.js"/>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
-
-        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
-            <!-- Morris Charts JavaScript -->
-            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
-            <asset:javascript src="js/plugins/morris/morris.min.js"/>
-        </g:if>
-
-        <!-- Custom Theme JavaScript -->
-        <asset:javascript src="js/sb-admin-2.js"/>
-
-        <!-- Chosen jQuery UI -->
-        <asset:javascript src="js/chosen.jquery.min.js"/>
-        <asset:javascript src="js/chosen.proto.min.js"/>
-
-        <!-- Bootbox.js -->
-        <asset:javascript src="js/bootbox.min.js"/>
-
-        <g:layoutHead/>
-
-    </head>
+</head>
 
     <body>
 
@@ -81,7 +56,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                   <a class="navbar-brand" href=""><b>W-Educ</b> - Ambiente de Desenvolviento Web para Robótica Educacional</a>
+                    <a class="navbar-brand" href=""><b>W-Educ</b> - Ambiente de Desenvolviento Web para Robótica Educacional</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -158,6 +133,7 @@
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                                 <a href="#"><i class="fa fa-legal fa-fw"></i> Administrador<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
                                     <li>
                                         <g:link controller="erro" action="sistema">Estatísticas do Sistema</g:link>
                                     </li>
@@ -167,12 +143,14 @@
                                     <li>
                                         <g:link controller="gerenciar" action="usuarios">Gerenciar Alunos</g:link>
                                     </li>
+                                </ul>
                                 <!-- /.nav-second-level -->
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
                             <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_PROFESSOR">
+                                <ul class="nav nav-second-level">
                                     <li>
                                         <g:link controller="erro" action="exibirProf">Estatítiscas</g:link>
                                     </li>
@@ -191,15 +169,15 @@
                                     <li>
                                         <g:link controller="forum" action="home">Fórum</g:link>
                                     </li>
+                                </ul>
                                 <!-- /.nav-second-level -->
                             
                             </sec:ifAnyGranted>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
                             <a href="#"><i class="fa fa-male fa-fw"></i> Aluno<span class="fa arrow"></span></a>
                             </sec:ifAnyGranted>
                             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
-                            
-                                
+                                <ul class="nav nav-second-level">
                                     <li>
                                         <g:link controller="erro" action="exibirAluno">Desempenho</g:link>
                                     </li>
@@ -212,7 +190,7 @@
                                     <li>
                                         <g:link controller="forum" action="home">Fórum</g:link>
                                     </li>
-                                
+                                </ul>
                                 <!-- /.nav-second-level -->
                             
                             </sec:ifAnyGranted>
@@ -230,6 +208,32 @@
 
         </div>
         <!-- /#wrapper -->
+                
+        <!-- jQuery Version 1.11.0 -->
+        <script src="/weduc/assets/js/jquery.min.js" type="text/javascript"></script>
+        <asset:javascript src="js/jquery.min.js"/>
+
+        <!-- Bootstrap Core JavaScript -->
+        <asset:javascript src="js/bootstrap.min.js"/>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
+
+        <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
+            <!-- Morris Charts JavaScript -->
+            <asset:javascript src="js/plugins/morris/raphael.min.js"/>
+            <asset:javascript src="js/plugins/morris/morris.min.js"/>
+        </g:if>
+
+        <!-- Custom Theme JavaScript -->
+        <asset:javascript src="js/sb-admin-2.js"/>
+
+        <!-- Chosen jQuery UI -->
+        <asset:javascript src="js/chosen.jquery.min.js"/>
+        <asset:javascript src="js/chosen.proto.min.js"/>
+
+        <!-- Bootbox.js -->
+        <asset:javascript src="js/bootbox.min.js"/>
 
     </body>
 

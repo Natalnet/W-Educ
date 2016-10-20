@@ -9,6 +9,6 @@ class Comment {
     Date createDate = new Date()
     
     static constraints = {
-        body( maxSize: 8000)
+        body(blank: false, maxSize: 8000)
     }
 }

@@ -11,9 +11,14 @@
     <h1 class="page-header">
         Novo Post
     </h1>
+    <g:if test="${flash?.error}">
+        <div class="alert alert-danger">
+            ${flash?.error}
+        </div>
+    </g:if>
     <div class="row">
         <div class="col-lg-12">
-            <form action='<g:createLink controller="forum" action="postNew" id="enviar"/>' method="post">
+            <form action='<g:createLink controller="thread" action="save" />' method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Preencha os campos abaixo:

@@ -8,36 +8,48 @@
 
 </head>
 <body>
-    <h1>${topic?.title}</h1>
+    <br />
+    <g:if test="${flash?.error}">
+        <div class="alert alert-danger">
+            ${flash?.error}
+        </div>
+    </g:if>
+    <g:elseif test="${flash?.success}">
+        <div class="alert alert-success">
+            ${flash?.success}
+        </div>
+    </g:elseif>
     <div class="row">
         <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-comments fa-fw"></i> Post
-                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <i class="fa fa-comments fa-fw"></i> ${thread?.title}
+                
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu slidedown">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-edit fa-fw"></i> Editar
-                            </a>
-                        </li>
-                        <li>
-                            <g:link controller="forum" action="block" type="button" id="${thread?.id}">
-                                <i class="fa fa-minus-circle fa-fw"></i> Bloquear
-                            </g:link>
-                        </li>
+                        <g:if test="${canEdit}">
+                            <li>
+                                <g:link controller="thread" action="edit" type="button" id="${thread?.id}">
+                                    <i class="fa fa-edit fa-fw"></i> Editar
+                                </g:link>
+                            </li>
+                        </g:if>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <li>
+                                <g:link controller="thread" action="block" type="button" id="${thread?.id}">
+                                    <i class="fa fa-minus-circle fa-fw"></i> Bloquear
+                                </g:link>
+                            </li>
+                        </sec:ifAnyGranted>
                     </ul>
                 </div>
-                </sec:ifAnyGranted>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="well">
-                    <h4>${thread?.title}</h4>
                     <p>${thread?.subject}</p>
                 </div>
                 <ul class="chat">

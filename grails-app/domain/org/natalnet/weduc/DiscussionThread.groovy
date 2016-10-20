@@ -16,5 +16,10 @@ class DiscussionThread {
     }
 
     static constraints = {
+        title(blank: false)
+    }
+    
+    static mapping = {
+        comments sort: 'createDate', order: 'asc'
     }
 }

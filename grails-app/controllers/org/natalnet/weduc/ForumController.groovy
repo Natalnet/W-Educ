@@ -24,12 +24,6 @@ class ForumController {
         [topic: topic]
     }
 
-    def thread(long threadId) {
-        def thread = DiscussionThread.findWhere( id : params.id.toLong())
-        
-        [thread: thread]
-    }
-
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def topicCreate(){
         def section = Section.findWhere(id: params.sectionId.toLong())
@@ -42,39 +36,13 @@ class ForumController {
         topic.section = Section.findWhere( id : params.section.toLong())
         topic.title = params.topicTitle
         topic.description = params.topicDescription
-        topic.save(flush: true, failOnError: true)
 
-        if(params.section != null) {
-            flash.message = "Tópico criado com sucesso."
+        if(topic.save()) {
+            flash.success = "Tópico criado com sucesso."
             redirect controller: "forum", action: "home"
         } else {
-            flash.message = "Erro ao criar um novo tópico."
-            redirect controller: "forum", action: "home"
-        }
-    }
-
-    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def postCreate(){
-        def topic = Topic.findWhere(id: params.topicId.toLong())
-        [topic: topic]
-    }
-
-    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def postNew() {
-        def thread = new DiscussionThread()
-        thread.topic = Topic.findWhere( id : params.topic.toLong())
-        thread.title = params.postTitle
-        thread.subject = params.postBody
-        thread.opener = springSecurityService.getCurrentUser()
-        thread.blocked = false
-        thread.save(flush: true, failOnError: true)
-
-        if(params.topic != null) {
-            flash.message = "Post criado com sucesso."
-            redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
-        } else {
-            flash.message = "Erro ao criar um novo tópico."
-            redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
+            flash.error = "Erro ao criar um novo tópico."
+            redirect controller: "forum", action: "topicCreate", params: [sectionId: topic.section.id]
         }
     }
 
@@ -85,32 +53,15 @@ class ForumController {
         comment.commentBy = springSecurityService.getCurrentUser()
         comment.thread = DiscussionThread.findWhere( id : params.thread.toLong())
         comment.body = params.mensagem
-        comment.save(flush: true, failOnError: true)
 
-        if(comment.body != null) {
-            flash.message = "Mensagem a " + comment.thread + " enviada com sucesso."
-            redirect controller: "forum", action: "thread", params: [id: comment.thread.id]
+        if(comment.save()) {
+            flash.success = "Resposta a " + comment.thread.title + " enviada com sucesso."
+            redirect controller: "thread", action: "show", params: [id: comment.thread.id]
         } else {
-            flash.message = "Erro ao enviar a mensagem."
-            redirect controller: "forum", action: "thread", params: [id: comment.thread.id]
+            flash.error = "Erro ao enviar a resposta."
+            redirect controller: "thread", action: "show", params: [id: comment.thread.id]
         }
         
         
-    }
-    
-    @Secured(['ROLE_ADMIN'])
-    def block() {
-        def thread = DiscussionThread.findWhere( id : params.id.toLong())
-
-        [thread: thread]
-    }
-    
-    @Secured(['ROLE_ADMIN'])
-    def confirmBlock() {
-        def thread = DiscussionThread.findWhere( id : params.id.toLong())
-        thread.blocked = true
-        thread.save(flush: true, failOnError: true)
-
-        redirect controller: "forum", action: "home"
     }
 }

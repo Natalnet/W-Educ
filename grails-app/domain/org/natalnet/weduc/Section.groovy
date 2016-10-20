@@ -7,4 +7,8 @@ class Section {
     
     static constraints = {
     }
+    
+    static mapping = {
+        topics sort: 'title', order: 'asc'
+    }
 }
