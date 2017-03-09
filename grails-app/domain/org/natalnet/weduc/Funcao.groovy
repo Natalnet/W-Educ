@@ -19,4 +19,18 @@ class Funcao {
         description sqlType: 'longtext'
         code sqlType: 'longtext'
     }
+    
+    def clonar(Linguagem owner = null) {
+        def novaFuncao = new Funcao(this.properties)
+        novaFuncao.typeAliases = ""
+        novaFuncao.imageURL = ""
+        
+        if(owner != null){
+            novaFuncao.linguagem = owner
+        }else{
+            novaFuncao.name += " - Cópia"
+        }
+        
+        return novaFuncao.save()
+    }
 }

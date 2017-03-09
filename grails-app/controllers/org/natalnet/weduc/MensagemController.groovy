@@ -73,9 +73,9 @@ class MensagemController {
 
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
 	def todas() {
-		def usuario = springSecurityService.getCurrentUser()
-		def mensagens = Mensagem.findAllWhere(destinatario: usuario)
-		[mensagens: mensagens]
+            def usuario = springSecurityService.getCurrentUser()
+            def mensagens = Mensagem.findAllWhere(destinatario: usuario)
+            [mensagens: mensagens]
 	}
 
 }

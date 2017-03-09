@@ -5,11 +5,21 @@
         <title>Lista de Funções - W-Educ</title>
     </head>
     <body>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Lista de Funções - Linguagem ${linguagem?.name}
+                    <g:if test="${canChange}">
+                        <div class="btn-group pull-right">
+                            <g:link action="nova" id="${linguagem?.id}" class="btn btn-default">Nova função</g:link>
+                        </div>
+                    </g:if>
+                </h1>
+            </div>
+        </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Lista de Funções</h1>
-                <h2>Linguagem ${linguagem?.name} <g:link action="nova" id="${linguagem?.id}" class="btn btn-default">Nova função</g:link></h2>
                 <g:if test="${flash.message}">
                 <g:if test="${flash.message.contains("removida")}">
                 <div class="alert alert-danger">
@@ -25,17 +35,25 @@
                         <thead>
                             <tr>
                                 <th>Nome da Função</th>
-                                <th>Opções</th>
+                                <g:if test="${canChange}">
+                                    <th>Opções</th>
+                                </g:if>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each in="${funcoes}" var="funcao">
                             <tr>
                                 <td><g:link controller="funcao" action="detalhes" id="${funcao?.id}">${funcao?.name}</g:link></td>
-                                <td>
-                                    <g:link controller="funcao" action="editar" id="${funcao?.id}">Editar função</g:link>&nbsp;
-                                    <g:link controller="funcao" action="remover" id="${funcao?.id}">Remover função</g:link>
-                                </td>
+                                <g:if test="${canChange}">
+                                    <td>
+                                        <g:link controller="funcao" action="editar" id="${funcao?.id}" class="btn btn-outline btn-primary btn-xs">
+                                            Editar função
+                                        </g:link>
+                                        <g:link controller="funcao" action="remover" id="${funcao?.id}" class="btn btn-outline btn-primary btn-xs">
+                                            Remover função
+                                        </g:link>
+                                    </td>
+                                </g:if>
                             </tr>
                             </g:each>
                         </tbody>

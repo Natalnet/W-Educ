@@ -30,7 +30,7 @@ class FuncaoController {
                 funcao.returnType = params.retorno
                 funcao.qntParameters = params.qntParametros
                 funcao.code = params.codigo
-                funcao.description = params.descricao
+                funcao.description = params.descricao.toString()
                 funcao.linguagem = linguagem
                 funcao.typeAliases = ""
                 funcao.imageURL = ""
@@ -95,7 +95,10 @@ class FuncaoController {
 	def listar() {
 		def usuario = springSecurityService.getCurrentUser()
                 def linguagem = Linguagem.get(params.id)
-		[funcoes: Funcao.findAllByLinguagem(linguagem), linguagem: linguagem]
+                
+                def canChange = (usuario == linguagem.autor) || (linguagem.isSystemLanguage && request.isUserInRole('ROLE_ADMIN'))
+        
+		[funcoes: Funcao.findAllByLinguagem(linguagem), linguagem: linguagem, canChange: canChange]
 	}
 
         @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])

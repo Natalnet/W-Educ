@@ -20,17 +20,33 @@ class Linguagem {
     Operadores operators
     ControleDeFluxo controlFlow
     
-    static hasMany = [functions: Funcao, defines: Definicao]
-
-    static belongsTo = [autor: Professor]
+    Professor autor
+    
+    boolean isPrivate
+    
+    static hasMany = [functions: Funcao, defines: Definicao, acessors: Professor]
+    
+    static belongsTo = Professor
 
     static constraints = {
+        isPrivate defaultValue: false
     }
+    
     static mapping = {
+        sort 'name'
         description sqlType: 'longtext'
         header sqlType: 'longtext'
         footnote sqlType: 'longtext'
     }
     
-    
+    def clonar(Usuario author){
+        def novaLinguagem = new Linguagem(this.properties)
+
+        novaLinguagem.name += " - Cópia"
+        novaLinguagem.functions = null
+        novaLinguagem.autor = author
+        novaLinguagem.footnote = ""
+        
+        return novaLinguagem.save()
+    }
 }

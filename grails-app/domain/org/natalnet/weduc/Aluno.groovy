@@ -2,10 +2,9 @@ package org.natalnet.weduc
 
 class Aluno extends Usuario {
 
-	Professor professor
+    Professor professor
 
-	static constraints = {
-		professor nullable: true
-	}
-	
+    static constraints = {
+            professor nullable: true
+    }
 }

@@ -566,20 +566,25 @@ class AmbienteController {
         def codigo = "import javax.swing.JOptionPane; \n import java.io.*; \n"
             codigo += "public class WeducClient {\n "
             codigo += "public static void main(String[] args) { \n"
-            codigo += "try {Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\"); \n try{Thread.sleep(1000); \n } catch(Exception e){};  } catch(Exception ex){ \n } \n"
+            //A utilização de Process p não funciona!
+        //    codigo += "try {Process p = Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\"); \n p.waitFor(); } catch(Exception ex){ \n } \n"
+        codigo += "try {Runtime.getRuntime().exec(\"jar xf W-Educ.jar " + programaCompilado +" " + enviar + " jssc.jar\"); \n try{Thread.sleep(1000); \n } catch(Exception e){};  } catch(Exception ex){ \n } \n"
             codigo += "String comando = \" " + comando + "\"; \n"
             codigo += "if (comando.contains(\"porta\")) { \n String portName = (String)JOptionPane.showInputDialog(null, \"Selecione a porta em que seu dispositivo está conectado:\", \"W-Educ - Seletor de Portas\","
             codigo += "JOptionPane.QUESTION_MESSAGE, null,SerialPortList.getPortNames(),null); \n \n"
             codigo +=  "if (portName != null){ \n comando = comando.replace(\"porta\",  portName); \n}\n} \n"
-            codigo += "String comando1 = \"bash ./script.sh\" ; \n"
+            /*codigo += "String comando1 = \"bash ./script.sh\" ; \n"
             codigo += "try { PrintWriter w = new PrintWriter(\"script.sh\", \"utf-8\"); \n"
-            codigo += "w.println(\"gnome-terminal -e \" + comando  ); \n"
+            codigo += "w.println( comando  ); \n"
             codigo += "w.close(); \n } catch(Exception e) {} \n"
             codigo += "try {Process p = Runtime.getRuntime().exec(comando1); try{p.waitFor();} catch(Exception e) {}} catch(IOException e){ } \n   \n"  
-            codigo += "if (CodeRhino.getOS() == \"windows\"){ \n try{Runtime.getRuntime().exec(\" del "+ enviar + "\");} catch(IOException e){ } \n"
-            codigo += "try{Runtime.getRuntime().exec(\" del "+ programaCompilado + " jssc.jar\");} catch(IOException e){ } \n "
-            codigo += "} else { \n try{Runtime.getRuntime().exec(\" rm "+ enviar + "\");} catch(IOException e){ } \n"
-            codigo += " try{Runtime.getRuntime().exec(\" rm "+ programaCompilado + " jssc.jar\");} catch(IOException e){ } \n } \n} \n}"
+            */ 
+            //Os arquivos não estão sendo apagados no windows 10.
+            codigo += "try {Process p = Runtime.getRuntime().exec(comando); \n p.waitFor();} catch(Exception e) {} \n \n"
+            codigo += "try{Runtime.getRuntime().exec(\"del "+ enviar + "\"); } catch(Exception e){ } \n"
+            codigo += "try{Runtime.getRuntime().exec(\"del "+ programaCompilado + " jssc.jar\");} catch(Exception e){ } \n "
+            codigo += "try{Runtime.getRuntime().exec(\"rm "+ enviar + "\"); } catch(Exception e){ } \n"
+            codigo += "try{Runtime.getRuntime().exec(\"rm "+ programaCompilado + " jssc.jar\"); } catch(Exception e){ } \n } \n}"
         weducClient << codigo
        
         //Compilação e geração do jar

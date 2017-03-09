@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <asset:stylesheet src="css/plugins/morris.css"/>
         <g:if test='${"erro".equals(controllerName) && "exibir".equals(actionName)}'>
             <!-- Morris Charts JavaScript -->
@@ -13,6 +14,7 @@
     </head>
     <body>
         <script type="text/javascript">
+  
             $(function() {
                 Morris.Line({
                     element: 'morris-line-chart',

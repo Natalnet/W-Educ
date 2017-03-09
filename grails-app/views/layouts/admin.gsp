@@ -11,6 +11,7 @@
 
     <title><g:layoutTitle default="W-Educ"/></title>
 
+    <asset:javascript src="js/jquery.min.js"/>
     <!-- Bootstrap Core CSS -->
     <asset:stylesheet src="css/bootstrap.min.css"/>
 
@@ -65,19 +66,20 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-messages"><g:each in="${ultimasMensagens}" var="mensagem">
-                            <li>
-                                <a href="mensagem/todas">
-                                    <div>
-                                        <strong>${mensagem?.autor?.username}</strong>
-                                        <span class="pull-right text-muted">
-                                            <em><g:formatDate format="dd/MM/yyyy" date="${mensagem?.data}"/></em>
-                                        </span>
-                                    </div>
-                                    <div>${mensagem?.mensagem}</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <g:each in="${ultimasMensagens}" var="mensagem">
+                                <li>
+                                    <g:link controller="mensagem" action="todas">
+                                        <div>
+                                            <strong>${mensagem?.autor?.username}</strong>
+                                            <span class="pull-right text-muted">
+                                                <em><g:formatDate format="dd/MM/yyyy" date="${mensagem?.data}"/></em>
+                                            </span>
+                                        </div>
+                                        <div>${mensagem?.mensagem}</div>
+                                    </g:link>
+                                </li>
+                                <li class="divider"></li>
                             </g:each>
                             <li>
                                 <g:link class="text-center" controller="mensagem" action="todas">
@@ -100,12 +102,19 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><g:link controller="perfil" action="index"><i class="fa fa-user fa-fw"></i> Perfil</g:link>
+                            <li>
+                                <g:link controller="perfil" action="index"><i class="fa fa-user fa-fw"></i> Perfil</g:link>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-gear fa-fw"></i> Configurações
+                                </a>
                             </li>
                             <li class="divider"></li>
-                            <li><g:link controller="logout" action="index"><i class="fa fa-sign-out fa-fw"></i> Logout</g:link>
+                            <li>
+                                <g:link controller="logout" action="index">
+                                    <i class="fa fa-sign-out fa-fw"></i> Logout
+                                </g:link>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -132,6 +141,7 @@
                                 <g:link controller="admin" action="index" class="active"><i class="fa fa-dashboard fa-fw"></i> Principal</g:link>
                             </li>
                             <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <li>
                                 <a href="#"><i class="fa fa-legal fa-fw"></i> Administrador<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -145,55 +155,61 @@
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
+                            </li>
                             </sec:ifAnyGranted>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN">
-                            <a href="#"><i class="fa fa-male fa-fw"></i> Professor<span class="fa arrow"></span></a>
+                            <sec:ifAnyGranted roles="ROLE_PROFESSOR">
+                            <li>
+                                <g:link controller="erro" action="exibirProf">
+                                    <i class="glyphicon glyphicon-stats fa-fw"></i> Estatítiscas
+                                </g:link>
+                            </li>
                             </sec:ifAnyGranted>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_PROFESSOR">
+                            <sec:ifAnyGranted roles="ROLE_ALUNO">
+                            <li>
+                                <g:link controller="erro" action="exibirAluno">
+                                    <i class="glyphicon glyphicon-stats fa-fw"></i> Desempenho
+                                </g:link>
+                            </li>
+                            </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_ALUNO">
+                            <li>
+                                <g:link controller="professor" action="procurar">
+                                    <i class="fa fa-group fa-fw"></i> Professores
+                                </g:link>
+                            </li>
+                            </sec:ifAnyGranted>
+                            <li>
+                                <a href="#"><i class="fa fa-code fa-fw"></i> Linguagens<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li>
-                                        <g:link controller="erro" action="exibirProf">Estatítiscas</g:link>
-                                    </li>
+                                    <sec:ifAnyGranted roles="ROLE_PROFESSOR, ROLE_ADMIN">
                                     <li>
                                         <g:link controller="linguagem" action="nova">Cadastrar Linguagem</g:link>
                                     </li>
                                     <li>
-                                        <g:link controller="linguagem" action="listar">Gerenciar Linguagens</g:link>
+                                        <g:link controller="linguagem" action="listarMinhas">Minhas Linguagens</g:link>
                                     </li>
+                                    <li>
+                                        <g:link controller="linguagem" action="listar">Linguagens Disponiveis</g:link>
+                                    </li>
+                                    </sec:ifAnyGranted>
                                     <li>
                                         <g:link controller="linguagem" action="procurar">Programar</g:link>
                                     </li>
-                                    <li>
-                                        <g:link controller="professor" action="gerenciarAlunos">Gerenciar Alunos</g:link>
-                                    </li>
-                                    <li>
-                                        <g:link controller="forum" action="home">Fórum</g:link>
-                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
-                            
+                            </li>
+                            <sec:ifAnyGranted roles="ROLE_PROFESSOR">
+                            <li>
+                                <g:link controller="professor" action="gerenciarAlunos">
+                                    <i class="fa fa-graduation-cap fa-fw"></i> Gerenciar Alunos
+                                </g:link>
+                            </li>
                             </sec:ifAnyGranted>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
-                            <a href="#"><i class="fa fa-male fa-fw"></i> Aluno<span class="fa arrow"></span></a>
-                            </sec:ifAnyGranted>
-                            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_ALUNO">
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <g:link controller="erro" action="exibirAluno">Desempenho</g:link>
-                                    </li>
-                                    <li>
-                                        <g:link controller="professor" action="procurar">Professores</g:link>
-                                    </li>
-                                    <li>
-                                        <g:link controller="linguagem" action="procurar">Programar</g:link>
-                                    </li>
-                                    <li>
-                                        <g:link controller="forum" action="home">Fórum</g:link>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            
-                            </sec:ifAnyGranted>
+                            <li>
+                                <g:link controller="forum" action="home">
+                                    <i class="fa fa-comments fa-fw"></i> Fórum
+                                </g:link>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -210,14 +226,14 @@
         <!-- /#wrapper -->
                 
         <!-- jQuery Version 1.11.0 -->
-        <script src="/weduc/assets/js/jquery.min.js" type="text/javascript"></script>
         <asset:javascript src="js/jquery.min.js"/>
-
+        
         <!-- Bootstrap Core JavaScript -->
         <asset:javascript src="js/bootstrap.min.js"/>
 
         <!-- Metis Menu Plugin JavaScript -->
         <asset:javascript src="js/plugins/metisMenu/metisMenu.min.js"/>
+        
 
         <g:if test='${"admin".equals(controllerName) && "index".equals(actionName)}'>
             <!-- Morris Charts JavaScript -->

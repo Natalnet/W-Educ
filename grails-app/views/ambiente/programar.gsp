@@ -217,6 +217,14 @@
                 });
             };
             
+            var novoPrograma = function () {
+                // Apaga o conteúdo do editor
+                editor.setValue("// Olá! Comece a programar aqui.");
+                // Limpa o nome do programa
+                $("#nome-do-programa").val("");
+                // Fecha modal
+                $('#dialogo-novo').modal('hide');
+            };
 
 
             // Exportar programa
@@ -283,14 +291,14 @@
                     <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir</button>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" id="btn-new">Novo</button>
+                    <button class="btn btn-primary" id="btn-new" onclick="$('#dialogo-novo').modal('show');">Novo</button>
                     <button class="btn btn-info" data-toggle="modal" id="dicionario1" data-target="#dicionario">Dicionário de Funções</button>
                     <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
                     <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
                     <button class="btn btn-info" id="converter" onclick="exportarPrograma();">Converter para ${linguagem?.name}</button>
                     <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
                     <button class="btn btn-warning" onclick="solicitarCorrecao();">Correção</button>
-                    <button class="btn btn-danger">Apagar</button>	
+                    <!--<button class="btn btn-danger">Apagar</button>	-->
                 </div>
 
                  <div id="editor_container" style="height: 450px;">
@@ -329,23 +337,21 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <g:each in="${funcoes}" var="funcao">
                 <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="${'heading'+funcao.id}">
-                                <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="${'#'+funcao.id}" aria-expanded="true" aria-controls="${funcao.id}">
-                                                 <strong>${funcao.name} </strong>
-                                        </a>
-                                </h4>
-                        </div>
+                    <div class="panel-heading" role="tab" id="${'heading'+funcao.id}">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="${'#'+funcao.id}" aria-expanded="true" aria-controls="${funcao.id}">
+                                <strong>${funcao.name} </strong>
+                            </a>
+                        </h4>
+                    </div>
                     <div id="${funcao.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="${'heading'+funcao.id}">
                         <div class="panel-body">
                             <div class="row">
-                              <div class="col-md-8">
-                              	${funcao.description}
-                              	<br>
-                              	<strong>
-                                Parâmetros:  
-                                </strong> ${funcao.qntParameters.toInteger()}
-                              </div>
+                                <div class="col-md-8">
+                                    <p class="descricao">${funcao.description}</p>      
+                                    <br>
+                                    <b>Parâmetros:</b> ${funcao.qntParameters.toInteger()}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -391,14 +397,11 @@
               
             });
             
-            var novoPrograma = function () {
-                // Apaga o conteúdo do editor
-                editor.setValue("// Olá! Comece a programar aqui.");
-                // Limpa o nome do programa
-                $("#nome-do-programa").val("");
-                // Fecha modal
-                $('#dialogo-novo').modal('hide');
-            };
+            $(document).ready(function(){
+                var original_txt = $('.descricao').html();
+                var display_txt = original_txt.replace(/\n/g, '<br />');
+                $('.descricao').html(display_txt);
+            });
             
         </script>
     </body>

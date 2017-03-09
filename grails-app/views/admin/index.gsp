@@ -5,7 +5,7 @@
         <title>Home - W-Educ</title>
     </head>
     <body>
-        <script type="text/javascript">
+        <!--script type="text/javascript">
             $(function() {
                 Morris.Area({
                     element: 'morris-area-chart',

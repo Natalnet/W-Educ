@@ -37,11 +37,11 @@
                             <div class="panel-body">
                                 <form action="salvar" method='POST' name="usuario" role="form">
                                     <fieldset>
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <g:if test="${flash.message}">
                                             	<div class="alert alert-danger alert-dismissable">
-    				                            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    				                                ${flash.message}
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    ${flash.message}
     				                </div>
                                             </g:if>
                                         </div>
@@ -65,21 +65,27 @@
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Data de Nascimento" name="dateofbirth"  type="text" required>
                                         </div>
-                                       
- <form>
-     Sexo
-     <br>
-  <input placeholder="Sexo" type="radio" name="gender" value="M"> M
-  <br>
-  <input placeholder="Sexo" type="radio" name="gender" value="F">F
-</form>  
-
-                         
+                                        <div class="form-group">
+                                            <label>Sexo: </label>
+                                            <div class="radio-inline">
+                                                <label>
+                                                    <input type="radio" name="gender" value="M" required="required"> M
+                                                </label>
+                                            </div>
+                                            <div class="radio-inline">
+                                                <label>
+                                                    <input type="radio" name="gender" value="F" required="required"> F
+                                                </label>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Telefone" name="telefone"  type="text" required>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Endereco" name="address"  type="text" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Código de Acesso (opcional)" name="accessCode"  type="text" size="7">
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
                                         <input type="submit" class="btn btn-lg btn-success btn-block" value="Finalizar Cadastro"/>
@@ -94,30 +100,30 @@
                 </div>
             </div>
         </div>
-<script language="javascript">
-function valida()
-{
-	var apelido = user.value ;
-	var msg = "" ;
-	if ( apelido.search( /\s/g ) != -1 )
-	{
-		msg+= "Não é permitido espaços em branco.\n" ;
-		apelido = apelido.replace( /\s/g , "" ) ;
-	}	
-	if ( apelido.search( /[^a-z0-9]/i ) != -1 )
-	{
-		msg += "Não é permitido caracteres especiais." ;
-		apelido = apelido.replace( /[^a-z0-9]/gi , "" ) ;
-	}
-	if ( msg )
-	{
-		alert( msg ) ;
-		user.value = apelido ;
-		return false ;
-	}
-	return true ;	
-}
-</script>
+        <script language="javascript">
+        function valida()
+        {
+            var apelido = user.value ;
+            var msg = "" ;
+            if ( apelido.search( /\s/g ) != -1 )
+            {
+                    msg+= "Não é permitido espaços em branco.\n" ;
+                    apelido = apelido.replace( /\s/g , "" ) ;
+            }	
+            if ( apelido.search( /[^a-z0-9]/i ) != -1 )
+            {
+                    msg += "Não é permitido caracteres especiais." ;
+                    apelido = apelido.replace( /[^a-z0-9]/gi , "" ) ;
+            }
+            if ( msg )
+            {
+                    alert( msg ) ;
+                    user.value = apelido ;
+                    return false ;
+            }
+            return true ;	
+        }
+        </script>
     </body>
 
 </html>

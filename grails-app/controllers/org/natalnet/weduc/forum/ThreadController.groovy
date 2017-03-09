@@ -14,7 +14,7 @@ class ThreadController {
         def thread = DiscussionThread.get(params.id)
         def user = springSecurityService.getCurrentUser()
         
-        render view: "/forum/thread/show", model: [thread: thread, canEdit: (thread.opener.id == user.id)]
+        render view: "/forum/thread/show", model: [thread: thread, canEdit: (thread.opener.id == user?.id)]
     }
     
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
