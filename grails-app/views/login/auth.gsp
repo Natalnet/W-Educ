@@ -24,7 +24,8 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;O <a href="https://github.com/Natalnet/W-Educ/wiki"><b>W-Educ</b></a> é um ambiente de desenvolvimento web multiplataforma configurável para aplicações em robótica educacional.
                                 </p>
 				<p align="justify">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;Este projeto, desenvolvido por pesquisadores do laboratório <a href="www.natalnet.br"><b>NatalNet</b></a> da <a href="www.ufrn.br"><b>Universidade Federal do Rio Grande do Norte</b></a>, 
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Este projeto, desenvolvido por pesquisadores do laboratório <a href="http://www.natalnet.br"><b>NatalNet</b></a> da <a href="http://www.ufrn.br"><b>Universidade Federal do Rio Grande do Norte</b></a>
+                                    e do laboratório <a href="http://laica.ifrn.edu.br"><b>LAICA</b></a> do <a href="http://ifrn.edu.br"><b>Instituto Federal do Rio Grande do Norte</b></a>, 
                                     é um projeto aberto, que surgiu como uma extensão do software educacional RoboEduc, e que possibilita que a programação de qualqeur robô programável possa ser realizada utilizando a linguagem <b>R-Educ</b>. </p>
                                 <p align="justify">  
                                     &nbsp;&nbsp;&nbsp;&nbsp;O sistema <a href="https://github.com/Natalnet/W-Educ/wiki"><b>W-Educ</b></a> é uma plataforma completa e gratuita para robótica educacional!

@@ -8,7 +8,7 @@ class Usuario {
     String name
     String password
     String institution
-    String dateofbirth
+    String dateOfBirth
     String gender
     String address
     String email
@@ -29,7 +29,7 @@ class Usuario {
         programas blank: true, nullable: true
         name blank: true, nullable:true
         institution blank: true, nullable:true
-        dateofbirth blank: true, nullable:true
+        dateOfBirth blank: true, nullable:true
         gender blank: true, nullable:true
         address blank: true, nullable:true
         telefone blank: true, nullable:true

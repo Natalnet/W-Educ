@@ -36,7 +36,7 @@
                       </tr>
                       <tr>
                         <td><b>Data de Nascimento:</b></td>
-                        <td>${usuario?.dateofbirth}</td>
+                        <td>${usuario?.dateOfBirth}</td>
                       </tr>
                       <tr>
                         <td><b>Sexo:</b></td>

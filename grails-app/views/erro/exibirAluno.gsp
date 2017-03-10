@@ -63,7 +63,7 @@
                       </tr>
                       <tr>
                         <td><b>Data de Nascimento:</b></td>
-                        <td>${aluno?.dateofbirth}</td>
+                        <td>${aluno?.dateOfBirth}</td>
                       </tr>
                       <tr>
                         <td><b>Sexo:</b></td>

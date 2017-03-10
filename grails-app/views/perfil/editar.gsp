@@ -54,7 +54,7 @@
                       </tr>
                       <tr>
                         <td><b>Data de Nascimento:</b></td>
-                        <td><input class="form-control"  name="dateofbirth" value="${usuario?.dateofbirth}" type="dateofbirth" required></td>
+                        <td><input class="form-control"  name="dateOfBirth" value="${usuario?.dateOfBirth}" type="text" required></td>
                       </tr>
                       <tr>
                         <td><b>Sexo:</b></td>

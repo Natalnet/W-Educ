@@ -21,7 +21,7 @@ class PerfilController {
     def atualizar(){
         def usuario = springSecurityService.getCurrentUser()    
         usuario.name = params.name.toString()
-        usuario.dateofbirth = params.dateofbirth.toString()
+        usuario.dateOfBirth = params.dateOfBirth.toString()
         usuario.address = params.address.toString()
         usuario.gender = params.gender.toString()
         usuario.telefone = params.telefone.toString()

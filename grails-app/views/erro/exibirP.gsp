@@ -55,7 +55,7 @@
                       </tr>
                       <tr>
                         <td><b>Data de Nascimento:</b></td>
-                        <td>${professor?.dateofbirth}</td>
+                        <td>${professor?.dateOfBirth}</td>
                       </tr>
                       <tr>
                         <td><b>Sexo:</b></td>
