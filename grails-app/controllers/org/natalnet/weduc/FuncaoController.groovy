@@ -96,7 +96,7 @@ class FuncaoController {
 		def usuario = springSecurityService.getCurrentUser()
                 def linguagem = Linguagem.get(params.id)
                 
-                def canChange = (usuario == linguagem.autor) || (linguagem.isSystemLanguage && request.isUserInRole('ROLE_ADMIN'))
+                def canChange = (usuario == linguagem.autor) || request.isUserInRole('ROLE_ADMIN')
         
 		[funcoes: Funcao.findAllByLinguagem(linguagem), linguagem: linguagem, canChange: canChange]
 	}

@@ -37,10 +37,6 @@ class LinguagemController {
         linguagem.callFunction = params.chamadaDeFuncao.toString()
         linguagem.autor = springSecurityService.getCurrentUser()
 
-        if(request.isUserInRole('ROLE_ADMIN')){
-            linguagem.isSystemLanguage = true
-        }
-
         // Tipos da linguagem
         linguagem.types = new Tipos()
         linguagem.types.name = ""
@@ -228,9 +224,9 @@ class LinguagemController {
         def linguagem = Linguagem.get(params.id)
         def currentUser = springSecurityService.getCurrentUser()
 
-        if(linguagem.isSystemLanguage && request.isUserInRole('ROLE_ADMIN')){
+        if(request.isUserInRole('ROLE_ADMIN')){
             [linguagem: linguagem]
-        }else if(!linguagem.isSystemLanguage && linguagem.autor == currentUser){
+        }else if(linguagem.autor == currentUser){
             [linguagem: linguagem]
         }else{
             render(status: 403, text: 'Você não tem permissão para isso!')
