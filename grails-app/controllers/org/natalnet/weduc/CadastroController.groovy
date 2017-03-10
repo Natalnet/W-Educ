@@ -1,11 +1,13 @@
 package org.natalnet.weduc
 
+import grails.plugin.springsecurity.annotation.Secured
+
 class CadastroController {
 
-    def index() {}
-
+    @Secured("isAnonymous()")
     def novo() {}
 
+    @Secured(value = ["isAnonymous()"], httpMethod = 'POST')
     def salvar() {
 
         // Faz o cadastro do usuário
