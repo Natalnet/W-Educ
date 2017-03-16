@@ -13,7 +13,7 @@ class Operadores {
     String logicalOr
     String logicalNot
     
-    static belongsTo = Linguagem
+    static belongsTo = [linguagem: Linguagem]
 
     static constraints = {
     }

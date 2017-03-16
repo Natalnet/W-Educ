@@ -9,7 +9,7 @@ class Tipos {
     String declareString
     String declareBoolean
     
-    static belongsTo = Linguagem
+    static belongsTo = [linguagem: Linguagem]
 
     static constraints = {
     }

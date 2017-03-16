@@ -16,17 +16,15 @@ class Linguagem {
     String otherFunctions
     String callFunction
     
-    Tipos types
-    Operadores operators
-    ControleDeFluxo controlFlow
+    boolean isPrivate
     
     Professor autor
     
-    boolean isPrivate
+    static belongsTo = Professor
+    
+    static hasOne = [types: Tipos, operators: Operadores, controlFlow: ControleDeFluxo]
     
     static hasMany = [functions: Funcao, defines: Definicao, acessors: Professor]
-    
-    static belongsTo = Professor
 
     static constraints = {
         isPrivate defaultValue: false

@@ -11,7 +11,7 @@ class ControleDeFluxo {
     String switchCode
     String whileCode
     
-    static belongsTo = Linguagem
+    static belongsTo = [linguagem: Linguagem]
 
     static constraints = {
     }
