@@ -10,6 +10,8 @@ class ControleDeFluxo {
     String repeatCode
     String switchCode
     String whileCode
+    
+    static belongsTo = Linguagem
 
     static constraints = {
     }

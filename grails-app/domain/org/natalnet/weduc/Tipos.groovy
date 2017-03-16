@@ -8,6 +8,8 @@ class Tipos {
     String declareFloat
     String declareString
     String declareBoolean
+    
+    static belongsTo = Linguagem
 
     static constraints = {
     }

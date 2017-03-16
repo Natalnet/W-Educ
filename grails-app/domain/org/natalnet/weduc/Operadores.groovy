@@ -12,6 +12,8 @@ class Operadores {
     String logicalAnd
     String logicalOr
     String logicalNot
+    
+    static belongsTo = Linguagem
 
     static constraints = {
     }
