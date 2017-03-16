@@ -244,20 +244,26 @@ class LinguagemController {
             }
 
             File sourceComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + linguagem.id + "/")
-            File destComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + novaLinguagem.id + "/")
+            if(sourceComp.exists()){
+                File destComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + novaLinguagem.id + "/")
+                FileUtils.copyDirectory(sourceComp, destComp);
+            }
 
-            FileUtils.copyDirectory(sourceComp, destComp);
-
+            
             File sourceSend = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + linguagem.id + "/")
-            File destSend = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + novaLinguagem.id + "/")
-
-            FileUtils.copyDirectory(sourceSend, destSend);
-
+            
+            if(sourceSend.exists()){
+                File destSend = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + novaLinguagem.id + "/")
+                FileUtils.copyDirectory(sourceSend, destSend);
+            }
+            
             File sourceIncl = new File("/data/sites/weduc/weduc/arquivos-de-include/" + linguagem.id + "/")
-            File destIncl = new File("/data/sites/weduc/weduc/arquivos-de-include/" + novaLinguagem.id + "/")
-
-            FileUtils.copyDirectory(sourceIncl, destIncl);
-
+            
+            if(sourceIncl.exists()){
+                File destIncl = new File("/data/sites/weduc/weduc/arquivos-de-include/" + novaLinguagem.id + "/")
+                FileUtils.copyDirectory(sourceIncl, destIncl);
+            }
+            
             flash.success = "Cópia da linguagem " + linguagem.name + " realizada com sucesso."
             redirect action: "listarMinhas"
         }else{
