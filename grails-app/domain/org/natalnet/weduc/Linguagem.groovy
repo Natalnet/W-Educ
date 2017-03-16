@@ -39,13 +39,31 @@ class Linguagem {
         footnote sqlType: 'longtext'
     }
     
-    def clonar(Usuario author){
-        def novaLinguagem = new Linguagem(this.properties)
+    def copy(Usuario author){
+        try {
+            def novaLinguagem = new Linguagem(this.properties)
 
-        novaLinguagem.name += " - Cópia"
-        novaLinguagem.functions = null
-        novaLinguagem.autor = author
+            novaLinguagem.name += " - Cópia"
+            novaLinguagem.functions = null
+            novaLinguagem.autor = author
+
+            novaLinguagem = novaLinguagem.save()
+            
+            if (!novaLinguagem) {
+                return null
+            }
+
+            this.functions.each {
+                it.copy(novaLinguagem)
+            }
+
+            this.types.copy(novaLinguagem)
+            this.operators.copy(novaLinguagem)
+            this.controlFlow.copy(novaLinguagem)
         
-        return novaLinguagem.save()
+            return novaLinguagem
+        } catch (Exception e){
+            return null
+        }
     }
 }

@@ -17,4 +17,11 @@ class Operadores {
 
     static constraints = {
     }
+    
+    def copy(Linguagem owner) {
+        def newOperators = new Operadores(this.properties)
+        newOperators.linguagem = owner
+        
+        return newOperators.save()
+    }
 }

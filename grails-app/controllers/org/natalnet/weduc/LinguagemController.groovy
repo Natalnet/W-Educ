@@ -236,13 +236,9 @@ class LinguagemController {
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR'])
     def copiar() {
         def linguagem = Linguagem.get(params.id)
-        def novaLinguagem = linguagem.clonar(springSecurityService.getCurrentUser())
+        def novaLinguagem = linguagem.copy(springSecurityService.getCurrentUser())
 
         if(novaLinguagem){
-            linguagem.functions.each {
-                it.clonar(novaLinguagem)
-            }
-
             File sourceComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + linguagem.id + "/")
             if(sourceComp.exists()){
                 File destComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + novaLinguagem.id + "/")

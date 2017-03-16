@@ -20,7 +20,7 @@ class Funcao {
         code sqlType: 'longtext'
     }
     
-    def clonar(Linguagem owner = null) {
+    def copy(Linguagem owner = null) {
         def novaFuncao = new Funcao(this.properties)
         novaFuncao.typeAliases = ""
         novaFuncao.imageURL = ""

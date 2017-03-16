@@ -13,4 +13,11 @@ class Tipos {
 
     static constraints = {
     }
+    
+    def copy(Linguagem owner) {
+        def newTypes = new Tipos(this.properties)
+        newTypes.linguagem = owner
+        
+        return newTypes.save()
+    }
 }

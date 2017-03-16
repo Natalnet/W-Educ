@@ -15,4 +15,11 @@ class ControleDeFluxo {
 
     static constraints = {
     }
+    
+    def copy(Linguagem owner) {
+        def newControlFlow = new ControleDeFluxo(this.properties)
+        newControlFlow.linguagem = owner
+        
+        return newControlFlow.save()
+    }
 }
