@@ -30,6 +30,8 @@ class Linguagem {
 
     static constraints = {
         isPrivate defaultValue: false
+        header nullable: true
+        footnote nullable: true
     }
     
     static mapping = {
@@ -45,7 +47,6 @@ class Linguagem {
         novaLinguagem.name += " - Cópia"
         novaLinguagem.functions = null
         novaLinguagem.autor = author
-        novaLinguagem.footnote = ""
         
         return novaLinguagem.save()
     }
