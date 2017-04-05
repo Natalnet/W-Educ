@@ -10,5 +10,6 @@ class Comment {
     
     static constraints = {
         body(blank: false, maxSize: 8000)
+        body sqlType: 'longtext'
     }
 }
