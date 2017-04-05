@@ -38,19 +38,24 @@ class ThreadController {
     
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def save() {
-        def thread = new DiscussionThread()
-        thread.topic = Topic.findWhere(id : params.topic.toLong())
-        thread.title = params.postTitle
-        thread.subject = params.postBody
-        thread.opener = springSecurityService.getCurrentUser()
-        thread.blocked = false
+        if(!params.postTitle || !params.postBody){
+            flash.error = "Preencha todos os campos."
+            redirect controller: "thread", action: "create", params: [topicId: params.topic.toLong()]
+        }else{
+            def thread = new DiscussionThread()
+            thread.topic = Topic.findWhere(id : params.topic.toLong())
+            thread.title = params.postTitle
+            thread.subject = params.postBody
+            thread.opener = springSecurityService.getCurrentUser()
+            thread.blocked = false
 
-        if(thread.save()) {
-            flash.success = "Postagem criada com sucesso."
-            redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
-        } else {
-            flash.error = "Erro ao criar uma nova postagem."
-            redirect controller: "thread", action: "create", params: [topicId: thread.topic.id]
+            if(thread.save()) {
+                flash.success = "Postagem criada com sucesso."
+                redirect controller: "forum", action: "topic", params: [topicId: thread.topic.id]
+            } else {
+                flash.error = "Erro ao criar uma nova postagem."
+                redirect controller: "thread", action: "create", params: [topicId: thread.topic.id]
+            }
         }
     }
     
