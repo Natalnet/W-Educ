@@ -76,7 +76,7 @@
                                                 <em><g:formatDate format="dd/MM/yyyy" date="${mensagem?.data}"/></em>
                                             </span>
                                         </div>
-                                        <div>${mensagem?.mensagem}</div>
+                                        <div>${mensagem?.assunto ? mensagem.assunto : "Sem assunto"}</div>
                                     </g:link>
                                 </li>
                                 <li class="divider"></li>
