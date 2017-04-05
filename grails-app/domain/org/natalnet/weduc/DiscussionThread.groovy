@@ -21,5 +21,6 @@ class DiscussionThread {
     
     static mapping = {
         comments sort: 'createDate', order: 'asc'
+        subject sqlType: 'longtext'
     }
 }
