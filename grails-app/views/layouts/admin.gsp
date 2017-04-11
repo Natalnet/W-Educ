@@ -28,7 +28,7 @@
     <asset:stylesheet src="css/plugins/morris.css"/>
 
     <!-- Custom Fonts -->
-    <asset:stylesheet src="font-awesome-4.1.0/css/font-awesome.min.css"/>
+    <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
 
     <!-- Chosen jQuery Plugin -->
     <asset:stylesheet src="css/chosen.min.css"/>
@@ -69,7 +69,7 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <g:each in="${ultimasMensagens}" var="mensagem">
                                 <li>
-                                    <g:link controller="mensagem" action="todas">
+                                    <g:link controller="mensagem" action="ver" id="${mensagem?.id}">
                                         <div>
                                             <strong>${mensagem?.autor?.username}</strong>
                                             <span class="pull-right text-muted">
