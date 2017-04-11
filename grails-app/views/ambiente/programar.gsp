@@ -13,6 +13,9 @@
                 left: 0;
             }
         </style>
+    
+        <link rel="stylesheet" type="text/css" href='${assetPath(src: "prismjs/prism.css")}'>
+        <script src='${assetPath(src: "prismjs/prism.js")}'></script>
     </head>
     <body>
         <script>	
@@ -348,8 +351,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <p class="descricao">${funcao.description}</p>      
-                                    <br>
+                                    ${raw(funcao.description)}
                                     <b>Parâmetros:</b> ${funcao.qntParameters.toInteger()}
                                 </div>
                             </div>
