@@ -19,29 +19,26 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>Linguagem</th>
                                 <th>Robô</th>
-                                <th>Nome da Linguagem</th>
+                                <th>Descrição</th>
                                 <th>Autor</th>
-                                <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
                             <g:each in="${linguagens}" var="linguagem">
                             <tr>
-                                <td><b>${linguagem?.robot}</b></td>
                                 <td>
-                                    <b>${linguagem?.name}</b>
-                                    <p class="help-block">${linguagem?.description}</p>
-                                </td>
-                                <td><b>${linguagem?.autor?.username}</b></td>
-                                <td>
-                                    <g:link class="btn btn-outline btn-primary" controller="ambiente" action="programar" id="${linguagem?.id}">
-                                        Programar
+                                    <g:link controller="ambiente" action="programar" id="${linguagem?.id}">
+                                        <b>${linguagem?.name}</b>
                                     </g:link>
                                 </td>
+                                <td><b>${linguagem?.robot}</b></td>
+                                <td>${linguagem?.description}</td>
+                                <td><b>${linguagem?.autor?.username}</b></td>
                             </tr>
                             </g:each>
                         </tbody>
