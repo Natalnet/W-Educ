@@ -18,7 +18,7 @@
                     <g:link title="Voltar" class="btn btn-sm btn-primary" controller="mensagem" action="todas">
                         <i class="fa fa-arrow-left fa-fw"></i>
                     </g:link>
-                    <g:link title="Visualizar" class="btn btn-sm btn-primary" controller="mensagem" action="escreverUsuario" id="${mensagem?.autor.id}">
+                    <g:link title="Responder" class="btn btn-sm btn-primary" controller="mensagem" action="escreverUsuario" id="${mensagem?.autor.id}">
                         <i class="fa fa-reply fa-fw"></i>
                     </g:link>
                     <g:link title="Exluir" class="btn btn-sm btn-danger" controller="mensagem" action="excluirMensagem" id="${mensagem?.id}">
