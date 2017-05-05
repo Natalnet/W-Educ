@@ -222,6 +222,7 @@ public class analisadorSintatico {
         keywordsList.add("<=");
         keywordsList.add("!=");
         keywordsList.add("verdadeiro");
+        keywordsList.add("falso");
         keywordsList.add("memoria");
         keywordsList.add("bateria");
         if (keywordsList.contains(name)) {
@@ -383,6 +384,7 @@ public class analisadorSintatico {
         else if (mapeamento.getFunctionsVoid().contains(getName(position))) {
             //checkParameters(getName(position), 2);
             if (checkFunction(getName(position), 2, true)) {
+                System.out.println("passando aqui");
                 writeFunctionOnFile(getName(position), 2);
             }
             else {

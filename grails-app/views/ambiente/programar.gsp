@@ -30,6 +30,16 @@
                     return "0"
                 }
             };
+            
+            function waitSeconds(iMilliSeconds) {
+                var counter= 0
+                    , start = new Date().getTime()
+                    , end = 0;
+                while (counter < iMilliSeconds) {
+                    end = new Date().getTime();
+                    counter = end - start;
+                }
+            }
 
             // Salva o programa no banco de dados
             var salvarPrograma = function () {
@@ -109,7 +119,7 @@
             
             // Solicitar correção ao professor
             var solicitarCorrecao = function () {
-
+                
                 // Inicia requisição assíncrona
                 // para solicitar correção
                 $.ajax({
@@ -128,9 +138,35 @@
                     }
                 });
             };
+            
+            // Compilar o programa
+            var compilarProgramaEnvio = function () {
+
+                // Inicia requisição assíncrona
+                // para compilar o programa
+                $.ajax({
+                    url: "<g:createLink action="compilarProgramaEnvio"/>",
+                    type: "post",
+                    data: {
+                        linguagem: ${linguagem?.id},
+                        reduc: verificarLinguagem(),
+                        nome: $("#nome-do-programa").val(),
+                        codigo: editor.getValue()
+                    },
+                    success: function (returnData) {
+                        alert(returnData);
+                        enviarBtn.disabled = false;
+                    },
+                    fail: function () {
+                        alert("Erro ao tentar compilar o programa.");
+                    }
+                });
+            };
 
             // Enviar o programa
             var enviarCliente = function () {
+                compilarProgramaEnvio();
+                waitSeconds(1000);
                 var hiddenIFrameID = 'hiddenDownloader',
                     iframe = document.getElementById(hiddenIFrameID);
                 if (iframe === null) {

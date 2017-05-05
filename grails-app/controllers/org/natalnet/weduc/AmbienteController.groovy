@@ -185,7 +185,7 @@ class AmbienteController {
 
 	if(reduc) { 	// Verifica se é R-Educ
 
-	// Compila o arquivo utilizando o compilador REduc
+	    // Compila o arquivo utilizando o compilador R-Educ
             
             // Define o local do programa, para utilização futura
             programa.local = fName + programa.extensao + "." + linguagem.extension
@@ -310,10 +310,12 @@ class AmbienteController {
             catch (Exception e) {
             	//println e
                 render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+                System.out.println("Erro no R-Educ!");
                 return;    
             }
 
-
+/* Não é necessário sempre compilar na linguagem alvo - diminui o tempo de compilação!
+ 
             //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
 	    File fDell = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName)
 	    fDell.deleteDir()
@@ -371,12 +373,13 @@ class AmbienteController {
             catch (Exception e) {
             	println e
             }
-
+*/
             
             if(!sintatico.isError()) {
                 programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
                 programa.save(flush: true)
                 render "Compilação bem sucedida!"
+                System.out.println("Compilado com sucesso!");
             } else {
                 //Adicionar aqui a equação das categorias.
                 categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "1", "variavel");
@@ -389,11 +392,13 @@ class AmbienteController {
                 categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "8", "sintaxe");
                 programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
                 programa.save(flush: true)
+                System.out.println("Erro de escrita!");
                 render "Linha: " + sintatico.getErrorInt() + " -> Erro " + sintatico.getErrorStr();
             }
-	} //Termina Compilação em R-Educ
+	} 
+        //Termina Compilação em R-Educ
 
-	// Se não for a linguagem alvo:
+	// Compilação na linguagem alvo:
 	else {
             
             //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
@@ -470,6 +475,357 @@ class AmbienteController {
 	}
 	
 	}//Termina compilar programa!
+        
+    //compilarProgramaEnvio
+	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+	def compilarProgramaEnvio() {
+                
+                if (params.nome == ""){
+                    render "É preciso nomear e salvar o programa para enviar."
+                    return false
+            
+                }
+                //salva o programa antes de compilar
+                saveCompile = false;
+                salvarPrograma();
+                saveCompile = true;
+                
+		// Define usuário atual
+		def usuario = springSecurityService.getCurrentUser()
+
+		// Define a linguagem
+		def linguagem = Linguagem.get(params.linguagem)
+
+		// Define se é R-Educ ou não
+		def reduc = params.reduc == "1" ? true : false
+
+		// Procura um programa de mesmo nome;
+		// caso não exista, o cria
+		def programa = Programa.findWhere(
+			usuario: usuario, 
+			linguagem: linguagem,
+			reduc: reduc,
+			nome: params.nome
+		)
+	
+	//Apaga todos os arquivos da pasta do usuário
+	File fDelete = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username)
+	fDelete.deleteDir()
+      	    
+
+		// Salva programa em arquivo temporário
+        String fName = programa.nome;
+   
+	File c = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username)
+	if (!c.exists()) {
+            c.mkdirs()
+            }  
+
+        def pontuacao
+        if(reduc)
+            pontuacao = ""
+        else
+            pontuacao = "."
+        File f = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + pontuacao + programa.extensao)
+        f << programa.codigo //.replaceAll("\n", "\r\n");
+
+
+	if(reduc) { 	// Verifica se é R-Educ
+
+	    // Compila o arquivo utilizando o compilador R-Educ
+            
+            // Define o local do programa, para utilização futura
+            programa.local = fName + programa.extensao + "." + linguagem.extension
+
+            def language;
+            language = new Language();
+            language.setId(linguagem.id);
+            language.setName(linguagem.name);
+            language.setDescription(linguagem.description);
+            language.setRobot(linguagem.robot);
+            language.setExtension(linguagem.extension);
+
+            language.setCompileCode(linguagem.compileCode);
+            language.setCompilerFile(linguagem.compilerFile);
+            language.setSendCode(linguagem.sendCode);
+            language.setSentExtension(linguagem.sentExtension);
+
+            language.setHeader(linguagem.header);
+            language.setFootnote(linguagem.footnote);
+
+            language.setMainFunction(linguagem.mainFunction);
+            language.setOtherFunctions(linguagem.otherFunctions);
+            language.setCallFunction(linguagem.callFunction);
+
+            // Tipos
+            def tipos = Tipos.findWhere(id: linguagem.types.id)
+            def types;
+            types = new Types();
+            types.setId(tipos.id);
+            types.setName(tipos.name);
+            types.setDeclareFalse(tipos.declareFalse);
+            types.setDeclareTrue(tipos.declareTrue);
+            types.setDeclareFloat(tipos.declareFloat);
+            types.setDeclareString(tipos.declareString);
+            types.setDeclareBoolean(tipos.declareBoolean);
+            language.setTypes(types);
+
+            // Funções
+            def funcoes = Funcao.findAllWhere(linguagem: linguagem)
+
+            def functions = new ArrayList();
+
+            funcoes.each() {
+                obj ->
+
+                def function = new LFunction();
+
+                function.setId(obj.id);
+                function.setName(obj.name);
+                function.setType(obj.type);
+                function.setReturnType(obj.returnType);
+                function.setQntParameters(obj.qntParameters);
+                function.setCode(obj.code);
+                function.setDescription(obj.description);
+                function.setTypeAliases(obj.typeAliases);
+                function.setImageURL(obj.imageURL);
+                functions.add(function);
+            }
+
+            // Defines
+            def defines = Definicao.findAllWhere(linguagem: linguagem)
+
+            def defines2 = new ArrayList();
+
+            defines.each() {
+                obj ->
+
+                def defines3 = new Defines();
+                
+                defines3.setId(obj.id);
+                defines3.setName(obj.name);
+                defines3.setType(obj.type);
+                defines3.setText(obj.text);
+                defines3.setAlreadyExists(obj.alreadyExists);
+                defines2.add(defines3);
+            }
+
+            // Operadores
+            def operadores = Operadores.findWhere(id: linguagem.operators.id)
+            def operators;
+            operators = new Operators();
+            operators.setId(operadores.id);
+            operators.setEqualTo(operadores.equalTo);
+            operators.setNotEqualTo(operadores.notEqualTo);
+            operators.setGreaterThan(operadores.greaterThan);
+            operators.setLessThan(operadores.lessThan);
+            operators.setLessThanOrEqualTo(operadores.lessThanOrEqualTo);
+            operators.setGreaterThanOrEqualTo(operadores.greaterThanOrEqualTo);
+            operators.setLogicalAnd(operadores.logicalAnd);
+            operators.setLogicalOr(operadores.logicalOr);
+            operators.setLogicalNot(operadores.logicalNot);
+            operators.setName(operadores.name);
+
+            // Controle de fluxo
+            def controleDeFluxo = ControleDeFluxo.findWhere(id: linguagem.controlFlow.id)
+            ControlFlow controlFlow;
+            controlFlow = new ControlFlow();
+            controlFlow.setId(controleDeFluxo.id);
+            controlFlow.setLanguageName(controleDeFluxo.languageName);
+            controlFlow.setBreakCode(controleDeFluxo.breakCode);
+            controlFlow.setDoCode(controleDeFluxo.doCode);
+            controlFlow.setForCode(controleDeFluxo.forCode);
+            controlFlow.setIfCode(controleDeFluxo.ifCode);
+            controlFlow.setRepeatCode(controleDeFluxo.repeatCode);
+            controlFlow.setSwitchCode(controleDeFluxo.switchCode);
+            controlFlow.setWhileCode(controleDeFluxo.whileCode);
+
+            def lexico = new analisadorLexico();
+            lexico.readFile(f.path);
+            def sintatico = new analisadorSintatico(lexico, "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);            
+            sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
+            lexico.defineUsedStructures(sintatico);
+            
+            try{
+
+
+                sintatico.startCompile();
+                sintatico.closeFile();
+                // println(sintatico.isError());
+                // render sintatico.isError();
+            }
+            catch (Exception e) {
+            	//println e
+                //render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+                System.out.println("Erro no R-Educ!");
+                return false;    
+            }
+
+
+ 
+            //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
+	    File fDell = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName)
+	    fDell.deleteDir()
+      	    
+
+	   //Copia os arquivos de include e extrai na pasta
+	   try {		 
+		def origem = "/data/sites/weduc/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
+		def destino = "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName        
+                CommandShellToString.execute("unzip "+origem+" -d "+ destino);              
+	   }
+	   catch (Exception e) {
+            	println e
+            }
+
+            // Deixa o arquivo com a extensão e identificação desejadas
+            File fSource = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            File fTarget = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + fName + "." + linguagem.extension)
+            org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
+
+            // Define o arquivo onde ficarão os comandos do Make
+            File fShell = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
+	    
+            //Colocar comando no servidor!
+            //def comando = "(Xvfb :1 -nolisten tcp -screen :1 1280x800x24 &);DISPLAY=:1 " + linguagem.compileCode + ";   killall Xvfb"
+	    def comando = "DISPLAY=:1 " + linguagem.compileCode 
+            println comando;
+            comando = comando.replace("diretorio", "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
+            comando = comando.replace("localdocompilador", "/data/sites/weduc/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("nomedoprograma",  fName )
+            org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
+               
+            println comando;  
+            // Prepara o comando Make
+            comando = "/bin/bash /data/sites/weduc/tmp/weduc/compilador/" 
+            comando += usuario?.username + "/" + fName + "/weduc.sh"
+
+
+            println "------>"
+            println comando;
+            println "------>"
+ 
+
+            try {
+
+		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
+                System.out.println(CommandShellToString.execute(comando));
+                
+		 System.out.println("Finalizei a compilacao na linguagem " + linguagem.id);
+
+            }
+            catch (IOException ex) {
+                System.out.println("Erro ao compilar o programa.");
+            }
+            catch (Exception e) {
+            	println e
+            }
+
+            
+            if(!sintatico.isError()) {
+                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+                programa.save(flush: true)
+                //render "Compilação bem sucedida!"
+                return true
+                System.out.println("Compilado com sucesso!");
+            } else {
+                //Adicionar aqui a equação das categorias.
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "1", "variavel");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "2", "funcao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "3", "tarefa");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "4", "estrutura");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "5", "condicao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "6", "repeticao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "7", "nome");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "8", "sintaxe");
+                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+                programa.save(flush: true)
+                System.out.println("Erro de escrita!");
+                return false
+                //render "Linha: " + sintatico.getErrorInt() + " -> Erro " + sintatico.getErrorStr();
+            }
+	} 
+        //Termina Compilação em R-Educ
+
+	// Compilação na linguagem alvo:
+	else {
+            
+            //Apaga todos os arquivos da pasta da linguagem para realizar nova compilação
+	    File fDell = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id)
+	    fDell.deleteDir()
+            
+            //Copia os arquivos de include e extrai na pasta
+            try {		 
+                 def origem = "/data/sites/weduc/weduc/arquivos-de-include/" + linguagem.id +  "/arquivo"	
+                 def destino = "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName        
+                 CommandShellToString.execute("unzip "+origem+" -d "+destino);              
+            }
+            catch (Exception e) {
+                 println e
+             }
+             
+            File fTarget = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + "/" + fName + "." + linguagem.extension);
+            org.apache.commons.io.FileUtils.writeStringToFile(fTarget, programa.codigo, null)
+            
+            // Deixa o arquivo com a extensão e identificação desejadas
+            //File fSource = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            //File fTarget = new File("/tmp/weduc/compilador/" + usuario?.username + "/" + linguagem.id + "/" + fName + "." + linguagem.extension)
+            //org.apache.commons.io.FileUtils.copyFile(fSource, fTarget);
+
+            // Define o arquivo onde ficarão os comandos do Make
+            File fShell = new File("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username +"/"+ fName +"/weduc.sh")
+	    def comando = "DISPLAY=:1 " + linguagem.compileCode 
+
+	    println comando;
+            comando = comando.replace("diretorio", "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username +"/"+ fName)
+            comando = comando.replace("localdocompilador", "/data/sites/weduc/weduc/arquivos-de-compilacao/" + linguagem.id )
+            comando = comando.replace("nomedoprograma",  fName )
+            org.apache.commons.io.FileUtils.writeStringToFile(fShell, comando, null)
+               
+            println comando;  
+            // Prepara o comando Make
+            comando = "/bin/bash /data/sites/weduc/tmp/weduc/compilador/" 
+            comando += usuario?.username + "/" + fName + "/weduc.sh"
+
+
+            println "------>"
+            println comando;
+            println "------>"
+            
+            def retorno;
+
+            try {
+
+		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
+                retorno = CommandShellToString.execute(comando);
+		 System.out.println(retorno);
+                
+		 System.out.println("Finalizei a compilacao na linguagem " + linguagem.id);
+
+            }
+            catch (IOException ex) {
+                System.out.println("Erro ao compilar o programa.");
+            }
+            catch (Exception e) {
+            	println e
+            }
+
+            
+            if(!(retorno.find("erro")||retorno.find("Erro")|| retorno.find("Error: "))) {
+                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+                programa.save(flush: true)
+                return true;
+                //render "Compilação bem sucedida!"
+            } else {
+                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+                programa.save(flush: true)
+                return false;
+                //render "Ocorreram erros durante a compilação: \n" + retorno; 
+            }
+            
+	}
+	
+	}//Termina compilar programa!
 
     def categorizarErros(String errorType, String usedStructures, String tipo, String descricao) {
         def usuario = springSecurityService.getCurrentUser()
@@ -491,10 +847,13 @@ class AmbienteController {
         }
     }    
     
+        
+    
     //enviarCliente
     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-    def enviarCliente() {
-	// Define usuário atual
+    def enviarCliente() {	
+        
+        // Define usuário atual
         def usuario = springSecurityService.getCurrentUser()
 
         // Define a linguagem
@@ -599,8 +958,9 @@ class AmbienteController {
         response.setHeader("Content-disposition", "filename= W-Educ.jar")
         response.outputStream << fWEduc
         
-       // render "Programa enviado com sucesso."
-    }
+           // render "Programa enviado com sucesso."
+        }
+
     
 
     //baixarPrograma    

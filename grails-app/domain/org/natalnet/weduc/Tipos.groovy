@@ -12,6 +12,7 @@ class Tipos {
     static belongsTo = [linguagem: Linguagem]
 
     static constraints = {
+        name nullable: true
     }
     
     def copy(Linguagem owner) {
