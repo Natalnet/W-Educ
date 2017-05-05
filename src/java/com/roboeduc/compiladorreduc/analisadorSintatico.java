@@ -477,6 +477,7 @@ public class analisadorSintatico {
         String[] writeFunction;
         writeFunction = mapeamento.writeFunction(functionName);
         writeOnFile(writeFunction[0]);
+        //System.out.println("Aqui eu tenho:" + writeFunction[0]);
         List<String> functionParameters = mapeamento.getFunctionParameters();
         if (getName(position+checkPosition-1).equals("(")) {
             int i = checkPosition;
@@ -785,12 +786,35 @@ public class analisadorSintatico {
         boolean newParameter = true;
         String[] writeFunction;
         writeFunction = mapeamento.writeFunction(functionName);
-        //writeOnFile(writeFunction[0]);
         List<String> functionParameters = mapeamento.getFunctionParameters();
+        //writeOnFile(writeFunction[0]);
+        
+        //corrige o erro de uma função sem parametros
+        if(functionParameters.size() == 0 && fileList.size() > (position+checkPosition)){
+            if(!getName(position+checkPosition).equals(")")){
+                    setErrorType("funcao");
+                    errorFunction(getLine(position+checkPosition),"16 - Está faltando um ')'.");
+                    return true;
+            }         
+        }
+
+        //corrige o erro de uma função com mais de dois parametros
+        if(functionParameters.size()>= 1){
+            if(fileList.size() > (position+checkPosition+functionParameters.size()*2 - 1)){
+                if(!getName(position+checkPosition+functionParameters.size()*2 - 1).equals(")")){
+                        setErrorType("funcao");
+                        errorFunction(getLine(position+checkPosition),"16 - Está faltando um ')'.");
+                        return true;
+                }         
+            }
+        }
+
+        
         int positionAnt = position+checkPosition-2;
         if (getName(position+checkPosition-1).equals("(")) {
             int i = checkPosition;
             int param = 0;
+            
             while (!getName(position+i).equals(")")) {
                 if (position+i == fileList.size()-1) {
                     break;
@@ -905,6 +929,7 @@ public class analisadorSintatico {
                     break;
                 }
             }
+            
             if (param < functionParameters.size()) {
                 setErrorType("funcao");
                 errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
