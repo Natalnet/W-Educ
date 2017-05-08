@@ -1,16 +1,19 @@
 package org.natalnet.weduc
 
 class Correction {
-    Programa program
     String originalCode
     String correctedCode
     String comments
+    Date requestedOn
     Date correctedOn
     
-    static belongsTo = [student: Aluno]
+    static belongsTo = [program: Programa]
     
     static constraints = {
         originalCode blank: false
+        requestedOn blank: false
+        correctedCode nullable: true
+        comments nullable: true
         correctedOn nullable: true
     }
     

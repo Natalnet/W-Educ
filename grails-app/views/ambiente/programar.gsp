@@ -123,18 +123,19 @@
                 // Inicia requisição assíncrona
                 // para solicitar correção
                 $.ajax({
-                    url: "<g:createLink action="solicitarCorrecao"/>",
+                    url: "<g:createLink controller="correction" action="store"/>",
                     type: "post",
                     data: {
+                        program: $("#program_id").val(),
                         linguagem: ${linguagem?.id},
                         reduc: verificarLinguagem(),
                         codigo: editor.getValue()
                     },
                     success: function (returnData) {
-                        alert(returnData);
+                        alert("Correção solicitada com sucesso.");
                     },
                     fail: function () {
-                        alert("Erro ao tentar solicitar correção ao professor.");
+                        alert("Erro ao tentar solicitar correção.");
                     }
                 });
             };
@@ -247,6 +248,7 @@
                     success: function (returnData) {
                         // Substitui o nome do programa
                         $("#nome-do-programa").val(nome);
+                        $("#program_id").val(id);
                         // Substitui o conteúdo do editor de texto
                         editor.setValue(returnData);
                     },
@@ -326,6 +328,7 @@
                     <br/>
                     <label>Nome do programa: </label>
                     <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
+                    <input type="hidden" id="program_id" />
                     <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
                     <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir</button>
                 </div>

@@ -16,6 +16,8 @@ class Programa {
     String codigo
     
     static belongsTo = [usuario: Usuario]
+    
+    static hasMany = [corrections: Correction]
 
     static constraints = {
         local nullable: true
