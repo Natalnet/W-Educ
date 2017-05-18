@@ -8,22 +8,45 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class AmbienteController {
 
-	def springSecurityService
+    def springSecurityService
+
+    def saveCompile = true;
+
+
+    def index() {}
         
-        def saveCompile = true;
-      
-    
-	def index() {}
-        
-        //programar
-	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
-	def programar() {
-                
-                // Funções
-            def funcoes = Funcao.findAllWhere(linguagem: Linguagem.get(params.id))
-            
-            [linguagem: Linguagem.get(params.id), funcoes: funcoes]    
+    //programar
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    def programar() {
+
+        def programa = null
+        def linguagem = null
+        def funcoes = null
+
+        if(params.id){
+            programa = Programa.get(params.id)
+            linguagem = programa.linguagem
+            funcoes = linguagem.functions
+        }else if(params.linguagem){
+            linguagem = Linguagem.get(params.linguagem)
+            funcoes = linguagem.functions
+        }else{
+            render(status: 400, text: 'Linguagem não informada.')
         }
+        
+        def programas = programas(springSecurityService.getCurrentUser(), linguagem)
+
+        [programa: programa, linguagem: linguagem, funcoes: funcoes, programas: programas]    
+    }
+    
+    protected def programas(Usuario usuario, Linguagem linguagem) {
+        def programas = Programa.findAllWhere(
+            usuario: usuario, 
+            linguagem: linguagem
+        )
+
+        return programas
+    }
 
         //salvarPrograma
 	@Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
@@ -1054,10 +1077,12 @@ class AmbienteController {
         render programa.codigo
     }
 
-     @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
+    @Secured(['ROLE_ADMIN', 'ROLE_PROFESSOR', 'ROLE_ALUNO'])
     def excluirPrograma(){
-         def programa = Programa.get(params.id) 
-         programa.delete(flush:true)   
+        def programa = Programa.get(params.id) 
+        programa.delete(flush:true)
+        
+        render(status: 200)
     }
 
     //exportarPrograma

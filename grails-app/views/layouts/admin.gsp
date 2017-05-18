@@ -205,6 +205,13 @@
                                 </g:link>
                             </li>
                             </sec:ifAnyGranted>
+                            <sec:ifAnyGranted roles="ROLE_PROFESSOR">
+                            <li>
+                                <g:link controller="correction" action="index">
+                                    <i class="fa fa-check-square-o fa-fw"></i> Correções
+                                </g:link>
+                            </li>
+                            </sec:ifAnyGranted>
                             <li>
                                 <g:link controller="forum" action="home">
                                     <i class="fa fa-comments fa-fw"></i> Fórum

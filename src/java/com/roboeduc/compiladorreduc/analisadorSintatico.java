@@ -808,8 +808,7 @@ public class analisadorSintatico {
                 }         
             }
         }
-
-        
+   
         int positionAnt = position+checkPosition-2;
         if (getName(position+checkPosition-1).equals("(")) {
             int i = checkPosition;

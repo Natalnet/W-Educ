@@ -32,7 +32,7 @@
                             <g:each in="${linguagens}" var="linguagem">
                             <tr>
                                 <td>
-                                    <g:link controller="ambiente" action="programar" id="${linguagem?.id}">
+                                    <g:link controller="ambiente" action="programar" params="[linguagem: linguagem?.id]">
                                         <b>${linguagem?.name}</b>
                                     </g:link>
                                 </td>

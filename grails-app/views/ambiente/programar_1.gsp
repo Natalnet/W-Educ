@@ -3,6 +3,16 @@
     <head>
         <meta name="layout" content="admin"/>
         <title>Ambiente Textual - W-Educ</title>
+        <style type="text/css" media="screen">
+            #editor { 
+                height: 600px;
+                position: absolute;
+                top: 22em;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        </style>
     
         <link rel="stylesheet" type="text/css" href='${assetPath(src: "prismjs/prism.css")}'>
         <script src='${assetPath(src: "prismjs/prism.js")}'></script>
@@ -217,9 +227,8 @@
                     },
                     success: function () {
                         // Substitui o nome do programa
-                        alert("Programa excluído com sucesso.");
-                        $('#prog-'+id).remove();
-                        $('#prog-item-'+id).remove();
+                         alert("Programa excluído com sucesso.");
+                         window.location.reload();
                     },
                     fail: function () {
                         alert("Erro ao tentar acessar o código do programa no banco de dados.");
@@ -300,145 +309,42 @@
             };
             
         </script>
-        
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    Ambiente de Programação
-                </h1>
-            </div>
-        </div>
         <!-- /.row -->  
             
         <div class="row">
             <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <p>
-                            Robô <label>${linguagem?.robot} </label>.
-                        </p>
-                    </div>
-                    <div class="col-lg-3">
-                        <p>
-                        Programar em 
-                        <label class="radio-inline">
-                            <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
-                            R-Educ
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
-                            ${linguagem?.name}
-                        </label>
-                        </p>
-                    </div>
-                    <div class="col-lg-6">
-                        <p>
-                            <label>Nome do programa: </label>
-                            <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" value="${programa?.nome}"/>
-                            <input type="hidden" id="program_id" />
-                            <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
-                        </p>
-                    </div>
+                <h1 class="page-header">Programar em 
+                <label class="radio-inline">
+                        <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
+                        R-Educ
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
+                        ${linguagem?.name}
+                    </label>  
+                </h1>
+                <div class="form-group">
+                    Você está programando um robô <label>${linguagem?.robot} </label>.
+                    <br/>
+                    <label>Nome do programa: </label>
+                    <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" />
+                    <input type="hidden" id="program_id" />
+                    <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
+                    <button type="button" class="btn btn-outline btn-default" onclick="listarProgramas();">Abrir</button>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Funções R-Educ
-                                    </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btn-new" onclick="$('#dialogo-novo').modal('show');">Novo</button>
+                    <button class="btn btn-info" data-toggle="modal" id="dicionario1" data-target="#dicionario">Dicionário de Funções</button>
+                    <button class="btn btn-warning" onclick="compilarPrograma();">Compilar</button>
+                    <button class="btn btn-success" onclick="baixarPrograma();">Baixar</button>
+                    <button class="btn btn-info" id="converter" onclick="exportarPrograma();">Converter para ${linguagem?.name}</button>
+                    <button id="enviarBtn" class="btn btn-success" disabled onclick="enviarCliente();">Enviar</button>
+                    <button class="btn btn-warning" onclick="solicitarCorrecao();">Correção</button>
+                    <!--<button class="btn btn-danger">Apagar</button>	-->
+                </div>
 
-                                    <!-- List group -->
-                                    <ul class="list-group" style="max-height: 200px; overflow-y: scroll;">
-                                        <g:each in="${funcoes}" var="funcao">
-                                            <li class="list-group-item">
-                                                <a href="#" data-toggle="modal" data-target="#func-${funcao.id}">${funcao.name}</a>
-                                            </li>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="func-${funcao.id}" tabindex="-1" role="dialog" aria-labelledby="func-${funcao.id}">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            ${funcao.name}
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ${raw(funcao.description)}
-                                                            <p><b>Parâmetros:</b> ${funcao.qntParameters.toInteger()}</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </g:each>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Programas
-                                    </div>
-
-                                    <!-- List group -->
-                                    <ul class="list-group" style="max-height: 200px; overflow-y: scroll;">
-                                        <g:each in="${programas}" var="item">
-                                            <li class="list-group-item" id="prog-item-${item.id}">
-                                                <a href="#" data-toggle="modal" data-target="#prog-${item.id}">
-                                                    ${item.nome}
-                                                </a>
-                                            </li>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="prog-${item.id}" tabindex="-1" role="dialog" aria-labelledby="prog-${item.id}">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            ${item.nome}
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ${item.codigo}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="excluirPrograma(${item.id});">Excluir</button>
-                                                            <g:link controller="ambiente" action="programar" id="${item.id}" class="btn btn-primary">
-                                                                Abrir
-                                                            </g:link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </g:each>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button class="btn btn-default" id="btn-new" onclick="$('#dialogo-novo').modal('show');">Novo</button>
-                                    <button class="btn btn-default" onclick="compilarPrograma();">Compilar</button>
-                                    <button class="btn btn-default" onclick="baixarPrograma();">Baixar</button>
-                                    <button class="btn btn-default" id="converter" onclick="exportarPrograma();">Converter para ${linguagem?.name}</button>
-                                    <button id="enviarBtn" class="btn btn-default" disabled onclick="enviarCliente();">Enviar</button>
-                                    <button class="btn btn-default" onclick="solicitarCorrecao();">Correção</button>
-                                    <!--<button class="btn btn-danger">Apagar</button>	-->
-                                </div>
-                            </div>
-                            <div id="editor" style="height: 400px">${(programa?.codigo) ?: "// Olá! Comece a programar aqui."}</div>
-                            <div class="panel-footer">
-                                
-                            </div>
-                        </div>
-                    </div>
+                 <div id="editor_container" style="height: 450px;">
+                	<div id="editor">// Olá! Comece a programar aqui.</div> 
                 </div>
             </div>
         </div>
@@ -456,20 +362,69 @@
                     </div>
                   </div>
                 </div>
-        <!-- / diálogo novo -->
+        <!-- / diálogo novo -->  
+
+<!-- Accordion -->
+    <div class="modal fade" id="dicionario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Fechar</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Dicionário de Funções</h4>
+            </div>
+        <div class="modal-body">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <g:each in="${funcoes}" var="funcao">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="${'heading'+funcao.id}">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="${'#'+funcao.id}" aria-expanded="true" aria-controls="${funcao.id}">
+                                <strong>${funcao.name} </strong>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="${funcao.id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="${'heading'+funcao.id}">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    ${raw(funcao.description)}
+                                    <b>Parâmetros:</b> ${funcao.qntParameters.toInteger()}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </g:each>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
         
         <asset:javascript src="js/ace/ace.js"/>
         <script>
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/github");
             editor.getSession().setMode("ace/mode/c_cpp");
+            var editor_height = $("#editor_container").height();
+            $("#editor").height(editor_height);
+            //var editor_width = $("#editor_container").width();
+            //$("#editor").width(editor_width);
             
             
             $("#radio1").click(function() {
+              
+                dicionario1.disabled = false;
                 converter.disabled = false;
             });
             
             $("#radio2").click(function() {
+              
+                dicionario1.disabled = true;
                 converter.disabled = true;
             });
             
