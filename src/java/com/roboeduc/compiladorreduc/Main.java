@@ -323,8 +323,8 @@ public class Main {
         analisadorSintatico sintatico = new analisadorSintatico(lexico, "C:\\Users\\Victor\\Documents\\", "c", "NXC", "nxc");
         //Modifiquei e por isso tem que ser feitas modificacoes aqui tmb...
         //sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow);
-        sintatico.startCompile();
-        sintatico.closeFile();
+        // sintatico.startCompile();
+        //sintatico.closeFile();
         System.out.print(sintatico.isError());
     }
     

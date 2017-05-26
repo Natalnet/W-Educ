@@ -11,7 +11,7 @@ package com.roboeduc.compiladorreduc;
 public class ControlFlowStatements {
     analisadorSintatico sintatico;
     
-    public void se() {
+    public void se() throws SintaticException {
         if (getName(getPosition()+1).equals("(")) {
             if (!getName(getPosition()+2).equals(")")) {
                 writeOnFile(ifCondition()[0]);
@@ -23,22 +23,25 @@ public class ControlFlowStatements {
                     }
                     if (getName(getPosition()).equals("entao")) {
                         if (getBracketsCounter() != 0) {
-                            setErrorType("sintaxe condicao");
-                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+//                            setErrorType("sintaxe condicao");
+//                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+                            throw new SintaticException("sintaxe condicao",getLine(getPosition()+2), "16 - Confira os parênteses.");
                         }
                         setPosition(1);
                         break;
                     }
                     else if (getBracketsCounter() == 0) {
-                        setErrorType("sintaxe condicao");
-                        errorFunction(getLine(getPosition()+2),"31 - Confira a sintaxe da estrutura.");
-                        break;
+//                        setErrorType("sintaxe condicao");
+//                        errorFunction(getLine(getPosition()+2),"31 - Confira a sintaxe da estrutura.");
+//                        break;
+                        throw new SintaticException("sintaxe condicao",getLine(getPosition()+2), "31 - Confira a sintaxe da estrutura.");
                     }
                     testCondition();
                 }
                 if ((getPosition()-1)==getListSize()) {
-                    setErrorType("sintaxe condicao");
-                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+//                    setErrorType("sintaxe condicao");
+//                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                    throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "6 - FIM não encontrado.");
                 }
                 if (!getError()) {
                     if (getName(getPosition()).equals("{")) {
@@ -66,8 +69,9 @@ public class ControlFlowStatements {
                                     }
                                 }
                                 else {
-                                    setErrorType("sintaxe condicao");
-                                    errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+//                                    setErrorType("sintaxe condicao");
+//                                    errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                                    throw new SintaticException("sintaxe condicao",getLine(getPosition()), "4 - Falta '{'.");
                                 }
                             }
                             else {
@@ -76,23 +80,26 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        setErrorType("sintaxe condicao");
-                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+//                        setErrorType("sintaxe condicao");
+//                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                        throw new SintaticException("sintaxe condicao",getLine(getPosition()), "4 - Falta '{'.");
                     }
                 }
             }
             else {
-                setErrorType("estrutura condicao");
-                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+//                setErrorType("estrutura condicao");
+//                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+                throw new SintaticException("estrutura condicao",getLine(getPosition()+2), "17 - Erro na condição.");
             }
         }
         else {
-            setErrorType("sintaxe condicao");
-            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+//            setErrorType("sintaxe condicao");
+//            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+            throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "15 - Está faltando '('.");
         }
     }
     
-    public void enquanto() {
+    public void enquanto() throws SintaticException {
         if (getName(getPosition()+1).equals("(")) {
             if (!getName(getPosition()+2).equals(")")) {
                 writeOnFile(whileCondition()[0]);
@@ -104,8 +111,9 @@ public class ControlFlowStatements {
                     }
                     if (getName(getPosition()).equals("farei")) {
                         if (getBracketsCounter() != 0) {
-                            setErrorType("sintaxe repeticao");
-                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+//                            setErrorType("sintaxe repeticao");
+//                            errorFunction(getLine(getPosition()+2),"16 - Confira os parênteses.");
+                            throw new SintaticException("sintaxe repeticao",getLine(getPosition()+2), "16 - Confira os parênteses.");
                         }
                         setPosition(1);
                         break;
@@ -113,8 +121,9 @@ public class ControlFlowStatements {
                     testCondition();
                 }
                 if ((getPosition()-1)==getListSize()) {
-                    setErrorType("sintaxe repeticao");
-                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+//                    setErrorType("sintaxe repeticao");
+//                    errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                    throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "6 - FIM não encontrado.");
                 }
                 if (!getError()) {
                     if (getName(getPosition()).equals("{")) {
@@ -131,23 +140,26 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        setErrorType("sintaxe repeticao");
-                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+//                        setErrorType("sintaxe repeticao");
+//                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                        throw new SintaticException("sintaxe repeticao",getLine(getPosition()), "4 - Falta '{'.");
                     }
                 }
             }
             else {
-                setErrorType("estrutura repeticao");
-                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+//                setErrorType("estrutura repeticao");
+//                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+                throw new SintaticException("sintaxe repeticao",getLine(getPosition()+2), "17 - Erro na condição.");
             }
         }
         else {
-            setErrorType("sintaxe repeticao");
-            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+//            setErrorType("sintaxe repeticao");
+//            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+            throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "15 - Está faltando '('.");
         }
     }
     
-    public void farei() {
+    public void farei() throws SintaticException {
         if (getName(getPosition()+1).equals("{")) {
             incrementLoopFunc();
             writeOnFile(doCondition()[0]+"\n");
@@ -176,27 +188,31 @@ public class ControlFlowStatements {
                         writeOnFile(doCondition()[2]);
                     }
                     if ((getPosition()-1)==getListSize()) {
-                        setErrorType("sintaxe repeticao");
-                        errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+//                        setErrorType("sintaxe repeticao");
+//                        errorFunction(getLine(getPosition()+1),"6 - FIM não encontrado.");
+                        throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "6 - FIM não encontrado.");
                     }
                 }
                 else {
-                    setErrorType("sintaxe repeticao");
-                    errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+//                    setErrorType("sintaxe repeticao");
+//                    errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+                    throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "15 - Está faltando '('.");
                 }
             }
             else {
-                setErrorType("sintaxe repeticao");
-                errorFunction(getLine(getPosition()),"18 - ENQUANTO não encontrado.");
+//                setErrorType("sintaxe repeticao");
+//                errorFunction(getLine(getPosition()),"18 - ENQUANTO não encontrado.");
+                throw new SintaticException("sintaxe repeticao",getLine(getPosition()), "18 - ENQUANTO não encontrado.");
             }
         }
         else {
-            setErrorType("sintaxe repeticao");
-            errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+//            setErrorType("sintaxe repeticao");
+//            errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+            throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "4 - Falta '{'.");
         }
     }
     
-    public void repita() {
+    public void repita() throws SintaticException {
         if (isNumber(getName(getPosition()+1)) || isNumberList(getName(getPosition()+1)) || getMapeamento().isNumberDefine(getName(getPosition()+1))) {
             if ((getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vez")) ||
                     (!getName(getPosition()+1).equals("1") && getName(getPosition()+2).equals("vezes"))) {
@@ -216,22 +232,25 @@ public class ControlFlowStatements {
                     }
                 }
                 else {
-                    setErrorType("sintaxe repeticao");
-                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+//                    setErrorType("sintaxe repeticao");
+//                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+                    throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "4 - Falta '{'.");
                 }
             }
             else {
-                setErrorType("sintaxe repeticao");
-                errorFunction(getLine(getPosition()+2),"19 - Confira a gramática da sua expressão.");
+//                setErrorType("sintaxe repeticao");
+//                errorFunction(getLine(getPosition()+2),"19 - Confira a gramática da sua expressão.");
+                throw new SintaticException("sintaxe repeticao",getLine(getPosition()+2), "19 - Confira a gramática da sua expressão.");
             }
         }
         else {
-            setErrorType("repeticao");
-            errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
+//            setErrorType("repeticao");
+//            errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
+            throw new SintaticException("repeticao",getLine(getPosition()+1), "20 - É exigido um número nesta expressão.");
         }
     }
     
-    public void para() {
+    public void para() throws SintaticException {
         String variable = "";
         String[] mapFor = new String[2];
         mapFor = getMapeamento().forCondition(getName(getPosition()+1), 
@@ -261,27 +280,31 @@ public class ControlFlowStatements {
                         }
                     }
                     else {
-                        setErrorType("sintaxe repeticao");
-                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+//                        setErrorType("sintaxe repeticao");
+//                        errorFunction(getLine(getPosition()),"4 - Falta '{'.");
+                        throw new SintaticException("sintaxe repeticao",getLine(getPosition()+1), "4 - Falta '{'.");
                     }
                 }
                 else {
-                    setErrorType("sintaxe repeticao");
-                    errorFunction(getLine(getPosition()),"21 - Erro na sintaxe do PARA.");
+//                    setErrorType("sintaxe repeticao");
+//                    errorFunction(getLine(getPosition()),"21 - Erro na sintaxe do PARA.");
+                    throw new SintaticException("sintaxe repeticao",getLine(getPosition()), "21 - Erro na sintaxe do PARA.");
                 }
             }
             else {
-                setErrorType("sintaxe repeticao");
-                errorFunction(getLine(getPosition()), "20 - É exigido um número nesta expressão.");
+//                setErrorType("sintaxe repeticao");
+//                errorFunction(getLine(getPosition()), "20 - É exigido um número nesta expressão.");
+                throw new SintaticException("sintaxe repeticao",getLine(getPosition()), "20 - É exigido um número nesta expressão.");
             }
         }
         else {
-            setErrorType("nome repeticao");
-            errorFunction(getLine(getPosition()+1), "3 - Utilização de nome inválido.");
+//            setErrorType("nome repeticao");
+//            errorFunction(getLine(getPosition()+1), "3 - Utilização de nome inválido.");
+            throw new SintaticException("nome repeticao",getLine(getPosition()+1), "3 - Utilização de nome inválido.");
         }
     }
     
-    public void teste() {
+    public void teste() throws SintaticException {
         System.out.println("sc: " + switchCondition()[0]);
         writeOnFile(switchCondition()[0]);
         if (getName(getPosition()+1).equals("(")) {
@@ -315,18 +338,21 @@ public class ControlFlowStatements {
                     testVariableCondition(3);
                 }
                 else {
-                    setErrorType("condicao");
-                    errorFunction(getLine(getPosition()),"14 - Parâmetro com valor inválido.");
+//                    setErrorType("condicao");
+//                    errorFunction(getLine(getPosition()),"14 - Parâmetro com valor inválido.");
+                    throw new SintaticException("condicao",getLine(getPosition()), "14 - Parâmetro com valor inválido.");
                 }
             }
             else {
-                setErrorType("estrutura condicao");
-                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+//                setErrorType("estrutura condicao");
+//                errorFunction(getLine(getPosition()+2),"17 - Erro na condição.");
+                throw new SintaticException("condicao",getLine(getPosition()+2), "17 - Erro na condição.");
             }
         }
         else {
-            setErrorType("sintaxe condicao");
-            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+//            setErrorType("sintaxe condicao");
+//            errorFunction(getLine(getPosition()+1),"15 - Está faltando '('.");
+            throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "15 - Está faltando '('.");
         }
     }
 
@@ -354,11 +380,11 @@ public class ControlFlowStatements {
         sintatico.setBracketsCounter(getBracketsCounter() + bc);
     }
     
-    private String getName(int position) {
+    private String getName(int position) throws SintaticException {
         return sintatico.getName(position);
     }
     
-    private int getLine(int position) {
+    private int getLine(int position) throws SintaticException {
         return sintatico.getLine(position);
     }
     
@@ -394,15 +420,15 @@ public class ControlFlowStatements {
         sintatico.errorFunction(line, name);
     }
     
-    private void wordTest() {
+    private void wordTest() throws SintaticException {
         sintatico.wordTest();
     }
     
-    private void writeString(boolean declaring) {
+    private void writeString(boolean declaring) throws SintaticException {
         sintatico.writeString(declaring);
     }
     
-    private void writeNumberOperand() {
+    private void writeNumberOperand() throws SintaticException {
         sintatico.writeNumberOperand();
     }
     
@@ -414,15 +440,15 @@ public class ControlFlowStatements {
         return sintatico.isBoolean(name);
     }
     
-    private int isName(int index) {
+    private int isName(int index) throws SintaticException {
         return sintatico.isName(index);
     }
     
-    private void testCondition() {
+    private void testCondition() throws SintaticException {
         sintatico.testCondition();
     }
     
-    private void testVariableCondition(int type) {
+    private void testVariableCondition(int type) throws SintaticException {
         sintatico.testVariableCondition(type);
     }
     

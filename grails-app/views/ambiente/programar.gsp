@@ -85,6 +85,8 @@
 
             // Compilar o programa
             var compilarPrograma = function () {
+                
+                $('#comp-result').html('Compilando o programa...');
 
                 // Inicia requisição assíncrona
                 // para compilar o programa
@@ -98,7 +100,7 @@
                         codigo: editor.getValue()
                     },
                     success: function (returnData) {
-                        alert(returnData);
+                        $('#comp-result').html(returnData);
                         enviarBtn.disabled = false;
                     },
                     fail: function () {
@@ -314,30 +316,37 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-3">
-                        <p>
-                            Robô <label>${linguagem?.robot} </label>.
-                        </p>
+                        <div class="form-group">
+                            <label>Robô:</label>
+                        <p class="form-control-static">${linguagem?.robot}</p>
+                        </div>
                     </div>
                     <div class="col-lg-3">
-                        <p>
-                        Programar em 
-                        <label class="radio-inline">
-                            <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
-                            R-Educ
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
-                            ${linguagem?.name}
-                        </label>
-                        </p>
+                        <div class="form-group">
+                            <label>Programar em:</label>
+                            <div class="radio">
+                                <label class="radio-inline">
+                                    <input type="radio" name="linguagemSelecionada" id="radio1" value="reduc" checked>
+                                    R-Educ
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="linguagemSelecionada" id="radio2" value="alvo">
+                                    ${linguagem?.name}
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6">
-                        <p>
-                            <label>Nome do programa: </label>
-                            <input class="form-control" type="text" id="nome-do-programa" style="display: inline; width: 200px;" value="${programa?.nome}"/>
+                        <div class="form-group">
+                            <label>Nome do programa:</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="nome-do-programa" value="${programa?.nome}"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
+                                </span>
+                            </div>
                             <input type="hidden" id="program_id" />
-                            <button type="button" class="btn btn-outline btn-default" onclick="salvarPrograma();">Salvar</button>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -387,6 +396,11 @@
 
                                     <!-- List group -->
                                     <ul class="list-group" style="max-height: 200px; overflow-y: scroll;">
+                                        <g:if test="${programa}">
+                                            <li class="list-group-item active">
+                                                ${programa.nome}
+                                            </li>
+                                        </g:if>
                                         <g:each in="${programas}" var="item">
                                             <li class="list-group-item" id="prog-item-${item.id}">
                                                 <a href="#" data-toggle="modal" data-target="#prog-${item.id}">
@@ -399,10 +413,10 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            ${item.nome}
+                                                            ${item.nome} (Modificado em <g:formatDate date="${item.modificadoEm}" format="dd/MM/yyyy"/>)
                                                         </div>
                                                         <div class="modal-body">
-                                                            ${item.codigo}
+                                                            <pre class=" language-cpp">${item.codigo}</pre>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -435,7 +449,7 @@
                             </div>
                             <div id="editor" style="height: 400px">${(programa?.codigo) ?: "// Olá! Comece a programar aqui."}</div>
                             <div class="panel-footer">
-                                
+                                <div id="comp-result"></div>
                             </div>
                         </div>
                     </div>

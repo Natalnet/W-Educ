@@ -15,7 +15,7 @@ public class TestCondition {
         this.sintatico = sintatico;
     }
     
-    public void testVariableCondition(int type) {
+    public void testVariableCondition(int type) throws SintaticException {
         boolean repeatDefault = false;
         if (getName(getPosition()+1).equals(")")) {
             if (getName(getPosition()+2).equals("{")) {
@@ -44,8 +44,9 @@ public class TestCondition {
                                     setPosition(2);
                                 }
                                 else {
-                                    setErrorType("condicao");
-                                    errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
+//                                    setErrorType("condicao");
+//                                    errorFunction(getLine(getPosition()+1),"20 - É exigido um número nesta expressão.");
+                                    throw new SintaticException("condicao",getLine(getPosition()+1), "20 - É exigido um número nesta expressão.");
                                 }
                                 break;
                             case (2):
@@ -55,8 +56,9 @@ public class TestCondition {
                                     writeString(false);
                                 }
                                 else {
-                                    setErrorType("sintaxe condicao");
-                                    errorFunction(getLine(getPosition()+1),"11 - Está faltando \".");
+//                                    setErrorType("sintaxe condicao");
+//                                    errorFunction(getLine(getPosition()+1),"11 - Está faltando \".");
+                                    throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "11 - Está faltando \".");
                                 }
                                 break;
                             case (3):
@@ -80,13 +82,15 @@ public class TestCondition {
                                     }
                                 }
                                 else {
-                                    setErrorType("sintaxe condicao");
-                                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+//                                    setErrorType("sintaxe condicao");
+//                                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+                                    throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "4 - Falta '{'.");
                                 }
                             }
                             else {
-                                setErrorType("sintaxe condicao");
-                                errorFunction(getLine(getPosition()),"25 - Está faltando ':'.");
+//                                setErrorType("sintaxe condicao");
+//                                errorFunction(getLine(getPosition()),"25 - Está faltando ':'.");
+                                throw new SintaticException("sintaxe condicao",getLine(getPosition()), "25 - Está faltando ':'.");
                             }
                         }
                     }
@@ -107,26 +111,30 @@ public class TestCondition {
                                     }
                                 }
                                 else {
-                                    setErrorType("sintaxe condicao");
-                                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+//                                    setErrorType("sintaxe condicao");
+//                                    errorFunction(getLine(getPosition()+1),"4 - Falta '{'.");
+                                    throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "4 - Falta '{'.");
                                 }
                             }
                             else {
-                                setErrorType("sintaxe condicao");
-                                errorFunction(getLine(getPosition()),"25 - Está faltando ':'.");
+//                                setErrorType("sintaxe condicao");
+//                                errorFunction(getLine(getPosition()),"25 - Está faltando ':'.");
+                                    throw new SintaticException("sintaxe condicao",getLine(getPosition()), "25 - Está faltando ':'.");
                             }
                         }
                         else {
-                            setErrorType("sintaxe condicao");
-                            errorFunction(getLine(getPosition()),"26 - SENAO em duplicidade.");
+//                            setErrorType("sintaxe condicao");
+//                            errorFunction(getLine(getPosition()),"26 - SENAO em duplicidade.");
+                            throw new SintaticException("sintaxe condicao",getLine(getPosition()), "26 - SENAO em duplicidade.");
                         }
                     }
                     else {
                         setPosition(1);
                         if (getPosition() == getListSize()) {
-                            setErrorType("sintaxe condicao");
-                            errorFunction(getLine(getPosition()-1),"6 - FIM não encontrado.");
-                            break;
+//                            setErrorType("sintaxe condicao");
+//                            errorFunction(getLine(getPosition()-1),"6 - FIM não encontrado.");
+//                            break;
+                            throw new SintaticException("sintaxe condicao",getLine(getPosition()-1), "6 - FIM não encontrado.");
                         }
                     }
                 }
@@ -136,17 +144,18 @@ public class TestCondition {
                 }
             }
             else {
-                setErrorType("sintaxe condicao");
-                errorFunction(getLine(getPosition()+2),"4 - Falta '{'.");
+//                setErrorType("sintaxe condicao");
+                throw new SintaticException("sintaxe condicao",getLine(getPosition()+2), "4 - Falta '{'.");
             }
         }
         else {
-            setErrorType("sintaxe condicao");
-            errorFunction(getLine(getPosition()+1),"15 - Está faltando ')'.");
+//            setErrorType("sintaxe condicao");
+//            errorFunction(getLine(getPosition()+1),"15 - Está faltando ')'.");
+            throw new SintaticException("sintaxe condicao",getLine(getPosition()+1), "15 - Está faltando ')'.");
         }
     }
 
-    public void writeNumberCondition() {
+    public void writeNumberCondition() throws SintaticException {
         if (sintatico.isValidNumberExpression(0)) {
             if (getMapeamento().isNumberFunction(getName(getPosition()))) {
                 checkParameters(getName(getPosition()), 2);
@@ -183,7 +192,7 @@ public class TestCondition {
         }
     }
     
-    public void testCondition() {
+    public void testCondition() throws SintaticException {
         if (getName(getPosition()).equals(")")) {
             if (getBracketsCounter() > 0) {
                 if (getBracketsCounter() != 1) {
@@ -193,8 +202,9 @@ public class TestCondition {
                 setPosition(1);
             }
             else {
-                setErrorType("sintaxe estrutura");
-                errorFunction(getLine(getPosition()),"16 - Confira os parênteses.");
+//                setErrorType("sintaxe estrutura");
+//                errorFunction(getLine(getPosition()),"16 - Confira os parênteses.");
+                throw new SintaticException("sintaxe estrutura",getLine(getPosition()), "16 - Confira os parênteses.");
             }
         }
         else if (getBracketsCounter() > 0) {
@@ -254,14 +264,16 @@ public class TestCondition {
                         checkParameters(getName(getPosition()+1), 3);
                     }
                     else {
-                        setErrorType("estrutura");
-                        errorFunction(getLine(getPosition()+1),"23 - Expressão com valor inválido.");
+//                        setErrorType("estrutura");
+//                        errorFunction(getLine(getPosition()+1),"23 - Expressão com valor inválido.");
+                        throw new SintaticException("estrutura",getLine(getPosition()+1), "23 - Expressão com valor inválido.");
                     }
                     enableComparison = true;
                 }
                 else {
-                    setErrorType("estrutura");
-                    errorFunction(getLine(getPosition()),"27 - Falta operador para comparação.");
+//                    setErrorType("estrutura");
+//                    errorFunction(getLine(getPosition()),"27 - Falta operador para comparação.");
+                    throw new SintaticException("estrutura",getLine(getPosition()), "27 - Falta operador para comparação.");
                 }
             }
             else if (getName(getPosition()).equals("(")) {
@@ -277,8 +289,9 @@ public class TestCondition {
                     setPosition(1);
                 }
                 else {
-                    setErrorType("estrutura");
-                    errorFunction(getLine(getPosition()),"28 - Confira a expressão anterior.");
+//                    setErrorType("estrutura");
+//                    errorFunction(getLine(getPosition()),"28 - Confira a expressão anterior.");
+                    throw new SintaticException("estrutura",getLine(getPosition()), "28 - Confira a expressão anterior.");
                 }
             }
             else if (getName(getPosition()).equals("nao")) {
@@ -288,8 +301,9 @@ public class TestCondition {
                     setPosition(1);
                 }
                 else {
-                    setErrorType("estrutura");
-                    errorFunction(getLine(getPosition()),"28 - Confira a expressão anterior.");
+//                    setErrorType("estrutura");
+//                    errorFunction(getLine(getPosition()),"28 - Confira a expressão anterior.");
+                    throw new SintaticException("estrutura",getLine(getPosition()), "28 - Confira a expressão anterior.");
                 }
             }
             else if (sintatico.isMathOperation(0, false, false, false)) {
@@ -303,13 +317,15 @@ public class TestCondition {
                         enableComparison=true;
                     }
                     else {
-                        setErrorType("estrutura");
-                        errorFunction(getLine(getPosition()),"29 - Expressão matemática incorreta.");
+//                        setErrorType("estrutura");
+//                        errorFunction(getLine(getPosition()),"29 - Expressão matemática incorreta.");
+                        throw new SintaticException("estrutura",getLine(getPosition()), "29 - Expressão matemática incorreta.");
                     }
                 }
                 else {
-                    setErrorType("estrutura");
-                    errorFunction(getLine(getPosition()),"30 - Operador inválido.");
+//                    setErrorType("estrutura");
+//                    errorFunction(getLine(getPosition()),"30 - Operador inválido.");
+                    throw new SintaticException("estrutura",getLine(getPosition()), "30 - Operador inválido.");
                 }
             }
             else if (isBoolean(getName(getPosition())) ||
@@ -332,9 +348,10 @@ public class TestCondition {
                 }
             }
             else {
-                setErrorType("estrutura");
-                // Escreveu uma coisa diferente dentro do parênteses.
-                errorFunction(getLine(getPosition()),"10 - Expressão inexistente.");
+//                setErrorType("estrutura");
+//                // Escreveu uma coisa diferente dentro do parênteses.
+//                errorFunction(getLine(getPosition()),"10 - Expressão inexistente.");
+                throw new SintaticException("estrutura",getLine(getPosition()), "10 - Expressão inexistente.");
             }
         }
         /*
@@ -367,11 +384,11 @@ public class TestCondition {
         sintatico.setBracketsCounter(getBracketsCounter() + bc);
     }
     
-    private String getName(int position) {
+    private String getName(int position) throws SintaticException {
         return sintatico.getName(position);
     }
     
-    private int getLine(int position) {
+    private int getLine(int position) throws SintaticException {
         return sintatico.getLine(position);
     }
     
@@ -399,15 +416,15 @@ public class TestCondition {
         sintatico.errorFunction(line, name);
     }
     
-    private void wordTest() {
+    private void wordTest() throws SintaticException {
         sintatico.wordTest();
     }
     
-    private void writeString(boolean declaring) {
+    private void writeString(boolean declaring) throws SintaticException {
         sintatico.writeString(declaring);
     }
     
-    private void writeNumberOperand() {
+    private void writeNumberOperand() throws SintaticException {
         sintatico.writeNumberOperand();
     }
     
@@ -415,7 +432,7 @@ public class TestCondition {
         return sintatico.isNumber(name);
     }
     
-    private int isName(int index) {
+    private int isName(int index) throws SintaticException {
         return sintatico.isName(index);
     }
     
@@ -435,7 +452,7 @@ public class TestCondition {
         return sintatico.getMapeamento();
     }
     
-    private void checkParameters(String functionName, int checkPosition) {
+    private void checkParameters(String functionName, int checkPosition) throws SintaticException {
         sintatico.getCheckParameters(functionName, checkPosition);
     }
 

@@ -12,10 +12,11 @@ public class OtherFunctions {
     analisadorSintatico sintatico;
     private int loopFunc = 0;
     
-    public void sair() {
+    public void sair() throws SintaticException {
         if (loopFunc == 0) {
-            setErrorType("sintaxe repeticao");
-            errorFunction(getLine(getPosition()), "22 - SAIR está fora de um laço de repetição.");
+//            setErrorType("sintaxe repeticao");
+//            errorFunction(getLine(getPosition()), "22 - SAIR está fora de um laço de repetição.");
+            throw new SintaticException("sintaxe repeticao",getLine(getPosition()), "22 - SAIR está fora de um laço de repetição.");
         }
         else {
             writeOnFile(getMapeamento().breakFunction()+"\n");
@@ -24,7 +25,7 @@ public class OtherFunctions {
         }
     }
     
-    public void numero(boolean declaring, int index) {
+    public void numero(boolean declaring, int index) throws SintaticException {
         if (declaring) {
             writeOnFile(getDeclareNumber()[0]);
         }
@@ -43,8 +44,9 @@ public class OtherFunctions {
                     addNumber(getName(getPosition()));
                 }
                 else {
-                    setErrorType("nome variavel");
-                    errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+//                    setErrorType("nome variavel");
+//                    errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+                    throw new SintaticException("nome variavel",getLine(getPosition()+index), "3 - Utilização de nome inválido.");
                 }
             }
 
@@ -55,13 +57,15 @@ public class OtherFunctions {
                     writeOnFile(getDeclareNumber()[2]);
                 }
                 else {
-                    setErrorType("sintaxe variavel");
-                    errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
+//                    setErrorType("sintaxe variavel");
+//                    errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
+                    throw new SintaticException("sintaxe variavel",getLine(getPosition()+index), "23 - Expressão com valor inválido.");
                 }    
             }
             else if (!declaring) {
-                setErrorType("sintaxe variavel");
-                errorFunction(getLine(getPosition()+index), "24 - Falta expressão.");
+//                setErrorType("sintaxe variavel");
+//                errorFunction(getLine(getPosition()+index), "24 - Falta expressão.");
+                    throw new SintaticException("sintaxe variavel",getLine(getPosition()+index), "24 - Falta expressão.");
             }
             else {
                 writeOnFile(getDeclareNumber()[2]);
@@ -70,12 +74,13 @@ public class OtherFunctions {
             
         }
         else {
-            setErrorType("nome variavel");
-            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+//            setErrorType("nome variavel");
+//            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+            throw new SintaticException("nome variavel",getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
     
-    public void booleano(boolean declaring, int index) {
+    public void booleano(boolean declaring, int index) throws SintaticException {
         if (declaring) {
             writeOnFile(getDeclareBoolean()[0]);
         }
@@ -99,17 +104,19 @@ public class OtherFunctions {
                 writeOnFile(getDeclareBoolean()[2]);
             }
             else {
-                setErrorType("sintaxe variavel");
-                errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
+//                setErrorType("sintaxe variavel");
+//                errorFunction(getLine(getPosition()+index), "23 - Expressão com valor inválido.");
+                throw new SintaticException("sintaxe variavel",getLine(getPosition()+index), "23 - Expressão com valor inválido.");
             }
         }
         else {
-            setErrorType("nome variavel");
-            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+//            setErrorType("nome variavel");
+//            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+            throw new SintaticException("nome variavel",getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
     
-    public void nome(boolean declaring, int index) {
+    public void nome(boolean declaring, int index) throws SintaticException {
         if (declaring) {
             writeOnFile(getDeclareString()[0]);
         }
@@ -126,13 +133,15 @@ public class OtherFunctions {
                 writeString(true);
             }
             else {
-                setErrorType("sintaxe variavel");
-                errorFunction(getLine(getPosition()+index), "11 - Está faltando \".");
+//                setErrorType("sintaxe variavel");
+//                errorFunction(getLine(getPosition()+index), "11 - Está faltando \".");
+                throw new SintaticException("sintaxe variavel",getLine(getPosition()+index), "11 - Está faltando \".");
             }
         }
         else {
-            setErrorType("nome variavel");
-            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+//            setErrorType("nome variavel");
+//            errorFunction(getLine(getPosition()+index), "3 - Utilização de nome inválido.");
+            throw new SintaticException("nome variavel",getLine(getPosition()+index), "3 - Utilização de nome inválido.");
         }
     }
 
@@ -168,11 +177,11 @@ public class OtherFunctions {
         sintatico.setBracketsCounter(getBracketsCounter() + bc);
     }
     
-    private String getName(int position) {
+    private String getName(int position) throws SintaticException {
         return sintatico.getName(position);
     }
     
-    private int getLine(int position) {
+    private int getLine(int position) throws SintaticException {
         return sintatico.getLine(position);
     }
     
@@ -208,7 +217,7 @@ public class OtherFunctions {
         return sintatico.isBoolean(name);
     }
     
-    private void writeString(boolean declaring) {
+    private void writeString(boolean declaring) throws SintaticException {
         sintatico.writeString(declaring);
     }
     

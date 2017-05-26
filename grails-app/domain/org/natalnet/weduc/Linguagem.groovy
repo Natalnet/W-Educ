@@ -37,6 +37,7 @@ class Linguagem {
         description sqlType: 'longtext'
         header sqlType: 'longtext'
         footnote sqlType: 'longtext'
+        functions sort:'name'
     }
     
     def copy(Usuario author){

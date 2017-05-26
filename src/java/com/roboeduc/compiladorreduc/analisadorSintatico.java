@@ -16,6 +16,32 @@ import java.util.List;
 // Falta fazer:
 // problema no ESCREVA com variáveis
 
+        class SintaticException extends Exception {
+            private String type;
+            private int line;
+            private String message;
+            
+            public SintaticException(String type, int line, String message){
+                this.type = type;
+                this.line = line + 1;
+                this.message = message;
+            }
+            
+            public String getType(){
+                return this.type;
+            }
+            
+            public int getLine(){
+                return this.line;
+            }
+            
+            @Override
+            public String getMessage(){
+                return this.message;
+            }
+            
+        }
+
 /**
  *
  * @author carlafernandes
@@ -90,7 +116,7 @@ public class analisadorSintatico {
         addNumberVariables();
     }
      
-    public void startCompile() {
+    public void startCompile() throws Exception {
         
         databaseData();
 
@@ -119,9 +145,12 @@ public class analisadorSintatico {
         
         writeOnFile(mapeamento.footnote());
         
+
+        
         if (!mainFunc && !error) {
-            setErrorType("sintaxe");
-            errorFunction(0, "1 - INICIO não encontrado.");
+//            setErrorType("sintaxe");
+//            errorFunction(0, "1 - INICIO não encontrado.");
+            throw new SintaticException("sintaxe", 0, "1 - INICIO não encontrado.");
         }
     }
     
@@ -147,11 +176,19 @@ public class analisadorSintatico {
     //    numberList.add("memoria");
     }
     
-    public String getName(int index) {
+    public String getName(int index) throws SintaticException {
+        if(index >= fileList.size()){
+            throw new SintaticException("sintaxe", getLine(fileList.size()-1), "31 - Confira a sintaxe da estrutura.");
+        }
+        
         return fileList.get(index).name;
     }
     
-    public int getLine(int index) {
+    public int getLine(int index) throws SintaticException {
+        if(index >= fileList.size()){
+            throw new SintaticException("sintaxe", getLine(fileList.size()-1), "31 - Confira a sintaxe da estrutura.");
+        }
+        
         return fileList.get(index).line;
     }
     
@@ -222,7 +259,6 @@ public class analisadorSintatico {
         keywordsList.add("<=");
         keywordsList.add("!=");
         keywordsList.add("verdadeiro");
-        keywordsList.add("falso");
         keywordsList.add("memoria");
         keywordsList.add("bateria");
         if (keywordsList.contains(name)) {
@@ -240,21 +276,24 @@ public class analisadorSintatico {
         //System.out.println("Line: " + (line+1) + " " + errorName);
     }
     
-    private void analyze() {
+    private void analyze() throws SintaticException {
+       
         if (getName(position).equals(" ")) {
             position++;
         }
         else if (getName(position).equals("tarefa")) {
             if (mainFunc) {
-                setErrorType("tarefa");
-                errorFunction(getLine(position), "2 - Não é possível declarar TAREFAS dentro da função INICIO.");
+//                setErrorType("tarefa");
+//                errorFunction(getLine(position), "2 - Não é possível declarar TAREFAS dentro da função INICIO.");
+                throw new SintaticException("tarefa", getLine(position), "2 - Não é possível declarar TAREFAS dentro da função INICIO.");
             }
             else {
                 writeOnFile(otherFunction[0]);
                 if (keywords(getName(position+1)) || mapeamento.defines().get(1).contains(getName(position+1)) ||
                     mapeamento.defines().get(2).contains(getName(position+1))) {
-                    setErrorType("nome");
-                    errorFunction(getLine(position+1), "3 - Utilização de nome inválido.");
+//                    setErrorType("nome");
+//                    errorFunction(getLine(position+1), "3 - Utilização de nome inválido.");
+                    throw new SintaticException("nome", getLine(position+1), "3 - Utilização de nome inválido.");
                 }
                 else {
                     writeOnFile(getName(position+1));
@@ -271,16 +310,18 @@ public class analisadorSintatico {
                         }
                     }
                     else {
-                        setErrorType("sintaxe");
-                        errorFunction(getLine(position+2), "4 - Falta '{'.");
+//                        setErrorType("sintaxe");
+//                        errorFunction(getLine(position+2), "4 - Falta '{'.");
+                        throw new SintaticException("sintaxe", getLine(position+2), "4 - Falta '{'.");
                     }
                 }
             }
         }
         else if (getName(position).equals("inicio")) {
             if (mainFunc) {
-                setErrorType("sintaxe");
-                errorFunction(getLine(position), "5 - Função INICIO em duplicidade.");
+//                setErrorType("sintaxe");
+//                errorFunction(getLine(position), "5 - Função INICIO em duplicidade.");
+                throw new SintaticException("sintaxe", getLine(position), "5 - Função INICIO em duplicidade.");
             }
             else {
                 writeOnFile(mainFunction[0]+"\n");
@@ -292,9 +333,9 @@ public class analisadorSintatico {
                     
                 }
                 if(position >= fileList.size() && !error && !getName(position-1).equals("fim")){
-                    setErrorType("sintaxe");
-                    errorFunction(getLine(position-1), "6 - FIM não encontrado.");
-                
+//                    setErrorType("sintaxe");
+//                    errorFunction(getLine(position-1), "6 - FIM não encontrado.");
+                    throw new SintaticException("sintaxe", getLine(position-1), "6 - FIM não encontrado.");
                 }
                 if (!error) {
                     writeOnFile("\n"+mainFunction[1]+"\n");
@@ -319,12 +360,13 @@ public class analisadorSintatico {
             //}
         }
         else {
-            setErrorType("sintaxe");
-            errorFunction(getLine(position), "7 - Esta declaração deve ser feita dentro do INICIO.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position), "7 - Esta declaração deve ser feita dentro do INICIO.");
+            throw new SintaticException("sintaxe", getLine(position), "7 - Esta declaração deve ser feita dentro do INICIO.");
         }
     }
     
-    public void wordTest() {
+    public void wordTest() throws SintaticException {
         if (getName(position).equals("sair")){
             functions.sair();
         }
@@ -359,12 +401,14 @@ public class analisadorSintatico {
         // O que fazer com as variaveis???
             // Tem que add acoes aqui tmb!
         else if (getName(position).equals("senao")){
-            setErrorType("sintaxe");
-            errorFunction(getLine(position), "8 - Está faltando um SE.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position), "8 - Está faltando um SE.");
+            throw new SintaticException("sintaxe", getLine(position), "8 - Está faltando um SE.");
         }
         else if (getName(position).equals("fim")){
-            setErrorType("sintaxe");
-            errorFunction(getLine(position), "10 - Expressão inexistente.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position), "10 - Expressão inexistente.");
+            throw new SintaticException("sintaxe", getLine(position), "10 - Expressão inexistente.");
         }
         /*else if (getName(position).equals("numero")){
             errorFunction(getLine(position), "Está faltando um ')'.");
@@ -384,31 +428,34 @@ public class analisadorSintatico {
         else if (mapeamento.getFunctionsVoid().contains(getName(position))) {
             //checkParameters(getName(position), 2);
             if (checkFunction(getName(position), 2, true)) {
-                System.out.println("passando aqui");
+                
                 writeFunctionOnFile(getName(position), 2);
+                      
             }
             else {
-                setErrorType("funcao");
-                errorFunction(getLine(position), "9 - Erro nos parâmetros da função " + getName(position) + ".");
+//                setErrorType("funcao");
+//                errorFunction(getLine(position), "9 - Erro nos parâmetros da função " + getName(position) + ".");
+                throw new SintaticException("funcao", getLine(position), "9 - Erro nos parâmetros da função " + getName(position) + ".");
             }
         }
         else {
             //System.out.println("Nome que aparece " + getName(position));
             //System.out.println("qual o nome: " + getName(position));
-            setErrorType("sintaxe");
-            errorFunction(getLine(position), "10 - Expressão inexistente.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position), "10 - Expressão inexistente.");
+            throw new SintaticException("sintaxe", getLine(position), "10 - Expressão inexistente.");
         }
     }
     
-    public void testVariableCondition(int type) {
+    public void testVariableCondition(int type) throws SintaticException {
         tests.testVariableCondition(type);
     }
     
-    public void testCondition() {
+    public void testCondition() throws SintaticException {
         tests.testCondition();
     }
     
-    public void writeString(boolean declaring) {
+    public void writeString(boolean declaring) throws SintaticException {
         while (position < fileList.size() && !getName(position).equals("\"")) {
             writeOnFile(getName(position));
             if (!getName(position+1).equals("\"")) {
@@ -426,8 +473,9 @@ public class analisadorSintatico {
             position++;
         }
         else {
-            setErrorType("sintaxe");
-            errorFunction(getLine(position-1), "11 - Está faltando \".");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position-1), "11 - Está faltando \".");
+            throw new SintaticException("sintaxe", getLine(position-1), "11 - Está faltando \".");
         }
     }
     
@@ -440,10 +488,11 @@ public class analisadorSintatico {
         }
     }
     
-    public void writeNumberOperand() {
+    public void writeNumberOperand() throws SintaticException {
         if (mapeamento.writeOperator(getName(position), getName(position+1)).equals("error")) {
-            setErrorType("sintaxe");
-            errorFunction(getLine(position),"30 - Operador inválido.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(position),"30 - Operador inválido.");
+            throw new SintaticException("sintaxe", getLine(position), "30 - Operador inválido.");
         }
         else {
             writeOnFile(mapeamento.writeOperator(getName(position), getName(position+1)));
@@ -472,12 +521,11 @@ public class analisadorSintatico {
         }*/
     }
 
-    private void checkParameters(String functionName, int checkPosition) {
+    private void checkParameters(String functionName, int checkPosition) throws SintaticException {
         boolean newParameter = true;
         String[] writeFunction;
         writeFunction = mapeamento.writeFunction(functionName);
         writeOnFile(writeFunction[0]);
-        //System.out.println("Aqui eu tenho:" + writeFunction[0]);
         List<String> functionParameters = mapeamento.getFunctionParameters();
         if (getName(position+checkPosition-1).equals("(")) {
             int i = checkPosition;
@@ -651,7 +699,7 @@ public class analisadorSintatico {
         return true;
     }
 
-    private void writeFunctionOnFile(String functionName, int checkPosition) {
+    private void writeFunctionOnFile(String functionName, int checkPosition) throws SintaticException {
         boolean newParameter = true;
         String[] writeFunction;
         writeFunction = mapeamento.writeFunction(functionName);
@@ -665,9 +713,10 @@ public class analisadorSintatico {
                     break;
                 }
                 if (param >= functionParameters.size()) {
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
-                    break;
+//                    setErrorType("funcao");
+//                    errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
+                    throw new SintaticException("funcao", getLine(position+i), "12 - A quantidade de parâmetros é maior do que a necessária.");
+//                    break;
                 }
                 if (newParameter && isValidNumberExpression(i) &&
                         (functionParameters.get(param).equalsIgnoreCase("int") ||
@@ -754,82 +803,79 @@ public class analisadorSintatico {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
-                        break;
+//                        setErrorType("funcao");
+//                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+                        throw new SintaticException("funcao", getLine(position+i+1), "13 - Está faltando um parâmetro.");
+//                        break;
                     }
                 }
                 else {
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
-                    break;
+//                    setErrorType("funcao");
+//                    errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
+                    throw new SintaticException("funcao", getLine(position+i), "14 - Parâmetro com valor inválido.");
+//                    break;
                 }
             }
 
             if (param < functionParameters.size()) {
-                setErrorType("funcao");
-                errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
+//                setErrorType("funcao");
+//                errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
+                throw new SintaticException("funcao", getLine(position+i), "13 - Está faltando um parâmetro.");
             }
             if (i == fileList.size()-1) {
-                setErrorType("sintaxe");
-                errorFunction(getLine(checkPosition-1), "15 - Está faltando '('.");
+//                setErrorType("sintaxe");
+//                errorFunction(getLine(checkPosition-1), "15 - Está faltando '('.");
+                throw new SintaticException("sintaxe", getLine(checkPosition-1), "15 - Está faltando '('.");
             }
             position += i+1;
         }
         else {
-            setErrorType("sintaxe");
-            errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+            throw new SintaticException("sintaxe", getLine(checkPosition-1), "15 - Está faltando '('.");
         }
     }
     
-    private boolean checkFunction(String functionName, int checkPosition, boolean backToBegin) {
+    private boolean checkFunction(String functionName, int checkPosition, boolean backToBegin) throws SintaticException {
         boolean newParameter = true;
         String[] writeFunction;
         writeFunction = mapeamento.writeFunction(functionName);
-        List<String> functionParameters = mapeamento.getFunctionParameters();
         //writeOnFile(writeFunction[0]);
-        
-        //corrige o erro de uma função sem parametros
-        if(functionParameters.size() == 0 && fileList.size() > (position+checkPosition)){
-            if(!getName(position+checkPosition).equals(")")){
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+checkPosition),"16 - Está faltando um ')'.");
-                    return true;
-            }         
-        }
-
-        //corrige o erro de uma função com mais de dois parametros
-        if(functionParameters.size()>= 1){
-            if(fileList.size() > (position+checkPosition+functionParameters.size()*2 - 1)){
-                if(!getName(position+checkPosition+functionParameters.size()*2 - 1).equals(")")){
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+checkPosition),"16 - Está faltando um ')'.");
-                        return true;
-                }         
-            }
-        }
-   
+        List<String> functionParameters = mapeamento.getFunctionParameters();
         int positionAnt = position+checkPosition-2;
-        if (getName(position+checkPosition-1).equals("(")) {
             int i = checkPosition;
-            int param = 0;
+        if (getName(position+checkPosition-1).equals("(")) {
             
-            while (!getName(position+i).equals(")")) {
+            int param = 0;
+            while (position+i < fileList.size() && !getName(position+i).equals(")")) {
+                System.out.println(position+i + " < " + fileList.size() + " =>>>> " + getName(position+i));
                 if (position+i == fileList.size()-1) {
-                    break;
+//                    break;
+                    throw new SintaticException("sintaxe", getLine(position), "16 - Está faltando ')'.");
                 }
+                
+                
+                if(getName(position+i).equals("fim")){
+//                    setErrorType("sintaxe");
+//                    errorFunction(getLine(checkPosition-1),"16 - Está faltando ')'.");
+//                    break;
+                    throw new SintaticException("sintaxe", getLine(position+i-1), "16 - Está faltando ')'.");
+                }
+                
                 if (param >= functionParameters.size()) {
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
-                    break;
+//                    setErrorType("funcao");
+//                    errorFunction(getLine(position+i),"12 - A quantidade de parâmetros é maior do que a necessária.");
+                    throw new SintaticException("funcao", getLine(position+i), "12 - A quantidade de parâmetros é maior do que a necessária.");
+//                    break;
                 }
                 if (getName(position+i).equals(",")) {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
-                        break;
+//                        setErrorType("funcao");
+//                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+//                        break;
+                        throw new SintaticException("funcao", getLine(position+i+1), "13 - Está faltando um parâmetro.");
                     }
                 }
                 else if (newParameter && /*isValidNumberExpression(i) &&*/
@@ -917,41 +963,56 @@ public class analisadorSintatico {
                     newParameter=true;
                     i++;
                     if (getName(position+i).equals(")")) {
-                        setErrorType("funcao");
-                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
-                        break;
+//                        setErrorType("funcao");
+//                        errorFunction(getLine(position+i+1),"13 - Está faltando um parâmetro.");
+//                        break;
+                        throw new SintaticException("funcao", getLine(position+i+1), "13 - Está faltando um parâmetro.");
                     }
                 }
                 else {
-                    setErrorType("funcao");
-                    errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
-                    break;
+//                    setErrorType("funcao");
+//                    errorFunction(getLine(position+i),"14 - Parâmetro com valor inválido.");
+//                    break;
+                    throw new SintaticException("funcao", getLine(position+i), "14 - Parâmetro com valor inválido.");
                 }
             }
             
+            
             if (param < functionParameters.size()) {
-                setErrorType("funcao");
-                errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
+//                setErrorType("funcao");
+//                errorFunction(getLine(position+i),"13 - Está faltando um parâmetro.");
+                System.out.println(getName(position+1) + " <<<<< Eu de novo");
+                throw new SintaticException("funcao", getLine(position), "13 - Está faltando um parâmetro.");
             }
             if (i == fileList.size()-1) {
-                setErrorType("sintaxe");
-                errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+//                setErrorType("sintaxe");
+//                errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+                throw new SintaticException("sintaxe", getLine(checkPosition-1), "16 - Está faltando ')'.");
             }
             position += i+1;
         }
         else {
-            setErrorType("sintaxe");
-            errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(checkPosition-1),"15 - Está faltando '('.");
+            throw new SintaticException("sintaxe", getLine(checkPosition-1), "15 - Está faltando '('.");
         }
-
+        System.out.println(" e agora?" );
+        System.out.println(position + " == " + fileList.size());
+        
+        if(!(getName(checkPosition+i-1).equals(")"))){
+//            setErrorType("sintaxe");
+//            errorFunction(getLine(checkPosition-1),"16 - Está faltando ')'.");
+            throw new SintaticException("sintaxe", getLine(checkPosition-1), "16 - Está faltando ')'.");
+        }
+        
+        
         if (backToBegin) {
             position = positionAnt;
         }
-
         return true;
     }
     
-    public void writeName(int index) {
+    public void writeName(int index) throws SintaticException {
         writeOnFile("\"");
         writeOnFile(getName(index+1));
         int value = index+2;
@@ -965,7 +1026,7 @@ public class analisadorSintatico {
         writeOnFile("\"");
     }
     
-    public int isName(int index) {
+    public int isName(int index) throws SintaticException {
         int value=index;
         if (getName(value).equals("\"")) {
             value++;
@@ -1005,7 +1066,7 @@ public class analisadorSintatico {
         }
     }
 
-    public boolean isMathOperation(int index, boolean condition, boolean continueTesting, boolean functionArgument) {
+    public boolean isMathOperation(int index, boolean condition, boolean continueTesting, boolean functionArgument) throws SintaticException {
         
         int positionAnt = position;
         int parenteses = 0;
@@ -1047,8 +1108,8 @@ public class analisadorSintatico {
                 //     position+=1;
                 // }
             }
-            else if (isNumber(getName(position)) || numberList.contains(getName(position))
-                 || mapeamento.isNumberDefine(getName(position))) {
+            else if (position+1 < fileList.size() && (isNumber(getName(position)) || numberList.contains(getName(position))
+                 || mapeamento.isNumberDefine(getName(position)))) {
                 if (getName(position+1).equals(")")) {
                     position++;
                 }
@@ -1085,7 +1146,7 @@ public class analisadorSintatico {
                 return false;
             }
         }
-
+System.out.println(":( " + getName(position));
         if (getName(position+1).equals("(") || (!keywords(getName(position+1)) &&
             !mapeamento.getFunctionsVoid().contains(getName(position+1)) && !numberList.contains(getName(position+1)) && 
             !nameList.contains(getName(position+1)) && !booleanList.contains(getName(position+1)) &&
@@ -1109,7 +1170,7 @@ public class analisadorSintatico {
         }
     }
 
-    public void writeMathOperation(int index, boolean condition) {
+    public void writeMathOperation(int index, boolean condition) throws SintaticException {
         boolean stop = false;
         int parenteses = 0;
         position+=index;
@@ -1197,7 +1258,7 @@ public class analisadorSintatico {
         }
     }
 
-    public boolean writeNumericalOperator(int i) {
+    public boolean writeNumericalOperator(int i) throws SintaticException {
         if (getName(position+i).equals("+") || getName(position+i).equals("-") || 
             getName(position+i).equals("*") || getName(position+i).equals("/")) {
             return true;
@@ -1205,7 +1266,7 @@ public class analisadorSintatico {
         return false;
     }
 
-    public boolean isValidNumberExpression(int i) {
+    public boolean isValidNumberExpression(int i) throws SintaticException {
         if (isNumber(getName(position+i)) || numberList.contains(getName(position+i)) ||
                 mapeamento.getFunctionsNumber().contains(getName(position+i)) || 
                 mapeamento.isNumberDefine(getName(position+i))) {
@@ -1324,7 +1385,7 @@ public class analisadorSintatico {
         return switchCondition;
     }
      
-    public void getCheckParameters(String functionName, int checkPosition) {
+    public void getCheckParameters(String functionName, int checkPosition) throws SintaticException {
         checkParameters(functionName, checkPosition);
     }
 
