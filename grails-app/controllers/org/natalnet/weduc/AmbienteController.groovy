@@ -351,7 +351,7 @@ class AmbienteController {
                 programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
                 programa.save(flush: true)
                 System.out.println("Erro de escrita!");
-                render "Linha: " + e.getLine() + " -> Erro " + e.getMessage();
+                render "Linha: " + e.getLine() + " -> Erro " + e.getErrorMessage();
                 
                 
                 System.out.println(e.type);
@@ -421,7 +421,7 @@ class AmbienteController {
             	println e
             }
 */
-//            
+            
 //            if(!sintatico.isError()) {
 //                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
 //                programa.save(flush: true)
@@ -700,31 +700,11 @@ class AmbienteController {
                 sintatico.closeFile();
                 // println(sintatico.isError());
                 // render sintatico.isError();
-                
-                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
-                programa.save(flush: true)
-                render "Compilação bem sucedida!"
-                System.out.println("Compilado com sucesso!");
             }
-            catch (SintaticException e) {
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "1", "variavel");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "2", "funcao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "3", "tarefa");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "4", "estrutura");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "5", "condicao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "6", "repeticao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "7", "nome");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "8", "sintaxe");
-                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
-                programa.save(flush: true)
-                System.out.println("Erro de escrita!");
-                render "Linha: " + e.getLine() + " -> Erro " + e.getMessage();
-                
-                
-                System.out.println(e.type);
+            catch (Exception e) {
             	//println e
-//                render "Está faltando um ')' \n"
-//                System.out.println("Erro no R-Educ!");
+                //render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+                System.out.println("Erro no R-Educ!");
                 return false;    
             }
 
@@ -786,6 +766,30 @@ class AmbienteController {
             }
             catch (Exception e) {
             	println e
+            }
+
+            
+            if(!sintatico.isError()) {
+                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+                programa.save(flush: true)
+                //render "Compilação bem sucedida!"
+                return true
+                System.out.println("Compilado com sucesso!");
+            } else {
+                //Adicionar aqui a equação das categorias.
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "1", "variavel");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "2", "funcao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "3", "tarefa");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "4", "estrutura");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "5", "condicao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "6", "repeticao");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "7", "nome");
+                categorizarErros(sintatico.getErrorType(), lexico.getUsedStructures(), "8", "sintaxe");
+                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+                programa.save(flush: true)
+                System.out.println("Erro de escrita!");
+                return false
+                //render "Linha: " + sintatico.getErrorInt() + " -> Erro " + sintatico.getErrorStr();
             }
 	} 
         //Termina Compilação em R-Educ
@@ -1257,69 +1261,35 @@ class AmbienteController {
         def sintatico = new analisadorSintatico(lexico, "/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName, programa.extensao, linguagem.name, language.extension);
         sintatico.getMapeamento().defineValues(language, types, functions, operators, controlFlow, defines2);
         
-               try{
+        try{
 
 
-                sintatico.startCompile();
-                sintatico.closeFile();
-                // println(sintatico.isError());
-                // render sintatico.isError();
-                
-                programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
-                programa.save(flush: true)
-                //render "Compilação bem sucedida!"
-                System.out.println("Compilado com sucesso!");
-                
-            
-            
-                // Abre o arquivo compilado
-                FileInputStream fPrograma = new FileInputStream("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+            sintatico.startCompile();
+            sintatico.closeFile();
 
-                response.setContentType("application/octet-stream")
-                // response.setHeader("Content-disposition", "filename=cv3")
-                response.outputStream << fPrograma
-                return
-            
-            }
-            catch (SintaticException e) {
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "1", "variavel");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "2", "funcao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "3", "tarefa");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "4", "estrutura");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "5", "condicao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "6", "repeticao");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "7", "nome");
-                categorizarErros(e.getType(), lexico.getUsedStructures(), "8", "sintaxe");
-                programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
-                programa.save(flush: true)
-                System.out.println("Erro de escrita!");
-                render "Linha: " + e.getLine() + " -> Erro " + e.getMessage();
-                
-                
-                System.out.println(e.type);
-            	//println e
-//                render "Está faltando um ')' \n"
-//                System.out.println("Erro no R-Educ!");
-                return;    
-            }
+        }
+        catch (Exception e) {
+            render "Erro ao compilar o programa. Consulte o administrador do sistema! \n"
+            return;    
+        }
 
             
-//        if(!sintatico.isError()) {
-//            programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
-//            programa.save(flush: true)
-//            
-//            // Abre o arquivo compilado
-//            FileInputStream fPrograma = new FileInputStream("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
-//
-//            response.setContentType("application/octet-stream")
-//            // response.setHeader("Content-disposition", "filename=cv3")
-//            response.outputStream << fPrograma
-//            return
-//        } else {
-//            programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
-//            programa.save(flush: true)
-//            render "Linha: " + sintatico.getErrorInt() + " Erro: " + sintatico.getErrorStr();
-//        }
+        if(!sintatico.isError()) {
+            programa.compilacoesBemSucedidas = programa.compilacoesBemSucedidas + 1;
+            programa.save(flush: true)
+            
+            // Abre o arquivo compilado
+            FileInputStream fPrograma = new FileInputStream("/data/sites/weduc/tmp/weduc/compilador/" + usuario?.username + "/" + fName + programa.extensao + "." + linguagem.extension)
+
+            response.setContentType("application/octet-stream")
+            // response.setHeader("Content-disposition", "filename=cv3")
+            response.outputStream << fPrograma
+            return
+        } else {
+            programa.compilacoesMalSucedidas = programa.compilacoesMalSucedidas + 1;
+            programa.save(flush: true)
+            render "Linha: " + sintatico.getErrorInt() + " Erro: " + sintatico.getErrorStr();
+        }
 
     }
    

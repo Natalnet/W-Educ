@@ -16,32 +16,6 @@ import java.util.List;
 // Falta fazer:
 // problema no ESCREVA com variáveis
 
-        class SintaticException extends Exception {
-            private String type;
-            private int line;
-            private String message;
-            
-            public SintaticException(String type, int line, String message){
-                this.type = type;
-                this.line = line + 1;
-                this.message = message;
-            }
-            
-            public String getType(){
-                return this.type;
-            }
-            
-            public int getLine(){
-                return this.line;
-            }
-            
-            @Override
-            public String getMessage(){
-                return this.message;
-            }
-            
-        }
-
 /**
  *
  * @author carlafernandes
