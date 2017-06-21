@@ -177,3 +177,5 @@ grails.plugin.springsecurity.onAuthenticationSuccessEvent = { e, appCtx ->
 
 }
 
+// the default value is true
+grails.databinding.convertEmptyStringsToNull = false

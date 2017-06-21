@@ -28,8 +28,8 @@ class Linguagem {
 
     static constraints = {
         isPrivate defaultValue: false
-        header nullable: true
-        footnote nullable: true
+//        header nullable: true
+//        footnote blank: true
     }
     
     static mapping = {

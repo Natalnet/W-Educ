@@ -2,6 +2,9 @@ package org.natalnet.weduc
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.apache.commons.io.FileUtils;
+import java.io.File
+import java.nio.file.*
+import com.roboeduc.compiladorreduc.CopyDir
 
 class LinguagemController {
 
@@ -242,7 +245,7 @@ class LinguagemController {
             File sourceComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + linguagem.id + "/")
             if(sourceComp.exists()){
                 File destComp = new File("/data/sites/weduc/weduc/arquivos-de-compilacao/" + novaLinguagem.id + "/")
-                FileUtils.copyDirectory(sourceComp, destComp);
+                new CopyDir(sourceComp.toPath(), destComp.toPath()).copy();
             }
 
             
@@ -250,14 +253,14 @@ class LinguagemController {
             
             if(sourceSend.exists()){
                 File destSend = new File("/data/sites/weduc/weduc/arquivos-de-envio/" + novaLinguagem.id + "/")
-                FileUtils.copyDirectory(sourceSend, destSend);
+                new CopyDir(sourceSend.toPath(), destSend.toPath()).copy();
             }
             
             File sourceIncl = new File("/data/sites/weduc/weduc/arquivos-de-include/" + linguagem.id + "/")
             
             if(sourceIncl.exists()){
                 File destIncl = new File("/data/sites/weduc/weduc/arquivos-de-include/" + novaLinguagem.id + "/")
-                FileUtils.copyDirectory(sourceIncl, destIncl);
+                new CopyDir(sourceIncl.toPath(), destIncl.toPath()).copy();
             }
             
             flash.success = "Cópia da linguagem " + linguagem.name + " realizada com sucesso."

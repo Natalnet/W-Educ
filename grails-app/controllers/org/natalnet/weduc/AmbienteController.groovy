@@ -482,8 +482,9 @@ class AmbienteController {
                
             println comando;  
             // Prepara o comando Make
-            comando = "/bin/bash /data/sites/weduc/tmp/weduc/compilador/" 
-            comando += usuario?.username + "/" + fName + "/weduc.sh"
+//            comando = "/bin/bash " + comando
+//            comando = "/bin/bash /data/sites/weduc/tmp/weduc/compilador/" 
+//            comando += usuario?.username + "/" + fName + "/weduc.sh"
 
 
             println "------>"
@@ -494,7 +495,7 @@ class AmbienteController {
 
             try {
 
-		System.out.println("Iniciei a compilacao na linguagem " + linguagem.id);
+		System.out.println("Iniciei a compilacao na linguagem-- " + linguagem.id);
                 retorno = CommandShellToString.execute(comando);
 		 System.out.println(retorno);
                 
@@ -999,6 +1000,7 @@ class AmbienteController {
         System.out.println(retorno);
         
         File f = new File("/data/sites/weduc/tmp/weduc/envio/" + usuario?.username + "/W-Educ.jar" )
+ //       CommandShellToString.execute("chmod 777 "+"/data/sites/weduc/tmp/weduc/envio/" + usuario?.username + "/W-Educ.jar");
         
         FileInputStream fWEduc = new FileInputStream(f)
         response.setContentType("application/octet-stream")
